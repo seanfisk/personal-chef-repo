@@ -15,3 +15,10 @@ dmg_package 'Adium' do
   volumes_dir 'Adium 1.5.6'
   action :install
 end
+
+dmg_package 'Quicksilver' do
+  source 'http://github.qsapp.com/downloads/Quicksilver%201.0.0.dmg'
+  checksum '0afb16445d12d7dd641aa8b2694056e319d23f785910a8c7c7de56219db6853c'
+  dmg_name 'Quicksilver 1.0.0'
+  action :install
+end
