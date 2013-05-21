@@ -1,0 +1,2 @@
+cookbook 'dmg', :locked_version => '1.1.0'
+cookbook 'macbook_setup', :path => '/Users/sean/src/personal/chef/macbook-chef-repo/cookbooks/macbook_setup'
