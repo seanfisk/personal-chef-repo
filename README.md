@@ -35,6 +35,15 @@ That's it!
 
 [chef_install]: http://www.opscode.com/chef/install/
 
+# Generating new keys
+
+If you ever lose the keys, they can be re-generated here:
+
+* [User key](https://www.opscode.com/account/password)
+* [Organization key](https://manage.opscode.com/organizations)
+
+Be careful, because after re-generating, all nodes must be updated to use the new keys.
+
 # References
 
 * <http://jtimberman.housepub.org/blog/2012/07/29/os-x-workstation-management-with-chef/>
