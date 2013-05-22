@@ -4,3 +4,13 @@
 * Add extra foodcritic rules.
 * Make a script that does some of the stuff in the README.
 * Use roles.
+
+* Things to add
+    * Dotfiles
+    * Emacs configuration
+    * f.lux
+    * texlive
+    * Skim
+    * SizeWell
+    * gfxCardStatus
+    * Skitch
