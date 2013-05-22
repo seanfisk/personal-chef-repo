@@ -6,15 +6,26 @@
 * Since we probably don't have `git` yet, download this repository as a tarball:
 
         curl --location https://github.com/seanfisk/macbook-chef-repo/archive/master.tar.gz | tar -xz
+        mv macbook-chef-repo-master macbook-chef-repo
 
-* Next, we need to put the keys in place:
+* If we do have git, go ahead and clone it:
 
-    * `seanfisk.pem` goes to `macbook-chef-repo/.chef/seanfisk.pem`
-    * `sean_fisk-validator.pem` goes to `/etc/chef/validator.pem`
+        git clone git@github.com:seanfisk/macbook-chef-repo.git
+
+* Next, we need to put the keys in place. These can be transferred in different ways, but let's just assume they are placed in the directory above the repository:
+
+        cp seanfisk.pem macbook-chef-repo/.chef/seanfisk.pem
+        cp sean_fisk-validator.pem /etc/chef/validation.pem
 
 * Copy the client configuration to the correct place:
 
-        cp .chef/client.rb /etc/chef
+        cp macbook-chef-repo/.chef/client.rb /etc/chef
+
+* Add the main recipe to the run_list (this may be fixed later by roles):
+
+        knife node run_list add NAME_OF_NODE macbook_setup
+
+  The name of the node may be found from `knife node list`.
 
 * Provision the server:
 
