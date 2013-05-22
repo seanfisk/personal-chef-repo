@@ -30,3 +30,10 @@ dmg_package 'Emacs' do
   checksum '92b3a6dd0a32b432f45ea925cfa34834c9ac9f7f0384c38775f6760f1e89365a'
   action :install
 end
+
+dmg_package 'Google Chrome' do
+  source 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
+  checksum '0e43d17aa2fe454e890bd58313f567de07e2343c0d447ef5496dbda9ff45e64d'
+  dmg_name 'googlechrome'
+  action :install
+end
