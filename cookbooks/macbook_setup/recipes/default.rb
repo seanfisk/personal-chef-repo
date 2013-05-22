@@ -37,3 +37,9 @@ dmg_package 'Google Chrome' do
   dmg_name 'googlechrome'
   action :install
 end
+
+dmg_package 'Skim' do
+  source 'http://downloads.sourceforge.net/project/skim-app/Skim/Skim-1.4.3/Skim-1.4.3.dmg'
+  checksum 'bc01dffe6f471fffc531222a56ab27f553ce42b91c800fe53f3770926feda809'
+  action :install
+end

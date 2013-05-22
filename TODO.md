@@ -10,7 +10,6 @@
     * Emacs configuration
     * f.lux
     * texlive
-    * Skim
     * SizeWell
     * gfxCardStatus
     * Skitch
