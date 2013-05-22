@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'iterm2'
+
 include_recipe 'dmg'
 
 dmg_package 'Adium' do
