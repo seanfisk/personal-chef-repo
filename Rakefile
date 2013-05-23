@@ -48,3 +48,8 @@ FoodCritic::Rake::LintTask.new do |t|
   t.files = ['cookbooks']
   t.options = {:fail_tags => ['any']}
 end
+
+desc 'Test and run foodcritic on all cookbooks'
+task :test => [:test_cookbooks, :foodcritic]
+# TODO: When the test_cookbooks task fails, it doesn't exit with a
+# fail status.
