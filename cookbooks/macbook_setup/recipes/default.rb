@@ -10,6 +10,7 @@
 include_recipe 'iterm2'
 
 include_recipe 'dmg'
+include_recipe 'mac_os_x'
 
 dmg_package 'Adium' do
   source 'http://download.adium.im/Adium_1.5.6.dmg'
@@ -23,6 +24,19 @@ dmg_package 'Quicksilver' do
   checksum '0afb16445d12d7dd641aa8b2694056e319d23f785910a8c7c7de56219db6853c'
   dmg_name 'Quicksilver 1.0.0'
   action :install
+  # This should work but it doesn't seem to. So we went with the
+  # `not_if' solution below.
+
+  # notifies :create, 'mac_os_x_plist_file[com.blacktree.Quicksilver.plist]'
+end
+
+mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
+  # Create a plist file for Quicksilver specifying the hotkey, among
+  # other things. Unfortunately, this doesn't avoid going through the
+  # setup assistant, but it helps out a bit.
+
+  # Don't overwrite the file if it already exists.
+  not_if {File.exists?("#{ENV['HOME']}/Library/Preferences/#{source}")}
 end
 
 dmg_package 'Emacs' do
