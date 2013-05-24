@@ -1,0 +1,4 @@
+# Ignore Chef key files, secrets, and cache
+*.pem
+encrypted_data_bag_secret
+/cache
