@@ -16,15 +16,15 @@ Throughout the instructions, `STANDARD-USER` will be used as a placeholder for y
 
 1. Go into the repo directory. All following commands should be run from here.
 
-   	cd macbook-chef-repo
+        cd macbook-chef-repo
 
 1. Next, set up the Chef client configuration. This allows us to authenticate to the Chef server using our "machine" client:
 
         sudo mkdir /etc/chef
-	sudo chown "$USER" /etc/chef
-	cp client.rb.sample /etc/chef/client.rb
-	# Now edit client.rb according to the instructions.
-	"$EDITOR" /etc/chef/client.rb
+        sudo chown "$USER" /etc/chef
+        cp client.rb.sample /etc/chef/client.rb
+        # Now edit client.rb according to the instructions.
+        "$EDITOR" /etc/chef/client.rb
 
 1. Now copy the validation key over to the chef directory:
 
