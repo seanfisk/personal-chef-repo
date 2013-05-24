@@ -57,3 +57,38 @@ dmg_package 'Skim' do
   checksum 'bc01dffe6f471fffc531222a56ab27f553ce42b91c800fe53f3770926feda809'
   action :install
 end
+
+# Clone my dotfiles and emacs git repositories
+
+personal_dir = "#{ENV['HOME']}/src/personal"
+
+directory personal_dir do
+  recursive true
+  action :create
+end
+
+git "#{personal_dir}/dotfiles" do
+  repository 'git@github.com:seanfisk/dotfiles.git'
+  enable_submodules true
+  action :checkout
+  notifies :run, 'execute[install dotfiles]'
+end
+
+execute 'install dotfiles' do
+  command 'make install'
+  cwd "#{personal_dir}/dotfiles"
+  action :nothing
+end
+
+git "#{personal_dir}/emacs" do
+  repository 'git@github.com:seanfisk/emacs.git'
+  enable_submodules true
+  action :checkout
+  notifies :run, 'execute[install emacs configuration]'
+end
+
+execute 'install emacs configuration' do
+  command 'make install'
+  cwd "#{personal_dir}/emacs"
+  action :nothing
+end
