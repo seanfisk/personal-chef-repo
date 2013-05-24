@@ -1,33 +1,54 @@
 # MacBook Pro Chef Configuration
 
+Throughout the instructions, `STANDARD-USER` will be used as a placeholder for your own standard user's name. Replace it with your own standard user's name in these situations. In addition, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately.
+
 ## Installing
 
-* First, install the Chef client using the [full-stack installer][chef_install].
-* Since we probably don't have `git` yet, download this repository as a tarball:
+1. First, install the Chef client using the [full-stack installer][chef_install].
+1. Since we probably don't have `git` yet, download this repository as a tarball:
 
         curl --location https://github.com/seanfisk/macbook-chef-repo/archive/master.tar.gz | tar -xz
         mv macbook-chef-repo-master macbook-chef-repo
 
-* If we do have git, go ahead and clone it:
+1. If we do have git, go ahead and clone it:
 
         git clone git@github.com:seanfisk/macbook-chef-repo.git
 
-* Next, we need to put the keys in place. These can be transferred in different ways, but let's just assume they are placed in the directory above the repository:
+1. Go into the repo directory. All following commands should be run from here.
 
-        cp seanfisk.pem macbook-chef-repo/.chef/seanfisk.pem
-        cp sean_fisk-validator.pem /etc/chef/validation.pem
+   	cd macbook-chef-repo
 
-* Copy the client configuration to the correct place:
+1. Next, set up the Chef client configuration. This allows us to authenticate to the Chef server using our "machine" client:
 
-        cp macbook-chef-repo/.chef/client.rb /etc/chef
+        sudo mkdir /etc/chef
+	sudo chown "$USER" /etc/chef
+	cp client.rb.sample /etc/chef/client.rb
+	# Now edit client.rb according to the instructions.
+	"$EDITOR" /etc/chef/client.rb
 
-* Add the main recipe to the run_list (this may be fixed later by roles):
+1. Now copy the validation key over to the chef directory:
 
-        knife node run_list add NAME_OF_NODE macbook_setup
+        cp ~/Downloads/sean_fisk-validator.pem /etc/chef/validation.pem
 
-  The name of the node may be found from `knife node list`.
+1. Run `chef-client` to register the client:
 
-* Provision the server:
+        chef-client
+
+1. Set up the knife configuration. This allows us to authenticate to the Chef server using our "user" client:
+
+        cp ~/Downloads/seanfisk.pem .chef
+
+    Make sure knife is working by typing the following:
+
+        knife client list
+
+    You should see two entries, `sean_fisk-validator` and `NODE_NAME`.
+
+1. Add the `macbook_setup` cookbook to this node's run list:
+
+        knife node run_list add NODE_NAME macbook_setup
+
+1. Provision the laptop:
 
         chef-client
 
