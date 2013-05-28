@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DateFormat</key>
+	<string>EEE MMM d  H:mm</string>
+	<key>FlashDateSeparators</key>
+	<false/>
+	<key>IsAnalog</key>
+	<false/>
+</dict>
+</plist>

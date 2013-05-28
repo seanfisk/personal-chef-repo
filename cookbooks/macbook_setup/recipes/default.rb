@@ -60,6 +60,13 @@ dmg_package 'Skim' do
   action :install
 end
 
+mac_os_x_plist_file 'com.apple.menuextra.clock.plist' do
+  # Set up clock with day of week, date, and 24-hour clock.
+
+  # Don't overwrite the file if it already exists.
+  # not_if {File.exists?("#{ENV['HOME']}/Library/Preferences/#{source}")}
+end
+
 # Clone my dotfiles and emacs git repositories
 
 personal_dir = "#{ENV['HOME']}/src/personal"
