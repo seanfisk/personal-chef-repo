@@ -2,9 +2,21 @@
 # Cookbook Name:: macbook_setup
 # Recipe:: default
 #
-# Copyright (C) 2013 Sean Fisk
+# Author:: Sean Fisk <sean@seanfisk.com>
+# Copyright:: Copyright (c) 2013, Sean Fisk
+# License:: Apache License, Version 2.0
 #
-# All rights reserved - Do Not Redistribute
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 
 include_recipe 'homebrew'
@@ -38,7 +50,7 @@ mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
   # setup assistant, but it helps out a bit.
 
   # Don't overwrite the file if it already exists.
-  not_if {File.exists?("#{ENV['HOME']}/Library/Preferences/#{source}")}
+  not_if {File.exists?("#{node['macbook_setup']['home']}/Library/Preferences/#{source}")}
 end
 
 dmg_package 'Emacs' do
@@ -60,23 +72,17 @@ dmg_package 'Skim' do
   action :install
 end
 
-mac_os_x_plist_file 'com.apple.menuextra.clock.plist' do
-  # Set up clock with day of week, date, and 24-hour clock.
-
-  # Don't overwrite the file if it already exists.
-  # not_if {File.exists?("#{ENV['HOME']}/Library/Preferences/#{source}")}
-end
+# Set up clock with day of week, date, and 24-hour clock.
+mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
 
 # Clone my dotfiles and emacs git repositories
 
-personal_dir = "#{ENV['HOME']}/src/personal"
-
-directory personal_dir do
+directory node['macbook_setup']['personal_dir'] do
   recursive true
   action :create
 end
 
-git "#{personal_dir}/dotfiles" do
+git node['macbook_setup']['dotfiles_dir'] do
   repository 'git@github.com:seanfisk/dotfiles.git'
   enable_submodules true
   action :checkout
@@ -85,11 +91,11 @@ end
 
 execute 'install dotfiles' do
   command 'make install'
-  cwd "#{personal_dir}/dotfiles"
+  cwd node['macbook_setup']['dotfiles_dir']
   action :nothing
 end
 
-git "#{personal_dir}/emacs" do
+git node['macbook_setup']['emacs_dir'] do
   repository 'git@github.com:seanfisk/emacs.git'
   enable_submodules true
   action :checkout
@@ -98,12 +104,12 @@ end
 
 execute 'install emacs configuration' do
   command 'make install'
-  cwd "#{personal_dir}/emacs"
+  cwd node['macbook_setup']['emacs_dir']
   action :nothing
 end
 
-# Install rbenv through homebrew
-
+# About installing rbenv
+#
 # Even though the rbenv cookbooks looks nice, they don't work as I'd
 # like. fnichol's supports local install, but insists on templating
 # /etc/profile.d/rbenv.sh *even when doing a local install*. That
@@ -113,10 +119,10 @@ end
 #
 # So let's just install through trusty homebrew.
 
-package 'rbenv' do
-  action :install
-end
+# Install homebrew packages
 
-package 'ruby-build' do
-  action :install
+node['macbook_setup']['packages'].each do |pkg|
+  package pkg do
+    action :install
+  end
 end
