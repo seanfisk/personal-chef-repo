@@ -1,6 +1,6 @@
 # MacBook Pro Chef Configuration
 
-Throughout the instructions, `STANDARD-USER` will be used as a placeholder for your own standard user's name. Replace it with your own standard user's name in these situations. In addition, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately.
+Throughout the instructions, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately.
 
 ## Installing
 
