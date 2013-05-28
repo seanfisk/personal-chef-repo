@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'homebrew'
+
 include_recipe 'iterm2'
 
 include_recipe 'dmg'
@@ -91,4 +93,23 @@ execute 'install emacs configuration' do
   command 'make install'
   cwd "#{personal_dir}/emacs"
   action :nothing
+end
+
+# Install rbenv through homebrew
+
+# Even though the rbenv cookbooks looks nice, they don't work as I'd
+# like. fnichol's supports local install, but insists on templating
+# /etc/profile.d/rbenv.sh *even when doing a local install*. That
+# makes no sense. I don't want that.
+#
+# The RiotGames rbenv cookbook only supports global install.
+#
+# So let's just install through trusty homebrew.
+
+package 'rbenv' do
+  action :install
+end
+
+package 'ruby-build' do
+  action :install
 end
