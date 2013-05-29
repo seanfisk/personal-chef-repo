@@ -19,6 +19,8 @@
 # limitations under the License.
 #
 
+# Include homebrew as the default package manager.
+# (default is MacPorts)
 include_recipe 'homebrew'
 
 include_recipe 'iterm2'
@@ -121,8 +123,8 @@ end
 
 # Install homebrew packages
 
-node['macbook_setup']['packages'].each do |pkg|
-  package pkg do
+node['macbook_setup']['packages'].each do |pkg_name|
+  package pkg_name do
     action :install
   end
 end

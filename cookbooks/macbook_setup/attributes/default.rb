@@ -20,4 +20,22 @@ default['macbook_setup']['home'] = ENV['HOME']
 default['macbook_setup']['personal_dir'] = "#{default['macbook_setup']['home']}/src/personal"
 default['macbook_setup']['dotfiles_dir'] = "#{default['macbook_setup']['personal_dir']}/dotfiles"
 default['macbook_setup']['emacs_dir'] = "#{default['macbook_setup']['personal_dir']}/emacs"
-default['macbook_setup']['packages'] = %w{rbenv ruby-build}
+default['macbook_setup']['packages'] = %w{
+coreutils
+dos2unix
+graphicsmagick
+graphviz
+htop
+markdown
+mobile-shell
+parallel
+rbenv
+ruby-build
+the_silver_searcher
+tmux
+watch
+wget
+zsh
+}
+#aria2 # gnutls ftp site is down
+#valgrind # fails to build
