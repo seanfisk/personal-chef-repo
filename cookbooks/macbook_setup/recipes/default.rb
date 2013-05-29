@@ -26,6 +26,9 @@ include_recipe 'homebrew'
 include_recipe 'dmg'
 include_recipe 'mac_os_x'
 
+# Password-protected screensaver + delay
+include_recipe 'mac_os_x::screensaver'
+
 # iTerm2
 include_recipe 'iterm2'
 
