@@ -23,10 +23,11 @@
 # (default is MacPorts)
 include_recipe 'homebrew'
 
-include_recipe 'iterm2'
-
 include_recipe 'dmg'
 include_recipe 'mac_os_x'
+
+# iTerm2
+include_recipe 'iterm2'
 
 dmg_package 'Adium' do
   source 'http://download.adium.im/Adium_1.5.6.dmg'
