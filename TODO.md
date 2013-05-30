@@ -8,6 +8,6 @@
 * Things to add
     * f.lux
     * texlive
-    * SizeWell
+    * SizeWell and SIMBL (SIMBL should be pretty simple, SizeWell more difficult)
     * gfxCardStatus
     * Skitch
