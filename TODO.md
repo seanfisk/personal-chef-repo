@@ -1,9 +1,8 @@
 * Document upload process.
-* Add rake/thor tasks for uploading with knife/berks.
-* Add rake/thor tasks for testing with knife/foodcritic.
-* Add extra foodcritic rules.
+* Add Travis-CI.
 * Make a script that does some of the stuff in the README.
-* iTerm2 option key send meta.
+* Split up test and upload tasks.
+* Add ruby style guide checker to test task.
 
 * Things to add
     * f.lux
@@ -11,3 +10,5 @@
     * SizeWell and SIMBL (SIMBL should be pretty simple, SizeWell more difficult)
     * gfxCardStatus
     * Skitch
+    * Swap Caps Lock and Control
+    * iTerm2 option key send meta.

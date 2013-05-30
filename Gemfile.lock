@@ -129,4 +129,5 @@ PLATFORMS
 
 DEPENDENCIES
   berkshelf
+  thor
   thor-foodcritic
