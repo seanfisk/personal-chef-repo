@@ -10,7 +10,11 @@ class Default < Thor
     puts
 
     # Run foodcritic on cookbooks
-    review = FoodCritic::Linter.new.check('cookbooks', {:fail_tags => ['any']})
+    review = FoodCritic::Linter.new.check('cookbooks', {
+                                            :fail_tags => ['any'],
+                                            :include_rules => ['foodcritic/etsy', 'foodcritic/customink'],
+                                            # Don't worry about not having a CHANGELOG.md file for each cookbook.
+                                            :tags => ['~CINK001']})
     if review.warnings.any?
       puts review
     else
