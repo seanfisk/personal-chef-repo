@@ -19,6 +19,13 @@ class Default < Thor
     exit !review.failed?
   end
 
+  desc 'upload', 'Upload everything to the Chef server'
+  def upload
+    invoke 'berkshelf:upload'
+
+    check_system 'knife', 'cookbook', 'upload', '--all'
+  end
+
   private
 
   # TODO: This should probably be a standalone function or class method at least.
