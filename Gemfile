@@ -2,4 +2,5 @@ source 'https://rubygems.org'
 
 gem 'berkshelf'
 gem 'thor'
-gem 'thor-foodcritic'
+gem 'foodcritic'
+gem 'chef'
