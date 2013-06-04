@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require 'english' # for $CHILD_STATUS
+require 'English' # for $CHILD_STATUS
 require 'foodcritic'
 require 'rubocop'
 require 'berkshelf/thor'
