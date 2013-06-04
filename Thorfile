@@ -1,15 +1,30 @@
 require 'foodcritic'
 require 'berkshelf/thor'
 
-class Default < Thor
-  desc 'test', 'Test all cookbooks'
+module SystemExec
+  def check_system(*args)
+    system(*args)
+    exit $?.exitstatus if $? != 0
+  end
+end
+
+class Knife < Thor
+  include SystemExec
+
+  desc 'test', 'Run cursory knife cookbook tests'
   def test
-    # Run cursory Chef knife tests on cookbooks
     check_system 'knife', 'cookbook', 'test', '--all'
+  end
 
-    puts
+  desc 'upload', 'Upload all local cookbooks to the Chef server'
+  def upload
+    check_system 'knife', 'cookbook', 'upload', '--all'
+  end
+end
 
-    # Run foodcritic on cookbooks
+class Foodcritic < Thor
+  desc 'test', 'Run foodcritic cookbook tests'
+  def test
     review = FoodCritic::Linter.new.check('cookbooks', {
                                             :fail_tags => ['any'],
                                             :include_rules => ['foodcritic/etsy', 'foodcritic/customink'],
@@ -22,19 +37,21 @@ class Default < Thor
     end
     exit !review.failed?
   end
+end
 
-  desc 'upload', 'Upload everything to the Chef server'
-  def upload
+class Upload < Thor
+  desc 'all', 'Upload everything to the Chef server'
+  def all
     invoke 'berkshelf:upload'
-
-    check_system 'knife', 'cookbook', 'upload', '--all'
+    invoke 'knife:upload'
   end
+end
 
-  private
-
-  # TODO: This should probably be a standalone function or class method at least.
-  def check_system(*args)
-    system(*args)
-    exit $?.exitstatus if $? != 0
+class Test < Thor
+  desc 'all', 'Run all tests on cookbooks'
+  def all
+    invoke 'knife:test'
+    puts
+    invoke 'foodcritic:test'
   end
 end
