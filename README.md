@@ -1,5 +1,7 @@
 # MacBook Pro Chef Configuration
 
+[![Build Status](https://travis-ci.org/seanfisk/macbook-chef-repo.png)](https://travis-ci.org/seanfisk/macbook-chef-repo)
+
 Throughout the instructions, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately.
 
 ## Installing
