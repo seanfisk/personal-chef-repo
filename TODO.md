@@ -2,6 +2,7 @@
 * Make a script that does some of the stuff in the README.
 * Add a pythonz provider instead of just a recipe.
 * Improve pythonz README.
+* Make tmux-MacOSX-pasteboard its own cookbook.
 
 * Things to add
     * f.lux

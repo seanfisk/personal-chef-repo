@@ -24,6 +24,8 @@ default['macbook_setup']['dotfiles_dir'] =
   "#{default['macbook_setup']['personal_dir']}/dotfiles"
 default['macbook_setup']['emacs_dir'] =
   "#{default['macbook_setup']['personal_dir']}/emacs"
+default['macbook_setup']['scripts_dir'] =
+  "#{default['macbook_setup']['home']}/bin"
 default['macbook_setup']['packages'] = %w{
 coreutils
 dos2unix

@@ -109,7 +109,10 @@ git node['macbook_setup']['dotfiles_dir'] do
 end
 
 execute 'install dotfiles' do
-  command 'make install'
+  # Running `make install-osx' does the regular install, then patches
+  # .tmux.conf to make this work:
+  # <https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard>
+  command 'make install-osx'
   cwd node['macbook_setup']['dotfiles_dir']
   action :nothing
 end
@@ -124,6 +127,35 @@ end
 execute 'install emacs configuration' do
   command 'make install'
   cwd node['macbook_setup']['emacs_dir']
+  action :nothing
+end
+
+# Install tmux-MacOSX-pasteboard reattach-to-user-namespace program
+directory node['macbook_setup']['scripts_dir'] do
+  recursive true
+  action :create
+end
+
+tmux_macosx_dir =
+  "#{Chef::Config[:file_cache_path]}/tmux-MacOSX-pasteboard"
+git tmux_macosx_dir do
+  repository 'https://github.com/ChrisJohnsen/' +
+    'tmux-MacOSX-pasteboard.git'
+  action :sync
+  notifies :run, 'bash[compile and install tmux-MacOSX-pasteboard]'
+end
+
+bash 'compile and install tmux-MacOSX-pasteboard' do
+  # We are using a line continuation in a Bash script, not in Ruby.
+  # rubocop:disable LineContinuation
+  code <<-EOH
+  set -o errexit # exit on first error
+  make reattach-to-user-namespace
+  cp reattach-to-user-namespace \\
+    '#{node["macbook_setup"]["scripts_dir"]}'
+  EOH
+  # rubocop:enable LineContinuation
+  cwd tmux_macosx_dir
   action :nothing
 end
 
