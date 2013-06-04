@@ -91,6 +91,9 @@ end
 # Set up clock with day of week, date, and 24-hour clock.
 mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
 
+# Show percentage on battery indicator.
+mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
+
 # Clone my dotfiles and emacs git repositories
 
 directory node['macbook_setup']['personal_dir'] do
