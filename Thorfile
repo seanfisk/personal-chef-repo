@@ -49,7 +49,7 @@ end
 class Style < Thor
   desc 'check', 'Run rubocop on all Ruby files'
   def check
-    result = Rubocop::CLI.new.run(['.', 'Thorfile'])
+    result = Rubocop::CLI.new.run(['.', __FILE__])
     if result == 0
       puts 'No rubocop errors'
     else
