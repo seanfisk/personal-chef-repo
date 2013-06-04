@@ -1,10 +1,11 @@
+# coding: UTF-8
 #
 # Cookbook Name:: pythonz
 # Recipe:: default
 #
 # Copyright 2013, Sean Fisk
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -23,7 +24,8 @@ execute 'run pythonz install script' do
   action :nothing
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/#{node['pythonz']['install_script_name']}" do
+remote_file "#{Chef::Config[:file_cache_path]}/" +
+  node['pythonz']['install_script_name'] do
   source node['pythonz']['install_script_url']
   mode '500'
 

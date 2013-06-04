@@ -1,3 +1,4 @@
+# coding: UTF-8
 name             'macbook_setup'
 maintainer       'Sean Fisk'
 maintainer_email 'sean@seanfisk.com'

@@ -1,10 +1,14 @@
+# encoding: UTF-8
+
+require 'english' # for $CHILD_STATUS
 require 'foodcritic'
+require 'rubocop'
 require 'berkshelf/thor'
 
 module SystemExec
   def check_system(*args)
     system(*args)
-    exit $?.exitstatus if $? != 0
+    exit $CHILD_STATUS.exitstatus if $CHILD_STATUS != 0
   end
 end
 
@@ -26,16 +30,31 @@ class Foodcritic < Thor
   desc 'test', 'Run foodcritic cookbook tests'
   def test
     review = FoodCritic::Linter.new.check('cookbooks', {
-                                            :fail_tags => ['any'],
-                                            :include_rules => ['foodcritic/etsy', 'foodcritic/customink'],
-                                            # Don't worry about not having a CHANGELOG.md file for each cookbook.
-                                            :tags => ['~CINK001']})
+      fail_tags: ['any'],
+      include_rules: ['foodcritic/etsy', 'foodcritic/customink'],
+      # Don't worry about not having a CHANGELOG.md file for each cookbook.
+      tags: ['~CINK001'] })
+
     if review.warnings.any?
       puts review
+      exit !review.failed?
     else
       puts 'No foodcritic errors'
     end
-    exit !review.failed?
+  end
+end
+
+# Make sure you don't re-define the Rubocop module here. That's why
+# it's named Style.
+class Style < Thor
+  desc 'check', 'Run rubocop on all Ruby files'
+  def check
+    result = Rubocop::CLI.new.run(['.', 'Thorfile'])
+    if result == 0
+      puts 'No rubocop errors'
+    else
+      exit result
+    end
   end
 end
 
@@ -53,5 +72,6 @@ class Test < Thor
     invoke 'knife:test'
     puts
     invoke 'foodcritic:test'
+    invoke 'style:check'
   end
 end

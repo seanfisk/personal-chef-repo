@@ -1,9 +1,10 @@
+# coding: UTF-8
 #
 # Author:: Sean Fisk <sean@seanfisk.com>
 # Copyright:: Copyright (c) 2013, Sean Fisk
 # License:: Apache License, Version 2.0
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -17,9 +18,12 @@
 #
 
 default['macbook_setup']['home'] = ENV['HOME']
-default['macbook_setup']['personal_dir'] = "#{default['macbook_setup']['home']}/src/personal"
-default['macbook_setup']['dotfiles_dir'] = "#{default['macbook_setup']['personal_dir']}/dotfiles"
-default['macbook_setup']['emacs_dir'] = "#{default['macbook_setup']['personal_dir']}/emacs"
+default['macbook_setup']['personal_dir'] =
+  "#{default['macbook_setup']['home']}/src/personal"
+default['macbook_setup']['dotfiles_dir'] =
+  "#{default['macbook_setup']['personal_dir']}/dotfiles"
+default['macbook_setup']['emacs_dir'] =
+  "#{default['macbook_setup']['personal_dir']}/emacs"
 default['macbook_setup']['packages'] = %w{
 coreutils
 dos2unix
@@ -37,5 +41,5 @@ watch
 wget
 zsh
 }
-#aria2 # gnutls ftp site is down
-#valgrind # fails to build
+# aria2 # gnutls ftp site is down
+# valgrind # fails to build

@@ -1,3 +1,4 @@
+# coding: UTF-8
 #
 # Cookbook Name:: macbook_setup
 # Recipe:: default
@@ -6,7 +7,7 @@
 # Copyright:: Copyright (c) 2013, Sean Fisk
 # License:: Apache License, Version 2.0
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -56,25 +57,34 @@ mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
   # setup assistant, but it helps out a bit.
 
   # Don't overwrite the file if it already exists.
-  not_if {File.exists?("#{node['macbook_setup']['home']}/Library/Preferences/#{source}")}
+  not_if do
+    File.exists?(node['macbook_setup']['home'] +
+                 "/Library/Preferences/#{source}")
+    end
 end
 
 dmg_package 'Emacs' do
-  source 'http://emacsformacosx.com/emacs-builds/Emacs-24.3-universal-10.6.8.dmg'
-  checksum '92b3a6dd0a32b432f45ea925cfa34834c9ac9f7f0384c38775f6760f1e89365a'
+  source 'http://emacsformacosx.com/emacs-builds/' +
+    'Emacs-24.3-universal-10.6.8.dmg'
+  checksum '92b3a6dd0a32b432f45ea925cfa34834' +
+    'c9ac9f7f0384c38775f6760f1e89365a'
   action :install
 end
 
 dmg_package 'Google Chrome' do
-  source 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
-  checksum '0e43d17aa2fe454e890bd58313f567de07e2343c0d447ef5496dbda9ff45e64d'
+  source 'https://dl.google.com/chrome/mac/' +
+    'stable/GGRO/googlechrome.dmg'
+  checksum '0e43d17aa2fe454e890bd58313f567de' +
+    '07e2343c0d447ef5496dbda9ff45e64d'
   dmg_name 'googlechrome'
   action :install
 end
 
 dmg_package 'Skim' do
-  source 'http://downloads.sourceforge.net/project/skim-app/Skim/Skim-1.4.3/Skim-1.4.3.dmg'
-  checksum 'bc01dffe6f471fffc531222a56ab27f553ce42b91c800fe53f3770926feda809'
+  source 'http://downloads.sourceforge.net/project/' +
+    'skim-app/Skim/Skim-1.4.3/Skim-1.4.3.dmg'
+  checksum 'bc01dffe6f471fffc531222a56ab27f5' +
+    '53ce42b91c800fe53f3770926feda809'
   action :install
 end
 
