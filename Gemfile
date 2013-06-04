@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf'
-gem 'thor'
-gem 'foodcritic'
-gem 'chef'
+group :development do
+  gem 'berkshelf'
+  gem 'chef'
+end
+
+group :test do
+  gem 'thor'
+  gem 'foodcritic'
+end

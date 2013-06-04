@@ -1,4 +1,7 @@
 language: ruby
 rvm:
   - 1.9.3
-script: thor test:all
+# Chef (and therefore knife) don't run correctly on the Travis-CI
+# nodes. Skip the knife tests and just run foodcritic.
+bundler_args: --without development
+script: thor foodcritic:test
