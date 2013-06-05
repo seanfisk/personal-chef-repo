@@ -6,4 +6,4 @@ rvm:
 bundler_args: --without development
 script:
   - thor foodcritic:test
-  - thor rubocop:test
+  - thor style:check
