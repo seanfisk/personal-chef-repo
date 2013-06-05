@@ -1,3 +1,5 @@
+# encoding: UTF-8 -*- mode: ruby; -*-
+
 source 'https://rubygems.org'
 
 group :development do
