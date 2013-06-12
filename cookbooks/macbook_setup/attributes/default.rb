@@ -27,6 +27,7 @@ default['macbook_setup']['emacs_dir'] =
 default['macbook_setup']['scripts_dir'] =
   "#{default['macbook_setup']['home']}/bin"
 default['macbook_setup']['packages'] = %w{
+ack
 coreutils
 dos2unix
 graphicsmagick
@@ -37,7 +38,6 @@ mobile-shell
 parallel
 rbenv
 ruby-build
-the_silver_searcher
 tmux
 watch
 wget
