@@ -32,7 +32,7 @@ class Foodcritic < Thor
     review = FoodCritic::Linter.new.check('cookbooks', {
       fail_tags: ['any'],
       include_rules: ['foodcritic/etsy', 'foodcritic/customink'],
-      # Don't worry about not having a CHANGELOG.md file for each cookbook.
+      # Don't worry about having a CHANGELOG.md file for each cookbook.
       tags: ['~CINK001'] })
 
     if review.warnings.any?
@@ -49,7 +49,8 @@ end
 class Style < Thor
   desc 'check', 'Run rubocop on all Ruby files'
   def check
-    result = Rubocop::CLI.new.run(['.', __FILE__])
+    result = Rubocop::CLI.new.run %W{
+Berksfile Gemfile #{ __FILE__ } cookbooks }
     if result == 0
       puts 'No rubocop errors'
     else

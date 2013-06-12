@@ -2,6 +2,8 @@ language: ruby
 rvm:
   - 1.9.3
 # Chef (and therefore knife) don't run correctly on the Travis-CI
-# nodes. Skip the knife tests and just run foodcritic.
+# nodes. Skip the knife tests and run foodcritic and rubocop.
 bundler_args: --without development
-script: thor foodcritic:test
+script:
+  - thor foodcritic:test
+  - thor style:check
