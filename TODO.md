@@ -3,6 +3,7 @@
 * Add a pythonz provider instead of just a recipe.
 * Improve pythonz README.
 * Make tmux-MacOSX-pasteboard its own cookbook.
+* Consider installing Emacs through homebrew (brew install emacs --cocoa && brew linkapps).
 
 * Things to add
     * f.lux
