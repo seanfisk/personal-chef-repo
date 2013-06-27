@@ -43,5 +43,5 @@ watch
 wget
 zsh
 }
-# aria2 # gnutls ftp site is down
+# aria2 # fails to build
 # valgrind # fails to build
