@@ -69,10 +69,13 @@ Be careful, because after re-generating, all nodes must be updated to use the ne
 
 # References
 
-* <http://jtimberman.housepub.org/blog/2012/07/29/os-x-workstation-management-with-chef/>
-* <http://jtimberman.housepub.org/blog/2011/09/04/update-to-managing-my-workstations/>
-* <http://jtimberman.housepub.org/blog/2011/04/03/managing-my-workstations-with-chef/>
-* <http://technology.customink.com/blog/2012/05/28/provision-your-laptop-with-chef-part-1/>
-* <http://technology.customink.com/blog/2012/07/30/provision-your-laptop-with-chef-part-2/>
-* <http://spin.atomicobject.com/2013/01/03/berks-simplifying-chef-solo-cookbook-management-with-berkshelf/>
-* <http://berkshelf.com/>
+* Josh Timberman
+    * [OS X Workstation Management With Chef](http://jtimberman.housepub.org/blog/2012/07/29/os-x-workstation-management-with-chef/)
+    * [Update to Managing My Workstations](http://jtimberman.housepub.org/blog/2011/09/04/update-to-managing-my-workstations/)
+    * [My Workstations With Chef](http://jtimberman.housepub.org/blog/2011/04/03/managing-my-workstations-with-chef/)
+* Seth Vargo
+    * [Provision Your Laptop With Chef: Part 1](http://technology.customink.com/blog/2012/05/28/provision-your-laptop-with-chef-part-1/)
+    * [Provision Your Laptop With Chef: Part 2](http://technology.customink.com/blog/2012/07/30/provision-your-laptop-with-chef-part-2/)
+* Mike English
+    * [Simplifying Chef Solo Cookbook Management with Berkshelf](http://spin.atomicobject.com/2013/01/03/berks-simplifying-chef-solo-cookbook-management-with-berkshelf/)
+* [Berkshelf](http://berkshelf.com/)
