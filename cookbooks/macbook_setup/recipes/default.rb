@@ -25,6 +25,7 @@
 include_recipe 'homebrew'
 
 include_recipe 'dmg'
+include_recipe 'zip'
 include_recipe 'mac_os_x'
 
 # Password-protected screensaver + delay
@@ -85,6 +86,23 @@ dmg_package 'Skim' do
     'skim-app/Skim/Skim-1.4.3/Skim-1.4.3.dmg'
   checksum 'bc01dffe6f471fffc531222a56ab27f5' +
     '53ce42b91c800fe53f3770926feda809'
+  action :install
+end
+
+zip_package 'gfxCardStatus' do
+  # 2.2.1 is for Mac OS 10.6 Snow Leopard compatibility. 2.3 and
+  # upwards require 10.7 Lion. Upgrade when we ditch the venerable
+  # Snow Leopard.
+  source 'http://codykrieger.com/downloads/gfxCardStatus-2.2.1.zip'
+  checksum 'b6867efa99f3682042505e47850b314f' +
+    '2ae39258d024aeebf63c32a28c83dbc9'
+  action :install
+end
+
+zip_package 'Flux' do
+  source 'https://justgetflux.com/mac/Flux.zip'
+  checksum 'c4cb2b2e08c07678e4825c7472f78fe8' +
+    'fca8e78846625dcb7a4fe4fcae503471'
   action :install
 end
 

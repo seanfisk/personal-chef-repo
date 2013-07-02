@@ -4,12 +4,14 @@
 * Improve pythonz README.
 * Make tmux-MacOSX-pasteboard its own cookbook.
 * Consider installing Emacs through homebrew (brew install emacs --cocoa && brew linkapps).
-
+* zip package
+    * Consider renaming it to something better. Remember the trouble with the imports though.
+    * Revise the CHANGELOG and README.
+    * Consider changing the `cp -R` in the installation to a ruby block.
+    * Remove the temp directory when done.
 * Things to add
-    * f.lux
     * texlive
     * SizeWell and SIMBL (SIMBL should be pretty simple, SizeWell more difficult)
-    * gfxCardStatus
     * Skitch
     * Swap Caps Lock and Control
     * iTerm2 option key send meta.
