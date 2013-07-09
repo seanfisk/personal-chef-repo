@@ -20,9 +20,47 @@
 # limitations under the License.
 #
 
+require 'etc'
+
 # Include homebrew as the default package manager.
 # (default is MacPorts)
 include_recipe 'homebrew'
+
+# Set latest bash 4 as the default shell.
+#
+# Unfortunately, these commands will cause password prompts, meaning
+# chef has to be watched. The "workaround" is to put them at the
+# beginning of the run.
+#
+# We also need to install bash separately from the other homebrew
+# packages because it needs to be available for changing the default
+# shell. We don't want to wait for all the other packages to be
+# installed to see the prompt, but we need the shell to be available
+# before setting it as the default.
+package 'bash' do
+  action :install
+end
+
+PATH_TO_BASH = '/usr/local/bin/bash'
+SHELLS_FILE = '/etc/shells'
+
+# First, add bash to /etc/shells so it is recognized as a valid user shell.
+execute "add latest bash to #{SHELLS_FILE}" do
+  command "sudo bash -c 'echo #{PATH_TO_BASH} >> #{SHELLS_FILE}'"
+  not_if do
+    # Don't execute if this bash is already in the shells config file.
+    File.open(SHELLS_FILE).lines.any? do
+      |line| line.include?(PATH_TO_BASH)
+    end
+  end
+end
+
+# Then, set bash as the current user's shell.
+execute 'set latest bash as default shell' do
+  command "chsh -s '#{PATH_TO_BASH}'"
+  # getpwuid defaults to the current user, which is what we want.
+  not_if { Etc.getpwuid().shell == PATH_TO_BASH }
+end
 
 include_recipe 'dmg'
 include_recipe 'zip'
