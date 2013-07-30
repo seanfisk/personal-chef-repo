@@ -26,8 +26,13 @@ default['macbook_setup']['emacs_dir'] =
   "#{default['macbook_setup']['personal_dir']}/emacs"
 default['macbook_setup']['scripts_dir'] =
   "#{default['macbook_setup']['home']}/bin"
+
+# To fix the aria2 build, I ran `brew edit gmp' and added a
+# `--with-pic' flag. Hopefully I will not have issues in the
+# future. See here: <https://github.com/mxcl/homebrew/issues/12946>
 default['macbook_setup']['packages'] = %w{
 ack
+aria2
 coreutils
 dos2unix
 graphicsmagick
@@ -43,5 +48,4 @@ watch
 wget
 zsh
 }
-# aria2 # fails to build
 # valgrind # fails to build
