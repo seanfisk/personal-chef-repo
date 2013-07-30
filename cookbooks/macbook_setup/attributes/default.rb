@@ -27,9 +27,14 @@ default['macbook_setup']['emacs_dir'] =
 default['macbook_setup']['scripts_dir'] =
   "#{default['macbook_setup']['home']}/bin"
 
-# To fix the aria2 build, I ran `brew edit gmp' and added a
-# `--with-pic' flag. Hopefully I will not have issues in the
-# future. See here: <https://github.com/mxcl/homebrew/issues/12946>
+# Notes:
+#
+# * To fix the aria2 build, I ran `brew edit gmp' and added a
+#   `--with-pic' flag. Hopefully I will not have issues in the
+#   future. See here: <https://github.com/mxcl/homebrew/issues/12946>
+#
+# * I prefer ohcount to cloc and sloccount.
+#
 default['macbook_setup']['packages'] = %w{
 ack
 aria2
@@ -40,6 +45,7 @@ graphviz
 htop
 markdown
 mobile-shell
+ohcount
 parallel
 rbenv
 ruby-build
