@@ -1,4 +1,5 @@
 * Add XQuartz.
+* Add Caffeine.
 * Document upload process.
 * Make a script that does some of the stuff in the README.
 * Add a pythonz provider instead of just a recipe.
