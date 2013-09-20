@@ -47,6 +47,7 @@ markdown
 mobile-shell
 ohcount
 parallel
+qpdf
 rbenv
 ruby-build
 tmux
