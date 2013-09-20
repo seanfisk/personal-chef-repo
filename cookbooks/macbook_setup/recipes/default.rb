@@ -105,16 +105,13 @@ end
 dmg_package 'Emacs' do
   source 'http://emacsformacosx.com/emacs-builds/' +
     'Emacs-24.3-universal-10.6.8.dmg'
-  checksum '92b3a6dd0a32b432f45ea925cfa34834' +
-    'c9ac9f7f0384c38775f6760f1e89365a'
+  checksum '92b3a6dd0a32b432f45ea925cfa34834c9ac9f7f0384c38775f6760f1e89365a'
   action :install
 end
 
 dmg_package 'Google Chrome' do
-  source 'https://dl.google.com/chrome/mac/' +
-    'stable/GGRO/googlechrome.dmg'
-  checksum '0e43d17aa2fe454e890bd58313f567de' +
-    '07e2343c0d447ef5496dbda9ff45e64d'
+  source 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
+  checksum '0e43d17aa2fe454e890bd58313f567de07e2343c0d447ef5496dbda9ff45e64d'
   dmg_name 'googlechrome'
   action :install
 end
@@ -122,8 +119,7 @@ end
 dmg_package 'Skim' do
   source 'http://downloads.sourceforge.net/project/' +
     'skim-app/Skim/Skim-1.4.3/Skim-1.4.3.dmg'
-  checksum 'bc01dffe6f471fffc531222a56ab27f5' +
-    '53ce42b91c800fe53f3770926feda809'
+  checksum 'bc01dffe6f471fffc531222a56ab27f553ce42b91c800fe53f3770926feda809'
   action :install
 end
 
@@ -140,15 +136,13 @@ zip_package 'gfxCardStatus' do
   # upwards require 10.7 Lion. Upgrade when we ditch the venerable
   # Snow Leopard.
   source 'http://codykrieger.com/downloads/gfxCardStatus-2.2.1.zip'
-  checksum 'b6867efa99f3682042505e47850b314f' +
-    '2ae39258d024aeebf63c32a28c83dbc9'
+  checksum 'b6867efa99f3682042505e47850b314f2ae39258d024aeebf63c32a28c83dbc9'
   action :install
 end
 
 zip_package 'Flux' do
   source 'https://justgetflux.com/mac/Flux.zip'
-  checksum 'c4cb2b2e08c07678e4825c7472f78fe8' +
-    'fca8e78846625dcb7a4fe4fcae503471'
+  checksum 'c4cb2b2e08c07678e4825c7472f78fe8fca8e78846625dcb7a4fe4fcae503471'
   action :install
 end
 
@@ -203,8 +197,7 @@ end
 tmux_macosx_dir =
   "#{Chef::Config[:file_cache_path]}/tmux-MacOSX-pasteboard"
 git tmux_macosx_dir do
-  repository 'https://github.com/ChrisJohnsen/' +
-    'tmux-MacOSX-pasteboard.git'
+  repository 'https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard.git'
   action :sync
   notifies :run, 'bash[compile and install tmux-MacOSX-pasteboard]'
 end
