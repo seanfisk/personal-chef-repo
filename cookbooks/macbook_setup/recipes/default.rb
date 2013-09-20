@@ -127,6 +127,14 @@ dmg_package 'Skim' do
   action :install
 end
 
+dmg_package 'XQuartz' do
+  source 'http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.4.dmg'
+  checksum '3f7c156fc4b13e3f0d0e44523ef2bd3cf7ea736126616dd2da28abb31840923c'
+  type 'pkg'
+  volumes_dir 'XQuartz-2.7.4'
+  action :install
+end
+
 zip_package 'gfxCardStatus' do
   # 2.2.1 is for Mac OS 10.6 Snow Leopard compatibility. 2.3 and
   # upwards require 10.7 Lion. Upgrade when we ditch the venerable

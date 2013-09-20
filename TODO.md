@@ -1,4 +1,3 @@
-* Add XQuartz.
 * Add Caffeine.
 * Document upload process.
 * Make a script that does some of the stuff in the README.
