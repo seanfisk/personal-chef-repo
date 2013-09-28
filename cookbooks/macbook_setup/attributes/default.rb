@@ -45,6 +45,7 @@ graphviz
 htop
 markdown
 mobile-shell
+nmap
 ohcount
 parallel
 qpdf
