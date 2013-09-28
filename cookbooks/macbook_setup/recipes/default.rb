@@ -128,6 +128,7 @@ dmg_package 'XQuartz' do
   checksum '3f7c156fc4b13e3f0d0e44523ef2bd3cf7ea736126616dd2da28abb31840923c'
   type 'pkg'
   volumes_dir 'XQuartz-2.7.4'
+  not_if { Dir.exists?('/Applications/Utilities/XQuartz.app') }
   action :install
 end
 
