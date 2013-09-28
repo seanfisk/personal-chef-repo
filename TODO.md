@@ -1,5 +1,8 @@
 * Add Caffeine.
 * Document upload process.
+* Remove redundancy in iTerm2 plist file in relation to background image.
+    * Should use templates.
+    * Should not use a hard-coded path (e.g., `/Users/sean`)
 * Make a script that does some of the stuff in the README.
 * Add a pythonz provider instead of just a recipe.
 * Improve pythonz README.

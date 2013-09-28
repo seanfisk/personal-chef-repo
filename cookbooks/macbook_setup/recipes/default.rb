@@ -70,6 +70,30 @@ include_recipe 'mac_os_x'
 include_recipe 'mac_os_x::screensaver'
 
 # iTerm2
+## Install iTerm2 background image.
+backgrounds_dir = "#{node['macbook_setup']['home']}/Pictures/Backgrounds"
+background_name = 'holland-beach-sunset.jpg'
+background_path = "#{backgrounds_dir}/#{background_name}"
+
+directory backgrounds_dir
+cookbook_file background_name do
+  path background_path
+end
+
+## Install plist, containing lots of themes, configuration, and
+## background image setup.
+mac_os_x_plist_file 'com.googlecode.iterm2.plist'
+
+## Include the iTerm2 recipe. This must be called AFTER the plist
+## command above for the following reason: The iterm2 cookbook can
+## also install the iTerm2 plist from files/default. We can't use
+## this, however, because we include the iterm2 cookbook through
+## Berkshelf, meaning that we can't write to that cookbook. The iterm2
+## cookbook declares a mac_os_x_plist_file just like ours, but it
+## fails because that file doesn't exist in the iterm2 cookbook.
+## ignore_failure is set to true, so it continues. If we make our call
+## after including the iterm2 cookbook, Chef remembers the config from
+## the first call to mac_os_x_plist_file and fails once again.
 include_recipe 'iterm2'
 
 dmg_package 'Adium' do
