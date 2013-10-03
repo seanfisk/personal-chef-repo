@@ -38,6 +38,7 @@ default['macbook_setup']['scripts_dir'] =
 default['macbook_setup']['packages'] = %w{
 ack
 aria2
+astyle
 coreutils
 dos2unix
 graphicsmagick
