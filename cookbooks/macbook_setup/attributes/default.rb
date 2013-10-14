@@ -53,6 +53,7 @@ qpdf
 rbenv
 ruby-build
 tmux
+tree
 watch
 wget
 zsh
