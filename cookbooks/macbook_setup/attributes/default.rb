@@ -49,6 +49,8 @@ mobile-shell
 nmap
 ohcount
 parallel
+pyenv
+pyenv-virtualenv
 qpdf
 rbenv
 ruby-build
