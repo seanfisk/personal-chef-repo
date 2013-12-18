@@ -62,6 +62,21 @@ execute 'set latest bash as default shell' do
   not_if { Etc.getpwuid().shell == PATH_TO_BASH }
 end
 
+# Make sure to use the `execute' resource than the `bash' resource, otherwise
+# sudo cannot prompt for a password.
+execute 'fix the zsh startup file that path_helper uses' do
+  # Mac OS X has a program called path_helper that allows paths to be easily
+  # set for multiple shells. For bash (and other shells), it works great
+  # because it is called /etc/profile which is executed only for login shells.
+  # However, with zsh, path_helper is run from /etc/zshenv *instead of*
+  # /etc/zprofile like it should be. This fixes Apple's mistake.
+  #
+  # See this link for more information:
+  # <https://github.com/sorin-ionescu/prezto/issues/381>
+  command 'sudo mv /etc/zshenv /etc/zprofile'
+  only_if { File.exists?('/etc/zshenv') }
+end
+
 include_recipe 'dmg'
 include_recipe 'zip'
 include_recipe 'mac_os_x'
