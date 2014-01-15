@@ -7,8 +7,6 @@
     * Should use templates.
     * Should not use a hard-coded path (e.g., `/Users/sean`)
 * Make a script that does some of the stuff in the README.
-* Add a pythonz provider instead of just a recipe.
-* Improve pythonz README.
 * Make tmux-MacOSX-pasteboard its own cookbook.
 * Consider installing Emacs through homebrew (brew install emacs --cocoa && brew linkapps).
 * zip package

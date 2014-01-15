@@ -274,6 +274,3 @@ node['macbook_setup']['packages'].each do |pkg_name|
     action :install
   end
 end
-
-# Install pythonz Python installation manager
-include_recipe 'pythonz'
