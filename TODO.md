@@ -34,3 +34,4 @@
     * Calibre
     * uTorrent
     * Seagate Dashboard (for my external drive, probably not easy to automate)
+    * Graphviz
