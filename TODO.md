@@ -19,7 +19,6 @@
     * iTerm2
         * option key send meta
         * font size
-    * Disk Inventory X (if I like it)
     * Chicken, CoRD, or similar
     * Firefox
     * Highlight

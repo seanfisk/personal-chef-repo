@@ -186,6 +186,13 @@ zip_package 'Flux' do
   action :install
 end
 
+dmg_package 'Disk Inventory X' do
+  source 'http://www.alice-dsl.net/tjark.derlien/DIX1.0Universal.dmg'
+  checksum 'f61c070a1ec8f29ee78b8a7c84dd4124553098acc87134e2ef05dbaf2a442636'
+  dmg_name 'DIX1.0Universal'
+  action :install
+end
+
 # Set up clock with day of week, date, and 24-hour clock.
 mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
 
