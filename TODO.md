@@ -18,7 +18,9 @@
         * But first checkout Slate.
     * Skitch
     * Swap Caps Lock and Control
-    * iTerm2 option key send meta.
+    * iTerm2
+        * option key send meta
+        * font size
     * Caffeine
     * Disk Inventory X (if I like it)
     * Chicken, CoRD, or similar
