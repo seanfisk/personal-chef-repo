@@ -176,6 +176,9 @@ zip_package 'gfxCardStatus' do
   checksum '092b3e2fad44681ba396cf498707c8b6c228fd55310770a8323ebb9344b4d9a1'
   action :install
 end
+# Install the gfxCardStatus preferences. This WILL overwrite current setting
+# (there are barely any :).
+mac_os_x_plist_file 'com.codykrieger.gfxCardStatus-Preferences.plist'
 
 zip_package 'Flux' do
   source 'https://justgetflux.com/mac/Flux.zip'
