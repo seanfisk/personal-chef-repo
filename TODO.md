@@ -7,7 +7,6 @@
     * Should not use a hard-coded path (e.g., `/Users/sean`)
 * Make a script that does some of the stuff in the README.
 * Make tmux-MacOSX-pasteboard its own cookbook.
-* Consider installing Emacs through homebrew (brew install emacs --cocoa && brew linkapps).
 * zip package
     * Consider renaming it to something better. Remember the trouble with the imports though.
     * Revise the CHANGELOG and README.
