@@ -39,6 +39,7 @@ default['macbook_setup']['packages'] = %w{
 ack
 aria2
 astyle
+autojump
 coreutils
 dos2unix
 graphicsmagick
