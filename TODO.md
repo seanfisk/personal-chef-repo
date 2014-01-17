@@ -34,6 +34,5 @@
     * Calibre
     * uTorrent
     * Seagate Dashboard (for my external drive, probably not easy to automate)
-    * Graphviz
     * Mention installing Command-Line Tools for Xcode.
     * Add note about setting up SSH keys before running.
