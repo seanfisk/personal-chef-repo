@@ -150,15 +150,15 @@ end
 
 dmg_package 'Google Chrome' do
   source 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
-  checksum '0e43d17aa2fe454e890bd58313f567de07e2343c0d447ef5496dbda9ff45e64d'
+  checksum 'ba4d6fe46e5b8deef5cfe5691e2c36ac3eb15396fefeb6d708c7c426818e2f11'
   dmg_name 'googlechrome'
   action :install
 end
 
 dmg_package 'Skim' do
   source 'http://downloads.sourceforge.net/project/' +
-    'skim-app/Skim/Skim-1.4.3/Skim-1.4.3.dmg'
-  checksum 'bc01dffe6f471fffc531222a56ab27f553ce42b91c800fe53f3770926feda809'
+    'skim-app/Skim/Skim-1.4.7/Skim-1.4.7.dmg'
+  checksum 'c8789c23cf66359adca5f636943dce3b440345da33ae3b5fa306ac2d438a968e'
   action :install
 end
 
@@ -172,17 +172,14 @@ dmg_package 'XQuartz' do
 end
 
 zip_package 'gfxCardStatus' do
-  # 2.2.1 is for Mac OS 10.6 Snow Leopard compatibility. 2.3 and
-  # upwards require 10.7 Lion. Upgrade when we ditch the venerable
-  # Snow Leopard.
-  source 'http://codykrieger.com/downloads/gfxCardStatus-2.2.1.zip'
-  checksum 'b6867efa99f3682042505e47850b314f2ae39258d024aeebf63c32a28c83dbc9'
+  source 'http://gfx.io/downloads/gfxCardStatus-2.3.zip'
+  checksum '092b3e2fad44681ba396cf498707c8b6c228fd55310770a8323ebb9344b4d9a1'
   action :install
 end
 
 zip_package 'Flux' do
   source 'https://justgetflux.com/mac/Flux.zip'
-  checksum 'c4cb2b2e08c07678e4825c7472f78fe8fca8e78846625dcb7a4fe4fcae503471'
+  checksum '7cc07a4865b45f6e9b4736b5eb25db21e16bbcd36ce447fee54394ccb9a0d360'
   action :install
 end
 
