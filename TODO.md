@@ -16,12 +16,9 @@
     * texlive
     * SizeWell and SIMBL (SIMBL should be pretty simple, SizeWell more difficult)
         * But first checkout Slate.
-    * Skitch
-    * Swap Caps Lock and Control
     * iTerm2
         * option key send meta
         * font size
-    * Caffeine
     * Disk Inventory X (if I like it)
     * Chicken, CoRD, or similar
     * Firefox
@@ -34,6 +31,11 @@
     * Xerox printer drivers
     * Calibre
     * uTorrent
-    * Seagate Dashboard (for my external drive, probably not easy to automate)
     * Mention installing Command-Line Tools for Xcode.
     * Add note about setting up SSH keys before running.
+* Check for these applications from the App Store or otherwise
+    * Caffeine
+    * Skitch
+    * Seagate Dashboard (for my external drive, probably not easy to automate)
+* Deferred / "Not Possible"
+    * Swap Caps Lock and Control
