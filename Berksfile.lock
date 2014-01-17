@@ -2,4 +2,4 @@ cookbook 'macbook_setup', :path => '/Users/sean/src/personal/chef/macbook-chef-r
 cookbook 'dmg', :locked_version => '1.1.0'
 cookbook 'mac_os_x', :locked_version => '1.4.2'
 cookbook 'iterm2', :locked_version => '1.3.0'
-cookbook 'homebrew', :locked_version => '1.3.2'
+cookbook 'homebrew', :locked_version => '1.5.4'
