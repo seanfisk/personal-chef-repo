@@ -32,7 +32,7 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
         cp ~/Downloads/sean_fisk-validator.pem /etc/chef/validation.pem
 
-1. Run `chef-client` to register the client:
+1. Run `chef-client` to register the client. The registration will create the file `/etc/chef/client.pem`, which allows the "machine" client to communicate with the chef server:
 
         chef-client
 
