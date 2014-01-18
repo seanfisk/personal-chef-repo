@@ -281,3 +281,33 @@ node['macbook_setup']['packages'].each do |pkg_name|
     action :install
   end
 end
+
+# Install fonts.
+
+## Ubuntu
+UBUNTU_FONT_ARCHIVE_NAME = 'ubuntu-font-family-0.80.zip'
+UBUNTU_FONT_ARCHIVE_PATH =
+  "#{Chef::Config[:file_cache_path]}/#{UBUNTU_FONT_ARCHIVE_NAME}"
+UBUNTU_FONT_DIR = "#{node['macbook_setup']['fonts_dir']}/Ubuntu"
+
+directory UBUNTU_FONT_DIR
+
+remote_file 'download Ubuntu fonts' do
+  source "http://font.ubuntu.com/download/#{UBUNTU_FONT_ARCHIVE_NAME}"
+  path UBUNTU_FONT_ARCHIVE_PATH
+  notifies :run, 'execute[install Ubuntu fonts]'
+end
+
+execute 'install Ubuntu fonts' do
+  command "unzip '#{UBUNTU_FONT_ARCHIVE_PATH}'"
+  cwd UBUNTU_FONT_DIR
+  action :nothing
+end
+
+## Inconsolata
+INCONSOLATA_FILE = 'Inconsolata.otf'
+remote_file 'download Inconsolata font' do
+  source "http://levien.com/type/myfonts/#{INCONSOLATA_FILE}"
+  path "#{node['macbook_setup']['fonts_dir']}/#{INCONSOLATA_FILE}"
+  action :create_if_missing
+end

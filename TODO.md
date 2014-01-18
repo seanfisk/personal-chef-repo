@@ -1,6 +1,3 @@
-* Install fonts.
-    * Inconsolata
-    * Monofur
 * Document upload process.
 * Remove redundancy in iTerm2 plist file in relation to background image.
     * Should use templates.

@@ -26,6 +26,8 @@ default['macbook_setup']['emacs_dir'] =
   "#{default['macbook_setup']['personal_dir']}/emacs"
 default['macbook_setup']['scripts_dir'] =
   "#{default['macbook_setup']['home']}/bin"
+default['macbook_setup']['fonts_dir'] =
+  "#{default['macbook_setup']['home']}/Library/Fonts"
 
 # Notes:
 #
