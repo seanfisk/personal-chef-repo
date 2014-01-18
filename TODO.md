@@ -13,9 +13,6 @@
     * texlive
     * SizeWell and SIMBL (SIMBL should be pretty simple, SizeWell more difficult)
         * But first checkout Slate.
-    * iTerm2
-        * option key send meta
-        * font size
     * Chicken, CoRD, or similar
     * Firefox
     * Highlight
