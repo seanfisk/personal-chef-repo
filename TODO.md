@@ -32,3 +32,4 @@
     * Seagate Dashboard (for my external drive, probably not easy to automate)
 * Deferred / "Not Possible"
     * Swap Caps Lock and Control
+* Consider turning on `finder`, `kbaccess`, `key_repeat`, and `firewall` from `mac_os_x` cookbook.
