@@ -14,7 +14,6 @@
     * SizeWell and SIMBL (SIMBL should be pretty simple, SizeWell more difficult)
         * But first checkout Slate.
     * Chicken, CoRD, or similar
-    * Firefox
     * Highlight
     * Flash Player standalone
     * Inkscape
