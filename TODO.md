@@ -9,6 +9,9 @@
     * Revise the CHANGELOG and README.
     * Consider changing the `cp -R` in the installation to a ruby block.
     * Remove the temp directory when done.
+* iTerm2
+    * Submit PR updating to newest version.
+    * Submit issue about plist not being found.
 * Things to add
     * texlive
     * SizeWell and SIMBL (SIMBL should be pretty simple, SizeWell more difficult)
@@ -25,6 +28,7 @@
     * uTorrent
     * Mention installing Command-Line Tools for Xcode.
     * Add note about setting up SSH keys before running.
+    * Set desktop backgrounds (for dual monitors, if possible).
 * Check for these applications from the App Store or otherwise
     * Caffeine
     * Skitch
