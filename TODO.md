@@ -20,7 +20,7 @@
     * Highlight
     * Flash Player standalone
     * Inkscape
-    * Gimp, Seashore, or Paintbrush?
+    * Seashore or Paintbrush? (GIMP already installed)
     * Network Connect (probably not easy to automate)
     * Ukelele (maybe)
     * Xerox printer drivers

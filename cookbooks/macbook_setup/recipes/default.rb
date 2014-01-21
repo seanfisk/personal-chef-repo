@@ -195,10 +195,20 @@ zip_package 'Flux' do
   action :install
 end
 
+DISK_INVENTORY_DMG_NAME = 'DIX1.0Universal'
 dmg_package 'Disk Inventory X' do
-  source 'http://www.alice-dsl.net/tjark.derlien/DIX1.0Universal.dmg'
+  source 'http://www.alice-dsl.net/' +
+    "tjark.derlien/#{DISK_INVENTORY_DMG_NAME}.dmg"
   checksum 'f61c070a1ec8f29ee78b8a7c84dd4124553098acc87134e2ef05dbaf2a442636'
-  dmg_name 'DIX1.0Universal'
+  dmg_name DISK_INVENTORY_DMG_NAME
+  action :install
+end
+
+GIMP_DMG_NAME = 'gimp-2.8.10-dmg-1'
+dmg_package 'GIMP' do
+  source "http://ftp.gimp.org/pub/gimp/v2.8/osx/#{GIMP_DMG_NAME}.dmg"
+  checksum 'e93a84cd5eff4fe1c987c9c358f9de5c3532ee516bce3cd5206c073048cddba5'
+  dmg_name GIMP_DMG_NAME
   action :install
 end
 
