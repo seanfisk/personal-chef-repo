@@ -218,6 +218,19 @@ dmg_package 'GIMP' do
   action :install
 end
 
+dmg_package 'Slate' do
+  source 'http://slate.ninjamonkeysoftware.com/Slate.dmg'
+  checksum '428e375d5b1c64f79f1536acb309e4414c3178051c6fe0b2f01a94a0803e223f'
+  action :install
+end
+
+# TODO: Consider using JavaScript preferences (replacing .slate, or to
+# supplement it).
+cookbook_file 'Slate preferences file' do
+  source 'slate'
+  path "#{node['macbook_setup']['home']}/.slate"
+end
+
 # I wish we could avoid installing Java, but I need it for at least these
 # reasons:
 #

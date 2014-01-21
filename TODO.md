@@ -14,8 +14,6 @@
     * Submit issue about plist not being found.
 * Things to add
     * texlive
-    * SizeWell and SIMBL (SIMBL should be pretty simple, SizeWell more difficult)
-        * But first checkout Slate.
     * Chicken, CoRD, or similar
     * Highlight
     * Flash Player standalone
