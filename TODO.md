@@ -1,3 +1,4 @@
+* Fix spurious errors causing DMG installs to fail. It happens on rsync for some reason.
 * Document upload process.
 * Remove redundancy in iTerm2 plist file in relation to background image.
     * Should use templates.
