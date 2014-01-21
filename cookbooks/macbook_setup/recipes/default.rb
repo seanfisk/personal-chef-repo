@@ -103,7 +103,15 @@ end
 
 ## Install plist, containing lots of themes, configuration, and
 ## background image setup.
-mac_os_x_plist_file 'com.googlecode.iterm2.plist'
+template 'iTerm2 preferences file' do
+  source 'com.googlecode.iterm2.plist.erb'
+  path "#{node['macbook_setup']['home']}/Library/Preferences/" +
+    'com.googlecode.iterm2.plist'
+  variables({
+              background_image_path: background_path,
+              home_directory: node['macbook_setup']['home']
+   })
+end
 
 ## Include the iTerm2 recipe. This must be called AFTER the plist
 ## command above for the following reason: The iterm2 cookbook can
@@ -115,6 +123,8 @@ mac_os_x_plist_file 'com.googlecode.iterm2.plist'
 ## ignore_failure is set to true, so it continues. If we make our call
 ## after including the iterm2 cookbook, Chef remembers the config from
 ## the first call to mac_os_x_plist_file and fails once again.
+##
+## This might not be a problem since we are now using a template above.
 include_recipe 'iterm2'
 
 dmg_package 'Adium' do
@@ -144,7 +154,7 @@ mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
   not_if do
     File.exists?(node['macbook_setup']['home'] +
                  "/Library/Preferences/#{source}")
-    end
+  end
 end
 
 dmg_package 'Emacs' do

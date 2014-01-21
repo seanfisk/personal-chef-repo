@@ -1,8 +1,5 @@
 * Fix spurious errors causing DMG installs to fail. It happens on rsync for some reason.
 * Document upload process.
-* Remove redundancy in iTerm2 plist file in relation to background image.
-    * Should use templates.
-    * Should not use a hard-coded path (e.g., `/Users/sean`)
 * Make a script that does some of the stuff in the README.
 * Make tmux-MacOSX-pasteboard its own cookbook.
 * zip package
