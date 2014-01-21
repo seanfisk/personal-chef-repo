@@ -84,6 +84,12 @@ include_recipe 'mac_os_x'
 # Password-protected screensaver + delay
 include_recipe 'mac_os_x::screensaver'
 
+# Turn on the OS X firewall.
+include_recipe 'mac_os_x::firewall'
+
+# Set up fast key repeat with low initial delay.
+include_recipe 'mac_os_x::key_repeat'
+
 # iTerm2
 ## Install iTerm2 background image.
 backgrounds_dir = "#{node['macbook_setup']['home']}/Pictures/Backgrounds"
