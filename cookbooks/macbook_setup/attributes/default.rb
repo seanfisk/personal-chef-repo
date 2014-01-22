@@ -44,6 +44,7 @@ astyle
 autojump
 coreutils
 dos2unix
+git
 graphicsmagick
 graphviz
 htop
