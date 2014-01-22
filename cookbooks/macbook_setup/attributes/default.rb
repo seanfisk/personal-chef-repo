@@ -60,8 +60,8 @@ rbenv
 ruby-build
 tmux
 tree
+valgrind
 watch
 wget
 zsh
 }
-# valgrind # fails to build
