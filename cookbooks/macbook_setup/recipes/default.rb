@@ -246,15 +246,55 @@ end
 #
 # - Network Connect, GVSU's SSL VPN
 # - Playing TankPit, a Java applet-based game
+#
+# GVSU's Network Connect, as of 2013-01-24, needs Java 6. Argh.
+
+# Java 6 JDK, from Apple
+
+# Thanks for the naming consistency, Apple! [sarcasm] Apparently the goal was
+# to format the name in as many different ways as possible.
+#
+# Apple distributes the JDK, it's not possible (or plausible, I guess) to get
+# the JRE.
+#
+# rubocop:disable LineLength
+#
+# To see all files install by *this* installer, run:
+#
+#     pkgutil --bom '/Volumes/Java for OS X 2013-005/JavaForOSX.pkg' | while read -r bom_path; do lsbom -lfs "$bom_path"; done
+#
+# rubocop:enable LineLength
+
+JDK6_DMG_NAME = 'JavaForOSX2013-05'
+# The name must not have spaces (requirement of dmg provider).
+
+# See pkgutil command above for the source of this directory.
+JDK6_IS_INSTALLED =
+  Dir.exists?('/System/Library/Java/JavaVirtualMachines/1.6.0.jdk')
+
+dmg_package 'Java6DevelopmentKit' do
+  source 'http://support.apple.com/downloads/' +
+    "DL1572/en_US/#{JDK6_DMG_NAME}.dmg"
+  checksum '81e1155e44b2c606db78487ca1a02e31dbb3cfbf7e0581a4de3ded9e635a704e'
+  # Though this provider doesn't install an app bundle, the `app' attribute
+  # specifies the name of the pkg file in the volume.
+  app 'JavaForOSX'
+  type 'pkg'
+  dmg_name JDK6_DMG_NAME
+  volumes_dir 'Java for OS X 2013-005'
+  action :install
+  not_if { JDK6_IS_INSTALLED }
+end
+
+# Java 7 JRE, from Oracle
 
 # If you update, also be aware of the 'b13' in the URL below -- that will
 # probably change.
-JAVA_MAJOR_VERSION = 7
-JAVA_UPDATE_VERSION = 51
-JAVA_VERSION = "#{JAVA_MAJOR_VERSION}u#{JAVA_UPDATE_VERSION}"
-JAVA_DMG_NAME = "jre-#{JAVA_VERSION}-macosx-x64"
-JAVA_PKG_AND_VOLUMES_DIR_NAME =
-  "Java #{JAVA_MAJOR_VERSION} Update #{JAVA_UPDATE_VERSION}"
+JRE7_UPDATE_VERSION = 51
+JRE7_VERSION = "7u#{JRE7_UPDATE_VERSION}"
+JRE7_DMG_NAME = "jre-#{JRE7_VERSION}-macosx-x64"
+JRE7_PKG_AND_VOLUMES_DIR_NAME =
+  "Java 7 Update #{JRE7_UPDATE_VERSION}"
 
 # Oracle makes you agree to their agreement, which means some trickery is
 # necessary. See here for more info:
@@ -263,13 +303,13 @@ JAVA_PKG_AND_VOLUMES_DIR_NAME =
 require 'uri'
 
 # See <http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jre.html>
-JRE_IS_INSTALLED =
+JRE7_IS_INSTALLED =
   Dir.exists?('/Library/Internet Plug-Ins/JavaAppletPlugin.plugin')
 
 remote_file 'download Java runtime environment DMG' do
   source 'http://download.oracle.com/otn-pub/' +
-    "java/jdk/#{JAVA_VERSION}-b13/#{JAVA_DMG_NAME}.dmg?"
-  path "#{Chef::Config[:file_cache_path]}/#{JAVA_DMG_NAME}.dmg"
+    "java/jdk/#{JRE7_VERSION}-b13/#{JRE7_DMG_NAME}.dmg?"
+  path "#{Chef::Config[:file_cache_path]}/#{JRE7_DMG_NAME}.dmg"
   checksum '8541090bf8bd7b284f07d4b1f74b5352b8addf5e0274eeb82cacdc4b2e2b66d2'
   headers('Cookie' =>
           URI.encode_www_form('gpw_e24' => 'http://www.oracle.com'))
@@ -279,21 +319,21 @@ remote_file 'download Java runtime environment DMG' do
 
   # Even if it's not in the cache, if we already have the JRE installed,
   # there's no reason to download it.
-  not_if { JRE_IS_INSTALLED }
+  not_if { JRE7_IS_INSTALLED }
 end
 
 # The name must not have spaces (requirement of dmg provider).
-dmg_package 'JRE' do
+dmg_package 'Java7RuntimeEnvironment' do
   # Though this provider doesn't install an app bundle, the `app' attribute
   # specifies the name of the pkg file in the volume.
-  app JAVA_PKG_AND_VOLUMES_DIR_NAME
+  app JRE7_PKG_AND_VOLUMES_DIR_NAME
   # A `source' attribute is not included. This causes the dmg provider to look
   # for the DMG specified by `dmg_name' in the Chef cache directory.
   type 'pkg'
-  dmg_name JAVA_DMG_NAME
-  volumes_dir JAVA_PKG_AND_VOLUMES_DIR_NAME
+  dmg_name JRE7_DMG_NAME
+  volumes_dir JRE7_PKG_AND_VOLUMES_DIR_NAME
   action :install
-  not_if { JRE_IS_INSTALLED }
+  not_if { JRE7_IS_INSTALLED }
 end
 
 # Set up clock with day of week, date, and 24-hour clock.
