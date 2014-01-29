@@ -127,21 +127,22 @@ end
 ## This might not be a problem since we are now using a template above.
 include_recipe 'iterm2'
 
+ADIUM_VERSION = '1.5.6'
 dmg_package 'Adium' do
-  source 'http://download.adium.im/Adium_1.5.6.dmg'
+  source "http://download.adium.im/Adium_#{ADIUM_VERSION}.dmg"
   checksum 'd5f580b7db57348c31f8e0f18691d7758a65ad61471bf984955360f91b21edb8'
-  volumes_dir 'Adium 1.5.6'
+  volumes_dir "Adium #{ADIUM_VERSION}"
   action :install
 end
 
+QUICKSILVER_VERSION = '1.0.0'
 dmg_package 'Quicksilver' do
-  source 'http://github.qsapp.com/downloads/Quicksilver%201.0.0.dmg'
+  source 'http://github.qsapp.com/downloads/' +
+    "Quicksilver%20#{QUICKSILVER_VERSION}.dmg"
   checksum '0afb16445d12d7dd641aa8b2694056e319d23f785910a8c7c7de56219db6853c'
-  dmg_name 'Quicksilver 1.0.0'
   action :install
   # This should work but it doesn't seem to. So we went with the
   # `not_if' solution below.
-
   # notifies :create, 'mac_os_x_plist_file[com.blacktree.Quicksilver.plist]'
 end
 
@@ -167,7 +168,8 @@ end
 dmg_package 'Google Chrome' do
   source 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
   checksum 'ba4d6fe46e5b8deef5cfe5691e2c36ac3eb15396fefeb6d708c7c426818e2f11'
-  dmg_name 'googlechrome'
+  # Need to use this because the app name has spaces.
+  dmg_name 'GoogleChrome'
   action :install
 end
 
@@ -176,7 +178,6 @@ dmg_package 'Firefox' do
   source 'http://download-installer.cdn.mozilla.net/pub/firefox/' +
     "releases/#{FIREFOX_VERSION}/mac/en-US/Firefox%20#{FIREFOX_VERSION}.dmg"
   checksum '0ea2b4cc1c56603d8449261ec2d97dba955056eb9029adfb85d002f6cd8a8952'
-  dmg_name "Firefox #{FIREFOX_VERSION}"
   action :install
 end
 
@@ -211,20 +212,17 @@ zip_package 'Flux' do
   action :install
 end
 
-DISK_INVENTORY_DMG_NAME = 'DIX1.0Universal'
 dmg_package 'Disk Inventory X' do
-  source 'http://www.alice-dsl.net/' +
-    "tjark.derlien/#{DISK_INVENTORY_DMG_NAME}.dmg"
+  source 'http://www.alice-dsl.net/tjark.derlien/DIX1.0Universal.dmg'
   checksum 'f61c070a1ec8f29ee78b8a7c84dd4124553098acc87134e2ef05dbaf2a442636'
-  dmg_name DISK_INVENTORY_DMG_NAME
+  # Need to use this because the app name has spaces.
+  dmg_name 'DiskInventoryX'
   action :install
 end
 
-GIMP_DMG_NAME = 'gimp-2.8.10-dmg-1'
 dmg_package 'GIMP' do
-  source "http://ftp.gimp.org/pub/gimp/v2.8/osx/#{GIMP_DMG_NAME}.dmg"
+  source 'http://ftp.gimp.org/pub/gimp/v2.8/osx/gimp-2.8.10-dmg-1.dmg'
   checksum 'e93a84cd5eff4fe1c987c9c358f9de5c3532ee516bce3cd5206c073048cddba5'
-  dmg_name GIMP_DMG_NAME
   action :install
 end
 
@@ -266,12 +264,11 @@ end
 # rubocop:enable LineLength
 
 JDK6_DMG_NAME = 'JavaForOSX2013-05'
-# The name must not have spaces (requirement of dmg provider).
-
 # See pkgutil command above for the source of this directory.
 JDK6_IS_INSTALLED =
   Dir.exists?('/System/Library/Java/JavaVirtualMachines/1.6.0.jdk')
 
+# The name must not have spaces (requirement of dmg provider).
 dmg_package 'Java6DevelopmentKit' do
   source 'http://support.apple.com/downloads/' +
     "DL1572/en_US/#{JDK6_DMG_NAME}.dmg"
