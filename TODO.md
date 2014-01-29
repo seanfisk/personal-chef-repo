@@ -12,7 +12,7 @@
     * Submit issue about plist not being found.
 * Things to add
     * texlive
-    * Chicken, CoRD, or similar
+    * CoRD
     * Highlight
     * Flash Player standalone
     * Inkscape

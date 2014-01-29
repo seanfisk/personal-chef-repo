@@ -239,6 +239,12 @@ cookbook_file 'Slate preferences file' do
   path "#{node['macbook_setup']['home']}/.slate"
 end
 
+dmg_package 'Chicken' do
+  source 'http://sourceforge.net/projects/chicken/files/Chicken-2.2b2.dmg'
+  checksum '20e910b6cbf95c3e5dcf6fe8e120d5a0911f19099128981fb95119cee8d5fc6b'
+  action :install
+end
+
 # I wish we could avoid installing Java, but I need it for at least these
 # reasons:
 #
