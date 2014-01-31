@@ -1,4 +1,3 @@
-* Fix spurious errors causing DMG installs to fail. It happens on rsync for some reason.
 * Document upload process.
 * Make a script that does some of the stuff in the README.
 * Make tmux-MacOSX-pasteboard its own cookbook.
