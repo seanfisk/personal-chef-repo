@@ -46,6 +46,8 @@ SHELLS_FILE = '/etc/shells'
 
 # First, add bash to /etc/shells so it is recognized as a valid user shell.
 execute "add latest bash to #{SHELLS_FILE}" do
+  # Unfortunately, this cannot be a ruby_block as that would prevent it from
+  # running with sudo. See the mactex cookbook for more information.
   command "sudo bash -c 'echo #{PATH_TO_BASH} >> #{SHELLS_FILE}'"
   not_if do
     # Don't execute if this bash is already in the shells config file.

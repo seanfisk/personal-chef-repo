@@ -46,3 +46,52 @@ execute 'install MacTeX' do
   command "sudo installer -pkg '#{PKG_CACHE_PATH}' -target /"
   not_if { MACTEX_IS_INSTALLED }
 end
+
+# rubocop:disable LineLength
+#
+# Deploy workaround for lualatex's font database. See:
+# - http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks
+# - https://github.com/lualatex/luaotfload/issues/139
+
+BLACKLIST_FILE = '/usr/local/texlive/2013/texmf-dist/tex/luatex/luaotfload/luaotfload-blacklist.cnf'
+BLACKLIST_APPEND_CONTENTS =
+  '% Causes segfaults, see http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks\\n' +
+  'Silom.ttf\\n' +
+  'Skia.ttf'
+
+# rubocop:enable LineLength
+
+execute 'add font to blacklist' do
+  # Yucky quoting. See below for why the better solution doesn't work.
+  command "sudo bash -c \"echo -e '#{BLACKLIST_APPEND_CONTENTS}'>> '#{BLACKLIST_FILE}'\"" # rubocop:disable LineLength
+  not_if do
+    # Don't execute if we've already added blacklist. We just check for
+    # 'Skia.ttf'.
+    File.open(BLACKLIST_FILE).lines.any? do
+      |line| line.include?('Skia.ttf')
+    end
+  end
+end
+
+# To allow the font blacklisting to take effect, run:
+#
+#     mkluatexfontdb --force --verbose=10 --update
+#
+# Note that this WILL NOT WORK, as it ignores blacklisted fonts for some
+# reason:
+#
+#     luaotfload-tool --force --verbose=10 --update
+#
+# Not sure why it does that but it's really confusing and inconvenient.
+
+# Unfortunately, this doesn't work, because there's no way that I know of to
+# execute this block using sudo.
+#
+# ruby_block 'add font to blacklist' do
+#   block do
+#     File.open(BLACKLIST_FILE, 'a') do |file|
+#       file.puts('% Causes segfault, see http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks') # rubocop:disable LineLength
+#       file.puts(BLACKLIST_FONT)
+#     end
+#   end
+# end
