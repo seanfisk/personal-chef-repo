@@ -1,3 +1,4 @@
+* Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.
 * Make a script that does some of the stuff in the README.
 * Make tmux-MacOSX-pasteboard its own cookbook.
@@ -23,11 +24,12 @@
     * uTorrent
     * Mention installing Command-Line Tools for Xcode.
     * Add note about setting up SSH keys before running.
-    * Set desktop backgrounds (for dual monitors, if possible).
 * Check for these applications from the App Store or otherwise
     * Caffeine
     * Skitch
     * Seagate Dashboard (for my external drive, probably not easy to automate)
 * Deferred / "Not Possible"
     * Swap Caps Lock and Control
+    * Set desktop backgrounds (for dual monitors, if possible).
+        * This is a little overkill. It's cool, but I change these from time to time manually, and that would be just one more thing to maintain.
 * Consider turning on `kbaccess` from `mac_os_x` cookbook.
