@@ -11,7 +11,6 @@
     * Submit PR updating to newest version.
     * Submit issue about plist not being found.
 * Things to add
-    * texlive
     * CoRD
     * Highlight
     * Flash Player standalone
