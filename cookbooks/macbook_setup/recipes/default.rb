@@ -447,6 +447,8 @@ directory UBUNTU_FONT_DIR
 
 remote_file 'download Ubuntu fonts' do
   source "http://font.ubuntu.com/download/#{UBUNTU_FONT_ARCHIVE_NAME}"
+  # This font release's checksum is unlikely to change.
+  checksum '107170099bbc3beae8602b97a5c423525d363106c3c24f787d43e09811298e4c'
   path UBUNTU_FONT_ARCHIVE_PATH
   notifies :run, 'execute[install Ubuntu fonts]'
 end
@@ -460,6 +462,8 @@ end
 ## Inconsolata
 INCONSOLATA_FILE = 'Inconsolata.otf'
 remote_file 'download Inconsolata font' do
+  # This URL seems like one that may be updated with newer versions, so we'll
+  # just install the current version if it's not already installed.
   source "http://levien.com/type/myfonts/#{INCONSOLATA_FILE}"
   path "#{node['macbook_setup']['fonts_dir']}/#{INCONSOLATA_FILE}"
   action :create_if_missing
