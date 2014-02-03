@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# -*- mode: ruby; coding: utf-8; -*-
 
 require 'English' # for $CHILD_STATUS
 require 'foodcritic'

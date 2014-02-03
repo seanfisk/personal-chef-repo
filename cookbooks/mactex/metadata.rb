@@ -1,4 +1,4 @@
-# coding: UTF-8
+# -*- coding: utf-8 -*-
 name             'mactex'
 maintainer       'Sean Fisk'
 maintainer_email 'sean@seanfisk.com'

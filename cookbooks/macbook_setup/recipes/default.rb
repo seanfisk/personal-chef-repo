@@ -1,4 +1,4 @@
-# coding: UTF-8
+# -*- coding: utf-8 -*-
 #
 # Cookbook Name:: macbook_setup
 # Recipe:: default

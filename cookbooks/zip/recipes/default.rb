@@ -1,4 +1,4 @@
-# coding: UTF-8
+# -*- coding: utf-8 -*-
 #
 # Author:: Sean Fisk <sean@seanfisk.com>
 # Copyright:: Copyright (c) 2013, Sean Fisk

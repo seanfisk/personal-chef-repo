@@ -1,4 +1,4 @@
-# encoding: UTF-8 -*- mode: ruby; -*-
+# -*- mode: ruby; coding: utf-8; -*-
 
 source 'https://rubygems.org'
 
