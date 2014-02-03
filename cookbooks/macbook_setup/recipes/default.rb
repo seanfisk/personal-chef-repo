@@ -191,11 +191,12 @@ dmg_package 'Skim' do
 end
 
 dmg_package 'XQuartz' do
+  # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
   source 'http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg'
   checksum '4382ff78cef5630fb6b8cc982da2e5a577d8cc5dddd35a493b50bad2fcf5e34a'
   type 'pkg'
   volumes_dir 'XQuartz-2.7.5'
-  not_if { Dir.exists?('/Applications/Utilities/XQuartz.app') }
+  package_id 'org.macosforge.xquartz.pkg'
   action :install
 end
 
@@ -269,12 +270,11 @@ end
 #
 #     pkgutil --bom '/Volumes/Java for OS X 2013-005/JavaForOSX.pkg' | while read -r bom_path; do lsbom -lfs "$bom_path"; done
 #
+# Note: Java 6 is installed to /System/Library/Java/JavaVirtualMachines/1.6.0.jdk
+#
 # rubocop:enable LineLength
 
 JDK6_DMG_NAME = 'JavaForOSX2013-05'
-# See pkgutil command above for the source of this directory.
-JDK6_IS_INSTALLED =
-  Dir.exists?('/System/Library/Java/JavaVirtualMachines/1.6.0.jdk')
 
 # The name must not have spaces (requirement of dmg provider).
 dmg_package 'Java6DevelopmentKit' do
@@ -288,7 +288,7 @@ dmg_package 'Java6DevelopmentKit' do
   dmg_name JDK6_DMG_NAME
   volumes_dir 'Java for OS X 2013-005'
   action :install
-  not_if { JDK6_IS_INSTALLED }
+  package_id 'com.apple.pkg.JavaForMacOSX107'
 end
 
 # Java 7 JRE, from Oracle
@@ -307,11 +307,14 @@ JRE7_PKG_AND_VOLUMES_DIR_NAME =
 
 require 'uri'
 
-# See <http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jre.html>
-JRE7_IS_INSTALLED =
-  Dir.exists?('/Library/Internet Plug-Ins/JavaAppletPlugin.plugin')
+JRE7_IS_INSTALLED = system('pkgutil --pkgs=com.oracle.jre')
 
-remote_file 'download Java runtime environment DMG' do
+remote_file 'download Java 7 runtime environment DMG' do
+  # Note: Java 7 is installed to
+  # /Library/Internet Plug-Ins/JavaAppletPlugin.plugin
+  #
+  # See here:
+  # <http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jre.html>
   source 'http://download.oracle.com/otn-pub/' +
     "java/jdk/#{JRE7_VERSION}-b13/#{JRE7_DMG_NAME}.dmg?"
   path "#{Chef::Config[:file_cache_path]}/#{JRE7_DMG_NAME}.dmg"
@@ -338,6 +341,8 @@ dmg_package 'Java7RuntimeEnvironment' do
   dmg_name JRE7_DMG_NAME
   volumes_dir JRE7_PKG_AND_VOLUMES_DIR_NAME
   action :install
+  # We could use package_id here, but since that's pretty much what we do
+  # above, we'll just stay consistent.
   not_if { JRE7_IS_INSTALLED }
 end
 
