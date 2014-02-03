@@ -29,3 +29,9 @@ dmg_package 'Panda3D' do
   package_id 'org.panda3d.panda3d.base.pkg'
   action :install
 end
+
+# Using Panda3D may or may not also require installing NVIDIA's Cg toolkit
+# <https://developer.nvidia.com/cg-toolkit>. Unfortunately, it uses a
+# .app-based installer that just runs a shell script with a tarball in the
+# background. In addition, since it might not be used on every machine, we'll
+# avoid automating it for now. But it at least deserves mention here.
