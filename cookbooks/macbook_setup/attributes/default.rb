@@ -53,6 +53,7 @@ mobile-shell
 nmap
 ohcount
 parallel
+pstree
 pyenv
 pyenv-virtualenv
 qpdf
