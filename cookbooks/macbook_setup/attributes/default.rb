@@ -34,8 +34,10 @@ default['macbook_setup']['fonts_dir'] =
 # * To fix the aria2 build, I ran `brew edit gmp' and added a
 #   `--with-pic' flag. Hopefully I will not have issues in the
 #   future. See here: <https://github.com/mxcl/homebrew/issues/12946>
-#
 # * I prefer ohcount to cloc and sloccount.
+# * ZeroMQ (zmq) is included to speed up IPython installs. It can install a
+#   bundled version to a virtualenv, but it's faster to have a globally built
+#   version.
 #
 default['macbook_setup']['packages'] = %w{
 ack
@@ -64,5 +66,6 @@ tree
 valgrind
 watch
 wget
+zmq
 zsh
 }
