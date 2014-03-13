@@ -26,3 +26,7 @@ This is a little overkill. It's nice to automate, but I change these from time t
 * GVSU's VPN (Network Connect)
 
 This comes from GVSU, and the versions need to remain consistent.
+
+* Qt 5
+
+This is installed using an application installer (an app bundle in the DMG which installs Qt), and is therefore hard to automate.
