@@ -27,6 +27,10 @@ This is a little overkill. It's nice to automate, but I change these from time t
 
 This comes from GVSU, and the versions need to remain consistent.
 
+* Xcode
+
+Installs using the Mac App Store. With Homebrew and normal C++ compiles, we can get along with just the Command-Line Tools. However, to compile Mac applications using Qt, we need the full Xcode installation.
+
 * Qt 5
 
 This is installed using an application installer (an app bundle in the DMG which installs Qt), and is therefore hard to automate.
