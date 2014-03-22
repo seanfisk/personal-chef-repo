@@ -34,3 +34,7 @@ Installs using the Mac App Store. With Homebrew and normal C++ compiles, we can 
 * Qt 5
 
 This is installed using an application installer (an app bundle in the DMG which installs Qt), and is therefore hard to automate.
+
+* Adobe Flash Player
+
+It has an app bundle inside the DMG, making it hard to automate.
