@@ -41,6 +41,7 @@ default['macbook_setup']['fonts_dir'] =
 #
 default['macbook_setup']['packages'] = %w{
 ack
+ag
 aria2
 astyle
 autojump
