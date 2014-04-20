@@ -1,3 +1,4 @@
+* Switch to Mixlib::ShellOut in Thorfile and in recipes.
 * Add VirtualBox, Vagrant, and KeyRemap4MacBook (with Targus Fix) DMGs.
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.
