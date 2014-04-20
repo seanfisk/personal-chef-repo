@@ -62,6 +62,7 @@ pyenv-virtualenv
 qpdf
 rbenv
 ruby-build
+ssh-copy-id
 tmux
 tree
 valgrind
