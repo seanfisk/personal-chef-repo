@@ -7,8 +7,11 @@ require 'berkshelf/thor'
 
 module SystemExec
   def check_system(*args)
-    system(*args)
-    exit $CHILD_STATUS.exitstatus if $CHILD_STATUS != 0
+    # See `bundle help exec' for more info on using a 'clean' environment.
+    Bundler.with_clean_env do
+      system(*args)
+      exit $CHILD_STATUS.exitstatus if $CHILD_STATUS != 0
+    end
   end
 end
 
