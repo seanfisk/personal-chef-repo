@@ -1,3 +1,4 @@
+* Add VirtualBox, Vagrant, and KeyRemap4MacBook (with Targus Fix) DMGs.
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.
 * Make a script that does some of the stuff in the README.
