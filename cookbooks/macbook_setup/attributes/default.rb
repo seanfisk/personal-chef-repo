@@ -54,6 +54,7 @@ htop
 markdown
 mobile-shell
 nmap
+node
 ohcount
 parallel
 pstree
