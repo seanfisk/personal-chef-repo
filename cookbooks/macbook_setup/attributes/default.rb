@@ -47,6 +47,7 @@ astyle
 autojump
 coreutils
 dos2unix
+editorconfig
 git
 graphicsmagick
 graphviz
