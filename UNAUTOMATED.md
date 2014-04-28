@@ -38,3 +38,7 @@ This is installed using an application installer (an app bundle in the DMG which
 * Adobe Flash Player
 
 It has an app bundle inside the DMG, making it hard to automate.
+
+* Microsoft DreamSpark's Secure Download Manager
+
+This is just installed because it was needed. Should probably uninstall when not needed anymore.
