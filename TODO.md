@@ -15,7 +15,6 @@
 * Things to add
     * CoRD
     * Highlight
-    * Flash Player standalone
     * Inkscape
     * Seashore or Paintbrush? (GIMP already installed)
     * Ukelele (maybe)

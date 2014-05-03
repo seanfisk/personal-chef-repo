@@ -258,6 +258,17 @@ dmg_package 'Chicken' do
   action :install
 end
 
+# This is the Flash Player Projector (aka Flash Player "standalone"). It's
+# useful for playing Flash games (in SWFs) on the desktop.
+FLASH_PLAYER_VERSION = 13
+dmg_package 'Flash Player' do
+  source 'http://fpdownload.macromedia.com/pub/flashplayer/' +
+         "updaters/#{FLASH_PLAYER_VERSION}/" +
+         "flashplayer_#{FLASH_PLAYER_VERSION}_sa.dmg"
+  checksum 'eeb47ba093876fc25d4993e0f7652e398c66c9f0a0e89d01586ab33c7a82bab2'
+  action :install
+end
+
 # I wish we could avoid installing Java, but I need it for at least these
 # reasons:
 #
