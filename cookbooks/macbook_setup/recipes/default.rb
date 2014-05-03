@@ -452,9 +452,11 @@ end
 #
 # The RiotGames rbenv cookbook only supports global install.
 #
-# So let's just install through trusty homebrew.
+# So let's just install through trusty Homebrew.
+#
+# We now also install pyenv through Homebrew, so it's nice to be consistent.
 
-# Install homebrew packages
+# Install Homebrew packages
 
 node['macbook_setup']['packages'].each do |pkg_name|
   package pkg_name do
