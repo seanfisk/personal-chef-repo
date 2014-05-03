@@ -225,6 +225,12 @@ zip_package 'Flux' do
   action :install
 end
 
+zip_package 'Dash' do
+  source 'http://dallas.kapeli.com/Dash.zip'
+  checksum '76388ef51832885f87b4059fc4ec34c74d71b8b80d55a2a86796eaf1673bf4e8'
+  action :install
+end
+
 dmg_package 'Disk Inventory X' do
   source 'http://www.alice-dsl.net/tjark.derlien/DIX1.0Universal.dmg'
   checksum 'f61c070a1ec8f29ee78b8a7c84dd4124553098acc87134e2ef05dbaf2a442636'
