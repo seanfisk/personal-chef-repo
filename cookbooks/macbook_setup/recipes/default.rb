@@ -92,6 +92,105 @@ include_recipe 'mac_os_x::firewall'
 # Set up fast key repeat with low initial delay.
 include_recipe 'mac_os_x::key_repeat'
 
+# Set up clock with day of week, date, and 24-hour clock.
+mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
+
+# Show percentage on battery indicator.
+mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
+
+ADIUM_VERSION = '1.5.6'
+dmg_package 'Adium' do
+  source "http://download.adium.im/Adium_#{ADIUM_VERSION}.dmg"
+  checksum 'd5f580b7db57348c31f8e0f18691d7758a65ad61471bf984955360f91b21edb8'
+  volumes_dir "Adium #{ADIUM_VERSION}"
+  action :install
+end
+
+dmg_package 'Chicken' do
+  source 'http://sourceforge.net/projects/chicken/files/Chicken-2.2b2.dmg'
+  checksum '20e910b6cbf95c3e5dcf6fe8e120d5a0911f19099128981fb95119cee8d5fc6b'
+  action :install
+end
+
+zip_package 'Dash' do
+  source 'http://dallas.kapeli.com/Dash.zip'
+  checksum '76388ef51832885f87b4059fc4ec34c74d71b8b80d55a2a86796eaf1673bf4e8'
+  action :install
+end
+
+dmg_package 'Disk Inventory X' do
+  source 'http://www.alice-dsl.net/tjark.derlien/DIX1.0Universal.dmg'
+  checksum 'f61c070a1ec8f29ee78b8a7c84dd4124553098acc87134e2ef05dbaf2a442636'
+  # Need to use this because the app name has spaces.
+  dmg_name 'DiskInventoryX'
+  action :install
+end
+
+dmg_package 'Emacs' do
+  # We are now using a nightly build. There is a showstopping bug with Emacs
+  # 24.3 on Mavericks which causes a memory leak in the 'distnoted' process.
+  # See:
+  # - http://apple.stackexchange.com/questions/111197/runaway-distnoted-process
+  # - https://gist.github.com/anonymous/8553178
+  # - http://permalink.gmane.org/gmane.emacs.bugs/80836
+  #
+  # We will have to wait for 24.4 stable for this to be fixed.
+  source 'http://emacsformacosx.com/emacs-builds/' +
+         # 'Emacs-24.3-universal-10.6.8.dmg'
+         'Emacs-2014-02-14_01-34-10-116442-universal-10.6.8.dmg'
+  # checksum '92b3a6dd0a32b432f45ea925cfa34834c9ac9f7f0384c38775f6760f1e89365a'
+  checksum '6dc23cd554175c8023e6aabd00f132df4e687d552a7b960a73b880693e96d6b6'
+  action :install
+end
+
+FIREFOX_VERSION = 26.0
+dmg_package 'Firefox' do
+  source 'http://download-installer.cdn.mozilla.net/pub/firefox/' +
+         "releases/#{FIREFOX_VERSION}/mac/en-US/Firefox%20#{FIREFOX_VERSION}.dmg"
+  checksum '0ea2b4cc1c56603d8449261ec2d97dba955056eb9029adfb85d002f6cd8a8952'
+  action :install
+end
+
+# This is the Flash Player Projector (aka Flash Player "standalone"). It's
+# useful for playing Flash games (in SWFs) on the desktop.
+FLASH_PLAYER_VERSION = 13
+dmg_package 'Flash Player' do
+  source 'http://fpdownload.macromedia.com/pub/flashplayer/' +
+         "updaters/#{FLASH_PLAYER_VERSION}/" +
+         "flashplayer_#{FLASH_PLAYER_VERSION}_sa.dmg"
+  checksum 'eeb47ba093876fc25d4993e0f7652e398c66c9f0a0e89d01586ab33c7a82bab2'
+  action :install
+end
+
+zip_package 'Flux' do
+  source 'https://justgetflux.com/mac/Flux.zip'
+  checksum '7cc07a4865b45f6e9b4736b5eb25db21e16bbcd36ce447fee54394ccb9a0d360'
+  action :install
+end
+
+zip_package 'gfxCardStatus' do
+  source 'http://gfx.io/downloads/gfxCardStatus-2.3.zip'
+  checksum '092b3e2fad44681ba396cf498707c8b6c228fd55310770a8323ebb9344b4d9a1'
+  action :install
+end
+# Install the gfxCardStatus preferences. This WILL overwrite current setting
+# (there are barely any :).
+mac_os_x_plist_file 'com.codykrieger.gfxCardStatus-Preferences.plist'
+
+dmg_package 'GIMP' do
+  source 'http://ftp.gimp.org/pub/gimp/v2.8/osx/gimp-2.8.10-dmg-1.dmg'
+  checksum 'e93a84cd5eff4fe1c987c9c358f9de5c3532ee516bce3cd5206c073048cddba5'
+  action :install
+end
+
+dmg_package 'Google Chrome' do
+  source 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
+  checksum 'ba4d6fe46e5b8deef5cfe5691e2c36ac3eb15396fefeb6d708c7c426818e2f11'
+  # Need to use this because the app name has spaces.
+  dmg_name 'GoogleChrome'
+  action :install
+end
+
 # iTerm2
 ## Install iTerm2 background image.
 backgrounds_dir = "#{node['macbook_setup']['home']}/Pictures/Backgrounds"
@@ -129,152 +228,7 @@ end
 ## This might not be a problem since we are now using a template above.
 include_recipe 'iterm2'
 
-ADIUM_VERSION = '1.5.6'
-dmg_package 'Adium' do
-  source "http://download.adium.im/Adium_#{ADIUM_VERSION}.dmg"
-  checksum 'd5f580b7db57348c31f8e0f18691d7758a65ad61471bf984955360f91b21edb8'
-  volumes_dir "Adium #{ADIUM_VERSION}"
-  action :install
-end
-
-QUICKSILVER_VERSION = '1.0.0'
-dmg_package 'Quicksilver' do
-  source 'http://github.qsapp.com/downloads/' +
-    "Quicksilver%20#{QUICKSILVER_VERSION}.dmg"
-  checksum '0afb16445d12d7dd641aa8b2694056e319d23f785910a8c7c7de56219db6853c'
-  action :install
-  # This should work but it doesn't seem to. So we went with the
-  # `not_if' solution below.
-  # notifies :create, 'mac_os_x_plist_file[com.blacktree.Quicksilver.plist]'
-end
-
-mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
-  # Create a plist file for Quicksilver specifying the hotkey, among
-  # other things. Unfortunately, this doesn't avoid going through the
-  # setup assistant, but it helps out a bit.
-
-  # Don't overwrite the file if it already exists.
-  not_if do
-    File.exists?(node['macbook_setup']['home'] +
-                 "/Library/Preferences/#{source}")
-  end
-end
-
-dmg_package 'Emacs' do
-  # We are now using a nightly build. There is a showstopping bug with Emacs
-  # 24.3 on Mavericks which causes a memory leak in the 'distnoted' process.
-  # See:
-  # - http://apple.stackexchange.com/questions/111197/runaway-distnoted-process
-  # - https://gist.github.com/anonymous/8553178
-  # - http://permalink.gmane.org/gmane.emacs.bugs/80836
-  #
-  # We will have to wait for 24.4 stable for this to be fixed.
-  source 'http://emacsformacosx.com/emacs-builds/' +
-    # 'Emacs-24.3-universal-10.6.8.dmg'
-    'Emacs-2014-02-14_01-34-10-116442-universal-10.6.8.dmg'
-  # checksum '92b3a6dd0a32b432f45ea925cfa34834c9ac9f7f0384c38775f6760f1e89365a'
-  checksum '6dc23cd554175c8023e6aabd00f132df4e687d552a7b960a73b880693e96d6b6'
-  action :install
-end
-
-dmg_package 'Google Chrome' do
-  source 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
-  checksum 'ba4d6fe46e5b8deef5cfe5691e2c36ac3eb15396fefeb6d708c7c426818e2f11'
-  # Need to use this because the app name has spaces.
-  dmg_name 'GoogleChrome'
-  action :install
-end
-
-FIREFOX_VERSION = 26.0
-dmg_package 'Firefox' do
-  source 'http://download-installer.cdn.mozilla.net/pub/firefox/' +
-    "releases/#{FIREFOX_VERSION}/mac/en-US/Firefox%20#{FIREFOX_VERSION}.dmg"
-  checksum '0ea2b4cc1c56603d8449261ec2d97dba955056eb9029adfb85d002f6cd8a8952'
-  action :install
-end
-
-dmg_package 'Skim' do
-  source 'http://downloads.sourceforge.net/project/' +
-    'skim-app/Skim/Skim-1.4.7/Skim-1.4.7.dmg'
-  checksum 'c8789c23cf66359adca5f636943dce3b440345da33ae3b5fa306ac2d438a968e'
-  action :install
-end
-
-dmg_package 'XQuartz' do
-  # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
-  source 'http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg'
-  checksum '4382ff78cef5630fb6b8cc982da2e5a577d8cc5dddd35a493b50bad2fcf5e34a'
-  type 'pkg'
-  volumes_dir 'XQuartz-2.7.5'
-  package_id 'org.macosforge.xquartz.pkg'
-  action :install
-end
-
-zip_package 'gfxCardStatus' do
-  source 'http://gfx.io/downloads/gfxCardStatus-2.3.zip'
-  checksum '092b3e2fad44681ba396cf498707c8b6c228fd55310770a8323ebb9344b4d9a1'
-  action :install
-end
-# Install the gfxCardStatus preferences. This WILL overwrite current setting
-# (there are barely any :).
-mac_os_x_plist_file 'com.codykrieger.gfxCardStatus-Preferences.plist'
-
-zip_package 'Flux' do
-  source 'https://justgetflux.com/mac/Flux.zip'
-  checksum '7cc07a4865b45f6e9b4736b5eb25db21e16bbcd36ce447fee54394ccb9a0d360'
-  action :install
-end
-
-zip_package 'Dash' do
-  source 'http://dallas.kapeli.com/Dash.zip'
-  checksum '76388ef51832885f87b4059fc4ec34c74d71b8b80d55a2a86796eaf1673bf4e8'
-  action :install
-end
-
-dmg_package 'Disk Inventory X' do
-  source 'http://www.alice-dsl.net/tjark.derlien/DIX1.0Universal.dmg'
-  checksum 'f61c070a1ec8f29ee78b8a7c84dd4124553098acc87134e2ef05dbaf2a442636'
-  # Need to use this because the app name has spaces.
-  dmg_name 'DiskInventoryX'
-  action :install
-end
-
-dmg_package 'GIMP' do
-  source 'http://ftp.gimp.org/pub/gimp/v2.8/osx/gimp-2.8.10-dmg-1.dmg'
-  checksum 'e93a84cd5eff4fe1c987c9c358f9de5c3532ee516bce3cd5206c073048cddba5'
-  action :install
-end
-
-dmg_package 'Slate' do
-  source 'http://slate.ninjamonkeysoftware.com/Slate.dmg'
-  checksum '428e375d5b1c64f79f1536acb309e4414c3178051c6fe0b2f01a94a0803e223f'
-  action :install
-end
-
-# TODO: Consider using JavaScript preferences (replacing .slate, or to
-# supplement it).
-cookbook_file 'Slate preferences file' do
-  source 'slate'
-  path "#{node['macbook_setup']['home']}/.slate"
-end
-
-dmg_package 'Chicken' do
-  source 'http://sourceforge.net/projects/chicken/files/Chicken-2.2b2.dmg'
-  checksum '20e910b6cbf95c3e5dcf6fe8e120d5a0911f19099128981fb95119cee8d5fc6b'
-  action :install
-end
-
-# This is the Flash Player Projector (aka Flash Player "standalone"). It's
-# useful for playing Flash games (in SWFs) on the desktop.
-FLASH_PLAYER_VERSION = 13
-dmg_package 'Flash Player' do
-  source 'http://fpdownload.macromedia.com/pub/flashplayer/' +
-         "updaters/#{FLASH_PLAYER_VERSION}/" +
-         "flashplayer_#{FLASH_PLAYER_VERSION}_sa.dmg"
-  checksum 'eeb47ba093876fc25d4993e0f7652e398c66c9f0a0e89d01586ab33c7a82bab2'
-  action :install
-end
-
+# Java
 # I wish we could avoid installing Java, but I need it for at least these
 # reasons:
 #
@@ -373,11 +327,57 @@ dmg_package 'Java7RuntimeEnvironment' do
   not_if { JRE7_IS_INSTALLED }
 end
 
-# Set up clock with day of week, date, and 24-hour clock.
-mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
+QUICKSILVER_VERSION = '1.0.0'
+dmg_package 'Quicksilver' do
+  source 'http://github.qsapp.com/downloads/' +
+    "Quicksilver%20#{QUICKSILVER_VERSION}.dmg"
+  checksum '0afb16445d12d7dd641aa8b2694056e319d23f785910a8c7c7de56219db6853c'
+  action :install
+  # This should work but it doesn't seem to. So we went with the
+  # `not_if' solution below.
+  # notifies :create, 'mac_os_x_plist_file[com.blacktree.Quicksilver.plist]'
+end
 
-# Show percentage on battery indicator.
-mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
+mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
+  # Create a plist file for Quicksilver specifying the hotkey, among
+  # other things. Unfortunately, this doesn't avoid going through the
+  # setup assistant, but it helps out a bit.
+
+  # Don't overwrite the file if it already exists.
+  not_if do
+    File.exists?(node['macbook_setup']['home'] +
+                 "/Library/Preferences/#{source}")
+  end
+end
+
+dmg_package 'Skim' do
+  source 'http://downloads.sourceforge.net/project/' +
+    'skim-app/Skim/Skim-1.4.7/Skim-1.4.7.dmg'
+  checksum 'c8789c23cf66359adca5f636943dce3b440345da33ae3b5fa306ac2d438a968e'
+  action :install
+end
+
+dmg_package 'Slate' do
+  source 'http://slate.ninjamonkeysoftware.com/Slate.dmg'
+  checksum '428e375d5b1c64f79f1536acb309e4414c3178051c6fe0b2f01a94a0803e223f'
+  action :install
+end
+# TODO: Consider using JavaScript preferences (replacing .slate, or to
+# supplement it).
+cookbook_file 'Slate preferences file' do
+  source 'slate'
+  path "#{node['macbook_setup']['home']}/.slate"
+end
+
+dmg_package 'XQuartz' do
+  # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
+  source 'http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg'
+  checksum '4382ff78cef5630fb6b8cc982da2e5a577d8cc5dddd35a493b50bad2fcf5e34a'
+  type 'pkg'
+  volumes_dir 'XQuartz-2.7.5'
+  package_id 'org.macosforge.xquartz.pkg'
+  action :install
+end
 
 # Clone my dotfiles and emacs git repositories
 
