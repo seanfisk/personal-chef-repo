@@ -145,8 +145,8 @@ end
 
 FIREFOX_VERSION = 26.0
 dmg_package 'Firefox' do
-  source 'http://download-installer.cdn.mozilla.net/pub/firefox/' +
-         "releases/#{FIREFOX_VERSION}/mac/en-US/Firefox%20#{FIREFOX_VERSION}.dmg"
+  source 'http://download-installer.cdn.mozilla.net/pub/firefox/releases/' +
+         "#{FIREFOX_VERSION}/mac/en-US/Firefox%20#{FIREFOX_VERSION}.dmg"
   checksum '0ea2b4cc1c56603d8449261ec2d97dba955056eb9029adfb85d002f6cd8a8952'
   action :install
 end
