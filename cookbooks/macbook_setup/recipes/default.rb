@@ -369,6 +369,18 @@ cookbook_file 'Slate preferences file' do
   path "#{node['macbook_setup']['home']}/.slate"
 end
 
+# If you update, be aware that the number following the version in the URL will
+# also probably change.
+VIRTUALBOX_VERSION = '4.3.10'
+dmg_package 'VirtualBox' do
+  source "http://download.virtualbox.org/virtualbox/#{VIRTUALBOX_VERSION}/" +
+         "VirtualBox-#{VIRTUALBOX_VERSION}-93012-OSX.dmg"
+  checksum '8bf24a7afbde0cdb560b40abd8ab69584621ca6de59026553f007a0da7b4d443'
+  type 'pkg'
+  package_id 'org.virtualbox.pkg.virtualbox'
+  action :install
+end
+
 dmg_package 'XQuartz' do
   # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
   source 'http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg'
