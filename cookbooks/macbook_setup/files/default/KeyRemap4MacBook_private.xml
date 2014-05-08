@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<root>
+    <list>
+        <item>
+            <name>Targus Wireless Presenter Fix</name>
+            <identifier>private.targus_wireless_presenter_keynote_fix</identifier>
+            <autogen>__KeyToKey__ KeyCode::CURSOR_DOWN, VK_SHIFT, KeyCode::CURSOR_RIGHT</autogen>
+            <autogen>__KeyToKey__ KeyCode::CURSOR_UP, VK_SHIFT, KeyCode::CURSOR_LEFT</autogen>
+        </item>
+        <item>
+            <name>WASD to ASDF</name>
+            <identifier>private.was_to_asdf</identifier>
+            <autogen>__KeyToKey__ KeyCode::S, KeyCode::W</autogen>
+            <autogen>__KeyToKey__ KeyCode::D, KeyCode::S</autogen>
+            <autogen>__KeyToKey__ KeyCode::F, KeyCode::D</autogen>
+        </item>
+        <item>
+            <name>Crazy Flasher</name>
+            <identifier>private.crazy_flasher</identifier>
+            <autogen>__KeyToKey__ PointingButton::RIGHT, KeyCode::R</autogen>
+            <autogen>__KeyToKey__ PointingButton::MIDDLE, KeyCode::KEY_3</autogen>
+        </item>
+    </list>
+</root>

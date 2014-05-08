@@ -327,6 +327,23 @@ dmg_package 'Java7RuntimeEnvironment' do
   not_if { JRE7_IS_INSTALLED }
 end
 
+KEYREMAP_VERSION = '9.3.0'
+dmg_package 'KeyRemap4MacBook' do
+  source 'https://pqrs.org/macosx/keyremap4macbook/files/' +
+         "KeyRemap4MacBook-#{KEYREMAP_VERSION}.dmg"
+  checksum 'eec41ff544859e570b195726404b34e6c6280a0022b4c8ae09c0c9eeeb871b18'
+  type 'pkg'
+  package_id 'org.pqrs.driver.KeyRemap4MacBook'
+  volumes_dir "KeyRemap4MacBook-#{KEYREMAP_VERSION}"
+  action :install
+end
+# XML settings files
+cookbook_file 'KeyRemap4MacBook XML settings file' do
+  source 'KeyRemap4MacBook_private.xml'
+  path "#{node['macbook_setup']['home']}/Library/Application Support/" +
+       'KeyRemap4MacBook/private.xml'
+end
+
 QUICKSILVER_VERSION = '1.0.0'
 dmg_package 'Quicksilver' do
   source 'http://github.qsapp.com/downloads/' +
