@@ -47,6 +47,7 @@ astyle
 autojump
 coreutils
 dos2unix
+doxygen
 editorconfig
 git
 graphicsmagick
