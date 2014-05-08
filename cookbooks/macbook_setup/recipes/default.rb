@@ -369,6 +369,15 @@ cookbook_file 'Slate preferences file' do
   path "#{node['macbook_setup']['home']}/.slate"
 end
 
+# FYI: Vagrant has an uninstaller with its DMG! Just so you know.
+dmg_package 'Vagrant' do
+  source 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.0.dmg'
+  checksum '6d6a77a9180f79a1ac69053c28a7cb601b60fe033344881281bab80cde04bf71'
+  type 'pkg'
+  package_id 'com.vagrant.vagrant'
+  action :install
+end
+
 # If you update, be aware that the number following the version in the URL will
 # also probably change.
 VIRTUALBOX_VERSION = '4.3.10'
