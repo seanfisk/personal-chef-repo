@@ -67,6 +67,10 @@ If you ever lose the keys, they can be re-generated here:
 
 Be careful, because after re-generating, all nodes must be updated to use the new keys.
 
+# Why not Chef Solo?
+
+It is definitely possible to manage these recipes with Chef Solo. However, both Josh and Seth's tutorials are focused around Hosted Chef. In addition, Berkshelf works a bit better with Hosted Chef, as cookbooks only need to be uploaded initially and then for upgrades. It would be necessary to vendor the Berkshelf cookbooks each time for use with Chef Solo. This is all possible, and shouldn't be too difficult, but it's just not how I decided to do it.
+
 # References
 
 * Josh Timberman
