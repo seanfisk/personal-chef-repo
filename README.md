@@ -1,6 +1,6 @@
-# MacBook Pro Chef Configuration
+# Mac OS X Chef Configuration
 
-[![Build Status](https://travis-ci.org/seanfisk/macbook-chef-repo.png)](https://travis-ci.org/seanfisk/macbook-chef-repo)
+[![Build Status](https://travis-ci.org/seanfisk/macosx-chef-repo.png)](https://travis-ci.org/seanfisk/macosx-chef-repo)
 
 Throughout the instructions, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately.
 
@@ -9,16 +9,16 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 1. First, install the Chef client using the [full-stack installer][chef_install].
 1. Since we probably don't have `git` yet, download this repository as a tarball:
 
-        curl --location https://github.com/seanfisk/macbook-chef-repo/archive/master.tar.gz | tar -xz
-        mv macbook-chef-repo-master macbook-chef-repo
+        curl --location https://github.com/seanfisk/macosx-chef-repo/archive/master.tar.gz | tar -xz
+        mv macosx-chef-repo-master macosx-chef-repo
 
 1. If we do have git, go ahead and clone it:
 
-        git clone git@github.com:seanfisk/macbook-chef-repo.git
+        git clone git@github.com:seanfisk/macosx-chef-repo.git
 
 1. Go into the repo directory. All following commands should be run from here.
 
-        cd macbook-chef-repo
+        cd macosx-chef-repo
 
 1. Next, set up the Chef client configuration. This allows us to authenticate to the Chef server using our "machine" client:
 
