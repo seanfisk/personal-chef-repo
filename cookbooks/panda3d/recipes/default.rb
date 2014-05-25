@@ -22,7 +22,7 @@ include_recipe 'dmg'
 
 PANDA3D_VERSION = '1.8.1'
 dmg_package 'Panda3D' do
-  source "http://www.panda3d.org/download/panda3d-#{PANDA3D_VERSION}" +
+  source "http://www.panda3d.org/download/panda3d-#{PANDA3D_VERSION}" \
     "/Panda3D-#{PANDA3D_VERSION}.dmg"
   checksum '98ac480321c32040a87778c80e7df000100fd2796a1bfa59eba928eed8d2678a'
   type 'mpkg'

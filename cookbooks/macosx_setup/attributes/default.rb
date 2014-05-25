@@ -39,38 +39,38 @@ default['macosx_setup']['fonts_dir'] =
 #   bundled version to a virtualenv, but it's faster to have a globally built
 #   version.
 #
-default['macosx_setup']['packages'] = %w{
-ack
-ag
-aria2
-astyle
-autojump
-coreutils
-dos2unix
-doxygen
-editorconfig
-git
-graphicsmagick
-graphviz
-htop
-markdown
-mobile-shell
-nmap
-node
-ohcount
-parallel
-pstree
-pyenv
-pyenv-virtualenv
-qpdf
-rbenv
-ruby-build
-ssh-copy-id
-tmux
-tree
-valgrind
-watch
-wget
-zmq
-zsh
-}
+default['macosx_setup']['packages'] = %w(
+  ack
+  ag
+  aria2
+  astyle
+  autojump
+  coreutils
+  dos2unix
+  doxygen
+  editorconfig
+  git
+  graphicsmagick
+  graphviz
+  htop
+  markdown
+  mobile-shell
+  nmap
+  node
+  ohcount
+  parallel
+  pstree
+  pyenv
+  pyenv-virtualenv
+  qpdf
+  rbenv
+  ruby-build
+  ssh-copy-id
+  tmux
+  tree
+  valgrind
+  watch
+  wget
+  zmq
+  zsh
+)

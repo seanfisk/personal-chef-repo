@@ -20,7 +20,8 @@
 
 require 'mixlib/shellout'
 
-pkgutil_proc = Mixlib::ShellOut.new('pkgutil', '--pkgs=org.tug.mactex.texlive2013')
+pkgutil_proc = Mixlib::ShellOut.new(
+  'pkgutil', '--pkgs=org.tug.mactex.texlive2013')
 pkgutil_proc.run_command
 MACTEX_IS_INSTALLED = pkgutil_proc.exitstatus == 0
 
@@ -59,8 +60,8 @@ end
 
 BLACKLIST_FILE = '/usr/local/texlive/2013/texmf-dist/tex/luatex/luaotfload/luaotfload-blacklist.cnf'
 BLACKLIST_APPEND_CONTENTS =
-  '% Causes segfaults, see http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks\\n' +
-  'Silom.ttf\\n' +
+  '% Causes segfaults, see http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks\\n' \
+  'Silom.ttf\\n' \
   'Skia.ttf'
 
 # rubocop:enable LineLength
@@ -88,14 +89,16 @@ end
 #
 # Not sure why it does that but it's really confusing and inconvenient.
 
+# rubocop:disable LineLength
 # Unfortunately, this doesn't work, because there's no way that I know of to
 # execute this block using sudo.
 #
 # ruby_block 'add font to blacklist' do
 #   block do
 #     File.open(BLACKLIST_FILE, 'a') do |file|
-#       file.puts('% Causes segfault, see http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks') # rubocop:disable LineLength
+#       file.puts('% Causes segfault, see http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks')
 #       file.puts(BLACKLIST_FONT)
 #     end
 #   end
 # end
+# rubocop:enable LineLength

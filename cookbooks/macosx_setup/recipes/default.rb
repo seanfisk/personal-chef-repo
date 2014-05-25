@@ -62,7 +62,7 @@ end
 execute 'set latest bash as default shell' do
   command "chsh -s '#{PATH_TO_BASH}'"
   # getpwuid defaults to the current user, which is what we want.
-  not_if { Etc.getpwuid().shell == PATH_TO_BASH }
+  not_if { Etc.getpwuid.shell == PATH_TO_BASH }
 end
 
 # Make sure to use the `execute' resource than the `bash' resource, otherwise
@@ -77,7 +77,7 @@ execute 'fix the zsh startup file that path_helper uses' do
   # See this link for more information:
   # <https://github.com/sorin-ionescu/prezto/issues/381>
   command 'sudo mv /etc/zshenv /etc/zprofile'
-  only_if { File.exists?('/etc/zshenv') }
+  only_if { File.exist?('/etc/zshenv') }
 end
 
 include_recipe 'dmg'
@@ -136,8 +136,9 @@ dmg_package 'Emacs' do
   # - http://permalink.gmane.org/gmane.emacs.bugs/80836
   #
   # We will have to wait for 24.4 stable for this to be fixed.
-  source 'http://emacsformacosx.com/emacs-builds/' +
-         # 'Emacs-24.3-universal-10.6.8.dmg'
+
+  # 'Emacs-24.3-universal-10.6.8.dmg'
+  source 'http://emacsformacosx.com/emacs-builds/' \
          'Emacs-2014-02-14_01-34-10-116442-universal-10.6.8.dmg'
   # checksum '92b3a6dd0a32b432f45ea925cfa34834c9ac9f7f0384c38775f6760f1e89365a'
   checksum '6dc23cd554175c8023e6aabd00f132df4e687d552a7b960a73b880693e96d6b6'
@@ -146,7 +147,7 @@ end
 
 FIREFOX_VERSION = 26.0
 dmg_package 'Firefox' do
-  source 'http://download-installer.cdn.mozilla.net/pub/firefox/releases/' +
+  source 'http://download-installer.cdn.mozilla.net/pub/firefox/releases/' \
          "#{FIREFOX_VERSION}/mac/en-US/Firefox%20#{FIREFOX_VERSION}.dmg"
   checksum '0ea2b4cc1c56603d8449261ec2d97dba955056eb9029adfb85d002f6cd8a8952'
   action :install
@@ -156,8 +157,8 @@ end
 # useful for playing Flash games (in SWFs) on the desktop.
 FLASH_PLAYER_VERSION = 13
 dmg_package 'Flash Player' do
-  source 'http://fpdownload.macromedia.com/pub/flashplayer/' +
-         "updaters/#{FLASH_PLAYER_VERSION}/" +
+  source 'http://fpdownload.macromedia.com/pub/flashplayer/' \
+         "updaters/#{FLASH_PLAYER_VERSION}/" \
          "flashplayer_#{FLASH_PLAYER_VERSION}_sa.dmg"
   checksum 'eeb47ba093876fc25d4993e0f7652e398c66c9f0a0e89d01586ab33c7a82bab2'
   action :install
@@ -207,12 +208,12 @@ end
 ## background image setup.
 template 'iTerm2 preferences file' do
   source 'com.googlecode.iterm2.plist.erb'
-  path "#{node['macosx_setup']['home']}/Library/Preferences/" +
+  path "#{node['macosx_setup']['home']}/Library/Preferences/" \
     'com.googlecode.iterm2.plist'
-  variables({
-              background_image_path: background_path,
-              home_directory: node['macosx_setup']['home']
-   })
+  variables(
+    background_image_path: background_path,
+    home_directory: node['macosx_setup']['home']
+  )
 end
 
 ## Include the iTerm2 recipe. This must be called AFTER the plist
@@ -260,7 +261,7 @@ JDK6_DMG_NAME = 'JavaForOSX2013-05'
 
 # The name must not have spaces (requirement of dmg provider).
 dmg_package 'Java6DevelopmentKit' do
-  source 'http://support.apple.com/downloads/' +
+  source 'http://support.apple.com/downloads/' \
     "DL1572/en_US/#{JDK6_DMG_NAME}.dmg"
   checksum '81e1155e44b2c606db78487ca1a02e31dbb3cfbf7e0581a4de3ded9e635a704e'
   # Though this provider doesn't install an app bundle, the `app' attribute
@@ -283,9 +284,11 @@ JRE7_DMG_NAME = "jre-#{JRE7_VERSION}-macosx-x64"
 JRE7_PKG_AND_VOLUMES_DIR_NAME =
   "Java 7 Update #{JRE7_UPDATE_VERSION}"
 
+# rubocop:disable LineLength
 # Oracle makes you agree to their agreement, which means some trickery is
 # necessary. See here for more info:
-# <http://stackoverflow.com/questions/10268583/how-to-automate-download-and-instalation-of-java-jdk-on-linux> # rubocop:disable LineLength
+# <http://stackoverflow.com/questions/10268583/how-to-automate-download-and-instalation-of-java-jdk-on-linux>
+# rubocop:enable LineLength
 
 require 'uri'
 
@@ -299,7 +302,7 @@ remote_file 'download Java 7 runtime environment DMG' do
   #
   # See here:
   # <http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jre.html>
-  source 'http://download.oracle.com/otn-pub/' +
+  source 'http://download.oracle.com/otn-pub/' \
     "java/jdk/#{JRE7_VERSION}-b13/#{JRE7_DMG_NAME}.dmg?"
   path "#{Chef::Config[:file_cache_path]}/#{JRE7_DMG_NAME}.dmg"
   checksum '8541090bf8bd7b284f07d4b1f74b5352b8addf5e0274eeb82cacdc4b2e2b66d2'
@@ -332,7 +335,7 @@ end
 
 KEYREMAP_VERSION = '9.3.0'
 dmg_package 'KeyRemap4MacBook' do
-  source 'https://pqrs.org/macosx/keyremap4macbook/files/' +
+  source 'https://pqrs.org/macosx/keyremap4macbook/files/' \
          "KeyRemap4MacBook-#{KEYREMAP_VERSION}.dmg"
   checksum 'eec41ff544859e570b195726404b34e6c6280a0022b4c8ae09c0c9eeeb871b18'
   type 'pkg'
@@ -343,13 +346,13 @@ end
 # XML settings files
 cookbook_file 'KeyRemap4MacBook XML settings file' do
   source 'KeyRemap4MacBook_private.xml'
-  path "#{node['macosx_setup']['home']}/Library/Application Support/" +
+  path "#{node['macosx_setup']['home']}/Library/Application Support/" \
        'KeyRemap4MacBook/private.xml'
 end
 
 QUICKSILVER_VERSION = '1.0.0'
 dmg_package 'Quicksilver' do
-  source 'http://github.qsapp.com/downloads/' +
+  source 'http://github.qsapp.com/downloads/' \
     "Quicksilver%20#{QUICKSILVER_VERSION}.dmg"
   checksum '0afb16445d12d7dd641aa8b2694056e319d23f785910a8c7c7de56219db6853c'
   action :install
@@ -365,13 +368,13 @@ mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
 
   # Don't overwrite the file if it already exists.
   not_if do
-    File.exists?(node['macosx_setup']['home'] +
+    File.exist?(node['macosx_setup']['home'] +
                  "/Library/Preferences/#{source}")
   end
 end
 
 dmg_package 'Skim' do
-  source 'http://downloads.sourceforge.net/project/' +
+  source 'http://downloads.sourceforge.net/project/' \
     'skim-app/Skim/Skim-1.4.7/Skim-1.4.7.dmg'
   checksum 'c8789c23cf66359adca5f636943dce3b440345da33ae3b5fa306ac2d438a968e'
   action :install
@@ -402,7 +405,7 @@ end
 # also probably change.
 VIRTUALBOX_VERSION = '4.3.10'
 dmg_package 'VirtualBox' do
-  source "http://download.virtualbox.org/virtualbox/#{VIRTUALBOX_VERSION}/" +
+  source "http://download.virtualbox.org/virtualbox/#{VIRTUALBOX_VERSION}/" \
          "VirtualBox-#{VIRTUALBOX_VERSION}-93012-OSX.dmg"
   checksum '8bf24a7afbde0cdb560b40abd8ab69584621ca6de59026553f007a0da7b4d443'
   type 'pkg'
@@ -477,7 +480,7 @@ bash 'compile and install tmux-MacOSX-pasteboard' do
   set -o errexit # exit on first error
   make reattach-to-user-namespace
   cp reattach-to-user-namespace \\
-    '#{node["macosx_setup"]["scripts_dir"]}'
+    '#{node['macosx_setup']['scripts_dir']}'
   EOH
   # rubocop:enable LineContinuation
   cwd tmux_macosx_dir

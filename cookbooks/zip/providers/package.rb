@@ -55,8 +55,8 @@ action :install do
       user new_resource.owner if new_resource.owner
     end
 
-    file ("#{new_resource.destination}/#{new_resource.app}.app" +
-          "/Contents/MacOS/#{new_resource.app}") do
+    file "#{new_resource.destination}/#{new_resource.app}.app" \
+         "/Contents/MacOS/#{new_resource.app}" do
       mode 0755
       ignore_failure true
     end
@@ -70,9 +70,9 @@ end
 private
 
 def installed?
-  if Dir.exists?("#{new_resource.destination}/#{new_resource.app}.app")
-    Chef::Log.info 'Already installed; to upgrade, remove '
-    "\"#{new_resource.destination}/#{new_resource.app}.app\""
+  if Dir.exist?("#{new_resource.destination}/#{new_resource.app}.app")
+    Chef::Log.info 'Already installed; to upgrade, remove ' \
+                   "\"#{new_resource.destination}/#{new_resource.app}.app\""
     true
   else
     false
