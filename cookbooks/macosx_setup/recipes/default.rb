@@ -21,6 +21,7 @@
 #
 
 require 'etc'
+require 'mixlib/shellout'
 
 # Include homebrew as the default package manager.
 # (default is MacPorts)
@@ -288,7 +289,9 @@ JRE7_PKG_AND_VOLUMES_DIR_NAME =
 
 require 'uri'
 
-JRE7_IS_INSTALLED = system('pkgutil --pkgs=com.oracle.jre')
+pkgutil_proc = Mixlib::ShellOut.new('pkgutil', '--pkgs=com.oracle.jre')
+pkgutil_proc.run_command
+JRE7_IS_INSTALLED = pkgutil_proc.exitstatus == 0
 
 remote_file 'download Java 7 runtime environment DMG' do
   # Note: Java 7 is installed to
