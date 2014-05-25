@@ -10,9 +10,8 @@ module Subprocess
   def run_subprocess(*args)
     # See `bundle help exec' for more info on using a 'clean' environment.
     Bundler.with_clean_env do
-      proc = Mixlib::ShellOut.new(args)
+      proc = Mixlib::ShellOut.new(args, live_stream: STDOUT)
       proc.run_command
-      puts proc.stdout
       proc
     end
   end
