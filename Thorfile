@@ -6,30 +6,32 @@ require 'berkshelf/thor'
 require 'mixlib/shellout'
 
 # Helper module for safely executing subprocesses.
-module SystemExec
-  def check_system(*args)
+module Subprocess
+  def run_subprocess(*args)
     # See `bundle help exec' for more info on using a 'clean' environment.
     Bundler.with_clean_env do
       proc = Mixlib::ShellOut.new(args)
       proc.run_command
       puts proc.stdout
-      proc.error!
+      proc
     end
   end
 end
 
 # Chef Knife-related tasks.
 class Knife < Thor
-  include SystemExec
+  include Subprocess
 
   desc 'test', 'Run cursory knife cookbook tests'
   def test
-    check_system 'knife', 'cookbook', 'test', '--all'
+    proc = run_subprocess 'knife', 'cookbook', 'test', '--all'
+    proc.exitstatus
   end
 
   desc 'upload', 'Upload all local cookbooks to the Chef server'
   def upload
-    check_system 'knife', 'cookbook', 'upload', '--all'
+    proc = run_subprocess 'knife', 'cookbook', 'upload', '--all'
+    proc.error!
   end
 end
 
@@ -41,9 +43,10 @@ class Foodcritic < Thor
 
     if review.warnings.any?
       puts review
-      exit !review.failed?
+      1
     else
       puts 'No foodcritic errors'
+      0
     end
   end
 
@@ -69,8 +72,8 @@ class Style < Thor
     # Pass in a list of files/directories because we don't want the bin/
     # directory, other Foodcritic rules, etc., being checked.
     result = Rubocop::CLI.new.run %W(Berksfile Gemfile #{ __FILE__ } cookbooks)
-    exit result if result != 0
-    puts 'No rubocop errors'
+    puts 'No rubocop errors' if result == 0
+    result
   end
 end
 
@@ -87,9 +90,21 @@ end
 class Test < Thor
   desc 'all', 'Run all tests on cookbooks'
   def all
-    invoke 'knife:test'
+    knife_result = invoke 'knife:test'
     puts
-    invoke 'foodcritic:test'
-    invoke 'style:check'
+    fc_result = invoke 'foodcritic:test'
+    style_result = invoke 'style:check'
+
+    # Exit with the sum of the test categories.
+    exit knife_result + fc_result + style_result
+  end
+
+  desc 'no-knife', 'Run all tests besides Knife tests'
+  def no_knife
+    fc_result = invoke 'foodcritic:test'
+    style_result = invoke 'style:check'
+
+    # Exit with the sum of the test categories.
+    exit fc_result + style_result
   end
 end

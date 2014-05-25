@@ -1,4 +1,4 @@
-* Tests shouldn't exit when one portion fails (Thorfile issues).
+* Individual tests should exit with the correct error code.
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.
 * Make a script that does some of the stuff in the README.
