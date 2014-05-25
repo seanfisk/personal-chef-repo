@@ -3,6 +3,5 @@ rvm:
   - 1.9.3
 # Knife doesn't run correctly on the Travis-CI nodes. Skip the knife
 # tests and run foodcritic and rubocop.
-bundler_args: --without development
 script:
-  - thor test:no-knife
+  - bundle exec thor test:no-knife
