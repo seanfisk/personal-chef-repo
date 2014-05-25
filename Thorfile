@@ -1,16 +1,18 @@
 # -*- mode: ruby; coding: utf-8; -*-
 
-require 'English' # for $CHILD_STATUS
 require 'foodcritic'
 require 'rubocop'
 require 'berkshelf/thor'
+require 'mixlib/shellout'
 
 module SystemExec
   def check_system(*args)
     # See `bundle help exec' for more info on using a 'clean' environment.
     Bundler.with_clean_env do
-      system(*args)
-      exit $CHILD_STATUS.exitstatus if $CHILD_STATUS != 0
+      proc = Mixlib::ShellOut.new(args)
+      proc.run_command
+      puts proc.stdout
+      proc.error!
     end
   end
 end

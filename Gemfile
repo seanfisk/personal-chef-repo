@@ -10,4 +10,5 @@ group :test do
   # which is run for the tests. It's not a great solution, but it
   # works.
   gem 'berkshelf'
+  gem 'mixlib-shellout'
 end
