@@ -46,9 +46,9 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
     You should see two entries, `sean_fisk-validator` and `NODE_NAME`.
 
-1. Add the `macbook_setup` cookbook to this node's run list:
+1. Add the `macosx_setup` cookbook to this node's run list:
 
-        knife node run_list add NODE_NAME macbook_setup
+        knife node run_list add NODE_NAME macosx_setup
 
 1. Provision the laptop:
 

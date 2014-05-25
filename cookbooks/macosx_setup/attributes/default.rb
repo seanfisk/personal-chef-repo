@@ -17,17 +17,17 @@
 # limitations under the License.
 #
 
-default['macbook_setup']['home'] = ENV['HOME']
-default['macbook_setup']['personal_dir'] =
-  "#{default['macbook_setup']['home']}/src/personal"
-default['macbook_setup']['dotfiles_dir'] =
-  "#{default['macbook_setup']['personal_dir']}/dotfiles"
-default['macbook_setup']['emacs_dir'] =
-  "#{default['macbook_setup']['personal_dir']}/emacs"
-default['macbook_setup']['scripts_dir'] =
-  "#{default['macbook_setup']['home']}/bin"
-default['macbook_setup']['fonts_dir'] =
-  "#{default['macbook_setup']['home']}/Library/Fonts"
+default['macosx_setup']['home'] = ENV['HOME']
+default['macosx_setup']['personal_dir'] =
+  "#{default['macosx_setup']['home']}/src/personal"
+default['macosx_setup']['dotfiles_dir'] =
+  "#{default['macosx_setup']['personal_dir']}/dotfiles"
+default['macosx_setup']['emacs_dir'] =
+  "#{default['macosx_setup']['personal_dir']}/emacs"
+default['macosx_setup']['scripts_dir'] =
+  "#{default['macosx_setup']['home']}/bin"
+default['macosx_setup']['fonts_dir'] =
+  "#{default['macosx_setup']['home']}/Library/Fonts"
 
 # Notes:
 #
@@ -39,7 +39,7 @@ default['macbook_setup']['fonts_dir'] =
 #   bundled version to a virtualenv, but it's faster to have a globally built
 #   version.
 #
-default['macbook_setup']['packages'] = %w{
+default['macosx_setup']['packages'] = %w{
 ack
 ag
 aria2

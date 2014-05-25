@@ -3,7 +3,7 @@ MacTeX Cookbook
 
 Installs [MacTeX][mactex] on Mac OS X.
 
-This was made into a cookbook separate from `macbook_setup` because MacTeX is a large install and not necessary for bootstrapping a system for development.
+This was made into a cookbook separate from `macosx_setup` because MacTeX is a large install and not necessary for bootstrapping a system for development.
 
 **Note:** MacTeX is a huge download. If you already have it downloaded, but still want to use it as part of this setup, move the file into Chef's cache path.
 

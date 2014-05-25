@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Cookbook Name:: macbook_setup
+# Cookbook Name:: macosx_setup
 # Recipe:: default
 #
 # Author:: Sean Fisk <sean@seanfisk.com>
@@ -193,7 +193,7 @@ end
 
 # iTerm2
 ## Install iTerm2 background image.
-backgrounds_dir = "#{node['macbook_setup']['home']}/Pictures/Backgrounds"
+backgrounds_dir = "#{node['macosx_setup']['home']}/Pictures/Backgrounds"
 background_name = 'holland-beach-sunset.jpg'
 background_path = "#{backgrounds_dir}/#{background_name}"
 
@@ -206,11 +206,11 @@ end
 ## background image setup.
 template 'iTerm2 preferences file' do
   source 'com.googlecode.iterm2.plist.erb'
-  path "#{node['macbook_setup']['home']}/Library/Preferences/" +
+  path "#{node['macosx_setup']['home']}/Library/Preferences/" +
     'com.googlecode.iterm2.plist'
   variables({
               background_image_path: background_path,
-              home_directory: node['macbook_setup']['home']
+              home_directory: node['macosx_setup']['home']
    })
 end
 
@@ -340,7 +340,7 @@ end
 # XML settings files
 cookbook_file 'KeyRemap4MacBook XML settings file' do
   source 'KeyRemap4MacBook_private.xml'
-  path "#{node['macbook_setup']['home']}/Library/Application Support/" +
+  path "#{node['macosx_setup']['home']}/Library/Application Support/" +
        'KeyRemap4MacBook/private.xml'
 end
 
@@ -362,7 +362,7 @@ mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
 
   # Don't overwrite the file if it already exists.
   not_if do
-    File.exists?(node['macbook_setup']['home'] +
+    File.exists?(node['macosx_setup']['home'] +
                  "/Library/Preferences/#{source}")
   end
 end
@@ -383,7 +383,7 @@ end
 # supplement it).
 cookbook_file 'Slate preferences file' do
   source 'slate'
-  path "#{node['macbook_setup']['home']}/.slate"
+  path "#{node['macosx_setup']['home']}/.slate"
 end
 
 # FYI: Vagrant has an uninstaller with its DMG! Just so you know.
@@ -419,12 +419,12 @@ end
 
 # Clone my dotfiles and emacs git repositories
 
-directory node['macbook_setup']['personal_dir'] do
+directory node['macosx_setup']['personal_dir'] do
   recursive true
   action :create
 end
 
-git node['macbook_setup']['dotfiles_dir'] do
+git node['macosx_setup']['dotfiles_dir'] do
   repository 'git@github.com:seanfisk/dotfiles.git'
   enable_submodules true
   action :checkout
@@ -436,11 +436,11 @@ execute 'install dotfiles' do
   # .tmux.conf to make this work:
   # <https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard>
   command 'make install-osx'
-  cwd node['macbook_setup']['dotfiles_dir']
+  cwd node['macosx_setup']['dotfiles_dir']
   action :nothing
 end
 
-git node['macbook_setup']['emacs_dir'] do
+git node['macosx_setup']['emacs_dir'] do
   repository 'git@github.com:seanfisk/emacs.git'
   enable_submodules true
   action :checkout
@@ -449,12 +449,12 @@ end
 
 execute 'install emacs configuration' do
   command 'make install'
-  cwd node['macbook_setup']['emacs_dir']
+  cwd node['macosx_setup']['emacs_dir']
   action :nothing
 end
 
 # Install tmux-MacOSX-pasteboard reattach-to-user-namespace program
-directory node['macbook_setup']['scripts_dir'] do
+directory node['macosx_setup']['scripts_dir'] do
   recursive true
   action :create
 end
@@ -474,7 +474,7 @@ bash 'compile and install tmux-MacOSX-pasteboard' do
   set -o errexit # exit on first error
   make reattach-to-user-namespace
   cp reattach-to-user-namespace \\
-    '#{node["macbook_setup"]["scripts_dir"]}'
+    '#{node["macosx_setup"]["scripts_dir"]}'
   EOH
   # rubocop:enable LineContinuation
   cwd tmux_macosx_dir
@@ -496,7 +496,7 @@ end
 
 # Install Homebrew packages
 
-node['macbook_setup']['packages'].each do |pkg_name|
+node['macosx_setup']['packages'].each do |pkg_name|
   package pkg_name do
     action :install
   end
@@ -508,7 +508,7 @@ end
 UBUNTU_FONT_ARCHIVE_NAME = 'ubuntu-font-family-0.80.zip'
 UBUNTU_FONT_ARCHIVE_PATH =
   "#{Chef::Config[:file_cache_path]}/#{UBUNTU_FONT_ARCHIVE_NAME}"
-UBUNTU_FONT_DIR = "#{node['macbook_setup']['fonts_dir']}/Ubuntu"
+UBUNTU_FONT_DIR = "#{node['macosx_setup']['fonts_dir']}/Ubuntu"
 
 directory UBUNTU_FONT_DIR
 
@@ -532,6 +532,6 @@ remote_file 'download Inconsolata font' do
   # This URL seems like one that may be updated with newer versions, so we'll
   # just install the current version if it's not already installed.
   source "http://levien.com/type/myfonts/#{INCONSOLATA_FILE}"
-  path "#{node['macbook_setup']['fonts_dir']}/#{INCONSOLATA_FILE}"
+  path "#{node['macosx_setup']['fonts_dir']}/#{INCONSOLATA_FILE}"
   action :create_if_missing
 end
