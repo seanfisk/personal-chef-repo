@@ -1,6 +1,6 @@
 # -*- mode: ruby; coding: utf-8; -*-
 
-site :opscode
+source 'https://api.berkshelf.com'
 
 cookbook 'dmg', '~> 2.1.4'
 cookbook 'mac_os_x', '~> 1.4.2'

@@ -32,7 +32,8 @@ end
 class Foodcritic < Thor
   desc 'test', 'Run foodcritic cookbook tests'
   def test
-    review = FoodCritic::Linter.new.check('cookbooks', {
+    review = FoodCritic::Linter.new.check({
+      cookbook_paths: 'cookbooks',
       fail_tags: ['any'],
       include_rules: ['foodcritic/etsy', 'foodcritic/customink'],
       # Don't worry about having a CHANGELOG.md file for each cookbook.
