@@ -70,7 +70,8 @@ class Style < Thor
   def check
     # Pass in a list of files/directories because we don't want the bin/
     # directory, other Foodcritic rules, etc., being checked.
-    result = Rubocop::CLI.new.run %W(Berksfile Gemfile #{ __FILE__ } cookbooks)
+    result = Rubocop::CLI.new.run %W(Berksfile Gemfile #{ __FILE__ } cookbooks
+                                     client.rb.sample)
     puts 'No rubocop errors' if result == 0
     result
   end
