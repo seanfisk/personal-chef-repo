@@ -22,8 +22,9 @@ class Knife < Thor
   include Subprocess
 
   desc 'test', 'Run cursory knife cookbook tests'
-  def test
+  def test(exit = true)
     proc = run_subprocess 'knife', 'cookbook', 'test', '--all'
+    exit proc.exitstatus if exit
     proc.exitstatus
   end
 
@@ -37,16 +38,18 @@ end
 # Foodcritic-related tasks.
 class Foodcritic < Thor
   desc 'test', 'Run foodcritic cookbook tests'
-  def test
+  def test(exit = true)
     review = lint
 
     if review.warnings.any?
       puts review
-      1
+      retval = 1
     else
       puts 'No foodcritic errors'
-      0
+      retval = 0
     end
+    exit retval if exit
+    retval
   end
 
   private
@@ -67,12 +70,13 @@ class Style < Thor
   # Make sure you don't re-define the Rubocop module here. That's why
   # it's named Style.
   desc 'check', 'Run rubocop on all Ruby files'
-  def check
+  def check(exit = true)
     # Pass in a list of files/directories because we don't want the bin/
     # directory, other Foodcritic rules, etc., being checked.
     result = Rubocop::CLI.new.run %W(Berksfile Gemfile #{ __FILE__ } cookbooks
                                      client.rb.sample)
     puts 'No rubocop errors' if result == 0
+    exit result if exit
     result
   end
 end
@@ -90,10 +94,11 @@ end
 class Test < Thor
   desc 'all', 'Run all tests on cookbooks'
   def all
-    knife_result = invoke 'knife:test'
+    # Pass false as an argument to prevent the task from exiting.
+    knife_result = invoke 'knife:test', [false]
     puts
-    fc_result = invoke 'foodcritic:test'
-    style_result = invoke 'style:check'
+    fc_result = invoke 'foodcritic:test', [false]
+    style_result = invoke 'style:check', [false]
 
     # Exit with the sum of the test categories.
     exit knife_result + fc_result + style_result
@@ -101,8 +106,8 @@ class Test < Thor
 
   desc 'no-knife', 'Run all tests besides Knife tests'
   def no_knife
-    fc_result = invoke 'foodcritic:test'
-    style_result = invoke 'style:check'
+    fc_result = invoke 'foodcritic:test', [false]
+    style_result = invoke 'style:check', [false]
 
     # Exit with the sum of the test categories.
     exit fc_result + style_result
