@@ -1,3 +1,4 @@
+* Add guards to stop resources from updating if they don't need to.
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.
 * Make a script that does some of the stuff in the README.
