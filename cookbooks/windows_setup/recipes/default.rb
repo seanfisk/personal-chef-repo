@@ -25,3 +25,8 @@ include_recipe 'chocolatey'
 node['windows_setup']['packages'].each do |pkg_name|
   chocolatey pkg_name
 end
+
+# Allow running of local PowerShell scripts (default policy is Restricted).
+powershell_script 'set execution policy' do
+  code 'Set-ExecutionPolicy RemoteSigned'
+end
