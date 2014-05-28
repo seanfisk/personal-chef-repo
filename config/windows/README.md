@@ -13,6 +13,8 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
     We are primarily interested in the latter, as it is the configuration we will be modifying.
 
+    **Note:** If you had PowerShell open before running the installer, restart it. The installer modifies the `Path` to add Chef binaries.
+
 1. Set up the Chef client configuration. This allows us to authenticate to the Chef server using our *machine* client:
 
         Invoke-WebRequest https://raw.githubusercontent.com/seanfisk/personal-chef-repo/master/config/windows/client.rb.sample -OutFile C:\chef\client.rb
