@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-# Cookbook Name:: windows_setup
-# Recipe:: default
-#
 # Author:: Sean Fisk <sean@seanfisk.com>
 # Copyright:: Copyright (c) 2014, Sean Fisk
 # License:: Apache License, Version 2.0
@@ -20,8 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe 'chocolatey'
-
-node['windows_setup']['packages'].each do |pkg_name|
-  chocolatey pkg_name
-end
+default['windows_setup']['packages'] = %w(
+  pscx
+)
