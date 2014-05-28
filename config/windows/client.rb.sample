@@ -1,0 +1,20 @@
+# -*- mode: ruby; coding: utf-8; -*-
+
+# Sample chef client configuration file
+#
+# Instructions:
+#
+# Replace the node_name's 'windows-node' with a name for your machine. If it is
+# a roaming machine, it is NOT a good idea to let chef give it a node name
+# based on its fully qualified domain name (FQDN).
+#
+# For a full list of options, see
+# <http://docs.opscode.com/config_rb_client.html>.
+
+# Set a base directory that makes commands runnable by standard user.
+
+chef_server_url 'https://api.opscode.com/organizations/sean_fisk'
+log_level :info
+log_location STDOUT
+node_name 'windows-node'
+validation_client_name 'sean_fisk-validator'

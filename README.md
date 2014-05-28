@@ -1,18 +1,21 @@
-# Mac OS X Chef Configuration
+# Chef Configurations for Personal Machines
 
-[![Build Status](https://travis-ci.org/seanfisk/macosx-chef-repo.png)](https://travis-ci.org/seanfisk/macosx-chef-repo)
+[![Build Status](https://travis-ci.org/seanfisk/personal-chef-repo.png)](https://travis-ci.org/seanfisk/personal-chef-repo)
 
-Throughout the instructions, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately.
+This repository contains personal configurations for my machines, set up using the [Opscode Chef configuration management system][chef].
 
-## Installing
+[chef]: http://www.getchef.com/
 
-1. First, install the Chef client using the [full-stack installer][chef_install].
-1. Since we probably don't have `git` yet, download this repository as a tarball:
+Please see the README for one of the configurations for more instructions on how to install:
 
-        curl --location https://github.com/seanfisk/macosx-chef-repo/archive/master.tar.gz | tar -xz
-        mv macosx-chef-repo-master macosx-chef-repo
+* [Mac OS X](https://github.com/seanfisk/personal-chef-repo/tree/master/config/macosx)
+* [Windows](https://github.com/seanfisk/personal-chef-repo/tree/master/config/windows)
 
-1. If we do have git, go ahead and clone it:
+## Setting up an Administrator Workstation
+
+An administrator workstation is used to edit the Chef cookbooks in this repository and to run Knife, the Chef server utility. Please see [LearnChef](https://learnchef.opscode.com/get-started/) for a nice summary and visuals.
+
+1. Clone this repository:
 
         git clone git@github.com:seanfisk/macosx-chef-repo.git
 
@@ -20,45 +23,17 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
         cd macosx-chef-repo
 
-1. Next, set up the Chef client configuration. This allows us to authenticate to the Chef server using our "machine" client:
+1. Set up the Knife configuration. Copy the *user* key from an existing administrator workstation or generate a new one and download it to this machine. This allows us to authenticate to the Chef server using our *user* client:
 
-        sudo mkdir /etc/chef
-        sudo chown "$USER" /etc/chef
-        cp client.rb.sample /etc/chef/client.rb
-        # Now edit client.rb according to the instructions.
-        "$EDITOR" /etc/chef/client.rb
+        cp /path/to/seanfisk.pem .chef
 
-1. Now copy the validation key over to the chef directory:
-
-        cp ~/Downloads/sean_fisk-validator.pem /etc/chef/validation.pem
-
-1. Run `chef-client` to register the client. The registration will create the file `/etc/chef/client.pem`, which allows the "machine" client to communicate with the chef server:
-
-        chef-client
-
-1. Set up the knife configuration. This allows us to authenticate to the Chef server using our "user" client:
-
-        cp ~/Downloads/seanfisk.pem .chef
-
-    Make sure knife is working by typing the following:
+1. Make sure Knife is working by typing the following:
 
         knife client list
 
-    You should see two entries, `sean_fisk-validator` and `NODE_NAME`.
+    You should see an entry named `sean_fisk-validator`. If so, Knife is working properly!
 
-1. Add the `macosx_setup` cookbook to this node's run list:
-
-        knife node run_list add NODE_NAME macosx_setup
-
-1. Provision the laptop:
-
-        chef-client
-
-That's it!
-
-[chef_install]: http://www.opscode.com/chef/install/
-
-# Generating new keys
+## Generating new keys
 
 If you ever lose the keys, they can be re-generated here:
 
@@ -67,11 +42,11 @@ If you ever lose the keys, they can be re-generated here:
 
 Be careful, because after re-generating, all nodes must be updated to use the new keys.
 
-# Why not Chef Solo?
+## Why not Chef Solo?
 
 It is definitely possible to manage these recipes with Chef Solo. However, both Josh and Seth's tutorials are focused around Hosted Chef. In addition, Berkshelf works a bit better with Hosted Chef, as cookbooks only need to be uploaded initially and then for upgrades. It would be necessary to vendor the Berkshelf cookbooks each time for use with Chef Solo. This is all possible, and shouldn't be too difficult, but it's just not how I decided to do it.
 
-# References
+## References
 
 * Josh Timberman
     * [OS X Workstation Management With Chef](http://jtimberman.housepub.org/blog/2012/07/29/os-x-workstation-management-with-chef/)
