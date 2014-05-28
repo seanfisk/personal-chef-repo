@@ -18,5 +18,12 @@
 #
 
 default['windows_setup']['packages'] = %w(
+  7zip
+  Firefox
+  autohotkey
+  git
+  poshgit
   pscx
+  python2
+  wixtoolset
 )
