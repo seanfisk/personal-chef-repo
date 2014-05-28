@@ -1,44 +1,44 @@
 Unautomated Setup
 =================
 
-This file lists part of my MacBook setup that is not automated. Typically, this is due to technical or practical reasons.
+This file lists parts of Mac OS X setup that are not automated. Typically, this is due to technical or practical reasons.
 
 * Caffeine
 
-In the Mac App store.
+  In the Mac App store.
 
 * Skitch
 
-In the Mac App store.
+  In the Mac App store.
 
 * Seagate Dashboard
 
-Installed with my Seagate external hard drive. Hard to automate, since the software is on the drive itself. May not want to automate, since this seems very specific to the device itself.
+  Installed with my Seagate external hard drive. Hard to automate, since the software is on the drive itself. May not want to automate, since this seems very specific to the device itself.
 
 * Swap Caps Lock and Control
 
-Apparently, not really too easy to automate. I haven't looked into it too much, since it's pretty easy to do manually.
+  Apparently, not really too easy to automate. I haven't looked into it too much, since it's pretty easy to do manually.
 
 * Desktop backgrounds
 
-This is a little overkill. It's nice to automate, but I change these from time to time manually, and that would be just one more thing to change every time.
+  This is a little overkill. It's nice to automate, but I change these from time to time manually, and that would be just one more thing to change every time.
 
 * GVSU's VPN (Network Connect)
 
-This comes from GVSU, and the versions need to remain consistent.
+  This comes from GVSU, and the versions need to remain consistent.
 
 * Xcode
 
-Installs using the Mac App Store. With Homebrew and normal C++ compiles, we can get along with just the Command-Line Tools. However, to compile Mac applications using Qt, we need the full Xcode installation.
+  Installs using the Mac App Store. With Homebrew and normal C++ compiles, we can get along with just the Command-Line Tools. However, to compile Mac applications using Qt, we need the full Xcode installation.
 
 * Qt 5
 
-This is installed using an application installer (an app bundle in the DMG which installs Qt), and is therefore hard to automate.
+  This is installed using an application installer (an app bundle in the DMG which installs Qt), and is therefore hard to automate.
 
 * Adobe Flash Player
 
-It has an app bundle inside the DMG, making it hard to automate.
+  It has an app bundle inside the DMG, making it hard to automate.
 
 * Microsoft DreamSpark's Secure Download Manager
 
-This is just installed because it was needed. Should probably uninstall when not needed anymore.
+  This is just installed because it was needed. Should probably uninstall when not needed anymore.
