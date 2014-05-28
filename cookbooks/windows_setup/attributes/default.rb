@@ -19,6 +19,8 @@
 
 default['windows_setup']['packages'] = %w(
   7zip
+  ConEmu
+  EthanBrown.ConEmuConfig
   Firefox
   autohotkey
   git
