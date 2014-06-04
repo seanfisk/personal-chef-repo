@@ -42,3 +42,7 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 * Microsoft DreamSpark's Secure Download Manager
 
   This is just installed because it was needed. Should probably uninstall when not needed anymore.
+
+* LastPass
+
+  The universal installer has installer and uninstaller app bundles. Pretty annoying and difficult to automate. Alternatively, we could install just for Firefox and let Firefox sync the add-on (maybe?).
