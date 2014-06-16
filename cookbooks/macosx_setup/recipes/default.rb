@@ -146,7 +146,7 @@ execute 'install Eclipse' do
   # since the app bundle is inside this folder, but whatever. It should work
   # fine.
   cwd '/Applications'
-  # action :nothing
+  action :nothing
 end
 
 dmg_package 'Emacs' do
