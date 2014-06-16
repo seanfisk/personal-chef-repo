@@ -127,6 +127,28 @@ dmg_package 'Disk Inventory X' do
   action :install
 end
 
+# Eclipse
+ECLIPSE_ARCHIVE_NAME = 'eclipse-standard-kepler-SR2-macosx-cocoa-x86_64.tar.gz'
+ECLIPSE_ARCHIVE_PATH =
+  "#{Chef::Config[:file_cache_path]}/#{ECLIPSE_ARCHIVE_NAME}"
+
+remote_file 'download Eclipse' do
+  source 'http://www.eclipse.org/downloads/download.php?file=/technology/' \
+         "epp/downloads/release/kepler/SR2/#{ECLIPSE_ARCHIVE_NAME}&r=1"
+  checksum '7fd761853ae7f5b280963059fcf8da6cea14c93563a3dfe7cc3491a7a977966e'
+  path ECLIPSE_ARCHIVE_PATH
+  notifies :run, 'execute[install Eclipse]'
+end
+
+execute 'install Eclipse' do
+  command "tar -xf '#{ECLIPSE_ARCHIVE_PATH}'"
+  # Put the 'eclipse' folder in /Applications. Doesn't make complete sense,
+  # since the app bundle is inside this folder, but whatever. It should work
+  # fine.
+  cwd '/Applications'
+  # action :nothing
+end
+
 dmg_package 'Emacs' do
   # We are now using a nightly build. There is a showstopping bug with Emacs
   # 24.3 on Mavericks which causes a memory leak in the 'distnoted' process.
