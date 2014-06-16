@@ -296,15 +296,15 @@ dmg_package 'Java6DevelopmentKit' do
   package_id 'com.apple.pkg.JavaForMacOSX107'
 end
 
-# Java 7 JRE, from Oracle
+# Java 7 JDK, from Oracle
 
 # If you update, also be aware of the 'b13' in the URL below -- that will
 # probably change.
-JRE7_UPDATE_VERSION = 51
-JRE7_VERSION = "7u#{JRE7_UPDATE_VERSION}"
-JRE7_DMG_NAME = "jre-#{JRE7_VERSION}-macosx-x64"
-JRE7_PKG_AND_VOLUMES_DIR_NAME =
-  "Java 7 Update #{JRE7_UPDATE_VERSION}"
+JDK7_UPDATE_VERSION = 60
+JDK7_VERSION = "7u#{JDK7_UPDATE_VERSION}"
+JDK7_DMG_NAME = "jdk-#{JDK7_VERSION}-macosx-x64"
+JDK7_PKG_AND_VOLUMES_DIR_NAME =
+  "JDK 7 Update #{JDK7_UPDATE_VERSION}"
 
 # rubocop:disable LineLength
 # Oracle makes you agree to their agreement, which means some trickery is
@@ -312,47 +312,46 @@ JRE7_PKG_AND_VOLUMES_DIR_NAME =
 # <http://stackoverflow.com/questions/10268583/how-to-automate-download-and-instalation-of-java-jdk-on-linux>
 # rubocop:enable LineLength
 
-require 'uri'
-
-pkgutil_proc = Mixlib::ShellOut.new('pkgutil', '--pkgs=com.oracle.jre')
+pkgutil_proc = Mixlib::ShellOut.new(
+  'pkgutil', '--pkg-info', 'com.oracle.jdk7u60')
 pkgutil_proc.run_command
-JRE7_IS_INSTALLED = pkgutil_proc.exitstatus == 0
+JDK7_IS_INSTALLED = pkgutil_proc.exitstatus == 0
 
-remote_file 'download Java 7 runtime environment DMG' do
-  # Note: Java 7 is installed to
-  # /Library/Internet Plug-Ins/JavaAppletPlugin.plugin
+remote_file 'download JDK 7 DMG' do
+  # Note: JDK 7 is installed to
+  # /Library/Java/JavaVirtualMachines/
   #
   # See here:
-  # <http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jre.html>
+  # <http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html>
+
   source 'http://download.oracle.com/otn-pub/' \
-    "java/jdk/#{JRE7_VERSION}-b13/#{JRE7_DMG_NAME}.dmg?"
-  path "#{Chef::Config[:file_cache_path]}/#{JRE7_DMG_NAME}.dmg"
-  checksum '8541090bf8bd7b284f07d4b1f74b5352b8addf5e0274eeb82cacdc4b2e2b66d2'
-  headers('Cookie' =>
-          URI.encode_www_form('gpw_e24' => 'http://www.oracle.com'))
+    "java/jdk/#{JDK7_VERSION}-b19/#{JDK7_DMG_NAME}.dmg"
+  path "#{Chef::Config[:file_cache_path]}/#{JDK7_DMG_NAME}.dmg"
+  checksum 'a868aab818cd114f652252ded5b159b5c47beb1a0a074cdb0e475ed79826c9df'
+  headers('Cookie' => 'oraclelicense=accept-securebackup-cookie')
   # A `notifies' attribute seems like a good idea here, but if it it's already
   # downloaded *but not installed*, there will be no notification. We'll just
   # hope it gets downloaded before the next provider runs.
 
-  # Even if it's not in the cache, if we already have the JRE installed,
+  # Even if it's not in the cache, if we already have the JDK installed,
   # there's no reason to download it.
-  not_if { JRE7_IS_INSTALLED }
+  not_if { JDK7_IS_INSTALLED }
 end
 
 # The name must not have spaces (requirement of dmg provider).
-dmg_package 'Java7RuntimeEnvironment' do
+dmg_package 'Java7DevelopmentKit' do
   # Though this provider doesn't install an app bundle, the `app' attribute
   # specifies the name of the pkg file in the volume.
-  app JRE7_PKG_AND_VOLUMES_DIR_NAME
+  app JDK7_PKG_AND_VOLUMES_DIR_NAME
   # A `source' attribute is not included. This causes the dmg provider to look
   # for the DMG specified by `dmg_name' in the Chef cache directory.
   type 'pkg'
-  dmg_name JRE7_DMG_NAME
-  volumes_dir JRE7_PKG_AND_VOLUMES_DIR_NAME
+  dmg_name JDK7_DMG_NAME
+  volumes_dir JDK7_PKG_AND_VOLUMES_DIR_NAME
   action :install
   # We could use package_id here, but since that's pretty much what we do
   # above, we'll just stay consistent.
-  not_if { JRE7_IS_INSTALLED }
+  not_if { JDK7_IS_INSTALLED }
 end
 
 KEYREMAP_VERSION = '9.3.0'
