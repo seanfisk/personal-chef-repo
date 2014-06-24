@@ -150,20 +150,19 @@ execute 'install Eclipse' do
 end
 
 dmg_package 'Emacs' do
-  # We are now using a nightly build. There is a showstopping bug with Emacs
-  # 24.3 on Mavericks which causes a memory leak in the 'distnoted' process.
-  # See:
+  # We are now using an unreleased build. There is a showstopping bug with
+  # Emacs 24.3 on Mavericks which causes a memory leak in the 'distnoted'
+  # process.
+  #
   # - http://apple.stackexchange.com/questions/111197/runaway-distnoted-process
   # - https://gist.github.com/anonymous/8553178
   # - http://permalink.gmane.org/gmane.emacs.bugs/80836
   #
   # We will have to wait for 24.4 stable for this to be fixed.
 
-  # 'Emacs-24.3-universal-10.6.8.dmg'
   source 'http://emacsformacosx.com/emacs-builds/' \
-         'Emacs-2014-02-14_01-34-10-116442-universal-10.6.8.dmg'
-  # checksum '92b3a6dd0a32b432f45ea925cfa34834c9ac9f7f0384c38775f6760f1e89365a'
-  checksum '6dc23cd554175c8023e6aabd00f132df4e687d552a7b960a73b880693e96d6b6'
+         'Emacs-pretest-24.3.91-universal-10.6.8.dmg'
+  checksum 'fb110671e434bf9e81e570e2bfae7e79c1f9eb7dafb97647612919d1bb294477'
   action :install
 end
 
