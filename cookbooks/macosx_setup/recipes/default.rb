@@ -119,6 +119,25 @@ zip_package 'Dash' do
   action :install
 end
 
+# Deep Sleep Dashboard widget
+
+DEEP_SLEEP_ARCHIVE_NAME = 'deepsleep_1.2.zip'
+DEEP_SLEEP_ARCHIVE_PATH =
+  "#{Chef::Config[:file_cache_path]}/#{DEEP_SLEEP_ARCHIVE_NAME}"
+
+remote_file 'download Deep Sleep dashboard widget' do
+  source "http://deepsleep.free.fr/#{DEEP_SLEEP_ARCHIVE_NAME}"
+  checksum 'ca113853f9fe1fe1189cf73b34f2bf1eaf706b011438a20c5950c3acb2e1c98c'
+  path DEEP_SLEEP_ARCHIVE_PATH
+  notifies :run, 'execute[install Deep Sleep dashboard widget]'
+end
+
+execute 'install Deep Sleep dashboard widget' do
+  command "unzip '#{DEEP_SLEEP_ARCHIVE_PATH}'"
+  cwd "#{node['macosx_setup']['home']}/Library/Widgets"
+  action :nothing
+end
+
 dmg_package 'Disk Inventory X' do
   source 'http://www.alice-dsl.net/tjark.derlien/DIX1.0Universal.dmg'
   checksum 'f61c070a1ec8f29ee78b8a7c84dd4124553098acc87134e2ef05dbaf2a442636'
