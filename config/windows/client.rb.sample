@@ -18,3 +18,9 @@ log_level :info
 log_location STDOUT
 node_name 'windows-node'
 validation_client_name 'sean_fisk-validator'
+
+# Verify all HTTPS connections (recommended)
+#
+# Without this, chef-client warns about not verifying HTTPS connections every
+# time. Might as well go for the most secure option.
+ssl_verify_mode :verify_peer
