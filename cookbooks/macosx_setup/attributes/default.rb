@@ -31,13 +31,19 @@ default['macosx_setup']['fonts_dir'] =
 
 # Notes:
 #
-# * To fix the aria2 build, I ran `brew edit gmp' and added a
+# - To fix the aria2 build, I ran `brew edit gmp' and added a
 #   `--with-pic' flag. Hopefully I will not have issues in the
 #   future. See here: <https://github.com/mxcl/homebrew/issues/12946>
-# * I prefer ohcount to cloc and sloccount.
-# * ZeroMQ (zmq) is included to speed up IPython installs. It can install a
+# - I prefer ohcount to cloc and sloccount.
+# - ZeroMQ (zmq) is included to speed up IPython installs. It can install a
 #   bundled version to a virtualenv, but it's faster to have a globally built
 #   version.
+# - Install both GraphicMagick and ImageMagick. In generally, I prefer
+#   GraphicsMagick, but ImageMagick has ICO support so we use it for
+#   BetterPlanner.
+# - ImageMagick might already be present on the system (but just 'convert').
+#   I'm not sure if it's just an artifact of an earlier build, but it was on my
+#   Mavericks system before I installed it (again?).
 #
 default['macosx_setup']['packages'] = %w(
   ack
@@ -53,6 +59,7 @@ default['macosx_setup']['packages'] = %w(
   graphicsmagick
   graphviz
   htop
+  imagemagick
   markdown
   mobile-shell
   nmap
