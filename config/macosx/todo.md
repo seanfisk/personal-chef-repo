@@ -1,3 +1,5 @@
+* For the repo: check out [Strainer](https://github.com/customink/strainer).
+
 * Add guards to stop resources from updating if they don't need to.
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.

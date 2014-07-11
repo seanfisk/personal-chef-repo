@@ -1,3 +1,4 @@
+* Chocolatey seems broken in many ways. Try to find fixes, or we may have to remove. We can't depend on unstable software.
 * LastPass installation
 * GitHub for Windows installation
 * Die with a warning if running without admin privileges. Document what needs it.
