@@ -26,7 +26,6 @@ default['windows_setup']['packages'] = %w(
   git
   poshgit
   pscx
-  python2
   scite4autohotkey
   wixtoolset
 )
