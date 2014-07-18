@@ -276,43 +276,14 @@ include_recipe 'iterm2'
 #
 # - Network Connect, GVSU's SSL VPN
 # - Playing TankPit, a Java applet-based game
-#
-# GVSU's Network Connect, as of 2013-01-24, needs Java 6. Argh.
+# - Eclipse
 
-# Java 6 JDK, from Apple
-
-# Thanks for the naming consistency, Apple! [sarcasm] Apparently the goal was
-# to format the name in as many different ways as possible.
+# Note: Java 6 was installed, but uninstalled like so:
 #
-# Apple distributes the JDK, it's not possible (or plausible, I guess) to get
-# the JRE.
+#     sudo rm -r /System/Library/Java/JavaVirtualMachines/1.6.0.jdk
+#     sudo pkgutil --forget com.apple.pkg.JavaForMacOSX107
 #
-# rubocop:disable LineLength
-#
-# To see all files install by *this* installer, run:
-#
-#     pkgutil --bom '/Volumes/Java for OS X 2013-005/JavaForOSX.pkg' | while read -r bom_path; do lsbom -lfs "$bom_path"; done
-#
-# Note: Java 6 is installed to /System/Library/Java/JavaVirtualMachines/1.6.0.jdk
-#
-# rubocop:enable LineLength
-
-JDK6_DMG_NAME = 'JavaForOSX2013-05'
-
-# The name must not have spaces (requirement of dmg provider).
-dmg_package 'Java6DevelopmentKit' do
-  source 'http://support.apple.com/downloads/' \
-    "DL1572/en_US/#{JDK6_DMG_NAME}.dmg"
-  checksum '81e1155e44b2c606db78487ca1a02e31dbb3cfbf7e0581a4de3ded9e635a704e'
-  # Though this provider doesn't install an app bundle, the `app' attribute
-  # specifies the name of the pkg file in the volume.
-  app 'JavaForOSX'
-  type 'pkg'
-  dmg_name JDK6_DMG_NAME
-  volumes_dir 'Java for OS X 2013-005'
-  action :install
-  package_id 'com.apple.pkg.JavaForMacOSX107'
-end
+# See here for the procedure followed: http://superuser.com/a/712783
 
 # Java 7 JDK, from Oracle
 
