@@ -69,6 +69,7 @@ default['macosx_setup']['packages'] = %w(
   pstree
   pyenv
   pyenv-virtualenv
+  pyenv-which-ext
   qpdf
   rbenv
   ruby-build
