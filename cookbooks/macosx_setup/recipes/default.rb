@@ -121,13 +121,19 @@ end
 
 # Deep Sleep Dashboard widget
 
-DEEP_SLEEP_ARCHIVE_NAME = 'deepsleep_1.2.zip'
+# The original version (http://deepsleep.free.fr/) is unfortunately broken for
+# newer Macs as the hibernate modes have changed. However, CODE2K has updated
+# the widget for Mountain Lion (and Mavericks)
+# (http://code2k.net/blog/2012-11-06/).
+
+DEEP_SLEEP_ARCHIVE_NAME = 'deepsleep-1.3-beta1.zip'
 DEEP_SLEEP_ARCHIVE_PATH =
   "#{Chef::Config[:file_cache_path]}/#{DEEP_SLEEP_ARCHIVE_NAME}"
 
 remote_file 'download Deep Sleep dashboard widget' do
-  source "http://deepsleep.free.fr/#{DEEP_SLEEP_ARCHIVE_NAME}"
-  checksum 'ca113853f9fe1fe1189cf73b34f2bf1eaf706b011438a20c5950c3acb2e1c98c'
+  source 'https://github.com/downloads/code2k/Deep-Sleep.wdgt/' +
+         DEEP_SLEEP_ARCHIVE_NAME
+  checksum 'fa41a926d7c1b6566b074579bdd4c9bc969d348292597ac3064731326efc4207'
   path DEEP_SLEEP_ARCHIVE_PATH
   notifies :run, 'execute[install Deep Sleep dashboard widget]'
 end
