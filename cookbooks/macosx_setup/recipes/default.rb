@@ -21,6 +21,7 @@
 #
 
 require 'etc'
+require 'uri'
 require 'mixlib/shellout'
 
 # Include homebrew as the default package manager.
@@ -426,6 +427,55 @@ dmg_package 'VirtualBox' do
   checksum '8bf24a7afbde0cdb560b40abd8ab69584621ca6de59026553f007a0da7b4d443'
   type 'pkg'
   package_id 'org.virtualbox.pkg.virtualbox'
+  action :install
+end
+
+# Wireshark initially used GTK+ as the GUI library, but is switching to Qt.
+# According to their blog post announcement:
+#
+#     If you're running OS X you should use the Qt flavor. For common tasks it
+#     should have a better workflow. Again, if it doesn't we aren't doing our
+#     job.
+#
+# Source: https://blog.wireshark.org/2013/10/switching-to-qt/
+#
+# The newest release (1.12.0) still includes the GTK+ version in the Mac DMG.
+# However, the 'Capture Filters...' and 'Display Filters...' dialogs are
+# broken. These are pretty important, so we've decided to stick with GTK+ and
+# X11 for now. Here is the Qt version that we tried.
+#
+# Run with 'wireshark-qt' on the command-line (unfortunately, it's not an app
+# bundle).
+# package 'wireshark' do
+#   options '--with-qt --devel'
+#   action :install
+# end
+
+# Here the GTK+ DMG code until Wireshark switches their official Mac releases
+# to Qt.
+
+WIRESHARK_VERSION = '1.12.0'
+WIRESHARK_FULL_NAME = "Wireshark #{WIRESHARK_VERSION} Intel 64"
+dmg_package 'Wireshark' do
+  # The Wireshark DMG also includes instructions on how to uninstall, which is
+  # great.
+
+  # Use the app keyword to override the name of the .pkg file, which includes
+  # the version and architecture.
+  app WIRESHARK_FULL_NAME
+
+  # But then we need to override the volume dir and dmg name, which are based
+  # on the app name. The dmg name can't have spaces, and the volumes dir has to
+  # be, well, correct.
+  dmg_name 'Wireshark'
+  volumes_dir 'Wireshark'
+
+  # Don't forget to escape the spaces (into '%20').
+  source 'http://wiresharkdownloads.riverbed.com/wireshark/osx/' +
+         URI.escape(WIRESHARK_FULL_NAME) + '.dmg'
+  checksum '2e4131fe32b72339cb8d8191e591711c16f4c5950657428810fdfce91b0dead2'
+  type 'pkg'
+  package_id 'org.wireshark.Wireshark.pkg'
   action :install
 end
 
