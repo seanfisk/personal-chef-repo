@@ -187,8 +187,8 @@ dmg_package 'Emacs' do
   # We will have to wait for 24.4 stable for this to be fixed.
 
   source 'http://emacsformacosx.com/emacs-builds/' \
-         'Emacs-pretest-24.3.91-universal-10.6.8.dmg'
-  checksum 'fb110671e434bf9e81e570e2bfae7e79c1f9eb7dafb97647612919d1bb294477'
+         'Emacs-pretest-24.3.92-universal.dmg'
+  checksum '0f6f7afc70b6cecc7644b15120461213127b968c6135bbe2091b13f864567e25'
   action :install
 end
 
