@@ -47,7 +47,6 @@ default['macosx_setup']['fonts_dir'] =
 #
 default['macosx_setup']['packages'] = %w(
   ack
-  ag
   aria2
   astyle
   autojump
@@ -58,7 +57,7 @@ default['macosx_setup']['packages'] = %w(
   git
   graphicsmagick
   graphviz
-  htop
+  htop-osx
   imagemagick
   markdown
   mobile-shell
@@ -74,6 +73,7 @@ default['macosx_setup']['packages'] = %w(
   rbenv
   ruby-build
   ssh-copy-id
+  the_silver_searcher
   tmux
   tree
   valgrind
