@@ -46,3 +46,7 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 * LastPass
 
   The universal installer has installer and uninstaller app bundles. Pretty annoying and difficult to automate. Alternatively, we could install just for Firefox and let Firefox sync the add-on (maybe?).
+
+* Firefox
+
+  Disable the auto-redirection of domains. Specifically this is annoying for `localhost`. Hopefully this will be synced. See http://cdivilly.wordpress.com/2013/08/15/disable-firefox-redirecting-to-localhost-com/.
