@@ -1,6 +1,5 @@
 * For the repo: check out [Strainer](https://github.com/customink/strainer).
 
-* [OSX Fuse and SSHFS](http://osxfuse.github.io/) (brew packages: osxfuse sshfs)
 * [MacFusion](http://macfusionapp.org/)
 * [fuse-zip](https://code.google.com/p/fuse-zip/)
 * OpenEmu (if I like it)

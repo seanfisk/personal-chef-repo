@@ -367,6 +367,57 @@ cookbook_file 'Karabiner XML settings file' do
        'Karabiner/private.xml'
 end
 
+# OSXFUSE and SSHFS
+
+# Both of these pieces of software can be installed with Homebrew. However, it
+# requires root and is therefore not automatic. I also don't believe that the
+# Homebrew installer installs the OSXFUSE preferences pane.
+
+# Note: The preference pane uninstaller does not appear to uninstall the
+# preference pane itself.
+OSXFUSE_MAJOR_VERSION = 2
+OSXFUSE_MINOR_VERSION = 7
+OSXFUSE_PATCH_VERSION = 0
+OSXFUSE_FULL_VERSION =
+  "#{OSXFUSE_MAJOR_VERSION}.#{OSXFUSE_MINOR_VERSION}.#{OSXFUSE_PATCH_VERSION}"
+dmg_package 'OSXFUSE' do
+  source 'http://downloads.sourceforge.net/project/osxfuse/' \
+         "osxfuse-#{OSXFUSE_FULL_VERSION}/osxfuse-#{OSXFUSE_FULL_VERSION}.dmg"
+  checksum 'fab4c8d16d0fc6995826d74f2c0ab04cd7264b00c566d5cc3b219bd589da8114'
+  # Use the app keyword to override the name of the .pkg file.
+  app "Install OSXFUSE #{OSXFUSE_MAJOR_VERSION}.#{OSXFUSE_MINOR_VERSION}"
+  type 'pkg'
+  package_id 'com.github.osxfuse.pkg.Core'
+  volumes_dir 'FUSE for OS X'
+  action :install
+end
+
+SSHFS_VERSION = '2.5.0'
+pkgutil_proc = Mixlib::ShellOut.new(
+  'pkgutil', '--pkg-info', 'com.github.osxfuse.pkg.SSHFS')
+pkgutil_proc.run_command
+SSHFS_IS_INSTALLED = pkgutil_proc.exitstatus == 0
+SSHFS_PKG_PATH = "#{Chef::Config[:file_cache_path]}/sshfs.pkg"
+
+remote_file 'download SSHFS pkg' do
+  source 'https://github.com/osxfuse/sshfs/releases/download/' \
+         "osxfuse-sshfs-#{SSHFS_VERSION}/sshfs-#{SSHFS_VERSION}.pkg"
+  path SSHFS_PKG_PATH
+  checksum 'f8f4f71814273ea42dbe6cd92199f7cff418571ffd1b10c0608878d3472d2162'
+  # A `notifies' attribute seems like a good idea here, but if it it's already
+  # downloaded *but not installed*, there will be no notification. We'll just
+  # hope it gets downloaded before the next provider runs.
+
+  # Even if it's not in the cache, if we already have it installed, there's no
+  # reason to download it.
+  not_if { SSHFS_IS_INSTALLED }
+end
+
+execute 'run SSHFS package installer' do
+  command "sudo installer -pkg '#{SSHFS_PKG_PATH}' -target /"
+  not_if { SSHFS_IS_INSTALLED }
+end
+
 QUICKSILVER_VERSION = '1.0.0'
 dmg_package 'Quicksilver' do
   source 'http://github.qsapp.com/downloads/' \
