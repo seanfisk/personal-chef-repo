@@ -1,7 +1,6 @@
 * For the repo: check out [Strainer](https://github.com/customink/strainer).
 
 * [MacFusion](http://macfusionapp.org/)
-* [fuse-zip](https://code.google.com/p/fuse-zip/)
 * OpenEmu (if I like it)
 * Add guards to stop resources from updating if they don't need to.
 * Add checksums to fonts, or use `:create_if_missing`.
@@ -32,3 +31,4 @@
     * Add note about setting up SSH keys before running.
 maintain.
 * Consider turning on `kbaccess` from `mac_os_x` cookbook.
+* [fuse-zip](https://code.google.com/p/fuse-zip/) Currently weird because this would be best to install with Homebrew, but we are currently installing OSXFUSE (and SSHFS) through their pkg installers. Might want to reconsider this when installing fuse-zip.
