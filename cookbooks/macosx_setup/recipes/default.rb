@@ -350,21 +350,21 @@ dmg_package 'Java7DevelopmentKit' do
   not_if { JDK7_IS_INSTALLED }
 end
 
-KEYREMAP_VERSION = '9.3.0'
-dmg_package 'KeyRemap4MacBook' do
-  source 'https://pqrs.org/macosx/keyremap4macbook/files/' \
-         "KeyRemap4MacBook-#{KEYREMAP_VERSION}.dmg"
-  checksum 'eec41ff544859e570b195726404b34e6c6280a0022b4c8ae09c0c9eeeb871b18'
+KARABINER_VERSION = '10.2.0'
+dmg_package 'Karabiner' do
+  source 'https://pqrs.org/osx/karabiner/files/' \
+         "Karabiner-#{KARABINER_VERSION}.dmg"
+  checksum 'a5bd3717023d44a425f480289e13a66652bfe70f87c97bea03e73fded6283529'
   type 'pkg'
-  package_id 'org.pqrs.driver.KeyRemap4MacBook'
-  volumes_dir "KeyRemap4MacBook-#{KEYREMAP_VERSION}"
+  package_id 'org.pqrs.driver.Karabiner'
+  volumes_dir "Karabiner-#{KARABINER_VERSION}"
   action :install
 end
 # XML settings files
-cookbook_file 'KeyRemap4MacBook XML settings file' do
-  source 'KeyRemap4MacBook_private.xml'
+cookbook_file 'Karabiner XML settings file' do
+  source 'Karabiner_private.xml'
   path "#{node['macosx_setup']['home']}/Library/Application Support/" \
-       'KeyRemap4MacBook/private.xml'
+       'Karabiner/private.xml'
 end
 
 QUICKSILVER_VERSION = '1.0.0'

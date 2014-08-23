@@ -22,8 +22,6 @@ default['windows_setup']['packages'] = %w(
   ConEmu
   Firefox
   autohotkey
-  git
-  poshgit
   pscx
   scite4autohotkey
   wixtoolset

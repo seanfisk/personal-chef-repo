@@ -4,7 +4,6 @@
 * [MacFusion](http://macfusionapp.org/)
 * [fuse-zip](https://code.google.com/p/fuse-zip/)
 * OpenEmu (if I like it)
-* KeyRemap4MacBook is now Karabiner. Update links and preferences. <https://pqrs.org/osx/karabiner/>
 * Add guards to stop resources from updating if they don't need to.
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.
