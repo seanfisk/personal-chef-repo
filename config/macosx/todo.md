@@ -1,5 +1,6 @@
 * For the repo: check out [Strainer](https://github.com/customink/strainer).
 
+* [gibo](https://github.com/simonwhitaker/gibo), should work for Windows as well.
 * [MacFusion](http://macfusionapp.org/)
 * OpenEmu (if I like it)
 * Add guards to stop resources from updating if they don't need to.
