@@ -49,11 +49,11 @@ default['macosx_setup']['packages'] = %w(
   ack
   aria2
   astyle
-  autojump
   coreutils
   dos2unix
   doxygen
   editorconfig
+  fasd
   git
   graphicsmagick
   graphviz
