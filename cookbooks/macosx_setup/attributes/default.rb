@@ -44,6 +44,8 @@ default['macosx_setup']['fonts_dir'] =
 # - ImageMagick might already be present on the system (but just 'convert').
 #   I'm not sure if it's just an artifact of an earlier build, but it was on my
 #   Mavericks system before I installed it (again?).
+# - libgit2 is for pygit2 for Powerline.
+# - zpython is also for Powerline.
 #
 default['macosx_setup']['packages'] = %w(
   ack
@@ -59,6 +61,7 @@ default['macosx_setup']['packages'] = %w(
   graphviz
   htop-osx
   imagemagick
+  libgit2
   markdown
   mobile-shell
   nmap
@@ -80,5 +83,6 @@ default['macosx_setup']['packages'] = %w(
   watch
   wget
   zmq
+  zpython
   zsh
 )
