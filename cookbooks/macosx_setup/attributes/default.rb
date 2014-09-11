@@ -60,6 +60,7 @@ default['macosx_setup']['packages'] = %w(
   editorconfig
   fasd
   git
+  gnu-tar
   graphicsmagick
   graphviz
   htop-osx
@@ -86,6 +87,7 @@ default['macosx_setup']['packages'] = %w(
   valgrind
   watch
   wget
+  xz
   zmq
   zpython
   zsh
