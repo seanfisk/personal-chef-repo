@@ -64,6 +64,7 @@ default['macosx_setup']['packages'] = %w(
   graphicsmagick
   graphviz
   htop-osx
+  hub
   imagemagick
   libgit2
   markdown
