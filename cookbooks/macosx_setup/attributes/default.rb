@@ -35,6 +35,9 @@ default['macosx_setup']['fonts_dir'] =
 #   `--with-pic' flag. Hopefully I will not have issues in the
 #   future. See here: <https://github.com/mxcl/homebrew/issues/12946>
 # - I prefer ohcount to cloc and sloccount.
+# - Dos2Unix / Unix2Dos <http://waterlan.home.xs4all.nl/dos2unix.html> looks
+#   superior to Tofrodos <http://www.thefreecountry.com/tofrodos/>. But that
+#   was just from a quick look.
 # - ZeroMQ (zmq) is included to speed up IPython installs. It can install a
 #   bundled version to a virtualenv, but it's faster to have a globally built
 #   version.
