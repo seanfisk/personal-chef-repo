@@ -66,6 +66,7 @@ default['macosx_setup']['packages'] = %w(
   imagemagick
   libgit2
   markdown
+  mercurial
   mobile-shell
   nmap
   node
