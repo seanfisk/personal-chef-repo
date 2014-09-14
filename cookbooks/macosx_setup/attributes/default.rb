@@ -49,6 +49,7 @@ default['macosx_setup']['fonts_dir'] =
 #   Mavericks system before I installed it (again?).
 # - libgit2 is for pygit2 for Powerline.
 # - zpython is also for Powerline.
+# - texinfo is mainly for Sphinx.
 #
 default['macosx_setup']['packages'] = %w(
   ack
@@ -82,6 +83,7 @@ default['macosx_setup']['packages'] = %w(
   rbenv
   ruby-build
   ssh-copy-id
+  texinfo
   the_silver_searcher
   tmux
   tree
