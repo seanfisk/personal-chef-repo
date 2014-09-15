@@ -1,5 +1,6 @@
 * For the repo: check out [Strainer](https://github.com/customink/strainer).
 
+* Automatically install devpi and/or system Python packages (see dotfiles as well).
 * [gibo](https://github.com/simonwhitaker/gibo), should work for Windows as well.
 * [MacFusion](http://macfusionapp.org/)
 * OpenEmu (if I like it)
