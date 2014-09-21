@@ -74,6 +74,7 @@ default['macosx_setup']['packages'] = %w(
   nmap
   node
   ohcount
+  p7zip
   parallel
   pstree
   pyenv
