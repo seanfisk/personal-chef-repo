@@ -151,9 +151,9 @@ end
 #   source DEVPI_PLIST_NAME
 #   path "#{node['macosx_setup']['home']}/Library/LaunchAgents/" +
 #        DEVPI_PLIST_NAME
-#   # Override the umask and set the mode. The file must be writable *only by the
-#   # user* otherwise launchd will not load it. Be conservative and zero the
-#   # group and other permissions.
+#   # Override the umask and set the mode. The file must be writable *only by
+#   # the user* otherwise launchd will not load it. Be conservative and zero
+#   # the group and other permissions.
 #   mode '0600'
 # end
 
@@ -362,11 +362,11 @@ dmg_package 'Java7DevelopmentKit' do
   not_if { JDK7_IS_INSTALLED }
 end
 
-KARABINER_VERSION = '10.2.0'
+KARABINER_VERSION = '10.3.0'
 dmg_package 'Karabiner' do
   source 'https://pqrs.org/osx/karabiner/files/' \
          "Karabiner-#{KARABINER_VERSION}.dmg"
-  checksum 'a5bd3717023d44a425f480289e13a66652bfe70f87c97bea03e73fded6283529'
+  checksum '56285549cbdf17cce97c0a8f85ef867b6b7ee848d503b51636c7d9c96a724728'
   type 'pkg'
   package_id 'org.pqrs.driver.Karabiner'
   volumes_dir "Karabiner-#{KARABINER_VERSION}"
