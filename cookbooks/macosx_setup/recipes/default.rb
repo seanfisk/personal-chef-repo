@@ -225,7 +225,7 @@ end
 
 zip_package 'Flux' do
   source 'https://justgetflux.com/mac/Flux.zip'
-  checksum '7cc07a4865b45f6e9b4736b5eb25db21e16bbcd36ce447fee54394ccb9a0d360'
+  checksum 'e166bb86652c691272417919951a3b789397c1375ea643070e41f190a6ceb05a'
   action :install
 end
 

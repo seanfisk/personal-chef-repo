@@ -1,5 +1,8 @@
 * For the repo: check out [Strainer](https://github.com/customink/strainer).
 
+* Accessibility
+    * Zoom
+    * Picture-in-picture
 * Automatically install devpi and/or system Python packages (see dotfiles as well).
 * [gibo](https://github.com/simonwhitaker/gibo), should work for Windows as well.
 * [MacFusion](http://macfusionapp.org/)
