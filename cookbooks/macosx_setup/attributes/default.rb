@@ -50,6 +50,9 @@ default['macosx_setup']['fonts_dir'] =
 # - libgit2 is for pygit2 for Powerline.
 # - zpython is also for Powerline.
 # - texinfo is mainly for Sphinx.
+# - pwgen and sf-pwgen are both password generators. pwgen is more generic,
+#   whereas sf-pwgen uses Apple's security framework. We also looked at APG,
+#   but it seems unmaintained.
 #
 default['macosx_setup']['packages'] = %w(
   ack
@@ -77,12 +80,14 @@ default['macosx_setup']['packages'] = %w(
   p7zip
   parallel
   pstree
+  pwgen
   pyenv
   pyenv-virtualenv
   pyenv-which-ext
   qpdf
   rbenv
   ruby-build
+  sf-pwgen
   ssh-copy-id
   texinfo
   the_silver_searcher
