@@ -131,6 +131,8 @@ DEEP_SLEEP_ARCHIVE_NAME = 'deepsleep-1.3-beta1.zip'
 DEEP_SLEEP_ARCHIVE_PATH =
   "#{Chef::Config[:file_cache_path]}/#{DEEP_SLEEP_ARCHIVE_NAME}"
 
+# This isn't perfect -- the widget will only download and install when the
+# archive file doesn't exist.
 remote_file 'download Deep Sleep dashboard widget' do
   source 'https://github.com/downloads/code2k/Deep-Sleep.wdgt/' +
          DEEP_SLEEP_ARCHIVE_NAME
@@ -140,7 +142,7 @@ remote_file 'download Deep Sleep dashboard widget' do
 end
 
 execute 'install Deep Sleep dashboard widget' do
-  command "unzip '#{DEEP_SLEEP_ARCHIVE_PATH}'"
+  command "unzip -o '#{DEEP_SLEEP_ARCHIVE_PATH}'"
   cwd "#{node['macosx_setup']['home']}/Library/Widgets"
   action :nothing
 end
@@ -651,21 +653,19 @@ end
 UBUNTU_FONT_ARCHIVE_NAME = 'ubuntu-font-family-0.80.zip'
 UBUNTU_FONT_ARCHIVE_PATH =
   "#{Chef::Config[:file_cache_path]}/#{UBUNTU_FONT_ARCHIVE_NAME}"
-UBUNTU_FONT_DIR = "#{node['macosx_setup']['fonts_dir']}/Ubuntu"
 
-directory UBUNTU_FONT_DIR
-
+# This isn't perfect -- the fonts will only download and install when the
+# archive file doesn't exist.
 remote_file 'download Ubuntu fonts' do
   source "http://font.ubuntu.com/download/#{UBUNTU_FONT_ARCHIVE_NAME}"
-  # This font release's checksum is unlikely to change.
   checksum '107170099bbc3beae8602b97a5c423525d363106c3c24f787d43e09811298e4c'
   path UBUNTU_FONT_ARCHIVE_PATH
   notifies :run, 'execute[install Ubuntu fonts]'
 end
 
 execute 'install Ubuntu fonts' do
-  command "unzip '#{UBUNTU_FONT_ARCHIVE_PATH}'"
-  cwd UBUNTU_FONT_DIR
+  command "unzip -o '#{UBUNTU_FONT_ARCHIVE_PATH}'"
+  cwd node['macosx_setup']['fonts_dir']
   action :nothing
 end
 
@@ -676,7 +676,6 @@ remote_file 'download Inconsolata font' do
   # just install the current version if it's not already installed.
   source "http://levien.com/type/myfonts/#{INCONSOLATA_FILE}"
   path "#{node['macosx_setup']['fonts_dir']}/#{INCONSOLATA_FILE}"
-  action :create_if_missing
 end
 
 ## Inconsolata for Powerline
@@ -685,5 +684,4 @@ remote_file 'download Inconsolata for Powerline font' do
   source 'https://github.com/Lokaltog/powerline-fonts/raw/'\
          'master/Inconsolata/' + URI.escape(INCONSOLATA_POWERLINE_FILE)
   path "#{node['macosx_setup']['fonts_dir']}/#{INCONSOLATA_POWERLINE_FILE}"
-  action :create_if_missing
 end
