@@ -252,6 +252,12 @@ dmg_package 'Google Chrome' do
   action :install
 end
 
+dmg_package 'Inkscape' do
+  source 'http://downloads.sourceforge.net/inkscape/Inkscape-0.48.5-2+X11.dmg'
+  checksum '72191861ee19a4e047d9084c7181a5ccf6e89d9b4410e197a98c2e1027e65e72'
+  action :install
+end
+
 # iTerm2
 ## Install iTerm2 background image.
 backgrounds_dir = "#{node['macosx_setup']['home']}/Pictures/Backgrounds"
