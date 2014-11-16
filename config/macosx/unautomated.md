@@ -23,6 +23,10 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 
   This is a little overkill. It's nice to automate, but I change these from time to time manually, and that would be just one more thing to change every time.
 
+* [Deeper](http://www.titanium.free.fr/downloaddeeper.php)
+
+  We're currently using this to change the login screen background. It's specific to the version of OS X. Not impossible to automate, but we haven't chosen to yet.
+
 * GVSU's VPN (Network Connect)
 
   This comes from GVSU, and the versions need to remain consistent.
