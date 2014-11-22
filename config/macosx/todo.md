@@ -11,6 +11,7 @@
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.
 * Make a script that does some of the stuff in the README.
+* Check out SkyFonts for font installation: http://www.fonts.com/web-fonts/google
 * Eclipse
     * PyDev and configuration
     * Emacs+ and configuration
