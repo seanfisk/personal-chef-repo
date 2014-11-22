@@ -11,7 +11,6 @@
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.
 * Make a script that does some of the stuff in the README.
-* Make tmux-MacOSX-pasteboard its own cookbook.
 * Eclipse
     * PyDev and configuration
     * Emacs+ and configuration

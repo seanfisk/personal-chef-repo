@@ -53,6 +53,8 @@ default['macosx_setup']['fonts_dir'] =
 # - pwgen and sf-pwgen are both password generators. pwgen is more generic,
 #   whereas sf-pwgen uses Apple's security framework. We also looked at APG,
 #   but it seems unmaintained.
+# - reattach-to-user-namespace has options to fix launchctl and shim
+#   pbcopy/pbaste. We haven't needed them yet, though.
 #
 default['macosx_setup']['packages'] = %w(
   ack
@@ -86,6 +88,7 @@ default['macosx_setup']['packages'] = %w(
   pyenv-which-ext
   qpdf
   rbenv
+  reattach-to-user-namespace
   ruby-build
   sf-pwgen
   ssh-copy-id

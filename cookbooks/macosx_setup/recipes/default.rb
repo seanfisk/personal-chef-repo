@@ -598,34 +598,6 @@ execute 'install emacs configuration' do
   action :nothing
 end
 
-# Install tmux-MacOSX-pasteboard reattach-to-user-namespace program
-directory node['macosx_setup']['scripts_dir'] do
-  recursive true
-  action :create
-end
-
-tmux_macosx_dir =
-  "#{Chef::Config[:file_cache_path]}/tmux-MacOSX-pasteboard"
-git tmux_macosx_dir do
-  repository 'https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard.git'
-  action :sync
-  notifies :run, 'bash[compile and install tmux-MacOSX-pasteboard]'
-end
-
-bash 'compile and install tmux-MacOSX-pasteboard' do
-  # We are using a line continuation in a Bash script, not in Ruby.
-  # rubocop:disable LineContinuation
-  code <<-EOH
-  set -o errexit # exit on first error
-  make reattach-to-user-namespace
-  cp reattach-to-user-namespace \\
-    '#{node['macosx_setup']['scripts_dir']}'
-  EOH
-  # rubocop:enable LineContinuation
-  cwd tmux_macosx_dir
-  action :nothing
-end
-
 # About installing rbenv
 #
 # Even though the rbenv cookbooks looks nice, they don't work as I'd
