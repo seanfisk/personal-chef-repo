@@ -601,45 +601,24 @@ end
 # We now also install pyenv through Homebrew, so it's nice to be consistent.
 
 # Install Homebrew packages
-
 node['macosx_setup']['packages'].each do |pkg_name|
   package pkg_name do
     action :install
   end
 end
 
-# Install fonts.
-
-## Ubuntu
-UBUNTU_FONT_ARCHIVE_NAME = 'ubuntu-font-family-0.80.zip'
-UBUNTU_FONT_ARCHIVE_PATH =
-  "#{Chef::Config[:file_cache_path]}/#{UBUNTU_FONT_ARCHIVE_NAME}"
-
-# This isn't perfect -- the fonts will only download and install when the
-# archive file doesn't exist.
-remote_file 'download Ubuntu fonts' do
-  source "http://font.ubuntu.com/download/#{UBUNTU_FONT_ARCHIVE_NAME}"
-  checksum '107170099bbc3beae8602b97a5c423525d363106c3c24f787d43e09811298e4c'
-  path UBUNTU_FONT_ARCHIVE_PATH
-  notifies :run, 'execute[install Ubuntu fonts]'
+# SkyFonts (http://www.fonts.com/browse/font-tools/skyfonts) allows syncing of
+# fonts between platforms.
+dmg_package 'Monotype SkyFonts' do
+  source 'http://cdn1.skyfonts.com/client/Monotype_SkyFonts_Mac64_4.6.0.0.dmg'
+  checksum '211f8f386c0ed84a19235a1cc64478c5f24d1cb0bbfb3947fa5cb5633f36484d'
+  # Need to use this because the app name has spaces.
+  dmg_name 'MonotypeSkyFonts'
+  action :install
 end
 
-execute 'install Ubuntu fonts' do
-  command "unzip -o '#{UBUNTU_FONT_ARCHIVE_PATH}'"
-  cwd node['macosx_setup']['fonts_dir']
-  action :nothing
-end
-
-## Inconsolata
-INCONSOLATA_FILE = 'Inconsolata.otf'
-remote_file 'download Inconsolata font' do
-  # This URL seems like one that may be updated with newer versions, so we'll
-  # just install the current version if it's not already installed.
-  source "http://levien.com/type/myfonts/#{INCONSOLATA_FILE}"
-  path "#{node['macosx_setup']['fonts_dir']}/#{INCONSOLATA_FILE}"
-end
-
-## Inconsolata for Powerline
+# Inconsolata for Powerline (can't be installed via SkyFonts, for obvious
+# reasons).
 INCONSOLATA_POWERLINE_FILE = 'Inconsolata for Powerline.otf'
 remote_file 'download Inconsolata for Powerline font' do
   source 'https://github.com/Lokaltog/powerline-fonts/raw/'\

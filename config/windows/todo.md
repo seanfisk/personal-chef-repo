@@ -1,3 +1,4 @@
+* SkyFonts for font syncing
 * AutoHotKey SwapCapsLockControl.ahk
 * GitHub for Windows installation, ditch regular Git
 * Emacs
