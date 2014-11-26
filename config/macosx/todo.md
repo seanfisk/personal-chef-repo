@@ -16,7 +16,7 @@
     * PyDev and configuration
     * Emacs+ and configuration
 * zip package
-    * Consider renaming it to something better. Remember the trouble with the imports though.
+    * Renamed to `zipped_app`.
     * Revise the CHANGELOG and README.
     * Consider changing the `cp -R` in the installation to a ruby block.
     * Remove the temp directory when done.
