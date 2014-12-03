@@ -1,5 +1,6 @@
 * For the repo: check out [Strainer](https://github.com/customink/strainer).
 
+* Update URLs and mentions for name change to chef.io (as of time of writing, Hosted Chef is still api.opscode.com; wait until this changes to make the update)
 * Accessibility
     * Zoom
     * Picture-in-picture
