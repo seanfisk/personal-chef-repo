@@ -83,22 +83,6 @@ end
 
 include_recipe 'dmg'
 include_recipe 'zip'
-include_recipe 'mac_os_x'
-
-# Password-protected screensaver + delay
-include_recipe 'mac_os_x::screensaver'
-
-# Turn on the OS X firewall.
-include_recipe 'mac_os_x::firewall'
-
-# Set up fast key repeat with low initial delay.
-include_recipe 'mac_os_x::key_repeat'
-
-# Set up clock with day of week, date, and 24-hour clock.
-mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
-
-# Show percentage on battery indicator.
-mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 
 ADIUM_VERSION = '1.5.6'
 dmg_package 'Adium' do
@@ -624,4 +608,253 @@ remote_file 'download Inconsolata for Powerline font' do
   source 'https://github.com/Lokaltog/powerline-fonts/raw/'\
          'master/Inconsolata/' + URI.escape(INCONSOLATA_POWERLINE_FILE)
   path "#{node['macosx_setup']['fonts_dir']}/#{INCONSOLATA_POWERLINE_FILE}"
+end
+
+# Mac OS X tweaks
+
+include_recipe 'mac_os_x'
+
+# Password-protected screensaver + delay
+include_recipe 'mac_os_x::screensaver'
+
+# Turn on the OS X firewall.
+include_recipe 'mac_os_x::firewall'
+
+# Set up clock with day of week, date, and 24-hour clock.
+mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
+
+# Show percentage on battery indicator.
+mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
+
+# Tweaks from
+# https://github.com/kevinSuttle/OSXDefaults/blob/master/.osx
+# https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+
+mac_os_x_userdefaults 'always show scrollbars' do
+  global true
+  key 'AppleShowScrollBars'
+  value 'Always'
+end
+
+mac_os_x_userdefaults 'increase window resize speed for Cocoa applications' do
+  global true
+  key 'NSWindowResizeTime'
+  value 0.001
+end
+
+mac_os_x_userdefaults 'expand save panel by default' do
+  global true
+  key 'NSNavPanelExpandedStateForSaveMode'
+  value true
+end
+mac_os_x_userdefaults 'expand save panel by default (2)' do
+  global true
+  key 'NSNavPanelExpandedStateForSaveMode2'
+  value true
+end
+
+mac_os_x_userdefaults 'expand print panel by default' do
+  global true
+  key 'PMPrintingExpandedStateForPrint'
+  value true
+end
+mac_os_x_userdefaults 'expand print panel by default (2)' do
+  global true
+  key 'PMPrintingExpandedStateForPrint2'
+  value true
+end
+
+mac_os_x_userdefaults 'save to disk (not to iCloud) by default' do
+  global true
+  key 'NSDocumentSaveNewDocumentsToCloud'
+  value false
+end
+
+mac_os_x_userdefaults 'automatically quit printer app once the print jobs '\
+                      'complete' do
+  domain 'com.apple.print.PrintingPrefs'
+  key 'Quit When Finished'
+  value true
+end
+
+# Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
+mac_os_x_userdefaults 'display ASCII control characters using caret notation '\
+                      'in standard text views' do
+  global true
+  key 'NSTextShowsControlCharacters'
+  value true
+end
+
+mac_os_x_userdefaults 'set Help Viewer windows to non-floating mode' do
+  domain 'com.apple.helpviewer'
+  key 'DevMode'
+  value true
+end
+
+mac_os_x_userdefaults 'Reveal IP address, hostname, OS version, etc. when '\
+                      'clicking the clock in the login window' do
+  domain '/Library/Preferences/com.apple.loginwindow'
+  key 'AdminHostInfo'
+  value 'HostName'
+  sudo true
+end
+
+mac_os_x_userdefaults 'disable natural (Lion-style) scrolling' do
+  global true
+  key 'com.apple.swipescrolldirection'
+  value false
+end
+
+mac_os_x_userdefaults 'disable press-and-hold for keys in favor of key '\
+                      'repeat' do
+  global true
+  key 'ApplePressAndHoldEnabled'
+  value false
+end
+mac_os_x_userdefaults 'set a blazingly fast keyboard repeat rate' do
+  global true
+  key 'KeyRepeat'
+  value 0
+end
+
+# Finder
+# Note: Quitting Finder will also hide desktop icons.
+mac_os_x_userdefaults 'finder: allow quitting via ⌘Q' do
+  domain 'com.apple.finder'
+  key 'QuitMenuItem'
+  value true
+end
+mac_os_x_userdefaults 'finder: disable window animations and Get Info '\
+                      'animations' do
+  domain 'com.apple.finder'
+  key 'DisableAllAnimations'
+  value true
+end
+mac_os_x_userdefaults 'finder: show hidden files by default' do
+  domain 'com.apple.finder'
+  key 'AppleShowAllFiles'
+  value true
+end
+mac_os_x_userdefaults 'finder: show all filename extensions' do
+  global true
+  key 'AppleShowAllExtensions'
+  value true
+end
+mac_os_x_userdefaults 'finder: show status bar' do
+  domain 'com.apple.finder'
+  key 'ShowStatusBar'
+  value true
+end
+mac_os_x_userdefaults 'finder: show path bar' do
+  domain 'com.apple.finder'
+  key 'ShowPathbar'
+  value true
+end
+mac_os_x_userdefaults 'finder: allow text selection in Quick Look' do
+  domain 'com.apple.finder'
+  key 'QLEnableTextSelection'
+  value true
+end
+mac_os_x_userdefaults 'finder: display full POSIX path as Finder window '\
+                      'title' do
+  domain 'com.apple.finder'
+  key '_FXShowPosixPathInTitle'
+  value true
+end
+mac_os_x_userdefaults 'finder: when performing a search, search the current '\
+                      'folder by default' do
+  domain 'com.apple.finder'
+  key 'FXDefaultSearchScope'
+  value 'SCcf'
+end
+mac_os_x_userdefaults 'finder: disable the warning when changing a file '\
+                      'extension' do
+  domain 'com.apple.finder'
+  key 'FXEnableExtensionChangeWarning'
+  value false
+end
+mac_os_x_userdefaults 'finder: enable spring loading for directories' do
+  global true
+  key 'com.apple.springing.enabled'
+  value true
+end
+mac_os_x_userdefaults 'finder: remove the spring loading delay for '\
+                      'directories' do
+  global true
+  key 'com.apple.springing.delay'
+  value 0.0
+end
+mac_os_x_userdefaults 'finder: avoid creating .DS_Store files on network '\
+                      'volumes' do
+  domain 'com.apple.desktopservices'
+  key 'DSDontWriteNetworkStores'
+  value true
+end
+mac_os_x_userdefaults 'finder: use list view in all Finder windows by '\
+                      'default' do
+  domain 'com.apple.finder'
+  key 'FXPreferredViewStyle'
+  # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+  value 'Nlsv'
+end
+
+mac_os_x_userdefaults 'enable AirDrop over Ethernet and on unsupported Macs '\
+                      'running Lion' do
+  domain 'com.apple.NetworkBrowser'
+  key 'BrowseAllInterfaces'
+  value true
+end
+
+mac_os_x_userdefaults 'remove the auto-hiding Dock delay' do
+  domain 'com.apple.dock'
+  key 'autohide-delay'
+  value 0.0
+end
+mac_os_x_userdefaults 'remove the animation when hiding/showing the Dock' do
+  domain 'com.apple.dock'
+  key 'autohide-time-modifier'
+  value 0.0
+end
+mac_os_x_userdefaults 'automatically hide and show the Dock' do
+  domain 'com.apple.dock'
+  key 'autohide'
+  value true
+end
+mac_os_x_userdefaults 'make Dock icons of hidden applications translucent' do
+  domain 'com.apple.dock'
+  key 'showhidden'
+  value true
+end
+
+mac_os_x_userdefaults 'prevent Time Machine from prompting to use new hard '\
+                      'drives as backup volume' do
+  domain 'com.apple.TimeMachine'
+  key 'DoNotOfferNewDisksForBackup'
+  value true
+end
+
+mac_os_x_userdefaults 'use plain text mode for new TextEdit documents' do
+  domain 'com.apple.TextEdit'
+  key 'RichText'
+  value 0
+end
+mac_os_x_userdefaults 'open and save files as UTF-8 in TextEdit' do
+  domain 'com.apple.TextEdit'
+  key 'PlainTextEncoding'
+  value 4
+end
+mac_os_x_userdefaults 'open and save files as UTF-8 in TextEdit (write)' do
+  domain 'com.apple.TextEdit'
+  key 'PlainTextEncodingForWrite'
+  value 4
+end
+mac_os_x_userdefaults 'enable the debug menu in Disk Utility' do
+  domain 'com.apple.DiskUtility'
+  key 'DUDebugMenuEnabled'
+  value true
+end
+mac_os_x_userdefaults 'enable the advanced image menu in Disk Utility' do
+  domain 'com.apple.DiskUtility'
+  key 'advanced-image-options'
+  value true
 end
