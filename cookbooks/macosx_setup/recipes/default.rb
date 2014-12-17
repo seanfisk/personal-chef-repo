@@ -343,11 +343,11 @@ dmg_package 'Java7DevelopmentKit' do
   not_if { JDK7_IS_INSTALLED }
 end
 
-KARABINER_VERSION = '10.4.0'
+KARABINER_VERSION = '10.5.0'
 dmg_package 'Karabiner' do
   source 'https://pqrs.org/osx/karabiner/files/' \
          "Karabiner-#{KARABINER_VERSION}.dmg"
-  checksum 'b1e3ffb7cd10ec8651c68b184c236589f182a273dad4b1c68ab2c15d36a34248'
+  checksum 'c3ef92e6d7544eac90046bcff130b3fe2a74defa456af5971640ca62a77c81a9'
   type 'pkg'
   package_id 'org.pqrs.driver.Karabiner'
   volumes_dir "Karabiner-#{KARABINER_VERSION}"
