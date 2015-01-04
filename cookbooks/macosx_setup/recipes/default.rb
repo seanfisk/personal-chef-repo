@@ -343,6 +343,31 @@ dmg_package 'Java7DevelopmentKit' do
   not_if { JDK7_IS_INSTALLED }
 end
 
+JETTISON_VERSION = '1.4.3'
+dmg_package 'Jettison' do
+  source "http://www.stclairsoft.com/download/Jettison-#{JETTISON_VERSION}.dmg"
+  checksum '5836546099a85e212bd1cfbc79b35e5cf4d99e7056edff4a2b4fbdfdf3bdbd6a'
+  volumes_dir "Jettison #{JETTISON_VERSION}"
+  action :install
+end
+node.default['mac_os_x']['settings']['jettison'] = {
+  domain: 'com.stclairsoft.Jettison',
+  autoEjectAtLogout: false,
+  # This really means autoEjectAtSleep.
+  autoEjectEnabled: true,
+  ejectDiskImages: true,
+  ejectHardDisks: true,
+  ejectNetworkDisks: true,
+  ejectOpticalDisks: false,
+  ejectSDCards: false,
+  hideMenuBarIcon: false,
+  playSoundOnFailure: false,
+  playSoundOnSuccess: false,
+  showRemountProgress: false,
+  statusItemEnabled: true,
+  toggleMassStorageDriver: false
+}
+
 KARABINER_VERSION = '10.5.0'
 dmg_package 'Karabiner' do
   source 'https://pqrs.org/osx/karabiner/files/' \
