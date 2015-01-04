@@ -3,13 +3,11 @@ Unautomated Setup
 
 This file lists parts of Mac OS X setup that are not automated. Typically, this is due to technical or practical reasons.
 
-* Caffeine
+* Mac App Store downloads
 
-  In the Mac App store.
-
-* Skitch
-
-  In the Mac App store.
+    * Caffeine (free)
+    * Skitch (free)
+    * aText (paid)
 
 * Seagate Dashboard
 
