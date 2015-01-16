@@ -37,9 +37,9 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 
   This is installed using an application installer (an app bundle in the DMG which installs Qt), and is therefore hard to automate.
 
-* Adobe Flash Player
+* Adobe Flash Player and Adobe Reader
 
-  It has an app bundle inside the DMG, making it hard to automate.
+  They have an app bundle inside the DMG, making it hard to automate installation.
 
 * Microsoft DreamSpark's Secure Download Manager
 
