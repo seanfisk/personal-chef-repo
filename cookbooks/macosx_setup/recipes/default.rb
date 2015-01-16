@@ -368,11 +368,11 @@ node.default['mac_os_x']['settings']['jettison'] = {
   toggleMassStorageDriver: false
 }
 
-KARABINER_VERSION = '10.5.0'
+KARABINER_VERSION = '10.6.0'
 dmg_package 'Karabiner' do
   source 'https://pqrs.org/osx/karabiner/files/' \
          "Karabiner-#{KARABINER_VERSION}.dmg"
-  checksum 'c3ef92e6d7544eac90046bcff130b3fe2a74defa456af5971640ca62a77c81a9'
+  checksum '11e671861a6fa137a8a79506718840eb0d006868f89e89b0f431e5e9b5a06854'
   type 'pkg'
   package_id 'org.pqrs.driver.Karabiner'
   volumes_dir "Karabiner-#{KARABINER_VERSION}"
