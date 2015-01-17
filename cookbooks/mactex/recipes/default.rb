@@ -21,7 +21,7 @@
 require 'mixlib/shellout'
 
 pkgutil_proc = Mixlib::ShellOut.new(
-  'pkgutil', '--pkgs=org.tug.mactex.texlive2013')
+  'pkgutil', '--pkg-info', 'org.tug.mactex.texlive2013')
 pkgutil_proc.run_command
 MACTEX_IS_INSTALLED = pkgutil_proc.exitstatus == 0
 

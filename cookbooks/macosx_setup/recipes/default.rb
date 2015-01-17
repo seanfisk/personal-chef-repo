@@ -410,6 +410,38 @@ dmg_package 'OSXFUSE' do
   action :install
 end
 
+# Pandoc
+
+# Pandoc can be installed using Homebrew, but that doesn't install the man
+# pages. These are important as this is a pretty complex tool, and it's
+# important to have online documentation. The tradeoff is that this
+# installation pkg is a bit more complex to manage.
+
+# Note: This installation was based on the MacTeX installation procedure.
+PANDOC_VERSION = '1.13.2'
+pkgutil_proc = Mixlib::ShellOut.new(
+  'pkgutil', '--pkg-info', 'net.johnmacfarlane.pandoc')
+pkgutil_proc.run_command
+PANDOC_IS_INSTALLED = pkgutil_proc.exitstatus == 0
+
+PANDOC_CACHE_PATH = "#{Chef::Config[:file_cache_path]}/pandoc.pkg"
+
+# First, download the file.
+remote_file 'download Pandoc pkg' do
+  source 'https://github.com/jgm/pandoc/releases/download/'\
+         "#{PANDOC_VERSION}/pandoc-#{PANDOC_VERSION}-osx.pkg"
+  path PANDOC_CACHE_PATH
+  checksum '02455fba5353568b19d8b0bebbda9b99ba2c943b3f01b11b185f25c7db111b50'
+  # Don't bother downloading the file if Pandoc is already installed.
+  not_if { PANDOC_IS_INSTALLED }
+end
+
+# Now install.
+execute 'install Pandoc' do
+  command "sudo installer -pkg '#{PANDOC_CACHE_PATH}' -target /"
+  not_if { PANDOC_IS_INSTALLED }
+end
+
 SSHFS_VERSION = '2.5.0'
 pkgutil_proc = Mixlib::ShellOut.new(
   'pkgutil', '--pkg-info', 'com.github.osxfuse.pkg.SSHFS')
