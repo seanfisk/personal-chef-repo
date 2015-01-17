@@ -102,5 +102,4 @@ default['macosx_setup']['packages'] = %w(
   xz
   zmq
   zpython
-  zsh
 )

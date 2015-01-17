@@ -24,46 +24,53 @@ require 'etc'
 require 'uri'
 require 'mixlib/shellout'
 
-# Include homebrew as the default package manager.
-# (default is MacPorts)
+# Include homebrew as the default package manager (default is MacPorts).
 include_recipe 'homebrew'
 
-# Set latest bash 4 as the default shell.
+brew_proc = Mixlib::ShellOut.new('brew', '--prefix')
+brew_proc.run_command
+BREW_PREFIX = brew_proc.stdout.rstrip
+
+# Add the latest bash and zsh as possible login shells.
 #
 # Unfortunately, these commands will cause password prompts, meaning
 # chef has to be watched. The "workaround" is to put them at the
 # beginning of the run.
 #
-# We also need to install bash separately from the other homebrew
-# packages because it needs to be available for changing the default
-# shell. We don't want to wait for all the other packages to be
-# installed to see the prompt, but we need the shell to be available
-# before setting it as the default.
-package 'bash' do
-  action :install
-end
-
-PATH_TO_BASH = '/usr/local/bin/bash'
+# We also need to install the shells separately from the other Homebrew
+# packages because it needs to be available for changing the default shell. We
+# don't want to wait for all the other packages to be installed to see the
+# prompt, but we need the shell to be available before setting it as the
+# default.
 SHELLS_FILE = '/etc/shells'
+shells_file_lines = File.open(SHELLS_FILE).lines
+%w(bash zsh).each do |shell|
+  # Install the shell using Homebrew.
+  package shell do
+    action :install
+  end
 
-# First, add bash to /etc/shells so it is recognized as a valid user shell.
-execute "add latest bash to #{SHELLS_FILE}" do
-  # Unfortunately, this cannot be a ruby_block as that would prevent it from
-  # running with sudo. See the mactex cookbook for more information.
-  command "sudo bash -c 'echo #{PATH_TO_BASH} >> #{SHELLS_FILE}'"
-  not_if do
-    # Don't execute if this bash is already in the shells config file.
-    File.open(SHELLS_FILE).lines.any? do
-      |line| line.include?(PATH_TO_BASH)
+  shell_path = File.join(BREW_PREFIX, 'bin', shell)
+  # First, add shell to /etc/shells so it is recognized as a valid user shell.
+  execute "add #{shell_path} to #{SHELLS_FILE}" do
+    # Unfortunately, this cannot be a ruby_block as that would prevent it from
+    # running with sudo. See the mactex cookbook for more information.
+    command "sudo bash -c \"echo '#{shell_path}' >> '#{SHELLS_FILE}'\""
+    not_if do
+      # Don't execute if this shell is already in the shells config file.
+      shells_file_lines.any? do
+        |line| line.include?(shell_path)
+      end
     end
   end
 end
 
-# Then, set bash as the current user's shell.
-execute 'set latest bash as default shell' do
-  command "chsh -s '#{PATH_TO_BASH}'"
+# Then, set zsh as the current user's shell.
+ZSH_PATH = File.join(BREW_PREFIX, 'bin', 'zsh')
+execute "set #{ZSH_PATH} as default shell" do
+  command "chsh -s '#{ZSH_PATH}'"
   # getpwuid defaults to the current user, which is what we want.
-  not_if { Etc.getpwuid.shell == PATH_TO_BASH }
+  not_if { Etc.getpwuid.shell == ZSH_PATH }
 end
 
 # Make sure to use the `execute' resource than the `bash' resource, otherwise
