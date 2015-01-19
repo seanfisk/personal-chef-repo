@@ -65,6 +65,7 @@ default['macosx_setup']['packages'] = %w(
   doxygen
   editorconfig
   fasd
+  gibo
   git
   gnu-tar
   graphicsmagick
