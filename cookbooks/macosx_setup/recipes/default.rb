@@ -754,8 +754,10 @@ node.default['mac_os_x']['settings']['finder'] = {
   QuitMenuItem: true,
   # Disable window animations and Get Info animations
   DisableAllAnimations: true,
-  # Show hidden files by default
-  AppleShowAllFiles: true,
+  # Don't show hidden files by default -- this shows hidden files on the
+  # desktop, which is just kind of annoying. I've haven't really seen other
+  # benefits, since I don't use Finder much.
+  AppleShowAllFiles: false,
   # Show status bar
   ShowStatusBar: true,
   # Show path bar
