@@ -559,7 +559,7 @@ end
 #   action :install
 # end
 
-# Here the GTK+ DMG code until Wireshark switches their official Mac releases
+# Here's the GTK+ DMG code until Wireshark switches their official Mac releases
 # to Qt.
 
 WIRESHARK_VERSION = '1.12.0'
