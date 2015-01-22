@@ -31,7 +31,7 @@ DESIRED_POLICY = 'RemoteSigned'
 powershell_script 'set execution policy' do
   code "Set-ExecutionPolicy #{DESIRED_POLICY}"
   guard_interpreter :powershell_script
-  not_if "$(Get-ExecutionPolicy) -eq '#{DESIRED_POLICY}'"
+  not_if "(Get-ExecutionPolicy) -eq '#{DESIRED_POLICY}'"
 end
 
 directory node['windows_setup']['scripts_dir'] do
