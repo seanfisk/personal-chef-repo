@@ -17,6 +17,13 @@
 # limitations under the License.
 #
 
+default['windows_setup']['home'] = ENV['USERPROFILE']
+default['windows_setup']['scripts_dir'] =
+  "#{default['windows_setup']['home']}\\bin"
+default['windows_setup']['startup_dir'] =
+  default['windows_setup']['home'] +
+  '\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup'
+
 default['windows_setup']['packages'] = %w(
   7zip
   ConEmu

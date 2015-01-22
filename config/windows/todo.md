@@ -1,5 +1,4 @@
 * SkyFonts for font syncing
-* AutoHotKey SwapCapsLockControl.ahk
 * GitHub for Windows installation, ditch regular Git
 * Emacs
 * Emulators (Game Boy, N64)

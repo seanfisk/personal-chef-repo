@@ -33,3 +33,27 @@ powershell_script 'set execution policy' do
   guard_interpreter :powershell_script
   not_if "$(Get-ExecutionPolicy) -eq '#{DESIRED_POLICY}'"
 end
+
+directory node['windows_setup']['scripts_dir'] do
+  recursive true
+end
+
+# Fails out with insufficient permissions. I guess we'll just assume it exists
+# for now.
+#
+# directory node['windows_setup']['startup_dir'] do
+#   recursive true
+# end
+
+# Swap Caps Lock and Control using AutoHotKey.
+script_base = 'SwapCapsLockControl'
+script_name = "#{script_base}.ahk"
+script_path = "#{node['windows_setup']['scripts_dir']}\\#{script_name}"
+shortcut_path = "#{node['windows_setup']['startup_dir']}\\#{script_base}.lnk"
+cookbook_file script_name do
+  path script_path
+end
+windows_shortcut shortcut_path do
+  target script_path
+  description 'Swap Caps Lock and Control on startup'
+end

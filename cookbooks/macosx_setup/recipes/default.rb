@@ -555,7 +555,7 @@ end
 # Run with 'wireshark-qt' on the command-line (unfortunately, it's not an app
 # bundle).
 # package 'wireshark' do
-#   options '--with-qt --devel'
+#   options '--with-qt5 --devel'
 #   action :install
 # end
 
