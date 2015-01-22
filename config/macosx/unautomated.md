@@ -56,3 +56,7 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 * Xerox WorkCenter 5755 Printer Drivers
 
   For advanced use of GVSU's printers.
+
+* Silverlight
+
+  Have used this for Anne's Netflix account.
