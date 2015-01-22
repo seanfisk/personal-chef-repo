@@ -64,3 +64,12 @@ windows_shortcut shortcut_path do
   target script_path
   description 'Swap Caps Lock and Control on startup'
 end
+
+# Gibo
+script_name = 'gibo.bat'
+remote_file 'download and install Gibo' do
+  # This file will likely change, so don't provide a checksum.
+  source 'https://raw.githubusercontent.com/simonwhitaker/gibo/master/' +
+    script_name
+  path "#{node['windows_setup']['scripts_dir']}\\#{script_name}"
+end

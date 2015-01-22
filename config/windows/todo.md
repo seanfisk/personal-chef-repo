@@ -14,4 +14,3 @@
     * PowerGUI
     * PsGet
 * Pester (PowerShell testing framework) looks neat.
-* [gibo](https://github.com/simonwhitaker/gibo)
