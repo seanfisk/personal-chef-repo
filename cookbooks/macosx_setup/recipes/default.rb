@@ -126,7 +126,7 @@ DEEP_SLEEP_ARCHIVE_PATH =
 # archive file doesn't exist.
 remote_file 'download Deep Sleep dashboard widget' do
   source 'https://github.com/downloads/code2k/Deep-Sleep.wdgt/' +
-         DEEP_SLEEP_ARCHIVE_NAME
+    DEEP_SLEEP_ARCHIVE_NAME
   checksum 'fa41a926d7c1b6566b074579bdd4c9bc969d348292597ac3064731326efc4207'
   path DEEP_SLEEP_ARCHIVE_PATH
   notifies :run, 'execute[install Deep Sleep dashboard widget]'
@@ -580,7 +580,7 @@ dmg_package 'Wireshark' do
 
   # Don't forget to escape the spaces (into '%20').
   source 'http://wiresharkdownloads.riverbed.com/wireshark/osx/' +
-         URI.escape(WIRESHARK_FULL_NAME) + '.dmg'
+    URI.escape(WIRESHARK_FULL_NAME) + '.dmg'
   checksum '2e4131fe32b72339cb8d8191e591711c16f4c5950657428810fdfce91b0dead2'
   type 'pkg'
   package_id 'org.wireshark.Wireshark.pkg'
