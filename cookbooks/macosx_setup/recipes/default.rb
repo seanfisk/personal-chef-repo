@@ -658,8 +658,8 @@ end
 # SkyFonts (http://www.fonts.com/browse/font-tools/skyfonts) allows syncing of
 # fonts between platforms.
 dmg_package 'Monotype SkyFonts' do
-  source 'http://cdn1.skyfonts.com/client/Monotype_SkyFonts_Mac64_4.7.0.0.dmg'
-  checksum '4ab68c1567637f083f4739e88a1bf2c6895bd2d24c01789a2011c827474d28e5'
+  source 'http://cdn1.skyfonts.com/client/Monotype_SkyFonts_Mac64_4.7.1.0.dmg'
+  checksum '9a473e2b2d89d62b4fc2d9d3400a064636c210c62dfd935dd26e693a4c5c5bad'
   # Need to use this because the app name has spaces.
   dmg_name 'MonotypeSkyFonts'
   action :install
