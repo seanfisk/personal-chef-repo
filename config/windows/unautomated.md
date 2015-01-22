@@ -13,6 +13,6 @@ This file lists parts of Windows setup that are not automated. Typically, this i
 * RCT2 GoG; UCES
 * Powertab installation and config (see todos)
 * I ran `Update-Help` in PowerShell to get help documentation for PowerShell.
-
 * LastPass (Chocolatey package seems not to work)
-* GitHub for Windows (Chocolatey package is out-of-date)
+* GitHub for Windows (Chocolatey package is out-of-date, working on it)
+* SkyFonts (Chocolatey package is out-of-date, working on it)

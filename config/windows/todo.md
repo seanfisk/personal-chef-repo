@@ -1,4 +1,3 @@
-* SkyFonts for font syncing
 * GitHub for Windows installation, ditch regular Git
 * Emacs
 * Emulators (Game Boy, N64)
