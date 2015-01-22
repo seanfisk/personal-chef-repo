@@ -1,6 +1,6 @@
 # Windows Chef Configuration
 
-Throughout the instructions, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately. All commands should be run using Windows PowerShell, not `cmd.exe`.
+Throughout the instructions, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately. All commands should be run using Windows PowerShell, not `cmd.exe`. All PowerShell instances should be run as administrator.
 
 1. Access the machine you'd like to provision, hereby referred to as the *node*. We will go through a manual boostrap here. While a node can be bootstrapped from an administrator's workstation, that requires the node to have Windows Remote Management (WinRM) configured and running, and that is a little overkill for the bootstrap only. Instead, we manually perform the steps that a boostrap would do (with some modifications).
 
@@ -25,11 +25,11 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
 1. Copy the validation key from an existing Cheffed machine or generate a new one and download it to this machine. Move the validation key over to the `C:\chef` directory:
 
-        cp /path/to/sean_fisk-validator.pem C:\chef\validation.pem
+        Copy-Item \path\to\sean_fisk-validator.pem C:\chef\validation.pem
 
-1. Run `chef-client` to register the node with our hosted Chef server. The registration will create the file `C:\chef\client.pem`, which allows the *machine* client to communicate with the chef server:
+1. Run `chef-client` to register the node with our hosted Chef server. The registration will create the file `C:\chef\client.pem`, which allows the *machine* client to communicate with the chef server. The `-A` option causes `chef-client` to fail out if it is not being run as administrator, [as described here](https://docs.chef.io/ctl_chef_client.html#options).
 
-        chef-client
+        chef-client -A
 
 1. At this point, the node is registered and is ready to provision. However, we need to add cookbooks to this node's `run_list`. *From an administrator workstation*, run the following command. If you do not yet have an administrator workstation (i.e., this is the only workstation you have), read the section on setting up an administrator workstation in the main README and return here when finished.
 
@@ -39,6 +39,6 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
 1. Now provision the node with the modified `run_list`:
 
-        chef-client
+        chef-client -A
 
 That's it!
