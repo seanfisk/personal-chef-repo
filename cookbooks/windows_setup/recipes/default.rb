@@ -20,22 +20,23 @@
 # limitations under the License.
 #
 
-include_recipe 'chocolatey'
-
-node['windows_setup']['packages'].each do |pkg_name|
-  chocolatey pkg_name
-end
-
-# Allow running of local PowerShell scripts (default policy is Restricted).
-DESIRED_POLICY = 'RemoteSigned'
-powershell_script 'set execution policy' do
-  code "Set-ExecutionPolicy #{DESIRED_POLICY}"
-  guard_interpreter :powershell_script
-  not_if "(Get-ExecutionPolicy) -eq '#{DESIRED_POLICY}'"
-end
+# NOTE: powershell_script doesn't support the 'command' attribute. Argh...!
 
 directory node['windows_setup']['scripts_dir'] do
   recursive true
+end
+# The 'env' resource works for system environment variables, but apparently not
+# for user environment variables. Since this is a per-user scripts directory,
+# it makes sense to put in in the user environment variable.
+var = 'Path'
+scope = 'User'
+path = node['windows_setup']['scripts_dir']
+get_var_command = (
+  "[Environment]::GetEnvironmentVariable('#{var}', '#{scope}')")
+powershell_script "add #{path} to the #{scope} #{var}" do
+  code "[Environment]::SetEnvironmentVariable('#{var}', "\
+       "#{get_var_command} + ';' + '#{path}', '#{scope}')"
+  not_if "#{get_var_command}.Split(';') -Contains '#{path}'"
 end
 
 # Fails out with insufficient permissions. I guess we'll just assume it exists
@@ -44,6 +45,12 @@ end
 # directory node['windows_setup']['startup_dir'] do
 #   recursive true
 # end
+
+include_recipe 'chocolatey'
+
+node['windows_setup']['packages'].each do |pkg_name|
+  chocolatey pkg_name
+end
 
 # Swap Caps Lock and Control using AutoHotKey.
 script_base = 'SwapCapsLockControl'

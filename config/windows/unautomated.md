@@ -3,6 +3,7 @@ Unautomated Setup
 
 This file lists parts of Windows setup that are not automated. Typically, this is due to technical or practical reasons.
 
+* PowerShell execution policy [We've had various problems when running this from Chef. Not worth the trouble]
 * All Boot Camp software
 * All VMWare virtual machine software
 * Diablo 2
