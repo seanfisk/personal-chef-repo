@@ -547,22 +547,14 @@ end
 #
 # Source: https://blog.wireshark.org/2013/10/switching-to-qt/
 #
-# The newest release (1.12.0) still includes the GTK+ version in the Mac DMG.
-# However, the 'Capture Filters...' and 'Display Filters...' dialogs are
-# broken. These are pretty important, so we've decided to stick with GTK+ and
-# X11 for now. Here is the Qt version that we tried.
+# However, the 'Capture Filters...' and 'Display Filters...' dialogs are not
+# implemented as of development release 1.99.1, which uses Qt. These are pretty
+# important for a beginner like me, so I've decided to stick with GTK+ and X11
+# for now. When these are implemented, switch to Qt :)
 #
-# Run with 'wireshark-qt' on the command-line (unfortunately, it's not an app
-# bundle).
-# package 'wireshark' do
-#   options '--with-qt5 --devel'
-#   action :install
-# end
+# See: https://ask.wireshark.org/questions/33478/filter-box-not-working-on-qt-wireshark-on-os-x
 
-# Here's the GTK+ DMG code until Wireshark switches their official Mac releases
-# to Qt.
-
-WIRESHARK_VERSION = '1.12.0'
+WIRESHARK_VERSION = '1.12.3'
 WIRESHARK_FULL_NAME = "Wireshark #{WIRESHARK_VERSION} Intel 64"
 dmg_package 'Wireshark' do
   # The Wireshark DMG also includes instructions on how to uninstall, which is
@@ -581,7 +573,7 @@ dmg_package 'Wireshark' do
   # Don't forget to escape the spaces (into '%20').
   source 'http://wiresharkdownloads.riverbed.com/wireshark/osx/' +
     URI.escape(WIRESHARK_FULL_NAME) + '.dmg'
-  checksum '2e4131fe32b72339cb8d8191e591711c16f4c5950657428810fdfce91b0dead2'
+  checksum '79ad20e948c7da73663eaab7f9e9c03e098dd5d92aa439e82d76fc1a0e843085'
   type 'pkg'
   package_id 'org.wireshark.Wireshark.pkg'
   action :install
