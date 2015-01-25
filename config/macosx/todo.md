@@ -1,3 +1,4 @@
+* Use the `install_formulas` and `install_casks` recipes for Homebrew.
 * Try out [Homebrew Cask](http://caskroom.io/). It's not all that different from using DMG like we already do, but it will avoid having to do manual updates to hashes/version numbers considering somebody else will probably be doing them.
 * For the repo: check out [Strainer](https://github.com/customink/strainer).
 * Start using the [Chef Development Kit](https://docs.chef.io/install_dk.html), maybe. Things seem to be working OK now, but the Chef DK looks like "what everyone's using". Not sure, though.
