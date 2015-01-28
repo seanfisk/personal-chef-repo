@@ -43,7 +43,6 @@ BREW_PREFIX = brew_proc.stdout.rstrip
 # prompt, but we need the shell to be available before setting it as the
 # default.
 SHELLS_FILE = '/etc/shells'
-shells_file_lines = File.open(SHELLS_FILE).lines
 %w(bash zsh).each do |shell|
   # Install the shell using Homebrew.
   package shell do
@@ -57,8 +56,10 @@ shells_file_lines = File.open(SHELLS_FILE).lines
     # running with sudo. See the mactex cookbook for more information.
     command "sudo bash -c \"echo '#{shell_path}' >> '#{SHELLS_FILE}'\""
     not_if do
-      # Don't execute if this shell is already in the shells config file.
-      shells_file_lines.any? do
+      # Don't execute if this shell is already in the shells config file. Open
+      # a new file each time to reset the enumerator, and just in case these
+      # are executed in parallel.
+      File.open(SHELLS_FILE).each_line.any? do
         |line| line.include?(shell_path)
       end
     end
