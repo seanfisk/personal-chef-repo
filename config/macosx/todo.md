@@ -15,11 +15,6 @@
 * Eclipse
     * PyDev and configuration
     * Emacs+ and configuration
-* zip package
-    * Renamed to `zipped_app`.
-    * Revise the CHANGELOG and README.
-    * Consider changing the `cp -R` in the installation to a ruby block.
-    * Remove the temp directory when done.
 * iTerm2
     * Submit PR updating to newest version.
     * Submit issue about plist not being found.
