@@ -1,5 +1,3 @@
-* Use `install_casks` recipe for Homebrew.
-* Try out [Homebrew Cask](http://caskroom.io/). It's not all that different from using DMG like we already do, but it will avoid having to do manual updates to hashes/version numbers considering somebody else will probably be doing them.
 * For the repo: check out [Strainer](https://github.com/customink/strainer).
 * Start using the [Chef Development Kit](https://docs.chef.io/install_dk.html), maybe. Things seem to be working OK now, but the Chef DK looks like "what everyone's using". Not sure, though.
 * Login items, controlled by `~/Library/Preferences/com.apple.loginitems.plist`.
@@ -28,8 +26,6 @@
 * Things to add
     * CoRD
     * Highlight
-    * Inkscape
-    * Seashore or Paintbrush? (GIMP already installed)
     * Ukelele (maybe)
     * Xerox printer drivers
     * Calibre
@@ -39,3 +35,9 @@
 maintain.
 * Consider turning on `kbaccess` from `mac_os_x` cookbook.
 * [fuse-zip](https://code.google.com/p/fuse-zip/) Currently weird because this would be best to install with Homebrew, but we are currently installing OSXFUSE (and SSHFS) through their pkg installers. Might want to reconsider this when installing fuse-zip.
+* We've had some permission problems with `/opt` and Homebrew Cask. When doing a clean re-install, try to resolve these if they're not resolved by the project's maintainers.
+
+  The problem is that the default group of `/opt` (at least on Mavericks) is `wheel`, not `admin`. For example, when set what we think is correctly, both `/Applications` and `/usr/local` are set to `root:admin` with group writability. We've solved the problem currently by running:
+
+        sudo chgrp admin /opt
+        sudo chmod g+w /opt

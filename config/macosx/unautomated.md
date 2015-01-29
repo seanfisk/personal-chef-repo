@@ -21,10 +21,6 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 
   This is a little overkill. It's nice to automate, but I change these from time to time manually, and that would be just one more thing to change every time.
 
-* [Deeper](http://www.titanium.free.fr/downloaddeeper.php)
-
-  We're currently using this to change the login screen background. It's specific to the version of OS X. Not impossible to automate, but we haven't chosen to yet.
-
 * GVSU's VPN (Network Connect)
 
   This comes from GVSU, and the versions need to remain consistent.
@@ -36,10 +32,6 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 * Qt 5
 
   This is installed using an application installer (an app bundle in the DMG which installs Qt), and is therefore hard to automate.
-
-* Adobe Flash Player and Adobe Reader
-
-  They have an app bundle inside the DMG, making it hard to automate installation.
 
 * Microsoft DreamSpark's Secure Download Manager
 
@@ -56,7 +48,3 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 * Xerox WorkCenter 5755 Printer Drivers
 
   For advanced use of GVSU's printers.
-
-* Silverlight
-
-  Have used this for Anne's Netflix account.

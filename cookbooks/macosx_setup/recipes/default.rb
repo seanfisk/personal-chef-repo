@@ -27,6 +27,10 @@ require 'mixlib/shellout'
 # Include Homebrew as the default package manager (default is MacPorts).
 include_recipe 'homebrew'
 
+###############################################################################
+# SHELLS
+###############################################################################
+
 brew_proc = Mixlib::ShellOut.new('brew', '--prefix')
 brew_proc.run_command
 BREW_PREFIX = brew_proc.stdout.rstrip
@@ -89,28 +93,168 @@ execute 'fix the zsh startup file that path_helper uses' do
   only_if { File.exist?('/etc/zshenv') }
 end
 
+###############################################################################
+# HOMEBREW FORMULAS
+###############################################################################
+
+# Install Emacs with options. Do this before installing the other formulas,
+# because the cask formula depends on emacs.
+package 'emacs' do
+  options '--cocoa --with-gnutls'
+end
+
+node.default['homebrew']['formulas'] = [
+  'ack',
+  # To fix the aria2 build, I ran `brew edit gmp' and added a `--with-pic'
+  # flag. Hopefully I will not have issues in the future. See here:
+  # <https://github.com/mxcl/homebrew/issues/12946>
+  'aria2',
+  'astyle',
+  'cask',
+  'coreutils',
+  # Dos2Unix / Unix2Dos <http://waterlan.home.xs4all.nl/dos2unix.html> looks
+  # superior to Tofrodos <http://www.thefreecountry.com/tofrodos/>. But that
+  # was just from a quick look.
+  'dos2unix',
+  'doxygen',
+  'editorconfig',
+  'fasd',
+  'gibo',
+  'git',
+  'gnu-tar',
+  # Install both GraphicMagick and ImageMagick. In generally, I prefer
+  # GraphicsMagick, but ImageMagick has ICO support so we use it for
+  # BetterPlanner.
+  'graphicsmagick',
+  'graphviz',
+  'htop-osx',
+  'hub',
+  # ImageMagick might already be present on the system (but just 'convert').
+  # I'm not sure if it's just an artifact of an earlier build, but it was on my
+  # Mavericks system before I installed it (again?).
+  'imagemagick',
+  # For pygit2 (which is for Powerline).
+  'libgit2',
+  'markdown',
+  'mercurial',
+  'mobile-shell',
+  'nmap',
+  'node',
+  # I prefer ohcount to cloc and sloccount.
+  'ohcount',
+  'p7zip',
+  'parallel',
+  'pstree',
+  # pwgen and sf-pwgen are both password generators. pwgen is more generic,
+  # whereas sf-pwgen uses Apple's security framework. We also looked at APG,
+  # but it seems unmaintained.
+  'pwgen',
+  'sf-pwgen',
+  'pyenv',
+  'pyenv-virtualenv',
+  'pyenv-which-ext',
+  'qpdf',
+  # Even though the rbenv cookbooks looks nice, they don't work as I'd like.
+  # fnichol's supports local install, but insists on templating
+  # /etc/profile.d/rbenv.sh *even when doing a local install*. That makes no
+  # sense. I don't want that.
+  #
+  # The RiotGames rbenv cookbook only supports global install.
+  #
+  # So let's just install through trusty Homebrew.
+  #
+  # We now also install pyenv through Homebrew, so it's nice to be consistent.
+  'rbenv',
+  # reattach-to-user-namespace has options to fix launchctl and shim
+  # pbcopy/pbaste. We haven't needed them yet, though.
+  'reattach-to-user-namespace',
+  'ruby-build',
+  'ssh-copy-id',
+  # Primarily for Sphinx
+  'texinfo',
+  'the_silver_searcher',
+  'tmux',
+  'tree',
+  'valgrind',
+  'watch',
+  'wget',
+  'xz',
+  # ZeroMQ (zmq) is included to speed up IPython installs. It can install a
+  # bundled version to a virtualenv, but it's faster to have a globally built
+  # version.
+  'zmq',
+  # For Powerline
+  'zpython'
+]
+
+include_recipe 'homebrew::install_formulas'
+
+###############################################################################
+# HOMEBREW CASKS (see http://caskroom.io/)
+###############################################################################
+
+node.default['homebrew']['casks'] = [
+  'adium',
+  'adobe-reader',
+  'chicken',
+  'dash',
+  'deeper',
+  'disk-inventory-x',
+  # There are a number of different versions of Eclipse. The eclipse-ide cask,
+  # described as 'Eclipse IDE for Eclipse Committers', is actually just the
+  # standard package without any extras. This is nice, because extras can
+  # always be installed using the Eclipse Marketplace.
+  'eclipse-ide',
+  'firefox',
+  'flash',
+  'flash-player',
+  'flux',
+  'gfxcardstatus',
+  'gimp',
+  'google-chrome',
+  'inkscape',
+  'karabiner',
+  'monotype-skyfonts',
+  'osxfuse',
+  # Pandoc can be installed with a Homebrew formula, but that doesn't install
+  # the man pages. These are important as this is a pretty complex tool, and
+  # it's important to have online documentation.
+  'pandoc',
+  'quicksilver',
+  'skim',
+  'slate',
+  'sshfs',
+  # The silverlight cask is having some checksum issues.
+  # 'silverlight',
+  'vagrant',
+  'virtualbox',
+  # Wireshark initially used GTK+ as the GUI library, but is switching to Qt.
+  # According to their blog post announcement:
+  #
+  #     If you're running OS X you should use the Qt flavor. For common tasks it
+  #     should have a better workflow. Again, if it doesn't we aren't doing our
+  #     job.
+  #
+  # Source: https://blog.wireshark.org/2013/10/switching-to-qt/
+  #
+  # However, the 'Capture Filters...' and 'Display Filters...' dialogs are not
+  # implemented as of development release 1.99.1, which uses Qt. These are
+  # pretty important for a beginner like me, so I've decided to stick with GTK+
+  # and X11 for now. When these are implemented, switch to Qt :)
+  #
+  # See: https://ask.wireshark.org/questions/33478/filter-box-not-working-on-qt-wireshark-on-os-x
+  'wireshark',
+  # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
+  'xquartz'
+]
+
+include_recipe 'homebrew::install_casks'
+
+###############################################################################
+# CUSTOM INSTALLS
+###############################################################################
+
 include_recipe 'dmg'
-include_recipe 'zip'
-
-ADIUM_VERSION = '1.5.6'
-dmg_package 'Adium' do
-  source "http://download.adium.im/Adium_#{ADIUM_VERSION}.dmg"
-  checksum 'd5f580b7db57348c31f8e0f18691d7758a65ad61471bf984955360f91b21edb8'
-  volumes_dir "Adium #{ADIUM_VERSION}"
-  action :install
-end
-
-dmg_package 'Chicken' do
-  source 'http://sourceforge.net/projects/chicken/files/Chicken-2.2b2.dmg'
-  checksum '20e910b6cbf95c3e5dcf6fe8e120d5a0911f19099128981fb95119cee8d5fc6b'
-  action :install
-end
-
-zip_package 'Dash' do
-  source 'http://dallas.kapeli.com/Dash.zip'
-  checksum '76388ef51832885f87b4059fc4ec34c74d71b8b80d55a2a86796eaf1673bf4e8'
-  action :install
-end
 
 # Deep Sleep Dashboard widget
 
@@ -151,95 +295,9 @@ end
 #   mode '0600'
 # end
 
-dmg_package 'Disk Inventory X' do
-  source 'http://www.alice-dsl.net/tjark.derlien/DIX1.0Universal.dmg'
-  checksum 'f61c070a1ec8f29ee78b8a7c84dd4124553098acc87134e2ef05dbaf2a442636'
-  # Need to use this because the app name has spaces.
-  dmg_name 'DiskInventoryX'
-  action :install
-end
-
-# Eclipse
-ECLIPSE_ARCHIVE_NAME = 'eclipse-standard-kepler-SR2-macosx-cocoa-x86_64.tar.gz'
-ECLIPSE_ARCHIVE_PATH =
-  "#{Chef::Config[:file_cache_path]}/#{ECLIPSE_ARCHIVE_NAME}"
-
-remote_file 'download Eclipse' do
-  source 'http://www.eclipse.org/downloads/download.php?file=/technology/' \
-         "epp/downloads/release/kepler/SR2/#{ECLIPSE_ARCHIVE_NAME}&r=1"
-  checksum '7fd761853ae7f5b280963059fcf8da6cea14c93563a3dfe7cc3491a7a977966e'
-  path ECLIPSE_ARCHIVE_PATH
-  notifies :run, 'execute[install Eclipse]'
-end
-
-execute 'install Eclipse' do
-  command "tar -xf '#{ECLIPSE_ARCHIVE_PATH}'"
-  # Put the 'eclipse' folder in /Applications. Doesn't make complete sense,
-  # since the app bundle is inside this folder, but whatever. It should work
-  # fine.
-  cwd '/Applications'
-  action :nothing
-end
-
-dmg_package 'Emacs' do
-  source 'http://emacsforosx.com/emacs-builds/Emacs-24.4-universal.dmg'
-  checksum '2d13ff9edff16d4e8f4bc9cf37961cf91a3f308fad5e9c214c4a546e86719312'
-  action :install
-end
-
-FIREFOX_VERSION = 26.0
-dmg_package 'Firefox' do
-  source 'http://download-installer.cdn.mozilla.net/pub/firefox/releases/' \
-         "#{FIREFOX_VERSION}/mac/en-US/Firefox%20#{FIREFOX_VERSION}.dmg"
-  checksum '0ea2b4cc1c56603d8449261ec2d97dba955056eb9029adfb85d002f6cd8a8952'
-  action :install
-end
-
-# This is the Flash Player Projector (aka Flash Player "standalone"). It's
-# useful for playing Flash games (in SWFs) on the desktop.
-FLASH_PLAYER_VERSION = 13
-dmg_package 'Flash Player' do
-  source 'http://fpdownload.macromedia.com/pub/flashplayer/' \
-         "updaters/#{FLASH_PLAYER_VERSION}/" \
-         "flashplayer_#{FLASH_PLAYER_VERSION}_sa.dmg"
-  checksum 'eeb47ba093876fc25d4993e0f7652e398c66c9f0a0e89d01586ab33c7a82bab2'
-  action :install
-end
-
-zip_package 'Flux' do
-  source 'https://justgetflux.com/mac/Flux.zip'
-  checksum 'e166bb86652c691272417919951a3b789397c1375ea643070e41f190a6ceb05a'
-  action :install
-end
-
-zip_package 'gfxCardStatus' do
-  source 'http://gfx.io/downloads/gfxCardStatus-2.3.zip'
-  checksum '092b3e2fad44681ba396cf498707c8b6c228fd55310770a8323ebb9344b4d9a1'
-  action :install
-end
 # Install the gfxCardStatus preferences. This WILL overwrite current setting
 # (there are barely any :).
 mac_os_x_plist_file 'com.codykrieger.gfxCardStatus-Preferences.plist'
-
-dmg_package 'GIMP' do
-  source 'http://ftp.gimp.org/pub/gimp/v2.8/osx/gimp-2.8.10-dmg-1.dmg'
-  checksum 'e93a84cd5eff4fe1c987c9c358f9de5c3532ee516bce3cd5206c073048cddba5'
-  action :install
-end
-
-dmg_package 'Google Chrome' do
-  source 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
-  checksum 'ba4d6fe46e5b8deef5cfe5691e2c36ac3eb15396fefeb6d708c7c426818e2f11'
-  # Need to use this because the app name has spaces.
-  dmg_name 'GoogleChrome'
-  action :install
-end
-
-dmg_package 'Inkscape' do
-  source 'http://downloads.sourceforge.net/inkscape/Inkscape-0.48.5-2+X11.dmg'
-  checksum '72191861ee19a4e047d9084c7181a5ccf6e89d9b4410e197a98c2e1027e65e72'
-  action :install
-end
 
 # iTerm2
 ## Install iTerm2 background image.
@@ -376,115 +434,10 @@ node.default['mac_os_x']['settings']['jettison'] = {
   toggleMassStorageDriver: false
 }
 
-KARABINER_VERSION = '10.6.0'
-dmg_package 'Karabiner' do
-  source 'https://pqrs.org/osx/karabiner/files/' \
-         "Karabiner-#{KARABINER_VERSION}.dmg"
-  checksum '11e671861a6fa137a8a79506718840eb0d006868f89e89b0f431e5e9b5a06854'
-  type 'pkg'
-  package_id 'org.pqrs.driver.Karabiner'
-  volumes_dir "Karabiner-#{KARABINER_VERSION}"
-  action :install
-end
-# XML settings files
 cookbook_file 'Karabiner XML settings file' do
   source 'Karabiner_private.xml'
   path "#{node['macosx_setup']['home']}/Library/Application Support/" \
        'Karabiner/private.xml'
-end
-
-# OSXFUSE and SSHFS
-
-# Both of these pieces of software can be installed with Homebrew. However, it
-# requires root and is therefore not automatic. I also don't believe that the
-# Homebrew installer installs the OSXFUSE preferences pane.
-
-# Note: The preference pane uninstaller does not appear to uninstall the
-# preference pane itself.
-OSXFUSE_MAJOR_VERSION = 2
-OSXFUSE_MINOR_VERSION = 7
-OSXFUSE_PATCH_VERSION = 0
-OSXFUSE_FULL_VERSION =
-  "#{OSXFUSE_MAJOR_VERSION}.#{OSXFUSE_MINOR_VERSION}.#{OSXFUSE_PATCH_VERSION}"
-dmg_package 'OSXFUSE' do
-  source 'http://downloads.sourceforge.net/project/osxfuse/' \
-         "osxfuse-#{OSXFUSE_FULL_VERSION}/osxfuse-#{OSXFUSE_FULL_VERSION}.dmg"
-  checksum 'fab4c8d16d0fc6995826d74f2c0ab04cd7264b00c566d5cc3b219bd589da8114'
-  # Use the app keyword to override the name of the .pkg file.
-  app "Install OSXFUSE #{OSXFUSE_MAJOR_VERSION}.#{OSXFUSE_MINOR_VERSION}"
-  type 'pkg'
-  package_id 'com.github.osxfuse.pkg.Core'
-  volumes_dir 'FUSE for OS X'
-  action :install
-end
-
-# Pandoc
-
-# Pandoc can be installed using Homebrew, but that doesn't install the man
-# pages. These are important as this is a pretty complex tool, and it's
-# important to have online documentation. The tradeoff is that this
-# installation pkg is a bit more complex to manage.
-
-# Note: This installation was based on the MacTeX installation procedure.
-PANDOC_VERSION = '1.13.2'
-pkgutil_proc = Mixlib::ShellOut.new(
-  'pkgutil', '--pkg-info', 'net.johnmacfarlane.pandoc')
-pkgutil_proc.run_command
-PANDOC_IS_INSTALLED = pkgutil_proc.exitstatus == 0
-
-PANDOC_CACHE_PATH = "#{Chef::Config[:file_cache_path]}/pandoc.pkg"
-
-# First, download the file.
-remote_file 'download Pandoc pkg' do
-  source 'https://github.com/jgm/pandoc/releases/download/'\
-         "#{PANDOC_VERSION}/pandoc-#{PANDOC_VERSION}-osx.pkg"
-  path PANDOC_CACHE_PATH
-  checksum '02455fba5353568b19d8b0bebbda9b99ba2c943b3f01b11b185f25c7db111b50'
-  # Don't bother downloading the file if Pandoc is already installed.
-  not_if { PANDOC_IS_INSTALLED }
-end
-
-# Now install.
-execute 'install Pandoc' do
-  command "sudo installer -pkg '#{PANDOC_CACHE_PATH}' -target /"
-  not_if { PANDOC_IS_INSTALLED }
-end
-
-SSHFS_VERSION = '2.5.0'
-pkgutil_proc = Mixlib::ShellOut.new(
-  'pkgutil', '--pkg-info', 'com.github.osxfuse.pkg.SSHFS')
-pkgutil_proc.run_command
-SSHFS_IS_INSTALLED = pkgutil_proc.exitstatus == 0
-SSHFS_PKG_PATH = "#{Chef::Config[:file_cache_path]}/sshfs.pkg"
-
-remote_file 'download SSHFS pkg' do
-  source 'https://github.com/osxfuse/sshfs/releases/download/' \
-         "osxfuse-sshfs-#{SSHFS_VERSION}/sshfs-#{SSHFS_VERSION}.pkg"
-  path SSHFS_PKG_PATH
-  checksum 'f8f4f71814273ea42dbe6cd92199f7cff418571ffd1b10c0608878d3472d2162'
-  # A `notifies' attribute seems like a good idea here, but if it it's already
-  # downloaded *but not installed*, there will be no notification. We'll just
-  # hope it gets downloaded before the next provider runs.
-
-  # Even if it's not in the cache, if we already have it installed, there's no
-  # reason to download it.
-  not_if { SSHFS_IS_INSTALLED }
-end
-
-execute 'run SSHFS package installer' do
-  command "sudo installer -pkg '#{SSHFS_PKG_PATH}' -target /"
-  not_if { SSHFS_IS_INSTALLED }
-end
-
-QUICKSILVER_VERSION = '1.0.0'
-dmg_package 'Quicksilver' do
-  source 'http://github.qsapp.com/downloads/' \
-    "Quicksilver%20#{QUICKSILVER_VERSION}.dmg"
-  checksum '0afb16445d12d7dd641aa8b2694056e319d23f785910a8c7c7de56219db6853c'
-  action :install
-  # This should work but it doesn't seem to. So we went with the
-  # `not_if' solution below.
-  # notifies :create, 'mac_os_x_plist_file[com.blacktree.Quicksilver.plist]'
 end
 
 mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
@@ -495,240 +448,8 @@ mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
   # Don't overwrite the file if it already exists.
   not_if do
     File.exist?(node['macosx_setup']['home'] +
-                 "/Library/Preferences/#{source}")
+                "/Library/Preferences/#{source}")
   end
-end
-
-dmg_package 'Skim' do
-  source 'http://downloads.sourceforge.net/project/' \
-    'skim-app/Skim/Skim-1.4.7/Skim-1.4.7.dmg'
-  checksum 'c8789c23cf66359adca5f636943dce3b440345da33ae3b5fa306ac2d438a968e'
-  action :install
-end
-
-dmg_package 'Slate' do
-  source 'http://slate.ninjamonkeysoftware.com/Slate.dmg'
-  checksum '428e375d5b1c64f79f1536acb309e4414c3178051c6fe0b2f01a94a0803e223f'
-  action :install
-end
-# TODO: Consider using JavaScript preferences (replacing .slate, or to
-# supplement it).
-cookbook_file 'Slate preferences file' do
-  source 'slate'
-  path "#{node['macosx_setup']['home']}/.slate"
-end
-
-# FYI: Vagrant has an uninstaller with its DMG! Just so you know.
-dmg_package 'Vagrant' do
-  source 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.0.dmg'
-  checksum '6d6a77a9180f79a1ac69053c28a7cb601b60fe033344881281bab80cde04bf71'
-  type 'pkg'
-  package_id 'com.vagrant.vagrant'
-  action :install
-end
-
-# If you update, be aware that the number following the version in the URL will
-# also probably change.
-VIRTUALBOX_VERSION = '4.3.10'
-dmg_package 'VirtualBox' do
-  source "http://download.virtualbox.org/virtualbox/#{VIRTUALBOX_VERSION}/" \
-         "VirtualBox-#{VIRTUALBOX_VERSION}-93012-OSX.dmg"
-  checksum '8bf24a7afbde0cdb560b40abd8ab69584621ca6de59026553f007a0da7b4d443'
-  type 'pkg'
-  package_id 'org.virtualbox.pkg.virtualbox'
-  action :install
-end
-
-# Wireshark initially used GTK+ as the GUI library, but is switching to Qt.
-# According to their blog post announcement:
-#
-#     If you're running OS X you should use the Qt flavor. For common tasks it
-#     should have a better workflow. Again, if it doesn't we aren't doing our
-#     job.
-#
-# Source: https://blog.wireshark.org/2013/10/switching-to-qt/
-#
-# However, the 'Capture Filters...' and 'Display Filters...' dialogs are not
-# implemented as of development release 1.99.1, which uses Qt. These are pretty
-# important for a beginner like me, so I've decided to stick with GTK+ and X11
-# for now. When these are implemented, switch to Qt :)
-#
-# See: https://ask.wireshark.org/questions/33478/filter-box-not-working-on-qt-wireshark-on-os-x
-
-WIRESHARK_VERSION = '1.12.3'
-WIRESHARK_FULL_NAME = "Wireshark #{WIRESHARK_VERSION} Intel 64"
-dmg_package 'Wireshark' do
-  # The Wireshark DMG also includes instructions on how to uninstall, which is
-  # great.
-
-  # Use the app keyword to override the name of the .pkg file, which includes
-  # the version and architecture.
-  app WIRESHARK_FULL_NAME
-
-  # But then we need to override the volume dir and dmg name, which are based
-  # on the app name. The dmg name can't have spaces, and the volumes dir has to
-  # be, well, correct.
-  dmg_name 'Wireshark'
-  volumes_dir 'Wireshark'
-
-  # Don't forget to escape the spaces (into '%20').
-  source 'http://wiresharkdownloads.riverbed.com/wireshark/osx/' +
-    URI.escape(WIRESHARK_FULL_NAME) + '.dmg'
-  checksum '79ad20e948c7da73663eaab7f9e9c03e098dd5d92aa439e82d76fc1a0e843085'
-  type 'pkg'
-  package_id 'org.wireshark.Wireshark.pkg'
-  action :install
-end
-
-XQUARTZ_VERSION = '2.7.7'
-dmg_package 'XQuartz' do
-  # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
-  source 'http://xquartz.macosforge.org/downloads/SL/'\
-         "XQuartz-#{XQUARTZ_VERSION}.dmg"
-  checksum 'c9b3a373b7fd989331117acb9696fffd6b9ee1a08ba838b02ed751b184005211'
-  type 'pkg'
-  volumes_dir "XQuartz-#{XQUARTZ_VERSION}"
-  package_id 'org.macosforge.xquartz.pkg'
-  action :install
-end
-
-# Clone my dotfiles and emacs git repositories
-
-directory node['macosx_setup']['personal_dir'] do
-  recursive true
-  action :create
-end
-
-git node['macosx_setup']['dotfiles_dir'] do
-  repository 'git@github.com:seanfisk/dotfiles.git'
-  enable_submodules true
-  action :checkout
-  notifies :run, 'execute[install dotfiles]'
-end
-
-execute 'install dotfiles' do
-  # Running `make install-osx' does the regular install, then patches
-  # .tmux.conf to make this work:
-  # <https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard>
-  command 'make install-osx'
-  cwd node['macosx_setup']['dotfiles_dir']
-  action :nothing
-end
-
-git node['macosx_setup']['emacs_dir'] do
-  repository 'git@github.com:seanfisk/emacs.git'
-  enable_submodules true
-  action :checkout
-  notifies :run, 'execute[install emacs configuration]'
-end
-
-execute 'install emacs configuration' do
-  command 'make install'
-  cwd node['macosx_setup']['emacs_dir']
-  action :nothing
-end
-
-# About installing rbenv
-#
-# Even though the rbenv cookbooks looks nice, they don't work as I'd
-# like. fnichol's supports local install, but insists on templating
-# /etc/profile.d/rbenv.sh *even when doing a local install*. That
-# makes no sense. I don't want that.
-#
-# The RiotGames rbenv cookbook only supports global install.
-#
-# So let's just install through trusty Homebrew.
-#
-# We now also install pyenv through Homebrew, so it's nice to be consistent.
-
-# Install Homebrew packages
-#
-# Notes:
-#
-# - To fix the aria2 build, I ran `brew edit gmp' and added a
-#   `--with-pic' flag. Hopefully I will not have issues in the
-#   future. See here: <https://github.com/mxcl/homebrew/issues/12946>
-# - I prefer ohcount to cloc and sloccount.
-# - Dos2Unix / Unix2Dos <http://waterlan.home.xs4all.nl/dos2unix.html> looks
-#   superior to Tofrodos <http://www.thefreecountry.com/tofrodos/>. But that
-#   was just from a quick look.
-# - ZeroMQ (zmq) is included to speed up IPython installs. It can install a
-#   bundled version to a virtualenv, but it's faster to have a globally built
-#   version.
-# - Install both GraphicMagick and ImageMagick. In generally, I prefer
-#   GraphicsMagick, but ImageMagick has ICO support so we use it for
-#   BetterPlanner.
-# - ImageMagick might already be present on the system (but just 'convert').
-#   I'm not sure if it's just an artifact of an earlier build, but it was on my
-#   Mavericks system before I installed it (again?).
-# - libgit2 is for pygit2 for Powerline.
-# - zpython is also for Powerline.
-# - texinfo is mainly for Sphinx.
-# - pwgen and sf-pwgen are both password generators. pwgen is more generic,
-#   whereas sf-pwgen uses Apple's security framework. We also looked at APG,
-#   but it seems unmaintained.
-# - reattach-to-user-namespace has options to fix launchctl and shim
-#   pbcopy/pbaste. We haven't needed them yet, though.
-#
-node.default['homebrew']['formulas'] = %w(
-  ack
-  aria2
-  astyle
-  coreutils
-  dos2unix
-  doxygen
-  editorconfig
-  fasd
-  gibo
-  git
-  gnu-tar
-  graphicsmagick
-  graphviz
-  htop-osx
-  hub
-  imagemagick
-  libgit2
-  markdown
-  mercurial
-  mobile-shell
-  nmap
-  node
-  ohcount
-  p7zip
-  parallel
-  pstree
-  pwgen
-  pyenv
-  pyenv-virtualenv
-  pyenv-which-ext
-  qpdf
-  rbenv
-  reattach-to-user-namespace
-  ruby-build
-  sf-pwgen
-  ssh-copy-id
-  texinfo
-  the_silver_searcher
-  tmux
-  tree
-  valgrind
-  watch
-  wget
-  xz
-  zmq
-  zpython
-)
-
-include_recipe 'homebrew::install_formulas'
-
-# SkyFonts (http://www.fonts.com/browse/font-tools/skyfonts) allows syncing of
-# fonts between platforms.
-dmg_package 'Monotype SkyFonts' do
-  source 'http://cdn1.skyfonts.com/client/Monotype_SkyFonts_Mac64_4.7.1.0.dmg'
-  checksum '9a473e2b2d89d62b4fc2d9d3400a064636c210c62dfd935dd26e693a4c5c5bad'
-  # Need to use this because the app name has spaces.
-  dmg_name 'MonotypeSkyFonts'
-  action :install
 end
 
 # Inconsolata for Powerline (can't be installed via SkyFonts, for obvious
@@ -740,7 +461,9 @@ remote_file 'download Inconsolata for Powerline font' do
   path "#{node['macosx_setup']['fonts_dir']}/#{INCONSOLATA_POWERLINE_FILE}"
 end
 
-# Mac OS X tweaks
+###############################################################################
+# PREFERENCES
+###############################################################################
 
 include_recipe 'mac_os_x'
 
@@ -889,3 +612,48 @@ node.default['mac_os_x']['settings']['diskutil'] = {
 
 # Actually write all the settings using the 'defaults' command.
 include_recipe 'mac_os_x::settings'
+
+# TODO: Consider using JavaScript preferences (replacing .slate, or to
+# supplement it).
+cookbook_file 'Slate preferences file' do
+  source 'slate'
+  path "#{node['macosx_setup']['home']}/.slate"
+end
+
+###############################################################################
+# DOTFILES AND EMACS
+###############################################################################
+
+directory node['macosx_setup']['personal_dir'] do
+  recursive true
+  action :create
+end
+
+git node['macosx_setup']['dotfiles_dir'] do
+  repository 'git@github.com:seanfisk/dotfiles.git'
+  enable_submodules true
+  action :checkout
+  notifies :run, 'execute[install dotfiles]'
+end
+
+execute 'install dotfiles' do
+  # Running `make install-osx' does the regular install, then patches
+  # .tmux.conf to make this work:
+  # <https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard>
+  command 'make install-osx'
+  cwd node['macosx_setup']['dotfiles_dir']
+  action :nothing
+end
+
+git node['macosx_setup']['emacs_dir'] do
+  repository 'git@github.com:seanfisk/emacs.git'
+  enable_submodules true
+  action :checkout
+  notifies :run, 'execute[install emacs configuration]'
+end
+
+execute 'install emacs configuration' do
+  command 'make install'
+  cwd node['macosx_setup']['emacs_dir']
+  action :nothing
+end
