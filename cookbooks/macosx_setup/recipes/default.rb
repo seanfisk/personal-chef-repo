@@ -580,6 +580,7 @@ node.default['mac_os_x']['settings']['networkbrowser'] = {
 }
 
 node.default['mac_os_x']['settings']['dock'] = {
+  :domain => 'com.apple.dock',
   # Remove the auto-hiding Dock delay
   'autohide-delay' => 0.0,
   # Remove the animation when hiding/showing the Dock
