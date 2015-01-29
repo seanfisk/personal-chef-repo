@@ -486,6 +486,11 @@ end
 # https://github.com/kevinSuttle/OSXDefaults/blob/master/.osx
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
+# A note on settings: if the value is zero, set it as an integer 0 instead of
+# float 0.0. Otherwise, it will be "cast" to a float by the defaults system and
+# the resource will be updated every time. In addition, if the dock settings
+# are updated, the mac_os_x cookbook will `killall dock' every time.
+
 node.default['mac_os_x']['settings']['global'] = {
   :domain => 'NSGlobalDomain',
   # Always show scrollbars
@@ -516,7 +521,7 @@ node.default['mac_os_x']['settings']['global'] = {
   ## Enable spring loading for directories
   'com.apple.springing.enabled' => true,
   # Remove the spring loading delay for directories
-  'com.apple.springing.delay' => 0.0
+  'com.apple.springing.delay' => 0
 }
 
 # Automatically quit printer app once the print jobs complete
@@ -582,9 +587,9 @@ node.default['mac_os_x']['settings']['networkbrowser'] = {
 node.default['mac_os_x']['settings']['dock'] = {
   :domain => 'com.apple.dock',
   # Remove the auto-hiding Dock delay
-  'autohide-delay' => 0.0,
+  'autohide-delay' => 0,
   # Remove the animation when hiding/showing the Dock
-  'autohide-time-modifier' => 0.0,
+  'autohide-time-modifier' => 0,
   # Automatically hide and show the Dock
   :autohide => true,
   # Make Dock icons of hidden applications translucent
