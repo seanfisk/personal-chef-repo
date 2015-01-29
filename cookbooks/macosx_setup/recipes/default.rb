@@ -410,11 +410,12 @@ node.default['mac_os_x']['settings']['clock'] = {
 }
 
 # Show percentage on battery indicator.
-node.default['mac_os_x']['settings']['battery'] = {
-  domain: 'com.apple.menuextra.battery',
-  # Why is this not a boolean? Whatever.
-  ShowPercent: 'YES'
-}
+#
+# Note: For some reason, Apple chose the value of ShowPercent to be 'YES' or
+# 'NO' as a string instead of using a boolean. mac_os_x_userdefaults treats
+# 'YES' as a boolean when reading, making it overwrite every time. For this
+# reason, we just write the plist.
+mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 
 node.default['mac_os_x']['settings']['gfxcardstatus'] = {
   domain: 'com.codykrieger.gfxCardStatus-Preferences',
