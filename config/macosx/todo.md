@@ -7,7 +7,6 @@
     * Picture-in-picture
 * Automatically install devpi and/or system Python packages (see dotfiles as well).
 * [MacFusion](http://macfusionapp.org/)
-* OpenEmu (if I like it)
 * Add guards to stop resources from updating if they don't need to.
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.

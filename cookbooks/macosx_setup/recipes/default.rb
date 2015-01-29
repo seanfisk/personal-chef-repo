@@ -220,6 +220,7 @@ node.default['homebrew']['casks'] = [
   'iterm2',
   'karabiner',
   'monotype-skyfonts',
+  'openemu',
   'osxfuse',
   # Pandoc can be installed with a Homebrew formula, but that doesn't install
   # the man pages. These are important as this is a pretty complex tool, and
