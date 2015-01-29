@@ -19,6 +19,10 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 
   This is licensed software that is installed using Homebrew Cask. I purchased a license that has to be manually activated.
 
+* Quicksilver hotkey
+
+  Most of the other preferences are automated, but this one proved difficult. For now, it needs to be set manually. See the recipe for the gritty details and rationale for the decision not to automate.
+
 * Seagate Dashboard
 
   Installed with my Seagate external hard drive. Hard to automate, since the software is on the drive itself. May not want to automate, since this seems very specific to the device itself.

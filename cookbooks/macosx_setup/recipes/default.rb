@@ -477,17 +477,53 @@ cookbook_file 'Karabiner XML settings file' do
        'Karabiner/private.xml'
 end
 
-mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
-  # Create a plist file for Quicksilver specifying the hotkey, among
-  # other things. Unfortunately, this doesn't avoid going through the
-  # setup assistant, but it helps out a bit.
-
-  # Don't overwrite the file if it already exists.
-  not_if do
-    File.exist?(node['macosx_setup']['home'] +
-                "/Library/Preferences/#{source}")
-  end
-end
+# Note: We are not setting the Quicksilver hotkey through these settings.
+#
+# It was easy to do when we just copied the plist, but the plist has the
+# disadvantage of replacing *all* of the settings.
+#
+# However, the mac_os_x_userdefaults provider does not support dictionaries
+# with integer values, so it's not currently possible to set the hotkey through
+# that either.
+#
+# We could run this command manually:
+#
+#     defaults write com.blacktree.Quicksilver QSActivationHotKey \
+#     -dict keyCode -int 49 modifiers -int 524576
+#
+# However, the idempotency check presents a problem, since 'defaults read'
+# displays both an integer and string in the same way. The 'defaults read'
+# command also does not support descending into a dictionary to read a value.
+# These are weaknesses of the defaults command-line interface, I guess.
+#
+# However, /usr/libexec/PlistBuddy can descend into dictionaries, and can print
+# out type information when using the XML output option (-x). This gets ugly
+# quickly, though, as PlistBuddy is somewhat cumbersome, and also might not
+# play well with cached preferences.
+#
+# The most correct way to do this with an idempotence check that I can see
+# would be to use the NSUserDefaults Cocoa class [1] to read the values
+# programatically. The easiest way I can see to do this is to use the cocoa gem
+# [2]. In this way, we are playing with real data types, and not shuffling them
+# through an inaccurate command-line interface.
+#
+# However, with all these options being very complicated, we've decided just to
+# leave it unautomated for now. The story of the adventure is left here for
+# posterity.
+#
+# [1]: https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/UserDefaults/AccessingPreferenceValues/AccessingPreferenceValues.html
+# [2]: https://rubygems.org/gems/cocoa
+#
+node.default['mac_os_x']['settings']['quicksilver'] = {
+  :domain => 'com.blacktree.Quicksilver',
+  'Check for Updates' => true,
+  'Hide Dock Icon' => true,
+  :QSAgreementAccepted => true,
+  :QSCommandInterfaceControllers => 'QSBezelInterfaceController',
+  :QSShowMenuIcon => true,
+  :QSUseFullMenuStatusItem => false,
+  'Setup Assistant Completed' => true
+}
 
 # TODO: Consider using JavaScript preferences (replacing .slate, or to
 # supplement it).
