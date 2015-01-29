@@ -197,6 +197,7 @@ include_recipe 'homebrew::install_formulas'
 node.default['homebrew']['casks'] = [
   'adium',
   'adobe-reader',
+  'caffeine',
   'chicken',
   'dash',
   'deeper',
@@ -223,6 +224,7 @@ node.default['homebrew']['casks'] = [
   'pandoc',
   'quicksilver',
   'skim',
+  'skitch',
   'slate',
   'sshfs',
   # The silverlight cask is having some checksum issues.

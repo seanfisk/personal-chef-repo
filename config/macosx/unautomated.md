@@ -3,11 +3,13 @@ Unautomated Setup
 
 This file lists parts of Mac OS X setup that are not automated. Typically, this is due to technical or practical reasons.
 
-* Mac App Store downloads
+* aText
 
-    * Caffeine (free)
-    * Skitch (free)
-    * aText (paid)
+  This is licensed software that is installed using Homebrew Cask. I purchased it from the Mac App Store (MAS). However, as stated in [aText Support](http://www.trankynam.com/atext/support.html), the non-MAS version generally works better. You'll have to follow the process to migrate your MAS license to get the non-MAS version working.
+
+* Jettison
+
+  This is licensed software that is installed using the dmg cookbook. You will have to manually enter/activate the license. Don't get confused: I initially purchased Jettison from the Mac App Store, but bought a separate license when I found that the Mac App Store version isn't up-to-date.
 
 * Seagate Dashboard
 
