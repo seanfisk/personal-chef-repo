@@ -407,9 +407,13 @@ mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
 # Show percentage on battery indicator.
 mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 
-# Install the gfxCardStatus preferences. This WILL overwrite current setting
-# (there are barely any :).
-mac_os_x_plist_file 'com.codykrieger.gfxCardStatus-Preferences.plist'
+node.default['mac_os_x']['settings']['gfxcardstatus'] = {
+  domain: 'com.codykrieger.gfxCardStatus-Preferences',
+  shouldCheckForUpdatesOnStartup: true,
+  shouldUseSmartMenuBarIcons: true
+  # Note: shouldStartAtLogin doesn't actually work, because gfxCardStatus uses
+  # login items like most other applications. So don't bother setting it.
+}
 
 # iTerm2
 #
