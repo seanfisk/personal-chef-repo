@@ -301,10 +301,6 @@ end
 #   mode '0600'
 # end
 
-# Install the gfxCardStatus preferences. This WILL overwrite current setting
-# (there are barely any :).
-mac_os_x_plist_file 'com.codykrieger.gfxCardStatus-Preferences.plist'
-
 # iTerm2
 ## Install iTerm2 background image.
 backgrounds_dir = "#{node['macosx_setup']['home']}/Pictures/Backgrounds"
@@ -422,6 +418,38 @@ dmg_package 'Jettison' do
   volumes_dir "Jettison #{JETTISON_VERSION}"
   action :install
 end
+
+# Inconsolata for Powerline (can't be installed via SkyFonts, for obvious
+# reasons).
+INCONSOLATA_POWERLINE_FILE = 'Inconsolata for Powerline.otf'
+remote_file 'download Inconsolata for Powerline font' do
+  source 'https://github.com/Lokaltog/powerline-fonts/raw/'\
+         'master/Inconsolata/' + URI.escape(INCONSOLATA_POWERLINE_FILE)
+  path "#{node['macosx_setup']['fonts_dir']}/#{INCONSOLATA_POWERLINE_FILE}"
+end
+
+###############################################################################
+# PREFERENCES
+###############################################################################
+
+include_recipe 'mac_os_x'
+
+# Password-protected screensaver + delay
+include_recipe 'mac_os_x::screensaver'
+
+# Turn on the OS X firewall.
+include_recipe 'mac_os_x::firewall'
+
+# Set up clock with day of week, date, and 24-hour clock.
+mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
+
+# Show percentage on battery indicator.
+mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
+
+# Install the gfxCardStatus preferences. This WILL overwrite current setting
+# (there are barely any :).
+mac_os_x_plist_file 'com.codykrieger.gfxCardStatus-Preferences.plist'
+
 node.default['mac_os_x']['settings']['jettison'] = {
   domain: 'com.stclairsoft.Jettison',
   autoEjectAtLogout: false,
@@ -458,32 +486,12 @@ mac_os_x_plist_file 'com.blacktree.Quicksilver.plist' do
   end
 end
 
-# Inconsolata for Powerline (can't be installed via SkyFonts, for obvious
-# reasons).
-INCONSOLATA_POWERLINE_FILE = 'Inconsolata for Powerline.otf'
-remote_file 'download Inconsolata for Powerline font' do
-  source 'https://github.com/Lokaltog/powerline-fonts/raw/'\
-         'master/Inconsolata/' + URI.escape(INCONSOLATA_POWERLINE_FILE)
-  path "#{node['macosx_setup']['fonts_dir']}/#{INCONSOLATA_POWERLINE_FILE}"
+# TODO: Consider using JavaScript preferences (replacing .slate, or to
+# supplement it).
+cookbook_file 'Slate preferences file' do
+  source 'slate'
+  path "#{node['macosx_setup']['home']}/.slate"
 end
-
-###############################################################################
-# PREFERENCES
-###############################################################################
-
-include_recipe 'mac_os_x'
-
-# Password-protected screensaver + delay
-include_recipe 'mac_os_x::screensaver'
-
-# Turn on the OS X firewall.
-include_recipe 'mac_os_x::firewall'
-
-# Set up clock with day of week, date, and 24-hour clock.
-mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
-
-# Show percentage on battery indicator.
-mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 
 # Tweaks from
 # https://github.com/kevinSuttle/OSXDefaults/blob/master/.osx
@@ -618,13 +626,6 @@ node.default['mac_os_x']['settings']['diskutil'] = {
 
 # Actually write all the settings using the 'defaults' command.
 include_recipe 'mac_os_x::settings'
-
-# TODO: Consider using JavaScript preferences (replacing .slate, or to
-# supplement it).
-cookbook_file 'Slate preferences file' do
-  source 'slate'
-  path "#{node['macosx_setup']['home']}/.slate"
-end
 
 ###############################################################################
 # DOTFILES AND EMACS
