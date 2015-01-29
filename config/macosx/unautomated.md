@@ -3,6 +3,10 @@ Unautomated Setup
 
 This file lists parts of Mac OS X setup that are not automated. Typically, this is due to technical or practical reasons.
 
+* Dotfiles installation
+
+  This used to be automated, but since moving to Waf, it is probably a good idea to set up pyenv with a virtualenv to do it correctly. While this could be automated, there isn't a large benefit in doing it right now since I only have one machine.
+
 * aText
 
   This is licensed software that is installed using Homebrew Cask. I purchased it from the Mac App Store (MAS). However, as stated in [aText Support](http://www.trankynam.com/atext/support.html), the non-MAS version generally works better. You'll have to follow the process to migrate your MAS license to get the non-MAS version working.

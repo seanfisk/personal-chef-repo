@@ -635,22 +635,6 @@ directory node['macosx_setup']['personal_dir'] do
   action :create
 end
 
-git node['macosx_setup']['dotfiles_dir'] do
-  repository 'git@github.com:seanfisk/dotfiles.git'
-  enable_submodules true
-  action :checkout
-  notifies :run, 'execute[install dotfiles]'
-end
-
-execute 'install dotfiles' do
-  # Running `make install-osx' does the regular install, then patches
-  # .tmux.conf to make this work:
-  # <https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard>
-  command 'make install-osx'
-  cwd node['macosx_setup']['dotfiles_dir']
-  action :nothing
-end
-
 git node['macosx_setup']['emacs_dir'] do
   repository 'git@github.com:seanfisk/emacs.git'
   enable_submodules true
