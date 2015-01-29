@@ -24,7 +24,8 @@ require 'etc'
 require 'uri'
 require 'mixlib/shellout'
 
-# Include Homebrew as the default package manager (default is MacPorts).
+# Including this causes Homebrew to install if not already installed (needed
+# for the next section) and to run `brew update' if already installed.
 include_recipe 'homebrew'
 
 ###############################################################################
