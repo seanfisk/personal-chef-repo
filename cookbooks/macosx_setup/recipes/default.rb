@@ -198,7 +198,9 @@ node.default['homebrew']['casks'] = [
   'adium',
   'adobe-reader',
   'caffeine',
+  'cathode',
   'chicken',
+  'cord',
   'dash',
   'deeper',
   'disk-inventory-x',
@@ -223,6 +225,7 @@ node.default['homebrew']['casks'] = [
   # it's important to have online documentation.
   'pandoc',
   'quicksilver',
+  'remote-desktop-connection',
   'skim',
   'skitch',
   'slate',
