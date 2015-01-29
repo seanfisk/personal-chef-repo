@@ -217,6 +217,7 @@ node.default['homebrew']['casks'] = [
   'gimp',
   'google-chrome',
   'inkscape',
+  'iterm2',
   'karabiner',
   'monotype-skyfonts',
   'osxfuse',
@@ -260,8 +261,6 @@ include_recipe 'homebrew::install_casks'
 # CUSTOM INSTALLS
 ###############################################################################
 
-include_recipe 'dmg'
-
 # Deep Sleep Dashboard widget
 
 # The original version (http://deepsleep.free.fr/) is unfortunately broken for
@@ -300,43 +299,6 @@ end
 #   # the group and other permissions.
 #   mode '0600'
 # end
-
-# iTerm2
-## Install iTerm2 background image.
-backgrounds_dir = "#{node['macosx_setup']['home']}/Pictures/Backgrounds"
-background_name = 'holland-beach-sunset.jpg'
-background_path = "#{backgrounds_dir}/#{background_name}"
-
-directory backgrounds_dir
-cookbook_file background_name do
-  path background_path
-end
-
-## Install plist, containing lots of themes, configuration, and
-## background image setup.
-template 'iTerm2 preferences file' do
-  source 'com.googlecode.iterm2.plist.erb'
-  path "#{node['macosx_setup']['home']}/Library/Preferences/" \
-    'com.googlecode.iterm2.plist'
-  variables(
-    background_image_path: background_path,
-    home_directory: node['macosx_setup']['home']
-  )
-end
-
-## Include the iTerm2 recipe. This must be called AFTER the plist
-## command above for the following reason: The iterm2 cookbook can
-## also install the iTerm2 plist from files/default. We can't use
-## this, however, because we include the iterm2 cookbook through
-## Berkshelf, meaning that we can't write to that cookbook. The iterm2
-## cookbook declares a mac_os_x_plist_file just like ours, but it
-## fails because that file doesn't exist in the iterm2 cookbook.
-## ignore_failure is set to true, so it continues. If we make our call
-## after including the iterm2 cookbook, Chef remembers the config from
-## the first call to mac_os_x_plist_file and fails once again.
-##
-## This might not be a problem since we are now using a template above.
-include_recipe 'iterm2'
 
 # Java
 # I wish we could avoid installing Java, but I need it for at least these
@@ -432,8 +394,6 @@ end
 # PREFERENCES
 ###############################################################################
 
-include_recipe 'mac_os_x'
-
 # Password-protected screensaver + delay
 include_recipe 'mac_os_x::screensaver'
 
@@ -449,6 +409,35 @@ mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 # Install the gfxCardStatus preferences. This WILL overwrite current setting
 # (there are barely any :).
 mac_os_x_plist_file 'com.codykrieger.gfxCardStatus-Preferences.plist'
+
+# iTerm2
+#
+# There is a Chef cookbook for iterm2, but we've chosen to install using
+# Homebrew Cask. The iterm2 cookbook can install tmux integration, but it's
+# apparently spotty, and I haven't wanted tmux integration anyway. It also
+# raises an annoying error because it looks for the plist in its own cookbook.
+
+## Install background image.
+backgrounds_dir = "#{node['macosx_setup']['home']}/Pictures/Backgrounds"
+background_name = 'holland-beach-sunset.jpg'
+background_path = "#{backgrounds_dir}/#{background_name}"
+
+directory backgrounds_dir
+cookbook_file background_name do
+  path background_path
+end
+
+## Install plist, containing lots of themes, configuration, and background
+## image setup.
+template 'iTerm2 preferences file' do
+  source 'com.googlecode.iterm2.plist.erb'
+  path "#{node['macosx_setup']['home']}/Library/Preferences/" \
+       'com.googlecode.iterm2.plist'
+  variables(
+    background_image_path: background_path,
+    home_directory: node['macosx_setup']['home']
+  )
+end
 
 node.default['mac_os_x']['settings']['jettison'] = {
   domain: 'com.stclairsoft.Jettison',

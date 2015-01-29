@@ -5,7 +5,6 @@ source 'https://api.berkshelf.com'
 group :macosx do
   cookbook 'dmg', '~> 2.2.2'
   cookbook 'mac_os_x', '~> 1.4.6'
-  cookbook 'iterm2', '~> 1.3.3'
   cookbook 'homebrew', '~> 1.11.0'
 end
 
