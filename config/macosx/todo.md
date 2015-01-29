@@ -24,7 +24,6 @@
     * Submit PR updating to newest version.
     * Submit issue about plist not being found.
 * Things to add
-    * CoRD
     * Highlight
     * Ukelele (maybe)
     * Xerox printer drivers
