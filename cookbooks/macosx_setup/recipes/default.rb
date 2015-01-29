@@ -402,10 +402,19 @@ include_recipe 'mac_os_x::screensaver'
 include_recipe 'mac_os_x::firewall'
 
 # Set up clock with day of week, date, and 24-hour clock.
-mac_os_x_plist_file 'com.apple.menuextra.clock.plist'
+node.default['mac_os_x']['settings']['clock'] = {
+  domain: 'com.apple.menuextra.clock',
+  DateFormat: 'EEE MMM d  H:mm',
+  FlashDateSeparators: false,
+  IsAnalog: false
+}
 
 # Show percentage on battery indicator.
-mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
+node.default['mac_os_x']['settings']['battery'] = {
+  domain: 'com.apple.menuextra.battery',
+  # Why is this not a boolean? Whatever.
+  ShowPercent: 'YES'
+}
 
 node.default['mac_os_x']['settings']['gfxcardstatus'] = {
   domain: 'com.codykrieger.gfxCardStatus-Preferences',
