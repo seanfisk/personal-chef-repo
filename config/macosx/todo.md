@@ -15,9 +15,6 @@
 * Eclipse
     * PyDev and configuration
     * Emacs+ and configuration
-* iTerm2
-    * Submit PR updating to newest version.
-    * Submit issue about plist not being found.
 * Things to add
     * Highlight
     * Ukelele (maybe)
