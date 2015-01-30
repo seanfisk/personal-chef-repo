@@ -444,6 +444,15 @@ end
 
 ## Install plist, containing lots of themes, configuration, and background
 ## image setup.
+##
+## We've considered using defaults, but mac_os_x_userdefaults doesn't support
+## nested dictionary values. iTerm2 preferences use this, so we need to keep
+## using the template. Even if in the future mac_os_x_userdefaults gains nested
+## dictionary support, it builds command lines to 'defaults', which might
+## exceed the OS limit for command lines.
+##
+## Another option would be to merge part of the plist using
+## /usr/libexec/PlistBuddy.
 template 'iTerm2 preferences file' do
   source 'com.googlecode.iterm2.plist.erb'
   path "#{node['macosx_setup']['home']}/Library/Preferences/" \
