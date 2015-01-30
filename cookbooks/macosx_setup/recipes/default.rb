@@ -431,6 +431,18 @@ node.default['mac_os_x']['settings']['caffeine'] = {
   SuppressLaunchMessage: true
 }
 
+node.default['mac_os_x']['settings']['cathode'] = {
+  domain: 'com.secretgeometry.Cathode',
+  # Console and Monitor themes themselves seem not to be stored in preferences.
+  CloseOnExit: false,
+  JitterWhenWindowMoves: true,
+  PositionalPerspective: true,
+  RenderingQuality: 3, # High
+  UseColorPalette: true,
+  UseOptionAsMeta: true,
+  UseSounds: false
+}
+
 node.default['mac_os_x']['settings']['gfxcardstatus'] = {
   domain: 'com.codykrieger.gfxCardStatus-Preferences',
   shouldCheckForUpdatesOnStartup: true,
