@@ -417,6 +417,13 @@ node.default['mac_os_x']['settings']['clock'] = {
 # reason, we just write the plist.
 mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 
+node.default['mac_os_x']['settings']['caffeine'] = {
+  domain: 'com.lightheadsw.caffeine',
+  ActivateOnLaunch: true, # Turn on Caffeine when the app is started.
+  DefaultDuration: 0, # Activate indefinitely
+  SuppressLaunchMessage: true
+}
+
 node.default['mac_os_x']['settings']['gfxcardstatus'] = {
   domain: 'com.codykrieger.gfxCardStatus-Preferences',
   shouldCheckForUpdatesOnStartup: true,
