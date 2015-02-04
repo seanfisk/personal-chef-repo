@@ -1,7 +1,4 @@
 language: ruby
-rvm:
-  - 2.2.0
-# Knife doesn't run correctly on the Travis-CI nodes. Skip the knife
-# tests and run foodcritic and rubocop.
-script:
-  - bundle exec thor test:no-knife
+rvm: 2.2.0
+before_script: bundle exec berks install
+script: bundle exec thor test:all

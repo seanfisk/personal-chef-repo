@@ -1,4 +1,3 @@
-* For the repo: check out [Strainer](https://github.com/customink/strainer).
 * Start using the [Chef Development Kit](https://docs.chef.io/install_dk.html), maybe. Things seem to be working OK now, but the Chef DK looks like "what everyone's using". Not sure, though.
 * Login items, controlled by `~/Library/Preferences/com.apple.loginitems.plist`.
 * Update URLs and mentions for name change to chef.io (as of time of writing, Hosted Chef is still api.opscode.com; wait until this changes to make the update)
