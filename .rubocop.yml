@@ -1,5 +1,0 @@
-FileName:
-  Exclude:
-    - '**/Thorfile'
-    - '**/Berksfile'
-    - '**/Gemfile'

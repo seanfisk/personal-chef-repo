@@ -3,17 +3,18 @@
 require 'foodcritic'
 require 'rubocop'
 require 'berkshelf/thor'
+require 'strainer/thor'
 require 'mixlib/shellout'
 
 # Helper module for safely executing subprocesses.
 module Subprocess
   def run_subprocess(*args)
-    # See `bundle help exec' for more info on using a 'clean' environment.
-    Bundler.with_clean_env do
-      proc = Mixlib::ShellOut.new(args, live_stream: STDOUT)
-      proc.run_command
-      proc
-    end
+    # Don't use `Bundler.with_clean_env' anymore, now that we're requiring the
+    # chef gem. See `bundle help exec' for more info on using a 'clean'
+    # environment.
+    proc = Mixlib::ShellOut.new(args, live_stream: STDOUT)
+    proc.run_command
+    proc
   end
 end
 
@@ -21,65 +22,10 @@ end
 class Knife < Thor
   include Subprocess
 
-  desc 'test', 'Run cursory knife cookbook tests'
-  def test(exit = true)
-    proc = run_subprocess 'knife', 'cookbook', 'test', '--all'
-    exit proc.exitstatus if exit
-    proc.exitstatus
-  end
-
   desc 'upload', 'Upload all local cookbooks to the Chef server'
   def upload
     proc = run_subprocess 'knife', 'cookbook', 'upload', '--all'
     proc.error!
-  end
-end
-
-# Foodcritic-related tasks.
-class Foodcritic < Thor
-  desc 'test', 'Run foodcritic cookbook tests'
-  def test(exit = true)
-    review = lint
-
-    if review.warnings.any?
-      puts review
-      retval = 1
-    else
-      puts 'No foodcritic errors'
-      retval = 0
-    end
-    exit retval if exit
-    retval
-  end
-
-  private
-
-  def lint
-    FoodCritic::Linter.new.check(
-      cookbook_paths: 'cookbooks',
-      fail_tags: ['any'],
-      include_rules: ['foodcritic/etsy', 'foodcritic/customink'],
-      # Don't worry about having a CHANGELOG.md file for each cookbook.
-      tags: ['~CINK001']
-    )
-  end
-end
-
-# Rubocop-related tasks.
-class Style < Thor
-  # Make sure you don't re-define the Rubocop module here. That's why
-  # it's named Style.
-  desc 'check', 'Run rubocop on all Ruby files'
-  def check(exit = true)
-    # Pass in a list of files/directories because we don't want the bin/
-    # directory, other Foodcritic rules, etc., being checked.
-    result = RuboCop::CLI.new.run %W(Berksfile Gemfile #{ __FILE__ } cookbooks
-                                     config/macosx/client.rb.sample
-                                     config/windows/client.rb.sample
-                                     .chef/knife.rb)
-    puts 'No rubocop errors' if result == 0
-    exit result if exit
-    result
   end
 end
 
@@ -94,24 +40,37 @@ end
 
 # Tasks for testing cookbooks.
 class Test < Thor
-  desc 'all', 'Run all tests on cookbooks'
-  def all
-    # Pass false as an argument to prevent the task from exiting.
-    knife_result = invoke 'knife:test', [false]
-    puts
-    fc_result = invoke 'foodcritic:test', [false]
-    style_result = invoke 'style:check', [false]
-
-    # Exit with the sum of the test categories.
-    exit knife_result + fc_result + style_result
+  desc 'strainer', 'Run strainer on all the cookbooks'
+  def strainer(exit = true)
+    # Strainer doesn't have a way to run on *all* the cookbooks, aside from
+    # passing their names on the command-line. Fair enough...
+    # http://stackoverflow.com/a/1899885
+    invoke 'strainer:cli:test', Pathname.new('cookbooks').children
+      .select(&:directory?)
+      .collect { |p| p.basename.to_s }
+  rescue SystemExit => e
+    # Strainer calls exit(...), but we don't want it to exit when we're running
+    # more tasks.
+    exit e.status if exit
+    e.status
   end
 
-  desc 'no-knife', 'Run all tests besides Knife tests'
-  def no_knife
-    fc_result = invoke 'foodcritic:test', [false]
-    style_result = invoke 'style:check', [false]
+  desc 'other', 'Run rubocop on non-cookbook files'
+  def other(exit = true)
+    # Pass in a list of files/directories because we don't want the bin/
+    # directory, other Foodcritic rules, or any of the cookbooks (tested by
+    # Strainer) being checked.
+    result = RuboCop::CLI.new.run \
+      %W(Berksfile Gemfile #{ __FILE__ } .chef/knife.rb) +
+      Dir.glob('config/{macosx,windows}/client.rb.sample')
+    puts 'No rubocop errors on non-cookbook files' if result == 0
+    exit result if exit
+    result
+  end
 
-    # Exit with the sum of the test categories.
-    exit fc_result + style_result
+  desc 'all', 'Run all tests on the repository'
+  def all
+    # Exit with the sum of the error codes.
+    exit invoke('test:other', [false]) + invoke('test:strainer', [false])
   end
 end
