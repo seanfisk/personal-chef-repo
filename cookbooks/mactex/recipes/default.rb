@@ -18,87 +18,20 @@
 # limitations under the License.
 #
 
-require 'mixlib/shellout'
+# Although this is now just a Homebrew Cask, it's useful to have as its own
+# recipe so that it can be selectively added to the run_list. It's a huge
+# download and install.
 
-pkgutil_proc = Mixlib::ShellOut.new(
-  'pkgutil', '--pkg-info', 'org.tug.mactex.texlive2013')
-pkgutil_proc.run_command
-MACTEX_IS_INSTALLED = pkgutil_proc.exitstatus == 0
+include_recipe 'homebrew::cask'
 
-PKG_CACHE_PATH = "#{Chef::Config[:file_cache_path]}/MacTeX.pkg"
-
-# First, download the file.
-remote_file 'download MacTeX pkg' do
-  source 'http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg'
-  path PKG_CACHE_PATH
-  checksum '3fb0df81bc20725aa3424c33f2d8d45d9490e15af943fc5080e6e4d91e2c77c2'
-  # Don't bother downloading the file if MacTeX is already installed. Since the
-  # download is so large, this allows us to delete the pkg file from the cache
-  # once MacTeX is already installed and still be sure that the cookbook is
-  # going to handle it correctly.
-  not_if { MACTEX_IS_INSTALLED }
-end
-
-# Now install.
-execute 'install MacTeX' do
-  # rubocop:disable LineLength
-  #
-  # With some help from:
-  # - https://github.com/opscode-cookbooks/dmg/blob/master/providers/package.rb
-  # - https://github.com/mattdbridges/chef-osx_pkg/blob/master/providers/package.rb
-  #
-  # rubocop:enable LineLength
-  command "sudo installer -pkg '#{PKG_CACHE_PATH}' -target /"
-  not_if { MACTEX_IS_INSTALLED }
-end
+homebrew_cask 'mactex'
 
 # rubocop:disable LineLength
+
+# Blacklisting fonts as in MacTeX 2013 is no longer necessary with MacTeX 2014.
+# For the old issues, see:
 #
-# Deploy workaround for lualatex's font database. See:
 # - http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks
 # - https://github.com/lualatex/luaotfload/issues/139
 
-BLACKLIST_FILE = '/usr/local/texlive/2013/texmf-dist/tex/luatex/luaotfload/luaotfload-blacklist.cnf'
-BLACKLIST_APPEND_CONTENTS =
-  '% Causes segfaults, see http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks\\n' \
-  'Silom.ttf\\n' \
-  'Skia.ttf'
-
-# rubocop:enable LineLength
-
-execute 'add font to blacklist' do
-  # Yucky quoting. See below for why the better solution doesn't work.
-  command "sudo bash -c \"echo -e '#{BLACKLIST_APPEND_CONTENTS}'>> '#{BLACKLIST_FILE}'\"" # rubocop:disable LineLength
-  not_if do
-    # Don't execute if we've already added blacklist. We just check for
-    # 'Skia.ttf'.
-    File.open(BLACKLIST_FILE).lines.any? do
-      |line| line.include?('Skia.ttf')
-    end
-  end
-end
-
-# To allow the font blacklisting to take effect, run:
-#
-#     mkluatexfontdb --force --verbose=10 --update
-#
-# Note that this WILL NOT WORK, as it ignores blacklisted fonts for some
-# reason:
-#
-#     luaotfload-tool --force --verbose=10 --update
-#
-# Not sure why it does that but it's really confusing and inconvenient.
-
-# rubocop:disable LineLength
-# Unfortunately, this doesn't work, because there's no way that I know of to
-# execute this block using sudo.
-#
-# ruby_block 'add font to blacklist' do
-#   block do
-#     File.open(BLACKLIST_FILE, 'a') do |file|
-#       file.puts('% Causes segfault, see http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks')
-#       file.puts(BLACKLIST_FONT)
-#     end
-#   end
-# end
 # rubocop:enable LineLength
