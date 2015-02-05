@@ -183,9 +183,7 @@ node.default['homebrew']['formulas'] = [
   # ZeroMQ (zmq) is included to speed up IPython installs. It can install a
   # bundled version to a virtualenv, but it's faster to have a globally built
   # version.
-  'zmq',
-  # For Powerline
-  'zpython'
+  'zmq'
 ]
 
 include_recipe 'homebrew::install_formulas'
