@@ -605,8 +605,13 @@ node.default['mac_os_x']['settings']['global'] = {
   :NSTextShowsControlCharacters => true,
   # Disable press-and-hold for keys in favor of key repeat
   :ApplePressAndHoldEnabled => false,
-  # Set a blazingly fast keyboard repeat rate
-  :KeyRepeat => 0,
+  # Key repeat
+  # This is also possible through the mac_os_x::key_repeat recipe, but having
+  # it here allows customization of the values.
+  ## Set a keyboard repeat rate to fast
+  :KeyRepeat => 2,
+  ## Set low initial delay
+  :InitialKeyRepeat => 15,
   # Finder
   ## Show all filename extensions
   :AppleShowAllExtensions => true,
