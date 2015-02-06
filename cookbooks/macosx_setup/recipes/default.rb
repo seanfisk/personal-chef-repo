@@ -57,8 +57,8 @@ SHELLS_FILE = '/etc/shells'
   shell_path = File.join(BREW_PREFIX, 'bin', shell)
   # First, add shell to /etc/shells so it is recognized as a valid user shell.
   execute "add #{shell_path} to #{SHELLS_FILE}" do
-    # Unfortunately, this cannot be a ruby_block as that would prevent it from
-    # running with sudo. See the mactex cookbook for more information.
+    # Unfortunately, using a ruby_block does not work because there's no way
+    # that I know to execute it using sudo.
     command "sudo bash -c \"echo '#{shell_path}' >> '#{SHELLS_FILE}'\""
     not_if do
       # Don't execute if this shell is already in the shells config file. Open
