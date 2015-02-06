@@ -376,6 +376,42 @@ dmg_package 'Jettison' do
   action :install
 end
 
+# Tasks Explorer, distributed as a pkg file not inside a DMG.
+#
+# All pkg ids installed:
+#
+#     com.macosinternals.tasksexplorer.Contents.pkg
+#     com.macosinternals.tasksexplorer.tasksexplorerd.pkg
+#     com.macosinternals.tasksexplorer.com.macosinternals.tasksexplorerd.pkg
+#
+# We only check for the first one, though.
+pkgutil_proc = Mixlib::ShellOut.new(
+  'pkgutil', '--pkg-info', 'com.macosinternals.tasksexplorer.Contents.pkg')
+pkgutil_proc.run_command
+TE_IS_INSTALLED = pkgutil_proc.exitstatus == 0
+TE_PKG_CACHE_PATH = "#{Chef::Config[:file_cache_path]}/Tasks Explorer.pkg"
+# First, download the file.
+remote_file 'download Tasks Explorer pkg' do
+  source 'https://github.com/astavonin/Tasks-Explorer/blob/master/release/' \
+         'Tasks%20Explorer.pkg?raw=true'
+  path TE_PKG_CACHE_PATH
+  checksum '8fa4fff39a6cdea368e0110905253d7fb9e26e36bbe053704330fe9f24f7db6a'
+  # Don't bother downloading the file if Tasks Explorer is already installed.
+  not_if { TE_IS_INSTALLED }
+end
+# Now install.
+execute 'install Tasks Explorer' do
+  # rubocop:disable LineLength
+  #
+  # With some help from:
+  # - https://github.com/opscode-cookbooks/dmg/blob/master/providers/package.rb
+  # - https://github.com/mattdbridges/chef-osx_pkg/blob/master/providers/package.rb
+  #
+  # rubocop:enable LineLength
+  command "sudo installer -pkg '#{TE_PKG_CACHE_PATH}' -target /"
+  not_if { TE_IS_INSTALLED }
+end
+
 # Inconsolata for Powerline (can't be installed via SkyFonts, for obvious
 # reasons).
 INCONSOLATA_POWERLINE_FILE = 'Inconsolata for Powerline.otf'
@@ -561,6 +597,13 @@ cookbook_file 'Slate preferences file' do
   source 'slate'
   path "#{node['macosx_setup']['home']}/.slate"
 end
+
+node.default['mac_os_x']['settings']['tasks_explorer'] = {
+  domain: 'com.macosinternals.Tasks-Explorer',
+  highlight_processes: true,
+  show_kernel_cpu_time: true,
+  update_frequency: 2 # 2 seconds
+}
 
 # Tweaks from
 # https://github.com/kevinSuttle/OSXDefaults/blob/master/.osx
