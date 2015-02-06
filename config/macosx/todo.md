@@ -2,11 +2,10 @@
 * Login items, controlled by `~/Library/Preferences/com.apple.loginitems.plist`.
 * Update URLs and mentions for name change to chef.io (as of time of writing, Hosted Chef is still api.opscode.com; wait until this changes to make the update)
 * Use PlistBuddy to merge iTerm2 preferences.
-* Consider automating install of [Tasks Explorer](http://macosinternals.github.io/2000/01/02/tasks-explorer/).
 * Accessibility
     * Zoom
     * Picture-in-picture
-* Automatically install devpi and/or system Python packages (see dotfiles as well).
+* Automatically install default Python packages (see dotfiles as well for how this is done currently).
 * [MacFusion](http://macfusionapp.org/)
 * Add guards to stop resources from updating if they don't need to.
 * Add checksums to fonts, or use `:create_if_missing`.

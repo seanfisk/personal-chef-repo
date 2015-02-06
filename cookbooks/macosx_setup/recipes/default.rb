@@ -295,18 +295,6 @@ execute 'install Deep Sleep dashboard widget' do
   action :nothing
 end
 
-# devpi caching PyPi server
-# DEVPI_PLIST_NAME = 'net.devpi.plist'
-# cookbook_file 'devpi Launch Agent' do
-#   source DEVPI_PLIST_NAME
-#   path "#{node['macosx_setup']['home']}/Library/LaunchAgents/" +
-#        DEVPI_PLIST_NAME
-#   # Override the umask and set the mode. The file must be writable *only by
-#   # the user* otherwise launchd will not load it. Be conservative and zero
-#   # the group and other permissions.
-#   mode '0600'
-# end
-
 # Java
 # I wish we could avoid installing Java, but I need it for at least these
 # reasons:
