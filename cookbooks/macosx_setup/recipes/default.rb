@@ -747,6 +747,49 @@ node.default['mac_os_x']['settings']['diskutil'] = {
   'advanced-image-options' => true
 }
 
+# My own tweaks
+
+node.default['mac_os_x']['settings']['universalaccess'] = {
+  domain: 'com.apple.universalaccess',
+  # All closeView keys control the screen zoom.
+  ## 'Zoom style' choices:
+  ##
+  ##     0. Fullscreen
+  ##     1. Picture-in-picture
+  ##
+  ## Don't set this. Fullscreen is the default anyway, and this way we can let
+  ## the user change based upon needs at that point. We have fullscreen and PIP
+  ## settings later as well.
+  # closeViewZoomMode: 0,
+  closeViewHotkeysEnabled: false,
+  ## Use scroll gesture with modifier keys to zoom.
+  closeViewScrollWheelToggle: true,
+  ## Use Ctrl as the modifier key (the number is a key code or something).
+  ## This seems not to work correctly (?).
+  # closeViewScrollWheelModifiersInt: 262_144,
+  closeViewSmoothImages: true,
+  ## Don't follow *keyboard* focus.
+  closeViewZoomFollowsFocus: false,
+  ## Fullscreen zoom settings
+  ### Choices: When zoomed in, the screen image moves:
+  ###
+  ###     0. Continuously with pointer
+  ###     1. Only when the pointer reaches an edge
+  ###     2. So the pointer is at or near the center of the screen
+  closeViewPanningMode: 1,
+  ## Picture-in-picture settings
+  ### Use system cursor in zoom.
+  closeViewCursorType: 0,
+  ### Enable temporary zoom (with Ctrl-Cmd)
+  closeViewPressOnReleaseOff: true,
+  ### Choices:
+  ###
+  ###     1. Stationary
+  ###     2. Follow mouse cursor
+  ###     3. Tiled along edge
+  closeViewWindowMode: 1
+}
+
 # Actually write all the settings using the 'defaults' command.
 include_recipe 'mac_os_x::settings'
 
