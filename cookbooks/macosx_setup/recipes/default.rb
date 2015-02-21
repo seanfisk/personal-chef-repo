@@ -103,6 +103,10 @@ end
 package 'emacs' do
   options '--cocoa --with-gnutls'
 end
+execute "Link 'Emacs.app' to '/Applications'" do
+  command 'brew linkapps emacs'
+  creates '/Applications/Emacs.app'
+end
 
 node.default['homebrew']['formulas'] = [
   'ack',
