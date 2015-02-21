@@ -4,7 +4,7 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
 1. Access the machine you'd like to provision, hereby referred to as the *node*. We will go through a manual boostrap here. While a node can be bootstrapped from an administrator's workstation, that requires the node to have a running SSH server, which is probably overkill for one-off personal machines. Instead, we manually perform the steps that a boostrap would do (with some modifications).
 
-1. Install the Chef client using the [full-stack installer](http://www.opscode.com/chef/install/).
+1. Install the Chef client using the [full-stack installer](https://www.chef.io/download-chef-client/).
 
 1. Create the Chef configuration directory. We change the owner to our user so that we can provision mostly under our standard user. This works well with Mac OS X because most operations don't require root, including installing to `/Applications` and installing [Homebrew](http://brew.sh/) packages.
 

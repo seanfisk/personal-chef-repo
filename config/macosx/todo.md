@@ -1,6 +1,6 @@
 * Start using the [Chef Development Kit](https://docs.chef.io/install_dk.html), maybe. Things seem to be working OK now, but the Chef DK looks like "what everyone's using". Not sure, though.
 * Login items, controlled by `~/Library/Preferences/com.apple.loginitems.plist`.
-* Update URLs and mentions for name change to chef.io (as of time of writing, Hosted Chef is still api.opscode.com; wait until this changes to make the update)
+* Update Hosted Chef URL (http://api.opscode.com/) to the new one (presumably http://api.chef.io/) one when it changes (generate a new knife config and see what's in there). Also update `cookbooks/README.md` from [chef-repo](https://github.com/chef/chef-repo) when that gets updated.
 * Use PlistBuddy to merge iTerm2 preferences.
 * Automatically install default Python packages (see dotfiles as well for how this is done currently).
 * [MacFusion](http://macfusionapp.org/)

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/seanfisk/personal-chef-repo.png)](https://travis-ci.org/seanfisk/personal-chef-repo)
 
-This repository contains personal configurations for my machines, set up using the [Opscode Chef configuration management system][chef].
+This repository contains personal configurations for my machines, set up using the [Chef configuration management system][chef].
 
 [chef]: http://www.getchef.com/
 
@@ -13,7 +13,7 @@ Please see the README for one of the configurations for more instructions on how
 
 ## Setting up an Administrator Workstation
 
-An administrator workstation is used to edit the Chef cookbooks in this repository and to run Knife, the Chef server utility. Please see [LearnChef](https://learnchef.opscode.com/get-started/) for a nice summary and visuals.
+An administrator workstation is used to edit the Chef cookbooks in this repository and to run Knife, the Chef server utility. Please see [LearnChef](https://learn.chef.io/legacy/get-started/) for a nice summary and visuals.
 
 1. Clone this repository:
 
@@ -37,8 +37,8 @@ An administrator workstation is used to edit the Chef cookbooks in this reposito
 
 If you ever lose the keys, they can be re-generated here:
 
-* [User key](https://www.opscode.com/account/password)
-* [Organization key](https://manage.opscode.com/organizations)
+* [User key](https://www.chef.io/account/password)
+* [Organization key](https://manage.chef.io/organizations)
 
 Be careful, because after re-generating, all nodes must be updated to use the new keys.
 

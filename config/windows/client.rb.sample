@@ -9,7 +9,7 @@
 # based on its fully qualified domain name (FQDN).
 #
 # For a full list of options, see
-# <http://docs.opscode.com/config_rb_client.html>.
+# <https://docs.chef.io/config_rb_client.html>.
 
 # Set a base directory that makes commands runnable by standard user.
 
