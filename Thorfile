@@ -40,6 +40,8 @@ end
 
 # Tasks for testing cookbooks.
 class Test < Thor
+  include Subprocess
+
   desc 'strainer', 'Run strainer on all the cookbooks'
   def strainer(exit = true)
     # Strainer doesn't have a way to run on *all* the cookbooks, aside from
@@ -68,9 +70,19 @@ class Test < Thor
     result
   end
 
+  desc 'travis', "Run 'travis lint' on '.travis.yml'"
+  def travis(exit = true)
+    puts 'Linting travis file'
+    proc = run_subprocess 'travis', 'lint', '--exit-code'
+    exit proc.exitstatus if exit
+    proc.exitstatus
+  end
+
   desc 'all', 'Run all tests on the repository'
   def all
     # Exit with the sum of the error codes.
-    exit invoke('test:other', [false]) + invoke('test:strainer', [false])
+    exit %w(other strainer travis)
+      .collect { |task| invoke('test:' + task, [false]) }
+      .reduce(:+)
   end
 end

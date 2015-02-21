@@ -13,3 +13,4 @@ gem 'mixlib-shellout', '~> 2.0.1'
 gem 'strainer', '~> 3.4.0'
 # For running knife through strainer.
 gem 'chef', '~> 12.0.3'
+gem 'travis', '~> 1.7.5'
