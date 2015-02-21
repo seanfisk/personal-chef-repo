@@ -1,6 +1,6 @@
 # -*- mode: ruby; coding: utf-8; -*-
 
-source 'https://api.berkshelf.com'
+source 'https://supermarket.chef.io'
 
 group :macosx do
   cookbook 'dmg', '~> 2.2.2'
