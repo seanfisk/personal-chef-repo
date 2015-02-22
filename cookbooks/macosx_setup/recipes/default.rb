@@ -435,6 +435,10 @@ include_recipe 'mac_os_x::screensaver'
 # Turn on the OS X firewall.
 include_recipe 'mac_os_x::firewall'
 
+# Allow keyboard access to all controls (using Tab), not just text boxes and
+# lists.
+include_recipe 'mac_os_x::kbaccess'
+
 # Set up clock with day of week, date, and 24-hour clock.
 node.default['mac_os_x']['settings']['clock'] = {
   domain: 'com.apple.menuextra.clock',

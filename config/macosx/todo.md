@@ -20,7 +20,6 @@
     * Mention installing Command-Line Tools for Xcode.
     * Add note about setting up SSH keys before running.
 maintain.
-* Consider turning on `kbaccess` from `mac_os_x` cookbook.
 * [fuse-zip](https://code.google.com/p/fuse-zip/) Currently weird because this would be best to install with Homebrew, but we are currently installing OSXFUSE (and SSHFS) through their pkg installers. Might want to reconsider this when installing fuse-zip.
 * We've had some permission problems with `/opt` and Homebrew Cask. When doing a clean re-install, try to resolve these if they're not resolved by the project's maintainers.
 
