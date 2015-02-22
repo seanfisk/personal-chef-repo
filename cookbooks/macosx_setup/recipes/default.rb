@@ -229,6 +229,9 @@ node.default['homebrew']['casks'] = [
   'inkscape',
   'iterm2',
   'karabiner',
+  # This cask already applies the fix as shown here:
+  # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
+  'macfusion',
   'monotype-skyfonts',
   'openemu',
   'osxfuse',

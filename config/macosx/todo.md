@@ -3,7 +3,6 @@
 * Update Hosted Chef URL (http://api.opscode.com/) to the new one (presumably http://api.chef.io/) one when it changes (generate a new knife config and see what's in there). Also update `cookbooks/README.md` from [chef-repo](https://github.com/chef/chef-repo) when that gets updated.
 * Use PlistBuddy to merge iTerm2 preferences.
 * Automatically install default Python packages (see dotfiles as well for how this is done currently).
-* [MacFusion](http://macfusionapp.org/)
 * Add guards to stop resources from updating if they don't need to.
 * Add checksums to fonts, or use `:create_if_missing`.
 * Document upload process.
