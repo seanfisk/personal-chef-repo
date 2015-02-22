@@ -829,6 +829,9 @@ end
 execute 'invalidate sudo timestamp' do
   # 'sudo -K' will remove the timestamp entirely, which means that sudo will
   # print the initial 'Improper use of the sudo command' warning. Not what we
-  # want. 'sudo -k' just invalidates the timestampt without removing it.
+  # want. 'sudo -k' just invalidates the timestamp without removing it.
   command 'sudo -k'
+  # Kill only if we have sudo privileges. 'sudo -k' is idempotent anyway, but
+  # it's nice to see less resources updated when possible.
+  only_if 'sudo -n true'
 end
