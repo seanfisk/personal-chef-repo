@@ -825,3 +825,10 @@ execute 'install emacs configuration' do
   cwd node['macosx_setup']['emacs_dir']
   action :nothing
 end
+
+execute 'invalidate sudo timestamp' do
+  # 'sudo -K' will remove the timestamp entirely, which means that sudo will
+  # print the initial 'Improper use of the sudo command' warning. Not what we
+  # want. 'sudo -k' just invalidates the timestampt without removing it.
+  command 'sudo -k'
+end
