@@ -1,12 +1,19 @@
-* Start using the [Chef Development Kit](https://docs.chef.io/install_dk.html), maybe. Things seem to be working OK now, but the Chef DK looks like "what everyone's using". Not sure, though.
-* Login items, controlled by `~/Library/Preferences/com.apple.loginitems.plist`.
-* Update Hosted Chef URL (http://api.opscode.com/) to the new one (presumably http://api.chef.io/) one when it changes (generate a new knife config and see what's in there). Also update `cookbooks/README.md` from [chef-repo](https://github.com/chef/chef-repo) when that gets updated.
+High Priority
+-------------
+
 * Use PlistBuddy to merge iTerm2 preferences.
-* Automatically install default Python packages (see dotfiles as well for how this is done currently).
-* Add guards to stop resources from updating if they don't need to.
-* Add checksums to fonts, or use `:create_if_missing`.
+* Login items, controlled by `~/Library/Preferences/com.apple.loginitems.plist`.
+* Add note about setting up SSH keys before running.
+* Mention installing Command-Line Tools for Xcode.
 * Document upload process.
-* Make a script that does some of the stuff in the README.
+* Make a script that does some of the stuff in the `README`.
+
+Low Priority
+------------
+
+* Update Hosted Chef URL (http://api.opscode.com/) to the new one (presumably http://api.chef.io/) one when it changes (generate a new knife config and see what's in there). Also update `cookbooks/README.md` from [chef-repo](https://github.com/chef/chef-repo) when that gets updated.
+* Start using the [Chef Development Kit](https://docs.chef.io/install_dk.html), maybe. Things seem to be working OK now, but the Chef DK looks like "what everyone's using". Not sure, though.
+* Automatically install default Python packages (see dotfiles as well for how this is done currently).
 * Eclipse
     * PyDev and configuration
     * Emacs+ and configuration
@@ -16,13 +23,11 @@
     * Xerox printer drivers
     * Calibre
     * uTorrent
-    * Mention installing Command-Line Tools for Xcode.
-    * Add note about setting up SSH keys before running.
-maintain.
-* [fuse-zip](https://code.google.com/p/fuse-zip/) Currently weird because this would be best to install with Homebrew, but we are currently installing OSXFUSE (and SSHFS) through their pkg installers. Might want to reconsider this when installing fuse-zip.
 * We've had some permission problems with `/opt` and Homebrew Cask. When doing a clean re-install, try to resolve these if they're not resolved by the project's maintainers.
 
   The problem is that the default group of `/opt` (at least on Mavericks) is `wheel`, not `admin`. For example, when set what we think is correctly, both `/Applications` and `/usr/local` are set to `root:admin` with group writability. We've solved the problem currently by running:
 
         sudo chgrp admin /opt
         sudo chmod g+w /opt
+
+* [fuse-zip](https://code.google.com/p/fuse-zip/) Currently weird because this would be best to install with regular Homebrew, but we are currently installing OSXFUSE (and SSHFS) through Homebrew Cask. Might want to reconsider this if installing fuse-zip. However, we are installing Macfusion through Homebrew Cask which depends on the Cask version of OSXFUSE.
