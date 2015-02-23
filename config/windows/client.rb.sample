@@ -11,11 +11,10 @@
 # For a full list of options, see
 # <https://docs.chef.io/config_rb_client.html>.
 
-# Set a base directory that makes commands runnable by standard user.
-
 chef_server_url 'https://api.opscode.com/organizations/sean_fisk'
+# The default level is :auto, which sets the log_level to :warn when
+# log_location (default: STDOUT) is a tty. We want more information.
 log_level :info
-log_location STDOUT
 node_name 'windows-node'
 validation_client_name 'sean_fisk-validator'
 

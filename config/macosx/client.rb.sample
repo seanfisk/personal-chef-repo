@@ -11,15 +11,16 @@
 # For a full list of options, see
 # <https://docs.chef.io/config_rb_client.html>.
 
-# Set a base directory that makes commands runnable by standard user.
-base_dir = "#{ENV['HOME']}/.chef"
-
-cache_options path: "#{base_dir}/cache/checksums", skip_expires: true
+# Set a top-level cache path that makes commands runnable by standard user.
+# Although the docs are a bit vague, the source code does not lie. See
+# 'lib/chef/config.rb' in the repo <https://github.com/chef/chef>. cache_path
+# allows setting the top-level directory for all cache files used by Chef. This
+# means that it is not necessary to set checksum_path, file_cache_path,
+# file_backup_path, and lockfile, as these will all use cache_path.
+cache_path "#{ENV['HOME']}/.chef"
 chef_server_url 'https://api.opscode.com/organizations/sean_fisk'
-file_backup_path "#{base_dir}/backup"
-file_cache_path "#{base_dir}/cache"
+# The default level is :auto, which sets the log_level to :warn when
+# log_location (default: STDOUT) is a tty. We want more information.
 log_level :info
-log_location STDOUT
 node_name 'macosx-node'
-node_path "#{base_dir}/node"
 validation_client_name 'sean_fisk-validator'
