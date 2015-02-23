@@ -3,7 +3,6 @@ High Priority
 
 * `sudo` prompts in various resources are not showing, and script is hanging waiting for them.
 * Use PlistBuddy to merge iTerm2 preferences.
-* Login items, controlled by `~/Library/Preferences/com.apple.loginitems.plist`.
 * Add note about setting up SSH keys before running.
 * Mention installing Command-Line Tools for Xcode.
 * Document upload process.
@@ -32,3 +31,4 @@ Low Priority
         sudo chmod g+w /opt
 
 * [fuse-zip](https://code.google.com/p/fuse-zip/) Currently weird because this would be best to install with regular Homebrew, but we are currently installing OSXFUSE (and SSHFS) through Homebrew Cask. Might want to reconsider this if installing fuse-zip. However, we are installing Macfusion through Homebrew Cask which depends on the Cask version of OSXFUSE.
+* Login items are controlled by `~/Library/Preferences/com.apple.loginitems.plist`, which is can be viewed in System Preferences > Users & Group > Current User > Login Items. However, this plist appears not to be able to be edited manually. There appear to be two options: modify this plist programmatically using OS X APIs, or create launchd launch agents for each program. The first is preferrable because it allows customization through the UI, but is also more difficult. See [this StackOverflow](http://stackoverflow.com/q/12086638) question for more info.

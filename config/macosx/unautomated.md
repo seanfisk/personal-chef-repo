@@ -63,6 +63,20 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 
   Disable the auto-redirection of domains. Specifically this is annoying for `localhost`. Hopefully this will be synced. See http://cdivilly.wordpress.com/2013/08/15/disable-firefox-redirecting-to-localhost-com/.
 
+* Login items
+
+  The list of applications which should run at startup are currently not automated. They are:
+
+  * gfxCardStatus
+  * Quicksilver
+  * Flux
+  * Jettison
+  * Slate
+  * Monotype SkyFonts
+  * aText
+  * Karabiner
+  * iTerm (optional, this is just for convenience)
+
 * Xerox WorkCenter 5755 Printer Drivers
 
   For advanced use of GVSU's printers.
