@@ -19,6 +19,10 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 
   This is licensed software that is installed using Homebrew Cask. I purchased a license that has to be manually activated.
 
+* Memory Clean
+
+  Installed from the Mac App Store.
+
 * Quicksilver hotkey
 
   Most of the other preferences are automated, but this one proved difficult. For now, it needs to be set manually. See the recipe for the gritty details and rationale for the decision not to automate.
