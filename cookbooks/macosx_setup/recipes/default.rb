@@ -143,6 +143,7 @@ node.default['homebrew']['formulas'] = [
   'markdown',
   'mercurial',
   'mobile-shell',
+  'mr', # myrepos, for managing multiple repos
   'nmap',
   'node',
   # I prefer ohcount to cloc and sloccount.
@@ -833,5 +834,9 @@ execute 'invalidate sudo timestamp' do
   command 'sudo -k'
   # Kill only if we have sudo privileges. 'sudo -k' is idempotent anyway, but
   # it's nice to see less resources updated when possible.
-  only_if 'sudo -n true'
+  #
+  # 'sudo -n command' exits with 0 if a password is needed (what?), or the exit
+  # code of 'command' if it is able to run it. Hence the unusual guard here: an
+  # exit code of 1 indicates sudo privileges, while 0 indicates none.
+  not_if 'sudo -n false'
 end
