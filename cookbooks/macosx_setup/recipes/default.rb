@@ -150,6 +150,7 @@ node.default['homebrew']['formulas'] = [
   'ohcount',
   'p7zip',
   'parallel',
+  'pdfgrep',
   'pstree',
   # pwgen and sf-pwgen are both password generators. pwgen is more generic,
   # whereas sf-pwgen uses Apple's security framework. We also looked at APG,
