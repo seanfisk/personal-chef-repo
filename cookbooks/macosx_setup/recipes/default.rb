@@ -186,6 +186,7 @@ node.default['homebrew']['formulas'] = [
   'watch',
   'wget',
   'xz',
+  'youtube-dl',
   # ZeroMQ (zmq) is included to speed up IPython installs. It can install a
   # bundled version to a virtualenv, but it's faster to have a globally built
   # version.
