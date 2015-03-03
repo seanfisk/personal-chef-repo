@@ -116,9 +116,6 @@ end
 
 node.default['homebrew']['formulas'] = [
   'ack',
-  # To fix the aria2 build, I ran `brew edit gmp' and added a `--with-pic'
-  # flag. Hopefully I will not have issues in the future. See here:
-  # <https://github.com/mxcl/homebrew/issues/12946>
   'aria2',
   'astyle',
   'cask',
