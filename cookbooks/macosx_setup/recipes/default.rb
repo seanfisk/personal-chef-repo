@@ -132,6 +132,7 @@ node.default['homebrew']['formulas'] = [
   # BetterPlanner.
   'graphicsmagick',
   'graphviz',
+  'grc',
   'htop-osx',
   'hub',
   # ImageMagick might already be present on the system (but just 'convert').
