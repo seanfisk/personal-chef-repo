@@ -108,6 +108,12 @@ execute "Link 'Emacs.app' to '/Applications'" do
   creates '/Applications/Emacs.app'
 end
 
+# git-grep PCRE. Do this before installing other formulas in
+# case there is a dependency on git.
+package 'git' do
+  options '--with-pcre'
+end
+
 node.default['homebrew']['formulas'] = [
   'ack',
   # To fix the aria2 build, I ran `brew edit gmp' and added a `--with-pic'
@@ -125,7 +131,6 @@ node.default['homebrew']['formulas'] = [
   'editorconfig',
   'fasd',
   'gibo',
-  'git',
   'gnu-tar',
   # Install both GraphicMagick and ImageMagick. In generally, I prefer
   # GraphicsMagick, but ImageMagick has ICO support so we use it for
