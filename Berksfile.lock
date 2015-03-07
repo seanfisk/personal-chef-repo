@@ -14,5 +14,5 @@ GRAPH
   homebrew (1.11.0)
     build-essential (>= 2.1.2)
   mac_os_x (1.4.6)
-  windows (1.36.1)
+  windows (1.36.6)
     chef_handler (>= 0.0.0)
