@@ -5,3 +5,9 @@
 
 Import-Module PSReadLine
 Set-PSReadlineOption -EditMode Emacs
+
+# Shortcut for running chef-client. '-A' makes chef-client fail out if
+# not run as administrator.
+function converge {
+	chef-client -A
+}
