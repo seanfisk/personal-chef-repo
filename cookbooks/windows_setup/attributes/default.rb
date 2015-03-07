@@ -29,7 +29,12 @@ default['windows_setup']['packages'] = %w(
   ConEmu
   Firefox
   autohotkey
+  githubforwindows
   pscx
   scite4autohotkey
   wixtoolset
+)
+
+default['windows_setup']['psget_modules'] = %w(
+  PSReadLine
 )

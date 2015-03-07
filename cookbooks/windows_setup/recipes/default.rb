@@ -22,6 +22,8 @@
 
 # NOTE: powershell_script doesn't support the 'command' attribute. Argh...!
 
+require 'mixlib/shellout'
+
 directory node['windows_setup']['scripts_dir'] do
   recursive true
 end
@@ -45,6 +47,22 @@ end
 # directory node['windows_setup']['startup_dir'] do
 #   recursive true
 # end
+
+# TODO: As of the chocolatey cookbook version 0.2.0, the cookbook does not
+# recognize Chocolatey 0.9.9.x and downgrades to 0.9.8.x when run. However,
+# this leaves Chocolatey in a weird state where 'choco list -lo' will still
+# list the chocolatey package at version 0.9.9.x. If automatic update is
+# enabled (default), then the cookbook installs the old version and immediately
+# tries to upgrade to the newer one, and sometimes fails.
+#
+# So currently, after running chef-client, for the latest version of Chocolatey
+# you'll have to run:
+#
+#     choco install -force chocolatey
+#
+# Follow the issue here:
+# <https://github.com/chocolatey/chocolatey-cookbook/issues/34>
+node.default['chocolatey']['upgrade'] = false
 
 include_recipe 'chocolatey'
 
@@ -72,4 +90,37 @@ remote_file 'download and install Gibo' do
   source 'https://raw.githubusercontent.com/simonwhitaker/gibo/master/' +
     script_name
   path "#{node['windows_setup']['scripts_dir']}\\#{script_name}"
+end
+
+# Gitignore from dotfiles
+# TODO: This is kind of ugly; the dotfiles repo should really be on Windows.
+# Note: This file will have LF line endings. Not necessarily ideal...
+remote_file 'download my .gitconfig' do
+  source 'https://raw.githubusercontent.com/'\
+         'seanfisk/dotfiles/master/dotfiles/gitconfig'
+  path "#{node['windows_setup']['home']}\\.gitconfig"
+end
+
+# Install PsGet. There is a Chocolatey package for this, but as of 2015-03-06
+# it seems outdated. This install command seems to be idempotent.
+powershell_script 'install PsGet' do
+  code '(New-Object Net.WebClient).DownloadString('\
+       '"http://psget.net/GetPsGet.ps1") | Invoke-Expression'
+end
+
+node['windows_setup']['psget_modules'].each do |mod_name|
+  powershell_script 'install PsGet module ' + mod_name do
+    code 'Install-Module ' + mod_name
+  end
+end
+
+# Mixlib::ShellOut doesn't support arrays on Windows... Ugh.
+ps_proc = Mixlib::ShellOut.new(
+  'powershell -NoLogo -NonInteractive -NoProfile -Command $profile')
+ps_proc.run_command
+PS_PROFILE_PATH = ps_proc.stdout.rstrip
+
+cookbook_file 'Writing PowerShell profile ' + PS_PROFILE_PATH do
+  source 'profile.ps1'
+  path PS_PROFILE_PATH
 end
