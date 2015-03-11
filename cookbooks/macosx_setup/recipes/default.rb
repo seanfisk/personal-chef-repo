@@ -623,6 +623,37 @@ node.default['mac_os_x']['settings']['tasks_explorer'] = {
   update_frequency: 2 # 2 seconds
 }
 
+node.default['mac_os_x']['settings']['xquartz'] = {
+  domain: 'org.macosforge.xquartz.X11',
+  # Input
+  enable_fake_buttons: false,
+  sync_keymap: false,
+  enable_key_equivalents: true,
+  option_sends_alt: true,
+  # Output
+  depth: '-1', # use colors from display
+  rootless: true,
+  fullscreen_menu: true,
+  # Pasteboard
+  ## Syncing is somewhat broken, see here:
+  ## <http://xquartz.macosforge.org/trac/ticket/765>
+  ## If you go into XQuartz and press Cmd-C it will usually sync it.
+  sync_pasteboard: true,
+  sync_clipboard_to_pasteboard: true,
+  sync_pasteboard_to_clipboard: true,
+  sync_pasteboard_to_primary: true,
+  sync_primary_on_select: false,
+  # Windows
+  wm_click_through: false,
+  wm_ffm: false,
+  wm_focus_on_new_window: true,
+  # Security
+  no_auth: false,
+  nolisten_tcp: true,
+  # Other
+  login_shell: ZSH_PATH # XXX seems to do nothing, xterm still starts /bin/sh
+}
+
 # Tweaks from
 # https://github.com/kevinSuttle/OSXDefaults/blob/master/.osx
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
