@@ -188,6 +188,7 @@ node.default['homebrew']['formulas'] = [
   'valgrind',
   'watch',
   'wget',
+  'xclip',
   'xz',
   'youtube-dl',
   # ZeroMQ (zmq) is included to speed up IPython installs. It can install a
