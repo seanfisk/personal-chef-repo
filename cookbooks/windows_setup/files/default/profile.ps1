@@ -11,3 +11,7 @@ Set-PSReadlineOption -EditMode Emacs
 function converge {
 	chef-client -A
 }
+
+# Matches aliases in dotfiles
+New-Alias ccopy clip
+New-Alias cpaste paste
