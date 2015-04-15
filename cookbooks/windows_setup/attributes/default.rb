@@ -32,6 +32,7 @@ default['windows_setup']['packages'] = %w(
   githubforwindows
   pscx
   scite4autohotkey
+  sysinternals
   wixtoolset
 )
 
