@@ -48,22 +48,6 @@ end
 #   recursive true
 # end
 
-# TODO: As of the chocolatey cookbook version 0.2.0, the cookbook does not
-# recognize Chocolatey 0.9.9.x and downgrades to 0.9.8.x when run. However,
-# this leaves Chocolatey in a weird state where 'choco list -lo' will still
-# list the chocolatey package at version 0.9.9.x. If automatic update is
-# enabled (default), then the cookbook installs the old version and immediately
-# tries to upgrade to the newer one, and sometimes fails.
-#
-# So currently, after running chef-client, for the latest version of Chocolatey
-# you'll have to run:
-#
-#     choco install -force chocolatey
-#
-# Follow the issue here:
-# <https://github.com/chocolatey/chocolatey-cookbook/issues/34>
-node.default['chocolatey']['upgrade'] = false
-
 include_recipe 'chocolatey'
 
 node['windows_setup']['packages'].each do |pkg_name|

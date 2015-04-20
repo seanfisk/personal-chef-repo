@@ -1,14 +1,14 @@
 DEPENDENCIES
-  chocolatey (~> 0.2.0)
+  chocolatey (~> 0.3.0)
   dmg (~> 2.2.2)
   homebrew (~> 1.11.0)
   mac_os_x (~> 1.4.6)
-  windows (~> 1.36.1)
+  windows (~> 1.36.6)
 
 GRAPH
-  build-essential (2.1.3)
+  build-essential (2.2.3)
   chef_handler (1.1.6)
-  chocolatey (0.2.0)
+  chocolatey (0.3.0)
     windows (~> 1.31)
   dmg (2.2.2)
   homebrew (1.11.0)

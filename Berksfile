@@ -9,6 +9,6 @@ group :macosx do
 end
 
 group :windows do
-  cookbook 'chocolatey', '~> 0.2.0'
-  cookbook 'windows', '~> 1.36.1'
+  cookbook 'chocolatey', '~> 0.3.0'
+  cookbook 'windows', '~> 1.36.6'
 end
