@@ -468,6 +468,7 @@ mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 node.default['mac_os_x']['settings']['atext'] = {
   domain: 'com.trankynam.aText',
   # Most of aText's settings are [presumably] stored in a giant data blob.
+  # XXX These settings are dubiously applied.
   PlayFeedbackSound: false,
   ShowDockIcon: false
 }
