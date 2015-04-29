@@ -120,6 +120,8 @@ node.default['homebrew']['formulas'] = [
   'astyle',
   'cask',
   'coreutils',
+  # An improved version of df with colors.
+  'dfc',
   # Dos2Unix / Unix2Dos <http://waterlan.home.xs4all.nl/dos2unix.html> looks
   # superior to Tofrodos <http://www.thefreecountry.com/tofrodos/>. But that
   # was just from a quick look.
