@@ -29,6 +29,7 @@ default['windows_setup']['packages'] = %w(
   ConEmu
   Firefox
   autohotkey
+  carbon
   githubforwindows
   pscx
   scite4autohotkey
