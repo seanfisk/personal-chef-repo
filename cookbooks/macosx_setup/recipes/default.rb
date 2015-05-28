@@ -216,6 +216,7 @@ include_recipe 'homebrew::install_formulas'
 node.default['homebrew']['casks'] = [
   'adium',
   'adobe-reader',
+  'atext',
   'caffeine',
   'cathode',
   'chicken',
