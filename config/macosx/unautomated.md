@@ -13,7 +13,7 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 
 * Jettison
 
-  This is licensed software that is installed using the dmg cookbook. I purchased a license that has to be manually entered/activated. Don't get confused: I initially purchased Jettison from the Mac App Store, but bought a separate license when I found that the Mac App Store version isn't up-to-date.
+  This is licensed software that is installed using Homebrew Cask. I purchased a license that has to be manually entered/activated. Don't get confused: I initially purchased Jettison from the Mac App Store, but bought a separate license when I found that the Mac App Store version isn't up-to-date.
 
 * Cathode
 

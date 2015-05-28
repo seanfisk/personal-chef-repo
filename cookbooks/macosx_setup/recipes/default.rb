@@ -238,6 +238,7 @@ node.default['homebrew']['casks'] = [
   'google-chrome',
   'inkscape',
   'iterm2',
+  'jettison',
   'karabiner',
   # This cask already applies the fix as shown here:
   # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
@@ -383,14 +384,6 @@ dmg_package 'Java7DevelopmentKit' do
   # We could use package_id here, but since that's pretty much what we do
   # above, we'll just stay consistent.
   not_if { JDK7_IS_INSTALLED }
-end
-
-JETTISON_VERSION = '1.4.3'
-dmg_package 'Jettison' do
-  source "http://www.stclairsoft.com/download/Jettison-#{JETTISON_VERSION}.dmg"
-  checksum '5836546099a85e212bd1cfbc79b35e5cf4d99e7056edff4a2b4fbdfdf3bdbd6a'
-  volumes_dir "Jettison #{JETTISON_VERSION}"
-  action :install
 end
 
 # Tasks Explorer, distributed as a pkg file not inside a DMG.
