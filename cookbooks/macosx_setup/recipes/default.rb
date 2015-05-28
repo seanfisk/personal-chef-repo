@@ -545,6 +545,7 @@ node.default['mac_os_x']['settings']['jettison'] = {
   ejectOpticalDisks: false,
   ejectSDCards: false,
   hideMenuBarIcon: false,
+  moveToApplicationsFolderAlertSuppress: true,
   playSoundOnFailure: false,
   playSoundOnSuccess: false,
   showRemountProgress: false,
