@@ -180,6 +180,7 @@ node.default['homebrew']['formulas'] = [
   # reattach-to-user-namespace has options to fix launchctl and shim
   # pbcopy/pbaste. We haven't needed them yet, though.
   'reattach-to-user-namespace',
+  'renameutils',
   'ruby-build',
   'ssh-copy-id',
   # Primarily for Sphinx
