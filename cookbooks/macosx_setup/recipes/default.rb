@@ -198,6 +198,9 @@ node.default['homebrew']['formulas'] = [
   # bundled version to a virtualenv, but it's faster to have a globally built
   # version.
   'zmq',
+  # XML utilities
+  'html-xml-utils',
+  'xml-coreutils',
   # Fun commands!
   'cmatrix',
   'cowsay',
