@@ -114,6 +114,11 @@ package 'git' do
   options '--with-pcre'
 end
 
+# LastPass command-line interface
+package 'lastpass-cli' do
+  options '--with-doc --with-pinentry'
+end
+
 node.default['homebrew']['formulas'] = [
   'ack',
   'aria2',
