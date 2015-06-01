@@ -57,7 +57,8 @@ This file lists parts of Mac OS X setup that are not automated. Typically, this 
 
 * LastPass
 
-  The universal installer has installer and uninstaller app bundles. Pretty annoying and difficult to automate. Alternatively, we could install just for Firefox and let Firefox sync the add-on (maybe?).
+  - The universal installer has installer and uninstaller app bundles which are downloaded by Homebrew Cask but need to be run manually. Using the universal installer is preferable to individual browser add-ons due to the inclusion of all browser add-ons and the binary component, which allows sharing state between browsers.
+  - [LastPass app for OS X](https://itunes.apple.com/us/app/lastpass/id926036361?ls=1&mt=12), which is installed using the Mac App Store.
 
 * Firefox
 
