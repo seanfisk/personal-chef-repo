@@ -245,6 +245,8 @@ node.default['homebrew']['casks'] = [
   'gfxcardstatus',
   'gimp',
   'google-chrome',
+  # This is 'GoogleVoiceAndVideoSetup', which installs the browser plugins.
+  'google-hangouts',
   'inkscape',
   'iterm2',
   'jettison',
