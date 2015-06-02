@@ -7,7 +7,7 @@ DEPENDENCIES
 
 GRAPH
   build-essential (2.2.3)
-  chef_handler (1.1.6)
+  chef_handler (1.1.9)
   chocolatey (0.3.0)
     windows (~> 1.31)
   dmg (2.2.2)
