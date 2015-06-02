@@ -289,8 +289,7 @@ node.default['homebrew']['casks'] = [
   # build (although it's bottled anyway).
   'sqlitebrowser',
   'sshfs',
-  # The silverlight cask is having some checksum issues.
-  # 'silverlight',
+  'silverlight', # Used for Anne's Netflix :)
   'vagrant',
   'virtualbox',
   # Wireshark initially used GTK+ as the GUI library, but is switching to Qt.
