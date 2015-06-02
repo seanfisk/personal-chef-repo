@@ -266,6 +266,28 @@ node.default['homebrew']['casks'] = [
   'skim',
   'skitch',
   'slate',
+  # SQLite browser options:
+  #
+  # - sqlitebrowser: open-source, cross-platform, well-maintained
+  # - sqliteman: looks unmaintained, questionable OS support
+  # - mesasqlite: OS X-only, looks unmaintained
+  # - sqlprosqlite: OS X-only, proprietary
+  # - sqlitestudio: open-source, cross-platform, well-maintained
+  # - navicat-for-sqlite: cross-platform, proprietary
+  #
+  # Also available is SQLite Manager, which is a high-quality Firefox add-on.
+  # <https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/>
+  #
+  # We've tried DB Browser for SQLite (sqlitebrowser), SQLite Studio
+  # (sqlitestudio), and SQLite Manager for Firefox. All are excellent. The
+  # first two are written in Qt and look great on OS X. DB Browser and SQLite
+  # manager both have options for CSV and SQL export, while SQLite Studio has
+  # those in addition to HTML, JSON, PDF, and XML. However, we've decided to go
+  # for DB Browser for SQLite because it has an intuitive interface and has
+  # packages for both Homebrew and Chocolatey. For Homebrew, both a formula and
+  # a cask are available. We've decided to go for the cask to avoid having to
+  # build (although it's bottled anyway).
+  'sqlitebrowser',
   'sshfs',
   # The silverlight cask is having some checksum issues.
   # 'silverlight',
