@@ -190,6 +190,7 @@ node.default['homebrew']['formulas'] = [
   'ssh-copy-id',
   # Primarily for Sphinx
   'texinfo',
+  'thefuck',
   'the_silver_searcher',
   'tmux',
   'tree',
