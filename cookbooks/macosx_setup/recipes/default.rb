@@ -150,6 +150,8 @@ node.default['homebrew']['formulas'] = [
   'imagemagick',
   # For pygit2 (which is for Powerline).
   'libgit2',
+  # For rotating the Powerline log (see dotfiles).
+  'logrotate',
   'markdown',
   'mercurial',
   'mobile-shell',
