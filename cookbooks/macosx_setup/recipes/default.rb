@@ -260,9 +260,8 @@ node.default['homebrew']['casks'] = [
   'monotype-skyfonts',
   'openemu',
   'osxfuse',
-  # Pandoc can be installed with a Homebrew formula, but that doesn't install
-  # the man pages. These are important as this is a pretty complex tool, and
-  # it's important to have online documentation.
+  # Pandoc also has Homebrew formula. There isn't a particular reason to pick
+  # one over the other.
   'pandoc',
   'quicksilver',
   'remote-desktop-connection',
