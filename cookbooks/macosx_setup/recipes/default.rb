@@ -201,7 +201,12 @@ node.default['homebrew']['formulas'] = [
   'wget',
   'xclip',
   'xz',
+  # For downloading videos/audio. ffmpeg is for post-processing; we chose it
+  # over libav based on http://blog.pkh.me/p/13-the-ffmpeg-libav-situation.html
+  # However, youtube-dl seems to prefer avconv (libav) over ffmpeg, so we may
+  # change this at a later time.
   'youtube-dl',
+  'ffmpeg',
   # ZeroMQ (zmq) is included to speed up IPython installs. It can install a
   # bundled version to a virtualenv, but it's faster to have a globally built
   # version.
