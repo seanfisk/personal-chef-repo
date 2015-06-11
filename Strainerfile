@@ -1,4 +1,3 @@
-knife test: knife cookbook test $COOKBOOK
 # Exclude CINK001; don't worry about having a CHANGELOG.md file for each cookbook.
 foodcritic: bundle exec foodcritic --epic-fail any --include foodcritic/* --tags ~CINK001 $SANDBOX/$COOKBOOK
 rubocop: bundle exec rubocop $SANDBOX/$COOKBOOK

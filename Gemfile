@@ -11,6 +11,4 @@ gem 'rubocop', '~> 0.28.0'
 gem 'berkshelf', '~> 3.2.0'
 gem 'mixlib-shellout', '~> 2.0.0'
 gem 'strainer', '~> 3.4.0'
-# For running knife through strainer.
-gem 'chef', '~> 12.3.0'
 gem 'travis', '~> 1.7.6'
