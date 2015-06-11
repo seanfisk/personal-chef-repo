@@ -3,18 +3,17 @@
 require 'foodcritic'
 require 'rubocop'
 require 'berkshelf/thor'
-require 'strainer/thor'
 require 'mixlib/shellout'
 
 # Helper module for safely executing subprocesses.
 module Subprocess
   def run_subprocess(*args)
-    # Don't use `Bundler.with_clean_env' anymore, now that we're requiring the
-    # chef gem. See `bundle help exec' for more info on using a 'clean'
-    # environment.
-    proc = Mixlib::ShellOut.new(args, live_stream: STDOUT)
-    proc.run_command
-    proc
+    # See `bundle help exec' for more info on using a 'clean' environment.
+    Bundler.with_clean_env do
+      proc = Mixlib::ShellOut.new(args, live_stream: STDOUT)
+      proc.run_command
+      proc
+    end
   end
 end
 
@@ -38,36 +37,42 @@ class Upload < Thor
   end
 end
 
-# Tasks for testing cookbooks.
+# Tasks for testing.
 class Test < Thor
   include Subprocess
 
-  desc 'strainer', 'Run strainer on all the cookbooks'
-  def strainer(exit = true)
-    # Strainer doesn't have a way to run on *all* the cookbooks, aside from
-    # passing their names on the command-line. Fair enough...
-    # http://stackoverflow.com/a/1899885
-    invoke 'strainer:cli:test', Pathname.new('cookbooks').children
-      .select(&:directory?)
-      .collect { |p| p.basename.to_s }
-  rescue SystemExit => e
-    # Strainer calls exit(...), but we don't want it to exit when we're running
-    # more tasks.
-    exit e.status if exit
-    e.status
-  end
-
-  desc 'other', 'Run rubocop on non-cookbook files'
-  def other(exit = true)
+  desc 'rubocop', 'Run rubocop on all Ruby files'
+  def rubocop(exit = true)
     # Pass in a list of files/directories because we don't want the bin/
-    # directory, other Foodcritic rules, or any of the cookbooks (tested by
-    # Strainer) being checked.
-    result = RuboCop::CLI.new.run \
-      %W(Berksfile Gemfile #{ __FILE__ } .chef/knife.rb) +
-      Dir.glob('config/{macosx,windows}/client.rb.sample')
-    puts 'No rubocop errors on non-cookbook files' if result == 0
+    # directory, other Foodcritic rules, etc., being checked.
+    result = RuboCop::CLI.new.run %W(Berksfile Gemfile #{ __FILE__ } cookbooks
+                                     config/macosx/client.rb.sample
+                                     config/windows/client.rb.sample
+                                     .chef/knife.rb)
+    puts 'No rubocop errors' if result == 0
     exit result if exit
     result
+  end
+
+  desc 'foodcritic', 'Run foodcritic cookbook tests'
+  def foodcritic(exit = true)
+    review = FoodCritic::Linter.new.check(
+      cookbook_paths: 'cookbooks',
+      fail_tags: ['any'],
+      include_rules: ['foodcritic/etsy', 'foodcritic/customink'],
+      # Don't worry about having a CHANGELOG.md file for each cookbook.
+      tags: ['~CINK001']
+    )
+
+    if review.warnings.any?
+      puts review
+      retval = 1
+    else
+      puts 'No foodcritic errors'
+      retval = 0
+    end
+    exit retval if exit
+    retval
   end
 
   desc 'travis', "Run 'travis lint' on '.travis.yml'"
@@ -80,8 +85,9 @@ class Test < Thor
 
   desc 'all', 'Run all tests on the repository'
   def all
-    # Exit with the sum of the error codes.
-    exit %w(other strainer travis)
+    # Exit with the sum of the error codes. Pass false as an argument to
+    # prevent the task from exiting.
+    exit %w(rubocop foodcritic travis)
       .collect { |task| invoke('test:' + task, [false]) }
       .reduce(:+)
   end
