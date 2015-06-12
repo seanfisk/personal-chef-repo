@@ -4,6 +4,8 @@ require 'foodcritic'
 require 'rubocop'
 require 'berkshelf/thor'
 require 'mixlib/shellout'
+require 'artii'
+require 'colorize'
 
 # Helper module for safely executing subprocesses.
 module Subprocess
@@ -87,8 +89,20 @@ class Test < Thor
   def all
     # Exit with the sum of the error codes. Pass false as an argument to
     # prevent the task from exiting.
-    exit %w(rubocop foodcritic travis)
-      .collect { |task| invoke('test:' + task, [false]) }
-      .reduce(:+)
+    sum = %w(rubocop foodcritic travis)
+          .collect { |task| invoke('test:' + task, [false]) }
+          .reduce(:+)
+    if sum == 0
+      print_msg 'PASS', :green
+    else
+      print_msg 'FAIL', :red
+    end
+  end
+
+  private
+
+  def print_msg(msg, color)
+    artii = Artii::Base.new font: 'block'
+    puts artii.asciify(msg).colorize(color)
   end
 end

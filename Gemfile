@@ -11,3 +11,6 @@ gem 'rubocop', '~> 0.28.0'
 gem 'berkshelf', '~> 3.2.3'
 gem 'mixlib-shellout', '~> 2.0.1'
 gem 'travis', '~> 1.7.6'
+# For printing fancy pass/fail message :)
+gem 'artii', '~> 2.1.0'
+gem 'colorize', '~> 0.7.0'
