@@ -272,6 +272,7 @@ node.default['homebrew']['casks'] = [
   'remote-desktop-connection',
   'skim',
   'skitch',
+  'skype',
   'slate',
   # SQLite browser options:
   #
