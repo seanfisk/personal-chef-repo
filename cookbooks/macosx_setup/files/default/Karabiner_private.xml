@@ -1,24 +1,93 @@
 <?xml version="1.0"?>
 <root>
+    <!-- Add mapping for Targus Wireless Presenter -->
+    <devicevendordef>
+        <vendorname>TARGUS</vendorname>
+        <vendorid>0x1048</vendorid>
+    </devicevendordef>
+    <deviceproductdef>
+        <productname>AMP11</productname>
+        <productid>0x07D1</productid>
+    </deviceproductdef>
+
+    <appdef>
+        <appname>FLASH_PLAYER_PROJECTOR</appname>
+        <equal>com.macromedia.Flash Player.app</equal>
+    </appdef>
+
+    <!-- Our key remappings -->
     <list>
         <item>
-            <name>Targus Wireless Presenter Fix</name>
-            <identifier>private.targus_wireless_presenter_keynote_fix</identifier>
-            <autogen>__KeyToKey__ KeyCode::CURSOR_DOWN, VK_SHIFT, KeyCode::CURSOR_RIGHT</autogen>
-            <autogen>__KeyToKey__ KeyCode::CURSOR_UP, VK_SHIFT, KeyCode::CURSOR_LEFT</autogen>
+            <name>Targus Wireless Presenter</name>
+            <item>
+                <name>Keynote to Skim</name>
+                <identifier>private.targus.keynote-to-skim</identifier>
+                <device_only>DeviceVendor::TARGUS, DeviceProduct::AMP11</device_only>
+                <autogen>__KeyToKey__ KeyCode::CURSOR_DOWN, ModifierFlag::SHIFT_L, KeyCode::CURSOR_RIGHT, ModifierFlag::NONE</autogen>
+                <autogen>__KeyToKey__ KeyCode::CURSOR_UP, ModifierFlag::SHIFT_L, KeyCode::CURSOR_LEFT, ModifierFlag::NONE</autogen>
+            </item>
+            <item>
+                <name>Netflix Remote</name>
+                <!-- See http://cdn.targus.com/web/us/downloads/amp11_ug.pdf -->
+                <!-- Presenter Mode remaps -->
+                <identifier>private.targus.netflix</identifier>
+                <device_only>DeviceVendor::TARGUS, DeviceProduct::AMP11</device_only>
+                <!-- Next Slide to Rewind -->
+                <autogen>__KeyToKey__ KeyCode::CURSOR_UP, ModifierFlag::SHIFT_L, KeyCode::CURSOR_LEFT, ModifierFlag::SHIFT_L</autogen>
+                <!-- Previous Slide to Fast Forward -->
+                <autogen>__KeyToKey__ KeyCode::CURSOR_DOWN, ModifierFlag::SHIFT_L, KeyCode::CURSOR_RIGHT, ModifierFlag::SHIFT_L</autogen>
+                <!-- Blank Screen to Play/Pause -->
+                <autogen>__KeyToKey__ KeyCode::B, KeyCode::SPACE</autogen>
+                <!-- Start Slideshow to Full Screen
+
+                     This isn't perfect because the way that the
+                     remote send keys causes Option to be activated
+                     sometimes, whereas this Karabiner rule is only
+                     equipped to handle an Opt-Cmd-modified P key
+                     press. But it really shouldn't affect anything.
+                -->
+                <autogen>__KeyToKey__ KeyCode::P, ModifierFlag::OPTION_L, ModifierFlag::COMMAND_L, KeyCode::F, ModifierFlag::NONE</autogen>
+                <!-- Holding the Slideshow button activates Stop
+                     Slideshow, which maps to Escape. This is the same
+                     as Netflix's Exit Full Screen.
+                -->
+                <!-- Mouse Mode remaps -->
+                <!-- Left Programmable Button to Brightness Down -->
+                <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, ModifierFlag::COMMAND_L, ConsumerKeyCode::BRIGHTNESS_DOWN, ModifierFlag::NONE</autogen>
+                <!-- Right Programmable Button to Brightness Up -->
+                <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, ModifierFlag::COMMAND_L, ConsumerKeyCode::BRIGHTNESS_UP, ModifierFlag::NONE</autogen>
+            </item>
         </item>
         <item>
-            <name>WASD to ASDF</name>
-            <identifier>private.was_to_asdf</identifier>
-            <autogen>__KeyToKey__ KeyCode::S, KeyCode::W</autogen>
-            <autogen>__KeyToKey__ KeyCode::D, KeyCode::S</autogen>
-            <autogen>__KeyToKey__ KeyCode::F, KeyCode::D</autogen>
+            <name>Gaming</name>
+            <item>
+                <name>ASDF to AWSD</name>
+                <identifier>private.gaming.asdf-to-awsd</identifier>
+                <!-- Left: A is A, no remapping needed -->
+                <!-- Up: S to W -->
+                <autogen>__KeyToKey__ KeyCode::S, KeyCode::W</autogen>
+                <!-- Down: D to S -->
+                <autogen>__KeyToKey__ KeyCode::D, KeyCode::S</autogen>
+                <!-- Right: F to D -->
+                <autogen>__KeyToKey__ KeyCode::F, KeyCode::D</autogen>
+            </item>
+            <item>
+                <name>Crazy Flasher</name>
+                <identifier>private.gaming.crazy-flasher</identifier>
+                <only>FLASH_PLAYER_PROJECTOR</only>
+                <!-- Reload: Right Click to R -->
+                <autogen>__KeyToKey__ PointingButton::RIGHT, KeyCode::R</autogen>
+                <!-- Switch to Close Combat Weapon: Middle Click to 3 -->
+                <autogen>__KeyToKey__ PointingButton::MIDDLE, KeyCode::KEY_3</autogen>
+                <!-- Same as ASDF to AWSD -->
+                <autogen>__KeyToKey__ KeyCode::S, KeyCode::W</autogen>
+                <autogen>__KeyToKey__ KeyCode::D, KeyCode::S</autogen>
+                <autogen>__KeyToKey__ KeyCode::F, KeyCode::D</autogen>
+            </item>
         </item>
-        <item>
-            <name>Crazy Flasher</name>
-            <identifier>private.crazy_flasher</identifier>
-            <autogen>__KeyToKey__ PointingButton::RIGHT, KeyCode::R</autogen>
-            <autogen>__KeyToKey__ PointingButton::MIDDLE, KeyCode::KEY_3</autogen>
-        </item>
+        <!-- This file gets merged with Karabiner's built-in settings.
+             This adds a divider item like others used in Karabiner.
+        -->
+        <item><name>──────────────────────────────</name></item>
     </list>
 </root>
