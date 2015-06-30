@@ -184,6 +184,13 @@ node.default['homebrew']['formulas'] = [
   #
   # We now also install pyenv through Homebrew, so it's nice to be consistent.
   'rbenv',
+  # rbenv plugins
+  # For the reason this was chosen over alternatives, see
+  # https://github.com/maljub01/rbenv-bundle-exec#similar-plugins
+  'rbenv-bundle-exec',
+  'rbenv-communal-gems',
+  'rbenv-gem-rehash',
+  'rbenv-default-gems',
   # reattach-to-user-namespace has options to fix launchctl and shim
   # pbcopy/pbaste. We haven't needed them yet, though.
   'reattach-to-user-namespace',
