@@ -500,6 +500,16 @@ node.default['mac_os_x']['settings']['clock'] = {
   IsAnalog: false
 }
 
+# Start the character viewer in docked mode. The large window mode doesn't take
+# focus automatically, and can't AFAIK be focused with any keyboard shortcut,
+# rendering it less useful for those who like to stay on the keyboard. The
+# docked mode puts the cursor right in the search field, which is perfect for
+# keyboard users like myself.
+node.default['mac_os_x']['settings']['character_viewer'] = {
+  domain: 'com.apple.CharacterPaletteIM',
+  CVStartAsLargeWindow: false
+}
+
 # Show percentage on battery indicator.
 #
 # Note: For some reason, Apple chose the value of ShowPercent to be 'YES' or
