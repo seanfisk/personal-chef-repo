@@ -160,6 +160,7 @@ node.default['homebrew']['formulas'] = [
   'node',
   # I prefer ohcount to cloc and sloccount.
   'ohcount',
+  'osquery',
   'p7zip',
   'parallel',
   'pdfgrep',
