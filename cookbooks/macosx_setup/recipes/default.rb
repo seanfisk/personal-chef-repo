@@ -511,6 +511,12 @@ node.default['mac_os_x']['settings']['character_viewer'] = {
   CVStartAsLargeWindow: false
 }
 
+node.default['mac_os_x']['settings']['messages'] = {
+  domain: 'com.apple.iChat',
+  AddressMeInGroupchat: true, # Notify me when my name is mentioned
+  SaveConversationsOnClose: true # Save history when conversations are closed
+}
+
 # Show percentage on battery indicator.
 #
 # Note: For some reason, Apple chose the value of ShowPercent to be 'YES' or
