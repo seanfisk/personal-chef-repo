@@ -267,6 +267,9 @@ node.default['homebrew']['casks'] = [
   'iterm2',
   'jettison',
   'karabiner',
+  # This is a maintained fork of the original Slate:
+  # https://github.com/mattr-/slate
+  'mattr-slate',
   # This cask already applies the fix as shown here:
   # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
   'macfusion',
@@ -281,7 +284,6 @@ node.default['homebrew']['casks'] = [
   'skim',
   'skitch',
   'skype',
-  'slate',
   # SQLite browser options:
   #
   # - sqlitebrowser: open-source, cross-platform, well-maintained
