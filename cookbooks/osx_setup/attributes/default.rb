@@ -17,14 +17,14 @@
 # limitations under the License.
 #
 
-default['macosx_setup']['home'] = ENV['HOME']
-default['macosx_setup']['personal_dir'] =
-  "#{default['macosx_setup']['home']}/src/personal"
-default['macosx_setup']['dotfiles_dir'] =
-  "#{default['macosx_setup']['personal_dir']}/dotfiles"
-default['macosx_setup']['emacs_dir'] =
-  "#{default['macosx_setup']['personal_dir']}/emacs"
-default['macosx_setup']['scripts_dir'] =
-  "#{default['macosx_setup']['home']}/bin"
-default['macosx_setup']['fonts_dir'] =
-  "#{default['macosx_setup']['home']}/Library/Fonts"
+default['osx_setup']['home'] = ENV['HOME']
+default['osx_setup']['personal_dir'] =
+  "#{default['osx_setup']['home']}/src/personal"
+default['osx_setup']['dotfiles_dir'] =
+  "#{default['osx_setup']['personal_dir']}/dotfiles"
+default['osx_setup']['emacs_dir'] =
+  "#{default['osx_setup']['personal_dir']}/emacs"
+default['osx_setup']['scripts_dir'] =
+  "#{default['osx_setup']['home']}/bin"
+default['osx_setup']['fonts_dir'] =
+  "#{default['osx_setup']['home']}/Library/Fonts"

@@ -8,7 +8,7 @@ This repository contains personal configurations for my machines, set up using t
 
 Please see the README for one of the configurations for more instructions on how to install:
 
-* [Mac OS X](https://github.com/seanfisk/personal-chef-repo/tree/master/config/macosx)
+* [Mac OS X](https://github.com/seanfisk/personal-chef-repo/tree/master/config/osx)
 * [Windows](https://github.com/seanfisk/personal-chef-repo/tree/master/config/windows)
 
 ## Setting up an Administrator Workstation
@@ -17,11 +17,11 @@ An administrator workstation is used to edit the Chef cookbooks in this reposito
 
 1. Clone this repository:
 
-        git clone git@github.com:seanfisk/macosx-chef-repo.git
+        git clone git@github.com:seanfisk/personal-chef-repo.git chef-repo
 
 1. Go into the repo directory. All following commands should be run from here.
 
-        cd macosx-chef-repo
+        cd chef-repo
 
 1. Set up the Knife configuration. Copy the *user* key from an existing administrator workstation or generate a new one and download it to this machine. This allows us to authenticate to the Chef server using our *user* client:
 

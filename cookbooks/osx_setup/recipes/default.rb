@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Cookbook Name:: macosx_setup
+# Cookbook Name:: osx_setup
 # Recipe:: default
 #
 # Author:: Sean Fisk <sean@seanfisk.com>
@@ -359,7 +359,7 @@ end
 
 execute 'install Deep Sleep dashboard widget' do
   command "unzip -o '#{DEEP_SLEEP_ARCHIVE_PATH}'"
-  cwd "#{node['macosx_setup']['home']}/Library/Widgets"
+  cwd "#{node['osx_setup']['home']}/Library/Widgets"
   action :nothing
 end
 
@@ -478,7 +478,7 @@ INCONSOLATA_POWERLINE_FILE = 'Inconsolata for Powerline.otf'
 remote_file 'download Inconsolata for Powerline font' do
   source 'https://github.com/Lokaltog/powerline-fonts/raw/'\
          'master/Inconsolata/' + URI.escape(INCONSOLATA_POWERLINE_FILE)
-  path "#{node['macosx_setup']['fonts_dir']}/#{INCONSOLATA_POWERLINE_FILE}"
+  path "#{node['osx_setup']['fonts_dir']}/#{INCONSOLATA_POWERLINE_FILE}"
 end
 
 ###############################################################################
@@ -570,7 +570,7 @@ node.default['mac_os_x']['settings']['gfxcardstatus'] = {
 # raises an annoying error because it looks for the plist in its own cookbook.
 
 ## Install background image.
-backgrounds_dir = "#{node['macosx_setup']['home']}/Pictures/Backgrounds"
+backgrounds_dir = "#{node['osx_setup']['home']}/Pictures/Backgrounds"
 background_name = 'holland-beach-sunset.jpg'
 background_path = "#{backgrounds_dir}/#{background_name}"
 
@@ -592,11 +592,11 @@ end
 ## /usr/libexec/PlistBuddy.
 template 'iTerm2 preferences file' do
   source 'com.googlecode.iterm2.plist.erb'
-  path "#{node['macosx_setup']['home']}/Library/Preferences/" \
+  path "#{node['osx_setup']['home']}/Library/Preferences/" \
        'com.googlecode.iterm2.plist'
   variables(
     background_image_path: background_path,
-    home_directory: node['macosx_setup']['home']
+    home_directory: node['osx_setup']['home']
   )
 end
 
@@ -621,7 +621,7 @@ node.default['mac_os_x']['settings']['jettison'] = {
 
 cookbook_file 'Karabiner XML settings file' do
   source 'Karabiner_private.xml'
-  path "#{node['macosx_setup']['home']}/Library/Application Support/" \
+  path "#{node['osx_setup']['home']}/Library/Application Support/" \
        'Karabiner/private.xml'
 end
 
@@ -677,7 +677,7 @@ node.default['mac_os_x']['settings']['quicksilver'] = {
 # supplement it).
 cookbook_file 'Slate preferences file' do
   source 'slate'
-  path "#{node['macosx_setup']['home']}/.slate"
+  path "#{node['osx_setup']['home']}/.slate"
 end
 
 node.default['mac_os_x']['settings']['tasks_explorer'] = {
@@ -910,12 +910,12 @@ include_recipe 'mac_os_x::settings'
 # DOTFILES AND EMACS
 ###############################################################################
 
-directory node['macosx_setup']['personal_dir'] do
+directory node['osx_setup']['personal_dir'] do
   recursive true
   action :create
 end
 
-git node['macosx_setup']['emacs_dir'] do
+git node['osx_setup']['emacs_dir'] do
   repository 'git@github.com:seanfisk/emacs.git'
   enable_submodules true
   action :checkout
@@ -924,7 +924,7 @@ end
 
 execute 'install emacs configuration' do
   command 'make install'
-  cwd node['macosx_setup']['emacs_dir']
+  cwd node['osx_setup']['emacs_dir']
   action :nothing
 end
 

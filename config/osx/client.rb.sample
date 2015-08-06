@@ -4,9 +4,9 @@
 #
 # Instructions:
 #
-# Replace the node_name's 'macosx-node' with a name for your machine. If it is
-# a roaming machine, it is NOT a good idea to let chef give it a node name
-# based on its fully qualified domain name (FQDN).
+# Replace the node_name's 'osx-node' with a name for your machine. If it is a
+# roaming machine, it is NOT a good idea to let chef give it a node name based
+# on its fully qualified domain name (FQDN).
 #
 # For a full list of options, see
 # <https://docs.chef.io/config_rb_client.html>.
@@ -22,5 +22,5 @@ chef_server_url 'https://api.opscode.com/organizations/sean_fisk'
 # The default level is :auto, which sets the log_level to :warn when
 # log_location (default: STDOUT) is a tty. We want more information.
 log_level :info
-node_name 'macosx-node'
+node_name 'osx-node'
 validation_client_name 'sean_fisk-validator'

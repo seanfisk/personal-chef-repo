@@ -13,7 +13,7 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
 1. Set up the Chef client configuration. This allows us to authenticate to the Chef server using our *machine* client:
 
-        curl https://raw.githubusercontent.com/seanfisk/personal-chef-repo/master/config/macosx/client.rb.sample > /etc/chef/client.rb
+        curl https://raw.githubusercontent.com/seanfisk/personal-chef-repo/master/config/osx/client.rb.sample > /etc/chef/client.rb
 
 1. Now edit `client.rb` according to the instructions.
 
@@ -29,9 +29,9 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
 1. At this point, the node is registered and is ready to provision. However, we need to add cookbooks to this node's `run_list`. *From an administrator workstation*, run the following command. If you do not yet have an administrator workstation (i.e., this is the only workstation you have), read the section on setting up an administrator workstation in the main README and return here when finished.
 
-        knife node run_list add NODE_NAME macosx_setup
+        knife node run_list add NODE_NAME osx_setup
 
-    This command registers the `macosx_setup` cookbook to be run when provisioning takes place.
+    This command registers the `osx_setup` cookbook to be run when provisioning takes place.
 
 1. Now provision the node with the modified `run_list`:
 
