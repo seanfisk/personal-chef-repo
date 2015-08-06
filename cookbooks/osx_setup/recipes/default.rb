@@ -265,6 +265,30 @@ node.default['homebrew']['casks'] = [
   'google-hangouts',
   'inkscape',
   'iterm2',
+  # Java
+  #
+  # I wish we could avoid installing Java, but I need it for at least these
+  # reasons:
+  #
+  # - Network Connect, GVSU's SSL VPN
+  # - Playing TankPit, a Java applet-based game
+  # - Eclipse
+  #
+  # Apple Java 6 was installed, then uninstalled like so:
+  #
+  #     sudo rm -r /System/Library/Java/JavaVirtualMachines/1.6.0.jdk
+  #     sudo pkgutil --forget com.apple.pkg.JavaForMacOSX107
+  #
+  # See here for the procedure followed: http://superuser.com/a/712783
+  #
+  # Oracle Java 7 JDK was installed, then uninstalled with:
+  #
+  #     sudo rm -r /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk
+  #
+  # See here:
+  # JDK: http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html#uninstall
+  # JRE: https://www.java.com/en/download/help/mac_uninstall_java.xml
+  'java',
   'jettison',
   'karabiner',
   # This is a maintained fork of the original Slate:
@@ -361,79 +385,6 @@ execute 'install Deep Sleep dashboard widget' do
   command "unzip -o '#{DEEP_SLEEP_ARCHIVE_PATH}'"
   cwd "#{node['osx_setup']['home']}/Library/Widgets"
   action :nothing
-end
-
-# Java
-# I wish we could avoid installing Java, but I need it for at least these
-# reasons:
-#
-# - Network Connect, GVSU's SSL VPN
-# - Playing TankPit, a Java applet-based game
-# - Eclipse
-
-# Note: Java 6 was installed, but uninstalled like so:
-#
-#     sudo rm -r /System/Library/Java/JavaVirtualMachines/1.6.0.jdk
-#     sudo pkgutil --forget com.apple.pkg.JavaForMacOSX107
-#
-# See here for the procedure followed: http://superuser.com/a/712783
-
-# Java 7 JDK, from Oracle
-
-# If you update, also be aware of the 'b13' in the URL below -- that will
-# probably change.
-JDK7_UPDATE_VERSION = 60
-JDK7_VERSION = "7u#{JDK7_UPDATE_VERSION}"
-JDK7_DMG_NAME = "jdk-#{JDK7_VERSION}-macosx-x64"
-JDK7_PKG_AND_VOLUMES_DIR_NAME =
-  "JDK 7 Update #{JDK7_UPDATE_VERSION}"
-
-# rubocop:disable LineLength
-# Oracle makes you agree to their agreement, which means some trickery is
-# necessary. See here for more info:
-# <http://stackoverflow.com/questions/10268583/how-to-automate-download-and-instalation-of-java-jdk-on-linux>
-# rubocop:enable LineLength
-
-pkgutil_proc = Mixlib::ShellOut.new(
-  'pkgutil', '--pkg-info', 'com.oracle.jdk7u60')
-pkgutil_proc.run_command
-JDK7_IS_INSTALLED = pkgutil_proc.exitstatus == 0
-
-remote_file 'download JDK 7 DMG' do
-  # Note: JDK 7 is installed to
-  # /Library/Java/JavaVirtualMachines/
-  #
-  # See here:
-  # <http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html>
-
-  source 'http://download.oracle.com/otn-pub/' \
-    "java/jdk/#{JDK7_VERSION}-b19/#{JDK7_DMG_NAME}.dmg"
-  path "#{Chef::Config[:file_cache_path]}/#{JDK7_DMG_NAME}.dmg"
-  checksum 'a868aab818cd114f652252ded5b159b5c47beb1a0a074cdb0e475ed79826c9df'
-  headers('Cookie' => 'oraclelicense=accept-securebackup-cookie')
-  # A `notifies' attribute seems like a good idea here, but if it it's already
-  # downloaded *but not installed*, there will be no notification. We'll just
-  # hope it gets downloaded before the next provider runs.
-
-  # Even if it's not in the cache, if we already have the JDK installed,
-  # there's no reason to download it.
-  not_if { JDK7_IS_INSTALLED }
-end
-
-# The name must not have spaces (requirement of dmg provider).
-dmg_package 'Java7DevelopmentKit' do
-  # Though this provider doesn't install an app bundle, the `app' attribute
-  # specifies the name of the pkg file in the volume.
-  app JDK7_PKG_AND_VOLUMES_DIR_NAME
-  # A `source' attribute is not included. This causes the dmg provider to look
-  # for the DMG specified by `dmg_name' in the Chef cache directory.
-  type 'pkg'
-  dmg_name JDK7_DMG_NAME
-  volumes_dir JDK7_PKG_AND_VOLUMES_DIR_NAME
-  action :install
-  # We could use package_id here, but since that's pretty much what we do
-  # above, we'll just stay consistent.
-  not_if { JDK7_IS_INSTALLED }
 end
 
 # Tasks Explorer, distributed as a pkg file not inside a DMG.
