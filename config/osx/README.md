@@ -9,7 +9,7 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 1. Create the Chef configuration directory. We change the owner to our user so that we can provision mostly under our standard user. This works well with Mac OS X because most operations don't require root, including installing to `/Applications` and installing [Homebrew](http://brew.sh/) packages.
 
         sudo mkdir /etc/chef
-        sudo chown "$USER" /etc/chef
+        sudo chown "$(id -u):$(id -g)" /etc/chef
 
 1. Set up the Chef client configuration. This allows us to authenticate to the Chef server using our *machine* client:
 
