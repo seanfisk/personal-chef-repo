@@ -26,12 +26,8 @@ include_recipe 'homebrew::cask'
 
 homebrew_cask 'mactex'
 
-# rubocop:disable LineLength
-
 # Blacklisting fonts as in MacTeX 2013 is no longer necessary with MacTeX 2014.
 # For the old issues, see:
 #
 # - http://tex.stackexchange.com/questions/140840/lualatex-luaotfload-broke-after-upgrading-to-mavericks
 # - https://github.com/lualatex/luaotfload/issues/139
-
-# rubocop:enable LineLength

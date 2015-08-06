@@ -64,8 +64,8 @@ SHELLS_FILE = '/etc/shells'
       # Don't execute if this shell is already in the shells config file. Open
       # a new file each time to reset the enumerator, and just in case these
       # are executed in parallel.
-      File.open(SHELLS_FILE).each_line.any? do
-        |line| line.include?(shell_path)
+      File.open(SHELLS_FILE).each_line.any? do |line|
+        line.include?(shell_path)
       end
     end
   end
@@ -461,13 +461,9 @@ remote_file 'download Tasks Explorer pkg' do
 end
 # Now install.
 execute 'install Tasks Explorer' do
-  # rubocop:disable LineLength
-  #
   # With some help from:
   # - https://github.com/opscode-cookbooks/dmg/blob/master/providers/package.rb
   # - https://github.com/mattdbridges/chef-osx_pkg/blob/master/providers/package.rb
-  #
-  # rubocop:enable LineLength
   command "sudo installer -pkg '#{TE_PKG_CACHE_PATH}' -target /"
   not_if { TE_IS_INSTALLED }
 end
