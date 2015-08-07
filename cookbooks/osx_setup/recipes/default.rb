@@ -291,6 +291,7 @@ node.default['homebrew']['casks'] = [
   'java',
   'jettison',
   'karabiner',
+  'lastpass', # NOTE: Requires manual intervention
   # This is a maintained fork of the original Slate:
   # https://github.com/mattr-/slate
   'mattr-slate',
