@@ -573,6 +573,21 @@ cookbook_file 'Karabiner XML settings file' do
        'Karabiner/private.xml'
 end
 
+LASTPASS_CMD_SHIFT_KEY = '1179914'
+node.default['mac_os_x']['settings']['lastpass'] = {
+  domain: 'com.lastpass.LastPass',
+  # Some preferences are prefixed by a hash, which seems to be stored in
+  # 'lp_local_pwhash'. We don't know what that hash means, or whether it's
+  # consistent, so just leave those alone.
+  global_StartOnLogin: '1',
+  # Cmd-Shift-L
+  global_SearchHotKeyMod: LASTPASS_CMD_SHIFT_KEY,
+  global_SearchHotKeyVK: '37',
+  # Cmd-Shift-V
+  global_VaultHotKeyMod: LASTPASS_CMD_SHIFT_KEY,
+  global_VaultHotKeyVK: '9'
+}
+
 # Note: We are not setting the Quicksilver hotkey through these settings.
 #
 # It was easy to do when we just copied the plist, but the plist has the
