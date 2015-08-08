@@ -1,7 +1,6 @@
 High Priority
 -------------
 
-* Google Talk plugin (also note that this needs to be blocked in Firefox, as it forces a transition to the discrete GPU even when the plugin really isn't being used [i.e., not in hangouts]).
 * `sudo` prompts in various resources are not showing, and script is hanging waiting for them.
 * Use PlistBuddy to merge iTerm2 preferences.
 * Add note about setting up SSH keys before running.
