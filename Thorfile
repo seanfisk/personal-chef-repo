@@ -87,8 +87,7 @@ class Test < Thor
 
   desc 'all', 'Run all tests on the repository'
   def all
-    # Exit with the sum of the error codes. Pass false as an argument to
-    # prevent the task from exiting.
+    # Pass false as an argument to prevent the task from exiting.
     sum = %w(rubocop foodcritic travis)
           .collect { |task| invoke('test:' + task, [false]) }
           .reduce(:+)
@@ -97,6 +96,8 @@ class Test < Thor
     else
       print_msg 'FAIL', :red
     end
+    # Exit with the sum of the error codes.
+    exit sum
   end
 
   private
