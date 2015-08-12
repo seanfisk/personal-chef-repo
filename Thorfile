@@ -54,7 +54,7 @@ class Test < Thor
                                      config/osx/client.rb.sample
                                      config/windows/client.rb.sample
                                      .chef/knife.rb)
-    puts 'No rubocop errors' if result == 0
+    puts 'No rubocop errors'.colorize(:green) if result == 0
     exit result if exit
     result
   end
@@ -73,7 +73,7 @@ class Test < Thor
       puts review
       retval = 1
     else
-      puts 'No foodcritic errors'
+      puts 'No foodcritic errors'.colorize(:green)
       retval = 0
     end
     exit retval if exit
