@@ -59,7 +59,7 @@ SHELLS_FILE = '/etc/shells'
   execute "add #{shell_path} to #{SHELLS_FILE}" do
     # Unfortunately, using a ruby_block does not work because there's no way
     # that I know to execute it using sudo.
-    command "sudo bash -c \"echo '#{shell_path}' >> '#{SHELLS_FILE}'\""
+    command ['sudo', 'bash', '-c', "echo '#{shell_path}' >> '#{SHELLS_FILE}'"]
     not_if do
       # Don't execute if this shell is already in the shells config file. Open
       # a new file each time to reset the enumerator, and just in case these
@@ -74,7 +74,7 @@ end
 # Then, set zsh as the current user's shell.
 ZSH_PATH = File.join(BREW_PREFIX, 'bin', 'zsh')
 execute "set #{ZSH_PATH} as default shell" do
-  command "chsh -s '#{ZSH_PATH}'"
+  command ['chsh', '-s', ZSH_PATH]
   # getpwuid defaults to the current user, which is what we want.
   not_if { Etc.getpwuid.shell == ZSH_PATH }
 end
@@ -90,7 +90,7 @@ execute 'fix the zsh startup file that path_helper uses' do
   #
   # See this link for more information:
   # <https://github.com/sorin-ionescu/prezto/issues/381>
-  command 'sudo mv /etc/zshenv /etc/zprofile'
+  command ['sudo', 'mv', '/etc/zshenv', '/etc/zprofile']
   only_if { File.exist?('/etc/zshenv') }
 end
 
@@ -104,7 +104,7 @@ package 'emacs' do
   options '--cocoa --with-gnutls'
 end
 execute "Link 'Emacs.app' to '/Applications'" do
-  command 'brew linkapps emacs'
+  command %w(brew linkapps emacs)
   creates '/Applications/Emacs.app'
 end
 
@@ -383,7 +383,7 @@ remote_file 'download Deep Sleep dashboard widget' do
 end
 
 execute 'install Deep Sleep dashboard widget' do
-  command "unzip -o '#{DEEP_SLEEP_ARCHIVE_PATH}'"
+  command ['unzip', '-o', DEEP_SLEEP_ARCHIVE_PATH]
   cwd "#{node['osx_setup']['home']}/Library/Widgets"
   action :nothing
 end
@@ -416,7 +416,7 @@ execute 'install Tasks Explorer' do
   # With some help from:
   # - https://github.com/opscode-cookbooks/dmg/blob/master/providers/package.rb
   # - https://github.com/mattdbridges/chef-osx_pkg/blob/master/providers/package.rb
-  command "sudo installer -pkg '#{TE_PKG_CACHE_PATH}' -target /"
+  command ['sudo', 'installer', '-pkg', TE_PKG_CACHE_PATH, '-target', '/']
   not_if { TE_IS_INSTALLED }
 end
 
@@ -925,7 +925,7 @@ git node['osx_setup']['emacs_dir'] do
 end
 
 execute 'install emacs configuration' do
-  command 'make install'
+  command %w(make install)
   cwd node['osx_setup']['emacs_dir']
   action :nothing
 end
@@ -934,12 +934,12 @@ execute 'invalidate sudo timestamp' do
   # 'sudo -K' will remove the timestamp entirely, which means that sudo will
   # print the initial 'Improper use of the sudo command' warning. Not what we
   # want. 'sudo -k' just invalidates the timestamp without removing it.
-  command 'sudo -k'
+  command ['sudo', '-k']
   # Kill only if we have sudo privileges. 'sudo -k' is idempotent anyway, but
   # it's nice to see less resources updated when possible.
   #
   # 'sudo -n command' exits with 0 if a password is needed (what?), or the exit
   # code of 'command' if it is able to run it. Hence the unusual guard here: an
   # exit code of 1 indicates sudo privileges, while 0 indicates none.
-  not_if 'sudo -n false'
+  not_if ['sudo', '-n', 'false']
 end
