@@ -2,7 +2,6 @@ High Priority
 -------------
 
 * `sudo` prompts in various resources are not showing, and script is hanging waiting for them.
-* Use PlistBuddy to merge iTerm2 preferences.
 * Add note about setting up SSH keys before running.
 * Mention installing Command-Line Tools for Xcode.
 * Document upload process.

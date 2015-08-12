@@ -528,7 +528,17 @@ node.default['mac_os_x']['settings']['gfxcardstatus'] = {
 # apparently spotty, and I haven't wanted tmux integration anyway. It also
 # raises an annoying error because it looks for the plist in its own cookbook.
 
-## Install background image.
+# Set top-level iTerm2 preferences.
+node.default['mac_os_x']['settings']['iterm2'] = {
+  domain: 'com.googlecode.iterm2',
+  Hotkey: true,
+  HotkeyChar: 59,
+  HotkeyCode: 41,
+  HotkeyModifiers: 1_048_840,
+  PasteFromClipboard: false
+}
+
+# Install background image.
 backgrounds_dir = "#{node['osx_setup']['home']}/Pictures/Backgrounds"
 background_name = 'holland-beach-sunset.jpg'
 background_path = "#{backgrounds_dir}/#{background_name}"
@@ -538,25 +548,43 @@ cookbook_file background_name do
   path background_path
 end
 
-## Install plist, containing lots of themes, configuration, and background
-## image setup.
-##
-## We've considered using defaults, but mac_os_x_userdefaults doesn't support
-## nested dictionary values. iTerm2 preferences use this, so we need to keep
-## using the template. Even if in the future mac_os_x_userdefaults gains nested
-## dictionary support, it builds command lines to 'defaults', which might
-## exceed the OS limit for command lines.
-##
-## Another option would be to merge part of the plist using
-## /usr/libexec/PlistBuddy.
-template 'iTerm2 preferences file' do
-  source 'com.googlecode.iterm2.plist.erb'
-  path "#{node['osx_setup']['home']}/Library/Preferences/" \
-       'com.googlecode.iterm2.plist'
-  variables(
-    background_image_path: background_path,
-    home_directory: node['osx_setup']['home']
-  )
+# Install and run script which merges our specific customizations into the
+# fuller iTerm2 preferences. There is an array of profiles in the key 'New
+# Bookmarks' (no idea why they chose this name). By default there is only one
+# profile, the default profile. Our script sets only the keys within the
+# default profile we have specifically changed.
+#
+# This can't be done with mac_os_x_userdefaults because it only supports
+# setting top-level keys, not merging. The current approach is to use
+# CoreFoundation's Preferences API to retrieve the profile dictionary through
+# the top-level key, merge the values, then set the top-level key with the new
+# values. This is done through Python using PyObjC so that we don't have to
+# compile an Objective-C or Swift program.
+#
+# Other approaches that have been considered are:
+#
+# - Modifying the plist directly (templating values or merging or setting with
+#   PlistBuddy). This is not good because preference plists are synced with
+#   cached defaults, and the plists are not really meant to be modified
+#   directly. The correct way to interact with them is through the preferences
+#   APIs. PlistBuddy does support setting of keys within nested structures, but
+#   is cumbersome to use.
+# - NSUserDefaults only supports operations on preferences for the current
+#   application.
+# - It would be nice to call the CoreFoundation API from Ruby, but RubyCocoa,
+#   MacRuby, and HotCocoa are apparently defunct; they have been succeeded by
+#   RubyMotion which is a proprietary product. Frustrating.
+iterm2_script_name = 'iterm2-set-profile-prefs'
+iterm2_script_path = "#{Chef::Config[:file_cache_path]}/#{iterm2_script_name}"
+cookbook_file 'Copy iTerm2 Profile Preferences Script' do
+  source iterm2_script_name
+  path iterm2_script_path
+  mode '700'
+end
+
+execute 'Run iTerm2 Profile Preferences Script' do
+  command [iterm2_script_path, background_path]
+  only_if [iterm2_script_path, '--should-run', background_path]
 end
 
 node.default['mac_os_x']['settings']['jettison'] = {
