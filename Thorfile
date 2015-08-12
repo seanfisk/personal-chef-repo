@@ -3,6 +3,9 @@
 require 'foodcritic'
 require 'rubocop'
 require 'berkshelf/thor'
+# 'travis lint' can be called as a subprocess, but calling it from Ruby is
+# preferable because it is cleaner and avoids loading the entire travis gem.
+require 'travis/cli/lint'
 require 'mixlib/shellout'
 require 'artii'
 require 'colorize'
@@ -80,9 +83,18 @@ class Test < Thor
   desc 'travis', "Run 'travis lint' on '.travis.yml'"
   def travis(exit = true)
     puts 'Linting travis file'
-    proc = run_subprocess 'travis', 'lint', '--exit-code'
-    exit proc.exitstatus if exit
-    proc.exitstatus
+    lint = Travis::CLI::Lint.new
+    lint.exit_code = true # Make lint exit with an exit code
+    begin
+      lint.run
+    rescue SystemExit => e
+      retval = e.status
+    else
+      # Travis::CLI::Lint.run will only exit if the file has errors
+      retval = 0
+    end
+    exit retval if exit
+    retval
   end
 
   desc 'all', 'Run all tests on the repository'
