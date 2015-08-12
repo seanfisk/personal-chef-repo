@@ -439,10 +439,6 @@ include_recipe 'mac_os_x::screensaver'
 # Turn on the OS X firewall.
 include_recipe 'mac_os_x::firewall'
 
-# Allow keyboard access to all controls (using Tab), not just text boxes and
-# lists.
-include_recipe 'mac_os_x::kbaccess'
-
 # Set up clock with day of week, date, and 24-hour clock.
 node.default['mac_os_x']['settings']['clock'] = {
   domain: 'com.apple.menuextra.clock',
@@ -697,6 +693,9 @@ node.default['mac_os_x']['settings']['xquartz'] = {
   enable_key_equivalents: true,
   option_sends_alt: true,
   # Output
+  # XXX The idempotency check for this is not working because grep is
+  # interpreting it as an option.
+  # See https://github.com/chef-osx/mac_os_x/blob/9a63d0a14a3574d32c4adb91377c719d7b533835/providers/userdefaults.rb#L35
   depth: '-1', # use colors from display
   rootless: true,
   fullscreen_menu: true,
@@ -733,6 +732,16 @@ node.default['mac_os_x']['settings']['global'] = {
   :domain => 'NSGlobalDomain',
   # Always show scrollbars
   :AppleShowScrollBars => 'Always',
+  # Allow keyboard access to all controls (using Tab), not just text boxes and
+  # lists.
+  #
+  # Note: We used to use
+  #
+  #     include_recipe 'mac_os_x::kbaccess'
+  #
+  # which supposedly does the same thing, but its idempotence check was not
+  # behaving properly. Moved it to here and it is working fine.
+  :AppleKeyboardUIMode => 2,
   # Increase window resize speed for Cocoa applications
   :NSWindowResizeTime => 0.001,
   # Expand save panel by default
