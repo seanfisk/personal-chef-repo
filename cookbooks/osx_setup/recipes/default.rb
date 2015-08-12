@@ -502,6 +502,17 @@ node.default['mac_os_x']['settings']['cathode'] = {
   UseSounds: false
 }
 
+node.default['mac_os_x']['settings']['deeper'] = {
+  domain: 'com.titanium.Deeper',
+  ConfirmQuit: false,
+  ConfirmQuitApp: true,
+  DeleteLog: true,
+  DrawerEffect: true,
+  Licence: false, # Don't show the license at startup
+  OpenLog: false,
+  ShowHelp: false
+}
+
 node.default['mac_os_x']['settings']['gfxcardstatus'] = {
   domain: 'com.codykrieger.gfxCardStatus-Preferences',
   shouldCheckForUpdatesOnStartup: true,
