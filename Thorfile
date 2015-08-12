@@ -104,6 +104,7 @@ class Test < Thor
 
   def print_msg(msg, color)
     artii = Artii::Base.new font: 'block'
-    puts artii.asciify(msg).colorize(color)
+    # artii adds two blank lines after the block text; we just want one.
+    print artii.asciify(msg).lines[0..-2].join.colorize(color)
   end
 end
