@@ -1,4 +1,4 @@
-# Mac OS X Chef Configuration
+# OS X Chef Configuration
 
 Throughout the instructions, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately.
 
@@ -6,7 +6,7 @@ Throughout the instructions, `NODE_NAME` will used as the machine's node name, a
 
 1. Install the Chef client using the [full-stack installer](https://www.chef.io/download-chef-client/).
 
-1. Create the Chef configuration directory. We change the owner to our user so that we can provision mostly under our standard user. This works well with Mac OS X because most operations don't require root, including installing to `/Applications` and installing [Homebrew](http://brew.sh/) packages.
+1. Create the Chef configuration directory. We change the owner to our user so that we can provision mostly under our standard user. This works well with OS X because most operations don't require root, including installing to `/Applications` and installing [Homebrew](http://brew.sh/) packages.
 
         sudo mkdir /etc/chef
         sudo chown "$(id -u):$(id -g)" /etc/chef

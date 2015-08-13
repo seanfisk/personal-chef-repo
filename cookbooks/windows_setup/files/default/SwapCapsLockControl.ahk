@@ -3,7 +3,7 @@
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability.
 
 ; If we are running within a VMWare virtual machine, don't swap the keys.
-; This is because we have them swapped in Mac OS X, and if we swap them again in Windows we double-swap and things become weird.
+; This is because we have them swapped in OS X, and if we swap them again in Windows we double-swap and things become weird.
 
 IsInVMware() {
 	; TODO: Possibly use DllCall to run this instead of PowerShell.

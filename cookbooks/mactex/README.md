@@ -1,7 +1,7 @@
 MacTeX Cookbook
 ===============
 
-Installs [MacTeX][mactex] on Mac OS X.
+Installs [MacTeX][mactex] on OS X.
 
 This was made into a cookbook separate from `osx_setup` because MacTeX is a large install and not necessary for bootstrapping a system for development.
 
@@ -23,7 +23,7 @@ mv ~/Downloads/mactex20130618.pkg ~/.chef/cache/MacTeX.pkg
 Requirements
 ------------
 
-Only works on Mac OS X. Tested on Mac OS 10.9 Mavericks.
+Only works on OS X. Tested on OS 10.9 Mavericks.
 
 Usage
 -----

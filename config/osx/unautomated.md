@@ -1,7 +1,7 @@
 Unautomated Setup
 =================
 
-This file lists parts of Mac OS X setup that are not automated. Typically, this is due to technical or practical reasons.
+This file lists parts of OS X setup that are not automated. Typically, this is due to technical or practical reasons.
 
 * Dotfiles installation
 

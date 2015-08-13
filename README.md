@@ -8,7 +8,7 @@ This repository contains personal configurations for my machines, set up using t
 
 Please see the README for one of the configurations for more instructions on how to install:
 
-* [Mac OS X](https://github.com/seanfisk/personal-chef-repo/tree/master/config/osx)
+* [OS X](https://github.com/seanfisk/personal-chef-repo/tree/master/config/osx)
 * [Windows](https://github.com/seanfisk/personal-chef-repo/tree/master/config/windows)
 
 ## Setting up an Administrator Workstation
