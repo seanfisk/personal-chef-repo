@@ -22,7 +22,8 @@
 
 require 'etc'
 require 'uri'
-require 'mixlib/shellout'
+require 'chef/mixin/shell_out'
+extend Chef::Mixin::ShellOut
 
 # Including this causes Homebrew to install if not already installed (needed
 # for the next section) and to run `brew update' if already installed.
@@ -32,9 +33,7 @@ include_recipe 'homebrew'
 # SHELLS
 ###############################################################################
 
-brew_proc = Mixlib::ShellOut.new('brew', '--prefix')
-brew_proc.run_command
-BREW_PREFIX = brew_proc.stdout.rstrip
+BREW_PREFIX = shell_out!('brew', '--prefix').stdout.rstrip
 
 # Add the latest bash and zsh as possible login shells.
 #
@@ -397,10 +396,9 @@ end
 #     com.macosinternals.tasksexplorer.com.macosinternals.tasksexplorerd.pkg
 #
 # We only check for the first one, though.
-pkgutil_proc = Mixlib::ShellOut.new(
-  'pkgutil', '--pkg-info', 'com.macosinternals.tasksexplorer.Contents.pkg')
-pkgutil_proc.run_command
-TE_IS_INSTALLED = pkgutil_proc.exitstatus == 0
+TE_IS_INSTALLED = shell_out!(
+  'pkgutil', '--pkg-info', 'com.macosinternals.tasksexplorer.Contents.pkg'
+).exitstatus == 0
 TE_PKG_CACHE_PATH = "#{Chef::Config[:file_cache_path]}/Tasks Explorer.pkg"
 # First, download the file.
 remote_file 'download Tasks Explorer pkg' do

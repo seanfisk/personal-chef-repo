@@ -22,7 +22,8 @@
 
 # NOTE: powershell_script doesn't support the 'command' attribute. Argh...!
 
-require 'mixlib/shellout'
+require 'chef/mixin/shell_out'
+extend Chef::Mixin::ShellOut
 
 directory node['windows_setup']['scripts_dir'] do
   recursive true
@@ -118,10 +119,9 @@ powershell_script 'install paste program' do
 end
 
 # Mixlib::ShellOut doesn't support arrays on Windows... Ugh.
-ps_proc = Mixlib::ShellOut.new(
-  'powershell -NoLogo -NonInteractive -NoProfile -Command $profile')
-ps_proc.run_command
-PS_PROFILE_PATH = ps_proc.stdout.rstrip
+PS_PROFILE_PATH = shell_out!(
+  'powershell -NoLogo -NonInteractive -NoProfile -Command $profile'
+).stdout.rstrip
 
 cookbook_file 'Writing PowerShell profile ' + PS_PROFILE_PATH do
   source 'profile.ps1'
