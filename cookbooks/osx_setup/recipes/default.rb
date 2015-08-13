@@ -422,8 +422,8 @@ end
 # reasons).
 INCONSOLATA_POWERLINE_FILE = 'Inconsolata for Powerline.otf'
 remote_file 'download Inconsolata for Powerline font' do
-  source 'https://github.com/Lokaltog/powerline-fonts/raw/'\
-         'master/Inconsolata/' + URI.escape(INCONSOLATA_POWERLINE_FILE)
+  source 'https://github.com/powerline/fonts/raw/master/Inconsolata/' +
+    URI.escape(INCONSOLATA_POWERLINE_FILE)
   path "#{node['osx_setup']['fonts_dir']}/#{INCONSOLATA_POWERLINE_FILE}"
 end
 
