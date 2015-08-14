@@ -100,7 +100,8 @@ end
 # Install Emacs with options. Do this before installing the other formulas,
 # because the cask formula depends on emacs.
 package 'emacs' do
-  options '--cocoa --with-gnutls'
+  # Building with glib allows file notification support.
+  options '--cocoa --with-gnutls --with-glib'
 end
 execute "Link 'Emacs.app' to '/Applications'" do
   command %w(brew linkapps emacs)
