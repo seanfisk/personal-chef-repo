@@ -155,6 +155,7 @@ node.default['homebrew']['formulas'] = [
   'markdown',
   'mercurial',
   'mobile-shell',
+  'mplayer', # For https://github.com/TeMPOraL/nyan-mode#features :)
   'mr', # myrepos, for managing multiple repos
   'nmap',
   'node',
