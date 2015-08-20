@@ -19,6 +19,10 @@ This file lists parts of OS X setup that are not automated. Typically, this is d
 
   This is licensed software that is installed using Homebrew Cask. I purchased a license that has to be manually activated.
 
+* Sophos Anti-Virus
+
+  Preferences are scattered over a couple places. Some are in user defaults, and some are in `~/Library/Application Support/Sophos Anti-Virus`, and some are elsewhere. Most of them I didn't find, but I honestly didn't look really hard. We've just left the preferences unautomated for now.
+
 * Memory Clean
 
   Installed from the Mac App Store.

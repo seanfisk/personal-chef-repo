@@ -310,6 +310,9 @@ node.default['homebrew']['casks'] = [
   'skim',
   'skitch',
   'skype',
+  # Recommended by Lifehacker
+  # http://lifehacker.com/the-best-antivirus-app-for-mac-488021445
+  'sophos-anti-virus-home-edition',
   # SQLite browser options:
   #
   # - sqlitebrowser: open-source, cross-platform, well-maintained
