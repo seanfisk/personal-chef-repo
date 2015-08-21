@@ -119,6 +119,19 @@ package 'lastpass-cli' do
   options '--with-doc --with-pinentry'
 end
 
+# Ettercap with IPv6 support, GTK+ GUI, and Ghostscript (for PDF docs)
+#
+# Note: Ettercap is crashing at this time on my Mac, so I've disabled it for
+# now. Hopefully there is a solution in the future.
+#
+# Note: When initially installing, I had a problem with this Ghostscript
+# conflicting with Ghostscript from MacTeX, I believe. I just overwrote it, but
+# this may be a problem again when installing fresh.
+#
+# package 'ettercap' do
+#   options '--with-ghostscript --with-gtk+ --with-ipv6'
+# end
+
 node.default['homebrew']['formulas'] = [
   'ack',
   'aria2',
