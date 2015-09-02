@@ -138,10 +138,24 @@ registry_key 'enable standard function key behavior' do
   only_if { is_boot_camp_installed }
 end
 
+EXPLORER_KEY =
+  'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer'
+
+registry_key 'configure the taskbar' do
+  key EXPLORER_KEY
+  values [
+    # "Always show all icons and notifications on the taskbar"
+    { name: 'EnableAutoTray',
+      type: :dword,
+      data: 0
+    }
+  ]
+  notifies :run, 'powershell_script[restart Windows Explorer]'
+end
+
 # http://stackoverflow.com/a/8110982/879885
 registry_key 'configure Windows Explorer' do
-  key 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer' \
-      '\Advanced'
+  key "#{EXPLORER_KEY}\\Advanced"
   values [
     # Show hidden files
     { name: 'Hidden',
