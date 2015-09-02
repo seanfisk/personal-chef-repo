@@ -129,3 +129,19 @@ cookbook_file 'Writing PowerShell profile ' + PS_PROFILE_PATH do
   source 'profile.ps1'
   path PS_PROFILE_PATH
 end
+
+# For is_package_installed?
+::Chef::Recipe.send(:include, Windows::Helper)
+# This can't be inside the not_if guard in the registry_key resource, otherwise
+# the method won't be found.
+is_boot_camp_installed = is_package_installed?('Boot Camp Services')
+
+# Note: Requires logout to take effect
+registry_key 'Enable standard function key behavior' do
+  key 'HKEY_CURRENT_USER\Software\Apple Inc.\Apple Keyboard Support'
+  values [{ name: 'OSXFnBehavior',
+            type: :dword,
+            data: 0
+          }]
+  only_if { is_boot_camp_installed }
+end
