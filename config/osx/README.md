@@ -1,6 +1,6 @@
 # OS X Chef Configuration
 
-Throughout the instructions, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately.
+Throughout the instructions, `NODE_NAME` will be used as the machine's node name, and should be substituted appropriately.
 
 1. Access the machine you'd like to provision, hereby referred to as the *node*. We will go through a manual boostrap here. While a node can be bootstrapped from an administrator's workstation, that requires the node to have a running SSH server, which is probably overkill for one-off personal machines. Instead, we manually perform the steps that a boostrap would do (with some modifications).
 

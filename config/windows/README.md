@@ -1,6 +1,6 @@
 # Windows Chef Configuration
 
-Throughout the instructions, `NODE_NAME` will used as the machine's node name, and should be substituted appropriately. All commands should be run using Windows PowerShell, not `cmd.exe`. All PowerShell instances should be run as administrator.
+Throughout the instructions, `NODE_NAME` will be used as the machine's node name, and should be substituted appropriately. All commands should be run using Windows PowerShell, not `cmd.exe`. All PowerShell instances should be run as administrator.
 
 1. Access the machine you'd like to provision, hereby referred to as the *node*. We will go through a manual boostrap here. While a node can be bootstrapped from an administrator's workstation, that requires the node to have Windows Remote Management (WinRM) configured and running, and that is a little overkill for the bootstrap only. Instead, we manually perform the steps that a boostrap would do (with some modifications).
 
