@@ -102,22 +102,14 @@ node['windows_setup']['psget_modules'].each do |mod_name|
 end
 
 # Install paste program
-# TODO: This comes from a somewhat questionable source...
-archive_name = 'paste.zip'
-archive_path = "#{Chef::Config[:file_cache_path]}/#{archive_name}"
-remote_file 'download paste zip file' do
-  source 'http://www.c3scripts.com/tutorials/msdos/' + archive_name
-  path archive_path
-  notifies :run, 'powershell_script[install paste program]'
-end
-powershell_script 'install paste program' do
-  # Based on http://stackoverflow.com/a/24323413
-  code <<-EOH
-  Add-Type -AssemblyName System.IO.Compression.FileSystem
-  [IO.Compression.ZipFile]::ExtractToDirectory(
-    '#{archive_path}', '#{node['windows_setup']['scripts_dir']}')
-  EOH
-  action :nothing
+windows_zipfile 'download and install paste program' do
+  path node['windows_setup']['scripts_dir']
+  # TODO: This comes from a somewhat questionable source...
+  source 'http://www.c3scripts.com/tutorials/msdos/paste.zip'
+  # We've provided a checksum as this file is unlikely to change.
+  checksum 'fd8034ed96d1e18be508b61c5732e91c24c6876229bc78ef9cd617682e37c493'
+  action :unzip
+  not_if { File.exist?("#{node['windows_setup']['scripts_dir']}/paste.exe") }
 end
 
 # Mixlib::ShellOut doesn't support arrays on Windows... Ugh.
