@@ -12,6 +12,11 @@ function converge {
 	chef-client -A
 }
 
+function which ([string]$cmd) {
+	# Use Definition instead of Path to work better with Cmdlets
+	(Get-Command $cmd).Definition
+}
+
 # Matches aliases in dotfiles
 New-Alias ccopy clip
 New-Alias cpaste paste
