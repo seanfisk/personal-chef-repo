@@ -89,15 +89,19 @@ remote_file 'download my .gitconfig' do
 end
 
 # Install PsGet. There is a Chocolatey package for this, but as of 2015-03-06
-# it seems outdated. This install command seems to be idempotent.
+# it seems outdated.
 powershell_script 'install PsGet' do
   code '(New-Object Net.WebClient).DownloadString('\
        '"http://psget.net/GetPsGet.ps1") | Invoke-Expression'
+  only_if '(Get-Module -ListAvailable -Name PsGet) -eq $null'
 end
 
 node['windows_setup']['psget_modules'].each do |mod_name|
-  powershell_script 'install PsGet module ' + mod_name do
-    code 'Install-Module ' + mod_name
+  # Use string interpolation in the name instead of concatenation, else
+  # Foodcritic will complain about the guard not acting as expected.
+  powershell_script "install PsGet module '#{mod_name}'" do
+    code "Install-Module '#{mod_name}'"
+    only_if "(Get-PsGetModuleInfo -ModuleName '#{mod_name}') -eq $null"
   end
 end
 
