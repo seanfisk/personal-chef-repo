@@ -129,7 +129,7 @@ end
 is_boot_camp_installed = is_package_installed?('Boot Camp Services')
 
 # Note: Requires logout to take effect
-registry_key 'Enable standard function key behavior' do
+registry_key 'enable standard function key behavior' do
   key 'HKEY_CURRENT_USER\Software\Apple Inc.\Apple Keyboard Support'
   values [{ name: 'OSXFnBehavior',
             type: :dword,
