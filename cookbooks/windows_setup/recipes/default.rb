@@ -137,3 +137,33 @@ registry_key 'enable standard function key behavior' do
           }]
   only_if { is_boot_camp_installed }
 end
+
+# http://stackoverflow.com/a/8110982/879885
+registry_key 'configure Windows Explorer' do
+  key 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer' \
+      '\Advanced'
+  values [
+    # Show hidden files
+    { name: 'Hidden',
+      type: :dword,
+      data: 1
+    },
+    # Don't hide file extensions for known file types
+    { name: 'HideFileExt',
+      type: :dword,
+      data: 0
+    },
+    # But don't show OS files
+    { name: 'ShowSuperHidden',
+      type: :dword,
+      data: 0
+    }
+  ]
+  notifies :run, 'powershell_script[restart Windows Explorer]'
+end
+
+powershell_script 'restart Windows Explorer' do
+  code 'Stop-Process -Name explorer'
+  # Windows Explorer restarts automatically
+  action :nothing
+end
