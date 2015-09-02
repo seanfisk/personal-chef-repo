@@ -29,8 +29,10 @@ directory node['windows_setup']['scripts_dir'] do
   recursive true
 end
 # The 'env' resource works for system environment variables, but apparently not
-# for user environment variables. Since this is a per-user scripts directory,
-# it makes sense to put in in the user environment variable.
+# for user environment variables. The 'windows_path' resource in the windows
+# cookbook appears to only work for the system path. Since this is a per-user
+# scripts directory, it makes sense to put in in the user environment variable.
+# We therefore resort to this PowerShell hack, which is ugly but works.
 var = 'Path'
 scope = 'User'
 path = node['windows_setup']['scripts_dir']
