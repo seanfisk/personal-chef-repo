@@ -13,7 +13,7 @@ Please see the README for one of the configurations for more instructions on how
 
 ## Setting up an Administrator Workstation
 
-An administrator workstation is used to edit the Chef cookbooks in this repository and to run Knife, the Chef server utility. Please see [LearnChef](https://learn.chef.io/legacy/get-started/) for a nice summary and visuals.
+An administrator workstation is used to edit the Chef cookbooks in this repository and to run Knife, the Chef server utility. Please see [LearnChef](https://learn.chef.io/manage-a-node/windows/) for a nice summary and visuals.
 
 1. Clone this repository:
 
