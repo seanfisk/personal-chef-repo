@@ -4,7 +4,7 @@ Throughout the instructions, `NODE_NAME` will be used as the machine's node name
 
 1. Access the machine you'd like to provision, hereby referred to as the *node*. We will go through a manual boostrap here. While a node can be bootstrapped from an administrator's workstation, that requires the node to have Windows Remote Management (WinRM) configured and running, and that is a little overkill for the bootstrap only. Instead, we manually perform the steps that a boostrap would do (with some modifications).
 
-1. Install the Chef client using the [full-stack installer](https://www.chef.io/download-chef-client/).
+1. Install the Chef client using the [full-stack installer](https://www.chef.io/download-chef-client/). Don't install the Chef client service, as it will run automatic provisioning periodically. We want to run on-demand only.
 
     On Windows, the installer creates two directories in the root (`C:`):
 
