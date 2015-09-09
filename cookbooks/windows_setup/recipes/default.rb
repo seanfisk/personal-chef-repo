@@ -115,6 +115,12 @@ windows_zipfile 'download and install paste program' do
   action :unzip
   not_if { File.exist?("#{node['windows_setup']['scripts_dir']}/paste.exe") }
 end
+# paste program depends on .NET 3.5
+# Also possible to install with Chocolatey, but Chef-native seems better.
+windows_feature 'NetFx3' do
+  action :install
+  all true
+end
 
 # Mixlib::ShellOut doesn't support arrays on Windows... Ugh.
 PS_PROFILE_PATH = shell_out!(
