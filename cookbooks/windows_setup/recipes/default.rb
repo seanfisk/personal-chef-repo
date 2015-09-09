@@ -186,6 +186,18 @@ registry_key 'configure Windows Explorer' do
   notifies :run, 'powershell_script[restart Windows Explorer]'
 end
 
+# Windows doesn't set this automatically, so set it here. Change if I move ;)
+TIME_ZONE = 'Eastern Standard Time'
+# See here http://www.windows-commandline.com/set-time-zone-from-command-line/
+# It's possible to manipulate the time zone registry key, but this misses keys
+# that get changed by the GUI and doesn't automatically update Windows
+# Explorer. tzutil does both.
+# Note: We've tried an array argument with execute's command... doesn't work :(
+powershell_script 'set time zone' do
+  code "tzutil /s '#{TIME_ZONE}'"
+  not_if "(tzutil /g) -eq '#{TIME_ZONE}'"
+end
+
 powershell_script 'restart Windows Explorer' do
   code 'Stop-Process -Name explorer'
   # Windows Explorer restarts automatically
