@@ -24,19 +24,22 @@ default['windows_setup']['startup_dir'] =
   default['windows_setup']['home'] +
   '\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup'
 
-default['windows_setup']['packages'] = %w(
-  7zip
-  ConEmu
-  Firefox
-  autohotkey
-  carbon
-  githubforwindows
-  pscx
-  scite4autohotkey
-  sqlitebrowser
-  sysinternals
-  wixtoolset
-)
+default['windows_setup']['packages'] = [
+  '7zip',
+  'ConEmu',
+  'Firefox',
+  'autohotkey',
+  'carbon',
+  # On OS X and GNU/Linux, we don't use the ChefDK. But it makes installation of
+  # a development environment very easy on Windows.
+  'chefdk',
+  'githubforwindows',
+  'pscx',
+  'scite4autohotkey',
+  'sqlitebrowser',
+  'sysinternals',
+  'wixtoolset'
+]
 
 default['windows_setup']['psget_modules'] = %w(
   PSReadLine
