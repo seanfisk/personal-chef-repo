@@ -1,6 +1,7 @@
 High Priority
 -------------
 
+* Local Python installation
 * `sudo` prompts in various resources are not showing, and script is hanging waiting for them.
 * Add note about setting up SSH keys before running.
 * Mention installing Command-Line Tools for Xcode.
