@@ -227,3 +227,26 @@ powershell_script 'update Powershell help' do
   # -Force). We don't have anything better, so we'll settle for this.
   code 'Update-Help'
 end
+
+# Custom applications
+directory node['windows_setup']['apps_dir']
+file "#{node['windows_setup']['apps_dir']}\\README.txt" do
+  content <<EOF
+This directory is for portable applications that do not install through a \
+Windows installer and do not have an entry in the Control Panel.
+EOF
+end
+
+FLASH_PLAYER_VERSION = '18'
+flash_player_install_path =
+  "#{node['windows_setup']['apps_dir']}\\flashplayer_sa.exe"
+remote_file 'download and install Flash Player projector' do
+  source 'https://fpdownload.macromedia.com/pub/flashplayer/updaters/' \
+    "#{FLASH_PLAYER_VERSION}/flashplayer_#{FLASH_PLAYER_VERSION}_sa.exe"
+  path flash_player_install_path
+  checksum 'f93ceb1c4dfff8934429c72c284058bc85061be77a6fd993372a89e00a07c525'
+end
+windows_shortcut "#{node['windows_setup']['desktop_dir']}\\Flash Player.lnk" do
+  target flash_player_install_path
+  description 'Launch the Flash Player projector'
+end

@@ -20,9 +20,17 @@
 default['windows_setup']['home'] = ENV['USERPROFILE']
 default['windows_setup']['scripts_dir'] =
   "#{default['windows_setup']['home']}\\bin"
-default['windows_setup']['startup_dir'] =
-  default['windows_setup']['home'] +
-  '\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup'
+default['windows_setup']['apps_dir'] =
+  "#{default['windows_setup']['home']}\\Applications"
+
+# Inspired by:
+# - https://github.com/opscode-cookbooks/windows#examples-12
+# - https://msdn.microsoft.com/en-us/library/0ea7b5xe%28v=vs.84%29.aspx
+require 'win32ole'
+wshell = WIN32OLE.new('WScript.Shell')
+
+default['windows_setup']['startup_dir'] = wshell.SpecialFolders('Startup')
+default['windows_setup']['desktop_dir'] = wshell.SpecialFolders('Desktop')
 
 default['windows_setup']['packages'] = [
   '7zip',
@@ -33,6 +41,7 @@ default['windows_setup']['packages'] = [
   # On OS X and GNU/Linux, we don't use the ChefDK. But it makes installation of
   # a development environment very easy on Windows.
   'chefdk',
+  'flashplayerplugin',
   'githubforwindows',
   'pscx',
   'scite4autohotkey',
