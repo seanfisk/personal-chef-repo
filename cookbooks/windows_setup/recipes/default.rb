@@ -186,6 +186,22 @@ registry_key 'configure Windows Explorer' do
   notifies :run, 'powershell_script[restart Windows Explorer]'
 end
 
+# Disable the startup sound
+# See here http://www.sevenforums.com/tutorials/179448-startup-sound-enable-disable.html
+# I've elected to have the startup sound always disabled. There's really no
+# point in allowing it to be edited via the GUI when it will be reset the
+# next we converge anyway.
+registry_key 'disable the startup sound' do
+  key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies' \
+    '\System'
+  values [{ name: 'DisableStartupSound', type: :dword, data: 1 }]
+end
+registry_key 'disable editing of startup sound' do
+  key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion' \
+    '\Authentication\LogonUI\BootAnimation'
+  values [{ name: 'DisableStartupSound', type: :dword, data: 0 }]
+end
+
 # Windows doesn't set this automatically, so set it here. Change if I move ;)
 TIME_ZONE = 'Eastern Standard Time'
 # See here http://www.windows-commandline.com/set-time-zone-from-command-line/
