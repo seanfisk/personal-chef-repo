@@ -12,10 +12,11 @@ require 'colorize'
 
 # Helper module for safely executing subprocesses.
 module Subprocess
-  def run_subprocess(*args)
+  # Mixlib::ShellOut doesn't support arrays on Windows... Ugh.
+  def run_subprocess(cmd)
     # See `bundle help exec' for more info on using a 'clean' environment.
     Bundler.with_clean_env do
-      proc = Mixlib::ShellOut.new(args, live_stream: STDOUT)
+      proc = Mixlib::ShellOut.new(cmd, live_stream: STDOUT)
       proc.run_command
       proc
     end
@@ -28,7 +29,7 @@ class Knife < Thor
 
   desc 'upload', 'Upload all local cookbooks to the Chef server'
   def upload
-    proc = run_subprocess 'knife', 'cookbook', 'upload', '--all'
+    proc = run_subprocess 'knife cookbook upload --all'
     proc.error!
   end
 end
