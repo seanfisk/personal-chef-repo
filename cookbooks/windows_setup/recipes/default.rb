@@ -185,3 +185,11 @@ powershell_script 'restart Windows Explorer' do
   # Windows Explorer restarts automatically
   action :nothing
 end
+
+powershell_script 'update Powershell help' do
+  # There is AFAIK no way to check to see if the help needs to be updated,
+  # making it impossible to make this resource idempotent. However, Update-Help
+  # has its own check in that it only runs once per day (unless you pass
+  # -Force). We don't have anything better, so we'll settle for this.
+  code 'Update-Help'
+end
