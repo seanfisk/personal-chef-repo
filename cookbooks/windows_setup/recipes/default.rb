@@ -259,3 +259,47 @@ windows_shortcut "#{node['windows_setup']['desktop_dir']}\\Flash Player.lnk" do
   target flash_player_install_path
   description 'Launch the Flash Player projector'
 end
+
+powerplan_cache_path = "#{Chef::Config[:file_cache_path]}\\powerplan-setup.exe"
+remote_file 'download Power Plan Assistant' do
+  source 'http://cdn-us.filecluster.com/PowerPlanAssistant/' \
+         'Power_Plan_Assistant_32a_Setup_09032015.exe'
+  path powerplan_cache_path
+  checksum 'abf029e8240b80ad42be8464757a6d3f6cd868fdb9e08800741b2fbc9f51acf4'
+  # They tried to be clever, but they couldn't fool me, no sir.
+  headers 'Referer' => 'http://www.filecluster.com/downloads/' \
+                       'Power-Plan-Assistant-for-Windows-7.html'
+end
+
+windows_package 'Power Plan Assistant' do
+  source powerplan_cache_path
+  # XXX: Unfortunately, this doesn't work. It was apparently not
+  # enabled when the installer was built. Clicking through the dialogs
+  # is manual, but we'll leave it in here any way so that we ensure it
+  # gets installed.
+  #
+  # See 'Silent Command-Line parameter' here:
+  # http://www.createinstall.com/help/settings.html
+  installer_type :custom
+  options '-silent'
+end
+# No way of which I know to automate turning off the keyboard
+# backlight for the first time, which is the whole reason we installed
+# this program. Luckily, it's persistent.
+
+# Power Plan Assistant is required for Trackpad++.
+trackpad_cache_path = "#{Chef::Config[:file_cache_path]}\\trackpad-setup.exe"
+remote_file 'download Trackpad++' do
+  source 'http://cdn-us.filecluster.com/TrackpadDriverandControlModule/' \
+         'Trackpad_Plus_Plus_Driver_Control_Module_Setup_31d_09032015.exe'
+  path trackpad_cache_path
+  checksum '1041d049690852cb02f3ab1aee61a089ae0e239c5a11d3e439fb9aaaee08435e'
+  headers 'Referer' => 'http://www.filecluster.com/downloads/' \
+                       'Trackpad-Driver-and-Control-Module.html'
+end
+windows_package 'Trackpad++' do
+  source trackpad_cache_path
+  # XXX: See above
+  installer_type :custom
+  options '-silent'
+end
