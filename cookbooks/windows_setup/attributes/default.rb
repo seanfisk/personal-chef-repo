@@ -46,6 +46,7 @@ default['windows_setup']['packages'] = [
   'pscx',
   'scite4autohotkey',
   'sqlitebrowser',
+  'steam',
   'sysinternals',
   'wixtoolset'
 ]
