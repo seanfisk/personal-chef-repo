@@ -28,6 +28,13 @@ extend Chef::Mixin::ShellOut
 directory node['windows_setup']['scripts_dir'] do
   recursive true
 end
+file "#{node['windows_setup']['scripts_dir']}\\README.txt" do
+  content <<EOF
+This directory is for command-line applications or scripts that will be added \
+to the executable Path. These programs do not install through a Windows \
+installer and do not have an entry in the Control Panel.
+EOF
+end
 # The 'env' resource works for system environment variables, but apparently not
 # for user environment variables. The 'windows_path' resource in the windows
 # cookbook appears to only work for the system path. Since this is a per-user
