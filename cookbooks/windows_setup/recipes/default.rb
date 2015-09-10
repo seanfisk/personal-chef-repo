@@ -229,7 +229,9 @@ powershell_script 'update Powershell help' do
 end
 
 # Custom applications
-directory node['windows_setup']['apps_dir']
+directory node['windows_setup']['apps_dir'] do
+  recursive true
+end
 file "#{node['windows_setup']['apps_dir']}\\README.txt" do
   content <<EOF
 This directory is for portable applications that do not install through a \
