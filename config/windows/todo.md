@@ -11,6 +11,5 @@
 * Steam
 * Consider adding Chocolatey packages:
     * Posh-VsVars
-    * sysinterals
     * PowerGUI
 * Pester (PowerShell testing framework) looks neat.
