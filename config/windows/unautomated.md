@@ -5,6 +5,7 @@ This file lists parts of Windows setup that are not automated. Typically, this i
 
 * PowerShell execution policy [We've had various problems when running this from Chef. Not worth the trouble]
 * All Boot Camp software
+* NVIDIA driver updates (Boot Camp installs old drivers)
 * All VMWare virtual machine software
 * Diablo 2
 * Microsoft Office
