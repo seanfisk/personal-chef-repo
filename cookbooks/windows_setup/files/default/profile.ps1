@@ -20,3 +20,10 @@ function which ([string]$cmd) {
 # Matches aliases in dotfiles
 New-Alias ccopy clip
 New-Alias cpaste paste
+New-Alias c Set-Location
+New-Alias l Get-ChildItem
+function u () {
+	 Set-Location ..
+}
+New-Alias py python
+New-Alias ipy ipython
