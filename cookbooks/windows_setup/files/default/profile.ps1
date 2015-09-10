@@ -3,6 +3,11 @@
 . (Resolve-Path "$env:LOCALAPPDATA\GitHub\shell.ps1")
 . $env:github_posh_git\profile.example.ps1
 
+# Make the ChefDK Ruby our primary Ruby. See here:
+# - https://docs.chef.io/install_dk.html#powershell
+# - https://www.chef.io/blog/2014/11/04/the-chefdk-on-windows-survival-guide/
+chef shell-init powershell | Invoke-Expression
+
 Import-Module PSReadLine
 Set-PSReadlineOption -EditMode Emacs
 
