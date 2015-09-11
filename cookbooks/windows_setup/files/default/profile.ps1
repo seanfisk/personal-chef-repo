@@ -30,7 +30,7 @@ New-Alias l Get-ChildItem
 function u {
 	 Set-Location ..
 }
-New-Alias py python
+# No 'py' alias; conflicts with the Python launcher
 New-Alias ipy ipython
 
 function and {
