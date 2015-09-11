@@ -25,6 +25,24 @@
 require 'chef/mixin/shell_out'
 extend Chef::Mixin::ShellOut
 
+def add_to_user_path(path)
+  # The 'env' resource works for system environment variables, but
+  # apparently not for user environment variables. The 'windows_path'
+  # resource in the windows cookbook appears to only work for the
+  # system path. Since we have per-user directories we want to add, it
+  # makes sense to put in in the user environment variable.  We
+  # therefore resort to this PowerShell hack, which is ugly but works.
+  var = 'Path'
+  scope = 'User'
+  get_var_command = (
+    "[Environment]::GetEnvironmentVariable('#{var}', '#{scope}')")
+  powershell_script "add #{path} to the #{scope} #{var}" do
+    code "[Environment]::SetEnvironmentVariable('#{var}', "\
+         "#{get_var_command} + ';' + '#{path}', '#{scope}')"
+    not_if "#{get_var_command}.Split(';') -Contains '#{path}'"
+  end
+end
+
 directory node['windows_setup']['scripts_dir'] do
   recursive true
 end
@@ -35,21 +53,7 @@ to the executable Path. These programs do not install through a Windows \
 installer and do not have an entry in the Control Panel.
 EOF
 end
-# The 'env' resource works for system environment variables, but apparently not
-# for user environment variables. The 'windows_path' resource in the windows
-# cookbook appears to only work for the system path. Since this is a per-user
-# scripts directory, it makes sense to put in in the user environment variable.
-# We therefore resort to this PowerShell hack, which is ugly but works.
-var = 'Path'
-scope = 'User'
-path = node['windows_setup']['scripts_dir']
-get_var_command = (
-  "[Environment]::GetEnvironmentVariable('#{var}', '#{scope}')")
-powershell_script "add #{path} to the #{scope} #{var}" do
-  code "[Environment]::SetEnvironmentVariable('#{var}', "\
-       "#{get_var_command} + ';' + '#{path}', '#{scope}')"
-  not_if "#{get_var_command}.Split(';') -Contains '#{path}'"
-end
+add_to_user_path node['windows_setup']['scripts_dir']
 
 # Fails out with insufficient permissions. I guess we'll just assume it exists
 # for now.
@@ -320,3 +324,11 @@ windows_package 'Python 3.5.0rc4 (64-bit)' do
           'InstallLauncherAllUsers=0 SimpleInstall=1 ' \
           'SimpleInstallDescription="Sean\'s per-user install"'
 end
+
+# Emacs Cask
+cask_install_path = "#{node['windows_setup']['home']}\\.cask"
+git cask_install_path do
+  repository 'https://github.com/cask/cask.git'
+  action :checkout
+end
+add_to_user_path "#{cask_install_path}\\bin"
