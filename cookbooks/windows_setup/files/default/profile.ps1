@@ -32,3 +32,24 @@ function u {
 }
 New-Alias py python
 New-Alias ipy ipython
+
+function and {
+	foreach ($scriptBlock in $args) {
+		# Reset $LASTEXITCODE in case the script block doesn't run any native commands.
+		# See http://stackoverflow.com/a/10943885
+		$global:LASTEXITCODE = 0
+		try {
+			# Tee-Object buffers the output annoyingly, but I guess it's the best we've got.
+			& $scriptBlock | Tee-Object -Variable output
+			# Unfortunately, we can't use $? because it is the value of the '&' operation, which is always $true.
+		}
+		catch [System.Exception] {
+			# PowerShell code threw an exception.
+			break
+		}
+		# The script block returned a value evaluating to Boolean $false or a native command in the script block exited with a non-zero exit code.
+		if (-not $output -or $LASTEXITCODE -ne 0) {
+			break
+		}
+	}
+}
