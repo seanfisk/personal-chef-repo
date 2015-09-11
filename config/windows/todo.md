@@ -1,4 +1,3 @@
-* Add a shc { command } { command } ... command for PowerShell; see http://stackoverflow.com/questions/563600/can-i-get-to-work-in-powershell
 * Emacs (configuration, PowerShell aliases, and desktop shortcut)
 * Emulators (Game Boy, N64)
 * LastPass installation
