@@ -325,6 +325,17 @@ windows_package 'Python 3.5.0rc4 (64-bit)' do
           'SimpleInstallDescription="Sean\'s per-user install"'
 end
 
+# Emacsen started through the shell will have the HOME variable set and be able
+# to select the correct HOME. However, for Emacsen started through the GUI,
+# HOME is unset. Set this registry key so Emacs finds the correct .emacs.d
+# directory.
+# https://www.gnu.org/software/emacs/manual/html_node/efaq-w32/Location-of-init-file.html
+registry_key 'set Emacs HOME' do
+  key 'HKEY_CURRENT_USER\SOFTWARE\GNU\Emacs'
+  values [{ name: 'HOME', type: :string, data: node['windows_setup']['home'] }]
+  recursive true
+end
+
 # Emacs Cask
 cask_install_path = "#{node['windows_setup']['home']}\\.cask"
 git cask_install_path do
