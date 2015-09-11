@@ -53,3 +53,8 @@ function and {
 		}
 	}
 }
+
+# TODO: Replace with e script from dotfiles
+function e {
+	emacsclient --no-wait $args
+}
