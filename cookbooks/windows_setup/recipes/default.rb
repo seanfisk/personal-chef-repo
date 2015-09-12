@@ -341,3 +341,62 @@ git cask_install_path do
   action :checkout
 end
 add_to_user_path "#{cask_install_path}\\bin"
+
+# Diablo II
+#
+# The game itself has a downloader and then an installer. The installer doesn't
+# appear to be a garden-variety installer, so we'll just have to do this
+# manually. NOTE: Install to our local apps dir, because otherwise Diablo II
+# will need to run with Administrator privileges in order to connect to
+# Battle.Net (or Slash Diablo).
+#
+# We need to modify the registry so Diablo II connects to the Slash Diablo
+# server. These values are simplified because I don't need to connect to the
+# official Diablo II servers, so we just overwrite them.
+#
+# https://www.reddit.com/r/slashdiablo/comments/lpgtw/slashdiablo_server_faq/
+if is_package_installed?('Diablo II')
+  SLASH_DIABLO_IP = 'play.slashdiablo.net'
+  DIABLO_KEY = 'HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II'
+  registry_key 'set Diablo II Battle.Net gateways' do
+    key 'HKEY_CURRENT_USER\Software\Battle.net\Configuration'
+    values [{ name: 'Diablo II Battle.net gateways',
+              type: :multi_string,
+              data: [
+                # Fixed garbage
+                '1002',
+                '01',
+                # The order is IP, Zone, Name. The Zone is some type of
+                # priority, I guess.
+                SLASH_DIABLO_IP,
+                '0',
+                'Slash Diablo',
+                'evnt.slashdiablo.net',
+                '1',
+                'Slash Diablo Event'
+              ] }]
+  end
+  registry_key 'choose Diablo II Battle.Net gateway' do
+    key DIABLO_KEY
+    values [{ name: 'BNETIP', type: :string, data: SLASH_DIABLO_IP }]
+  end
+
+  # Install the GLIDE wrapper; this allows the Steam overlay to work. The files
+  # are available online, but I'm not sure how long it'll be there, so I
+  # vendored it.
+  #
+  # Make sure to run D2VidTst.exe after installing to choose GLIDE as the
+  # renderer. D2VidTst.exe usually needs to run in compatibility mode for older
+  # Windows, so just be ready for that.
+
+  # TODO: Some error checking for a non-existent key would be nice
+  diablo_install_path = registry_get_values(DIABLO_KEY).select do |value|
+    value[:name] == 'InstallPath'
+  end[0][:data]
+  ['glide-init.exe', 'glide-readme.txt', 'glide3x.dll'].each do |file|
+    cookbook_file "install GLIDE file #{file} to Diablo II directory" do
+      source file
+      path "#{diablo_install_path}\\#{file}"
+    end
+  end
+end
