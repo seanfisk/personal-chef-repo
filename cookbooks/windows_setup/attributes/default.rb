@@ -42,6 +42,7 @@ default['windows_setup']['packages'] = [
   # a development environment very easy on Windows.
   'chefdk',
   'flashplayerplugin',
+  'gimp',
   'githubforwindows',
   'pscx',
   'scite4autohotkey',
