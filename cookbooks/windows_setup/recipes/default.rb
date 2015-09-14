@@ -43,6 +43,20 @@ def add_to_user_path(path)
   end
 end
 
+def add_to_system_path(path)
+  windows_path "add #{path} to the System Path" do
+    path path
+    action :add
+  end
+end
+
+def registry_get_value(key, value_name)
+  # TODO: Some error checking for a non-existent key would be nice
+  registry_get_values(key).select do |value|
+    value[:name] == value_name
+  end[0][:data]
+end
+
 directory node['windows_setup']['scripts_dir'] do
   recursive true
 end
@@ -67,6 +81,15 @@ include_recipe 'chocolatey'
 node['windows_setup']['packages'].each do |pkg_name|
   chocolatey pkg_name
 end
+
+# Add AutoHotkey compiler (Ahk2Exe) to System Path.
+add_to_system_path(
+  ::File.dirname(
+    registry_get_value(
+      'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths' \
+      '\Ahk2Exe.exe',
+      # This gets the default key.
+      '')))
 
 # Swap Caps Lock and Control using AutoHotKey.
 script_base = 'SwapCapsLockControl'
@@ -214,8 +237,8 @@ end
 # Windows doesn't set this automatically, so set it here. Change if I move ;)
 TIME_ZONE = 'Eastern Standard Time'
 # See here http://www.windows-commandline.com/set-time-zone-from-command-line/
-# It's possible to manipulate the time zone registry key, but this misses keys
-# that get changed by the GUI and doesn't automatically update Windows
+# It's possible to manipulate the time zone registry values, but this misses
+# values that get changed by the GUI and doesn't automatically update Windows
 # Explorer. tzutil does both.
 # Note: We've tried an array argument with execute's command... doesn't work :(
 powershell_script 'set time zone' do
@@ -388,11 +411,7 @@ if is_package_installed?('Diablo II')
   # Make sure to run D2VidTst.exe after installing to choose GLIDE as the
   # renderer. D2VidTst.exe usually needs to run in compatibility mode for older
   # Windows, so just be ready for that.
-
-  # TODO: Some error checking for a non-existent key would be nice
-  diablo_install_path = registry_get_values(DIABLO_KEY).select do |value|
-    value[:name] == 'InstallPath'
-  end[0][:data]
+  diablo_install_path = registry_get_value(DIABLO_KEY, 'InstallPath')
   ['glide-init.exe', 'glide-readme.txt', 'glide3x.dll'].each do |file|
     cookbook_file "install GLIDE file #{file} to Diablo II directory" do
       source file
