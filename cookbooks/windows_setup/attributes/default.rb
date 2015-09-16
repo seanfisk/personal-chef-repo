@@ -48,6 +48,7 @@ default['windows_setup']['packages'] = [
   'scite4autohotkey',
   'sqlitebrowser',
   'steam',
+  'switcheroo',
   'sysinternals',
   'wixtoolset'
 ]
