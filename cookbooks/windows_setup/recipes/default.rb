@@ -329,21 +329,15 @@ windows_package 'Trackpad++' do
   options '-silent'
 end
 
-windows_package 'Python 3.5.0rc4 (64-bit)' do
-  source 'https://www.python.org/ftp/python/3.5.0/python-3.5.0rc4-amd64.exe'
+windows_package 'Python 3.5.0 (64-bit)' do
+  source 'https://www.python.org/ftp/python/3.5.0/python-3.5.0-amd64.exe'
   installer_type :custom
   # https://docs.python.org/3.5/using/windows.html#installation-steps
   #
-  # XXX: /quiet and /passive fail to install the package correctly
-  # (use '/log mylog.txt' as an argument to the installer to see
-  # why). Because of this, we're just using SimpleInstall. It has a
-  # GUI, but it's only one click, and better than nothing.
-  #
   # Install just for me. This installer is also smart enough to add to
   # the User Path under the just-for-me install. Yay!
-  options 'InstallAllUsers=0 CompileAll=1 PrependPath=1 ' \
-          'InstallLauncherAllUsers=0 SimpleInstall=1 ' \
-          'SimpleInstallDescription="Sean\'s per-user install"'
+  options '/passive InstallAllUsers=0 CompileAll=1 PrependPath=1 ' \
+          'InstallLauncherAllUsers=0'
 end
 
 # Emacsen started through the shell will have the HOME variable set and be able
