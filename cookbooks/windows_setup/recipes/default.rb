@@ -22,6 +22,8 @@
 
 # NOTE: powershell_script doesn't support the 'command' attribute. Argh...!
 
+require 'json'
+
 # For is_package_installed?
 ::Chef::Recipe.send(:include, Windows::Helper)
 
@@ -158,7 +160,7 @@ end
 
 # Mixlib::ShellOut doesn't support arrays on Windows... Ugh.
 PS_PROFILE_PATH = shell_out!(
-  'powershell -NoLogo -NonInteractive -NoProfile -Command $profile'
+  "#{node['windows_setup']['pscmd_args']} $profile"
 ).stdout.rstrip
 
 cookbook_file 'Writing PowerShell profile ' + PS_PROFILE_PATH do
@@ -410,6 +412,17 @@ if is_package_installed?('Diablo II')
     cookbook_file "install GLIDE file #{file} to Diablo II directory" do
       source file
       path "#{diablo_install_path}\\#{file}"
+    end
+  end
+end
+
+# Install NodeJS and tools
+node['windows_setup']['nodejs_tools'].each do |tool|
+  powershell_script "install Node.js tool #{tool}" do
+    code "npm install --global '#{tool}'"
+    not_if do
+      JSON.parse(shell_out!('npm list --global --json').stdout)[
+        'dependencies'].include? tool
     end
   end
 end
