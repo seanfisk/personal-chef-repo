@@ -10,5 +10,5 @@ end
 
 group :windows do
   cookbook 'chocolatey', '~> 0.4.0'
-  cookbook 'windows', '~> 1.37.0'
+  cookbook 'windows', '~> 1.38.2'
 end
