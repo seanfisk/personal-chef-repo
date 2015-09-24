@@ -66,8 +66,13 @@ class Test < Thor
       cookbook_paths: 'cookbooks',
       fail_tags: ['any'],
       include_rules: ['foodcritic/etsy', 'foodcritic/customink'],
-      # Don't worry about having a CHANGELOG.md file for each cookbook.
-      tags: ['~CINK001']
+      tags: [
+        # Don't worry about having a CHANGELOG.md file for each cookbook.
+        '~CINK001',
+        # XXX This is disabled due to binary data (\x00) in our windows_setup
+        # cookbook incorrectly being flagged as an unnecessary use of double
+        # quotes. We should fix this upstream.
+        '~CINK002']
     )
 
     if review.warnings.any?

@@ -93,17 +93,29 @@ add_to_system_path(
       # This gets the default key.
       '')))
 
-# Swap Caps Lock and Control using AutoHotKey.
-script_base = 'SwapCapsLockControl'
-script_name = "#{script_base}.ahk"
-script_path = "#{node['windows_setup']['scripts_dir']}\\#{script_name}"
-shortcut_path = "#{node['windows_setup']['startup_dir']}\\#{script_base}.lnk"
-cookbook_file script_name do
-  path script_path
+# Swap Caps Lock and Control using a registry hack. We previously used
+# AutoHotkey to do this, but since it used hotstrings, it installed a keyboard
+# hook which interfered with the Diablo II macros. See notes in that project
+# for more information.
+#
+# See http://emacswiki.org/emacs/MovingTheCtrlKey#toc20
+CAPS_CONTROL_REBOOT_REASON = 'apply Caps Lock and Control swap registry hack'
+
+registry_key 'swap Caps Lock and Control keys using registry hack' do
+  key 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout'
+  values [{ name: 'Scancode Map',
+            type: :binary,
+            data: "\x00\x00\x00\x00\x00\x00\x00\x00\x03\x00\x00\x00" \
+                  "\x1d\x00\x3a\x00\x3a\x00\x1d\x00\x00\x00\x00\x00" }]
+  notifies :request_reboot, "reboot[#{CAPS_CONTROL_REBOOT_REASON}]",
+           # This means "deliver the notification immediately", not "reboot
+           # immediately". Apparently :delayed isn't even supported.
+           :immediately
 end
-windows_shortcut shortcut_path do
-  target script_path
-  description 'Swap Caps Lock and Control on startup'
+
+reboot CAPS_CONTROL_REBOOT_REASON do
+  reason 'Need to reboot to ' + CAPS_CONTROL_REBOOT_REASON
+  action :nothing
 end
 
 # Gibo

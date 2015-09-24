@@ -7,6 +7,8 @@ High Priority
 * Mention installing Command-Line Tools for Xcode.
 * Document upload process.
 * Make a script that does some of the stuff in the `README`.
+* VMWare Fusion preferences (general and BootCamp)
+    * Key mappings, including mapping Control to Caps Lock now that we're using the registry hack in Windows
 
 Low Priority
 ------------
