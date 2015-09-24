@@ -1,4 +1,5 @@
 * Emacs (configuration, PowerShell aliases, and desktop shortcut)
+* Google Voice and Video setup
 * Emulators (Game Boy, N64)
 * LastPass installation
 * Zeal (maybe?)
