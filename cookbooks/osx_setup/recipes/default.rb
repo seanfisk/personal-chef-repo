@@ -22,8 +22,6 @@
 
 require 'etc'
 require 'uri'
-require 'chef/mixin/shell_out'
-extend Chef::Mixin::ShellOut
 
 # Including this causes Homebrew to install if not already installed (needed
 # for the next section) and to run `brew update' if already installed.

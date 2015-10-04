@@ -3,6 +3,11 @@
 . (Resolve-Path "$env:LOCALAPPDATA\GitHub\shell.ps1")
 . $env:github_posh_git\profile.example.ps1
 
+# Make the ChefDK Ruby our primary Ruby. See here:
+# - https://docs.chef.io/install_dk.html#powershell
+# - https://www.chef.io/blog/2014/11/04/the-chefdk-on-windows-survival-guide/
+chef shell-init powershell | Invoke-Expression
+
 Import-Module PSReadLine
 Set-PSReadlineOption -EditMode Emacs
 
@@ -20,3 +25,36 @@ function which ([string]$cmd) {
 # Matches aliases in dotfiles
 New-Alias ccopy clip
 New-Alias cpaste paste
+New-Alias c Set-Location
+New-Alias l Get-ChildItem
+function u {
+	 Set-Location ..
+}
+# No 'py' alias; conflicts with the Python launcher
+New-Alias ipy ipython
+
+function and {
+	foreach ($scriptBlock in $args) {
+		# Reset $LASTEXITCODE in case the script block doesn't run any native commands.
+		# See http://stackoverflow.com/a/10943885
+		$global:LASTEXITCODE = 0
+		try {
+			# Tee-Object buffers the output annoyingly, but I guess it's the best we've got.
+			& $scriptBlock | Tee-Object -Variable output
+			# Unfortunately, we can't use $? because it is the value of the '&' operation, which is always $true.
+		}
+		catch [System.Exception] {
+			# PowerShell code threw an exception.
+			break
+		}
+		# The script block returned a value evaluating to Boolean $false or a native command in the script block exited with a non-zero exit code.
+		if (-not $output -or $LASTEXITCODE -ne 0) {
+			break
+		}
+	}
+}
+
+# TODO: Replace with e script from dotfiles
+function e {
+	emacsclient --no-wait $args
+}

@@ -4,7 +4,11 @@ Unautomated Setup
 This file lists parts of Windows setup that are not automated. Typically, this is due to technical or practical reasons.
 
 * PowerShell execution policy [We've had various problems when running this from Chef. Not worth the trouble]
+* Power Plan Assistant
+  Turning off the keyboard backlight initially isn't automated. Luckily, it persists between restarts when Power Plan Assistant is running.
+* Trackpad++ configuration
 * All Boot Camp software
+* NVIDIA driver updates (Boot Camp installs old drivers)
 * All VMWare virtual machine software
 * Diablo 2
 * Microsoft Office
@@ -12,7 +16,5 @@ This file lists parts of Windows setup that are not automated. Typically, this i
 * Skitch Desktop and Skitch Touch
 * RCT2 GoG; UCES
 * Powertab installation and config (see todos)
-* I ran `Update-Help` in PowerShell to get help documentation for PowerShell.
 * LastPass (Chocolatey package seems not to work)
-* GitHub for Windows (Chocolatey package is out-of-date, working on it)
 * SkyFonts (Chocolatey package is out-of-date, working on it)

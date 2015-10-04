@@ -1,11 +1,14 @@
 High Priority
 -------------
 
+* Local Python installation
 * `sudo` prompts in various resources are not showing, and script is hanging waiting for them.
 * Add note about setting up SSH keys before running.
 * Mention installing Command-Line Tools for Xcode.
 * Document upload process.
 * Make a script that does some of the stuff in the `README`.
+* VMWare Fusion preferences (general and BootCamp)
+    * Key mappings, including mapping Control to Caps Lock now that we're using the registry hack in Windows
 
 Low Priority
 ------------

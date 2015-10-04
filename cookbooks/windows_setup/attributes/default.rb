@@ -17,27 +17,52 @@
 # limitations under the License.
 #
 
+# Arguments used to run a batch PowerShell command
+default['windows_setup']['pscmd_args'] =
+  'powershell -NoLogo -NonInteractive -NoProfile -Command'
+
 default['windows_setup']['home'] = ENV['USERPROFILE']
 default['windows_setup']['scripts_dir'] =
   "#{default['windows_setup']['home']}\\bin"
-default['windows_setup']['startup_dir'] =
-  default['windows_setup']['home'] +
-  '\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup'
+default['windows_setup']['apps_dir'] =
+  "#{default['windows_setup']['home']}\\Applications"
 
-default['windows_setup']['packages'] = %w(
-  7zip
-  ConEmu
-  Firefox
-  autohotkey
-  carbon
-  githubforwindows
-  pscx
-  scite4autohotkey
-  sqlitebrowser
-  sysinternals
-  wixtoolset
-)
+# Inspired by:
+# - https://github.com/opscode-cookbooks/windows#examples-12
+# - https://msdn.microsoft.com/en-us/library/0ea7b5xe%28v=vs.84%29.aspx
+require 'win32ole'
+wshell = WIN32OLE.new('WScript.Shell')
+
+default['windows_setup']['startup_dir'] = wshell.SpecialFolders('Startup')
+default['windows_setup']['desktop_dir'] = wshell.SpecialFolders('Desktop')
+
+default['windows_setup']['packages'] = [
+  '7zip',
+  'ConEmu',
+  'Firefox',
+  'autohotkey',
+  'carbon',
+  # On OS X and GNU/Linux, we don't use the ChefDK. But it makes installation of
+  # a development environment very easy on Windows.
+  'chefdk',
+  'flashplayerplugin',
+  'gimp',
+  'githubforwindows',
+  'nodejs',
+  'pscx',
+  'scite4autohotkey',
+  'sqlitebrowser',
+  'steam',
+  'switcheroo',
+  'sysinternals',
+  'wixtoolset'
+]
 
 default['windows_setup']['psget_modules'] = %w(
   PSReadLine
+)
+
+default['windows_setup']['nodejs_tools'] = %w(
+  jsonlint
+  uglify-js
 )
