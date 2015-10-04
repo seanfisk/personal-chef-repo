@@ -165,7 +165,6 @@ node.default['homebrew']['formulas'] = [
   'libgit2',
   # For rotating the Powerline log (see dotfiles).
   'logrotate',
-  'markdown',
   'mercurial',
   'mobile-shell',
   'mplayer', # For https://github.com/TeMPOraL/nyan-mode#features :)
