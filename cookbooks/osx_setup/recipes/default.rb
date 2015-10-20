@@ -143,6 +143,7 @@ node.default['homebrew']['formulas'] = [
   # was just from a quick look.
   'dos2unix',
   'doxygen',
+  'duti',
   'editorconfig',
   'fasd',
   'gibo',
@@ -929,6 +930,17 @@ node.default['mac_os_x']['settings']['universalaccess'] = {
 
 # Actually write all the settings using the 'defaults' command.
 include_recipe 'mac_os_x::settings'
+
+# Set Skim as default PDF reader using duti.
+CURRENT_PDF_APP = shell_out!('duti', '-x', 'pdf').stdout.lines[0].rstrip
+execute 'set Skim as PDF viewer' do
+  # Note: Although setting the default app for 'viewer' instead of 'all' works
+  # and makes more sense, there is apparently no way to query this information
+  # using duti. Since we won't really be editing PDFs, we'll just set the role
+  # to 'all' for Skim.
+  command %w(duti -s net.sourceforge.skim-app.skim pdf all)
+  not_if { CURRENT_PDF_APP == 'Skim.app' }
+end
 
 ###############################################################################
 # DOTFILES AND EMACS
