@@ -117,6 +117,14 @@ package 'lastpass-cli' do
   options '--with-doc --with-pinentry'
 end
 
+# mitmproxy with options
+#
+# There is a cask for this as well, but it is out-of-date. We also want to make
+# sure the extras are included.
+package 'mitmproxy' do
+  options '--with-cssutils --with-protobuf --with-pyamf'
+end
+
 # Ettercap with IPv6 support, GTK+ GUI, and Ghostscript (for PDF docs)
 #
 # Note: Ettercap is crashing at this time on my Mac, so I've disabled it for
