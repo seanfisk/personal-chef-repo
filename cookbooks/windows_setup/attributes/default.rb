@@ -45,6 +45,7 @@ default['windows_setup']['packages'] = [
   # On OS X and GNU/Linux, we don't use the ChefDK. But it makes installation of
   # a development environment very easy on Windows.
   'chefdk',
+  'dependencywalker',
   'flashplayerplugin',
   'gimp',
   'githubforwindows',
