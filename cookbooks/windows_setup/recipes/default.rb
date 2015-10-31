@@ -301,10 +301,9 @@ end
 
 powerplan_cache_path = "#{Chef::Config[:file_cache_path]}\\powerplan-setup.exe"
 remote_file 'download Power Plan Assistant' do
-  source 'http://cdn-us.filecluster.com/PowerPlanAssistant/' \
-         'Power_Plan_Assistant_32a_Setup_09032015.exe'
+  # This URL [should] always redirect to the latest download.
+  source 'http://www.filecluster.com/download-link-4/113379.html'
   path powerplan_cache_path
-  checksum 'abf029e8240b80ad42be8464757a6d3f6cd868fdb9e08800741b2fbc9f51acf4'
   # They tried to be clever, but they couldn't fool me, no sir.
   headers 'Referer' => 'http://www.filecluster.com/downloads/' \
                        'Power-Plan-Assistant-for-Windows-7.html'
@@ -329,10 +328,9 @@ end
 # Power Plan Assistant is required for Trackpad++.
 trackpad_cache_path = "#{Chef::Config[:file_cache_path]}\\trackpad-setup.exe"
 remote_file 'download Trackpad++' do
-  source 'http://cdn-us.filecluster.com/TrackpadDriverandControlModule/' \
-         'Trackpad_Plus_Plus_Driver_Control_Module_Setup_31d_09032015.exe'
+  # This URL [should] always redirect to the latest download.
+  source 'http://www.filecluster.com/download-link-4/160247.html'
   path trackpad_cache_path
-  checksum '1041d049690852cb02f3ab1aee61a089ae0e239c5a11d3e439fb9aaaee08435e'
   headers 'Referer' => 'http://www.filecluster.com/downloads/' \
                        'Trackpad-Driver-and-Control-Module.html'
 end
