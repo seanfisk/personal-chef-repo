@@ -1,6 +1,7 @@
 High Priority
 -------------
 
+* [bcat](http://rtomayko.github.io/bcat/) gem (in either system Ruby or local Ruby)
 * Local Python installation
 * `sudo` prompts in various resources are not showing, and script is hanging waiting for them.
 * Add note about setting up SSH keys before running.
