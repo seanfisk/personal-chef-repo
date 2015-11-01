@@ -363,6 +363,23 @@ registry_key 'set Emacs HOME' do
   recursive true
 end
 
+# Create a desktop shortcut that runs Emacs through PowerShell. Because we are
+# using Git from the GitHub for Windows application, and the path to this is
+# defined within a PowerShell script, it's easiest to run Emacs from
+# PowerShell. In this way, Emacs is run with all of our profile variables
+# defined.
+windows_shortcut 'create Emacs desktop shortcut' do
+  name "#{node['windows_setup']['desktop_dir']}\\Emacs.lnk"
+  target 'powershell'
+  # Even with -WindowStyle Hidden, the command window shows up for a split
+  # second. The other options are to wrap it in a C# or VbScript application,
+  # which seems overkill for this. See:
+  # http://stackoverflow.com/questions/1802127/how-to-run-a-powershell-script-without-displaying-a-window
+  arguments '-NoLogo -NonInteractive -WindowStyle Hidden -Command emacs'
+  description 'Run Emacs through PowerShell, loading my profile variables'
+  iconlocation 'emacs.exe, 0'
+end
+
 # Emacs Cask
 cask_install_path = "#{node['windows_setup']['home']}\\.cask"
 git cask_install_path do
