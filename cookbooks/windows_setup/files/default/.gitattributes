@@ -1,4 +1,8 @@
-# All files in this directory should use Windows-style line endings.
-# Even if they are edited on another platform, they will be uploaded
-# by Chef as-is.
+# All text files in this directory should use Windows-style line
+# endings. Even if they are edited on another platform, they will be
+# uploaded by Chef as-is.
+
 * text eol=crlf
+
+*.dll binary
+*.exe binary
