@@ -84,6 +84,27 @@ node['windows_setup']['packages'].each do |pkg_name|
   chocolatey pkg_name
 end
 
+# Enable Chocolatey features.
+CHOCO_FEATURES = {}
+CHOCO_FEATURE_COMMAND = 'choco feature list'
+powershell_out!(CHOCO_FEATURE_COMMAND).stdout.lines do |line|
+  match = /(\w+) - \[(En|Dis)abled\]/.match(line)
+  Chef::Application.fatal!(
+    "Unexpected output format for '#{CHOCO_FEATURE_COMMAND}'") unless match
+  CHOCO_FEATURES[match[1]] = match[2] == 'En'
+end
+%w(
+  checksumFiles
+  autoUninstaller
+  allowGlobalConfirmation
+  failOnAutoUninstaller
+).each do |feature|
+  powershell_script "enable Chocolatey feature '#{feature}'" do
+    code "choco feature enable --name='#{feature}'"
+    not_if { CHOCO_FEATURES[feature] }
+  end
+end
+
 # Add AutoHotkey compiler (Ahk2Exe) to System Path.
 add_to_system_path(
   ::File.dirname(
