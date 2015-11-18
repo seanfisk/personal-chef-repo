@@ -3,7 +3,7 @@ DEPENDENCIES
   dmg (~> 2.3.0)
   homebrew (~> 1.13.0)
   mac_os_x (~> 1.4.6)
-  windows (~> 1.38.2)
+  windows (~> 1.38.0)
 
 GRAPH
   build-essential (2.2.4)
@@ -14,5 +14,5 @@ GRAPH
   homebrew (1.13.0)
     build-essential (>= 2.1.2)
   mac_os_x (1.4.6)
-  windows (1.38.3)
+  windows (1.38.4)
     chef_handler (>= 0.0.0)
