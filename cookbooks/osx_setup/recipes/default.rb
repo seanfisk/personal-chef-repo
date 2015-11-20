@@ -359,21 +359,6 @@ node.default['homebrew']['casks'] = [
   'silverlight', # Used for Anne's Netflix :)
   'vagrant',
   'virtualbox',
-  # Wireshark initially used GTK+ as the GUI library, but is switching to Qt.
-  # According to their blog post announcement:
-  #
-  #     If you're running OS X you should use the Qt flavor. For common tasks it
-  #     should have a better workflow. Again, if it doesn't we aren't doing our
-  #     job.
-  #
-  # Source: https://blog.wireshark.org/2013/10/switching-to-qt/
-  #
-  # However, the 'Capture Filters...' and 'Display Filters...' dialogs are not
-  # implemented as of development release 1.99.1, which uses Qt. These are
-  # pretty important for a beginner like me, so I've decided to stick with GTK+
-  # and X11 for now. When these are implemented, switch to Qt :)
-  #
-  # See: https://ask.wireshark.org/questions/33478/filter-box-not-working-on-qt-wireshark-on-os-x
   'wireshark',
   # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
   'xquartz'
