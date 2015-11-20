@@ -327,6 +327,7 @@ node.default['homebrew']['casks'] = [
   'pandoc',
   'quicksilver',
   'remote-desktop-connection',
+  'silverlight', # Used for Anne's Netflix :)
   'skim',
   'skitch',
   'skype',
@@ -356,7 +357,6 @@ node.default['homebrew']['casks'] = [
   # build (although it's bottled anyway).
   'sqlitebrowser',
   'sshfs',
-  'silverlight', # Used for Anne's Netflix :)
   'vagrant',
   'virtualbox',
   'wireshark',
