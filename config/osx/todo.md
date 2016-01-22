@@ -1,7 +1,6 @@
 High Priority
 -------------
 
-* NTFS enable in fstab
 * [bcat](http://rtomayko.github.io/bcat/) gem (in either system Ruby or local Ruby)
 * Local Python installation
 * `sudo` prompts in various resources are not showing, and script is hanging waiting for them.
@@ -15,6 +14,11 @@ High Priority
 Low Priority
 ------------
 
+* Automate [NTFS-3g installation](https://github.com/osxfuse/osxfuse/wiki/NTFS-3G#installation):
+    * Install FUSE for OS X with the MacFUSE compatibility layer. This is not in the default install, so we'll probably have to mess around with options to the pkg installer using the `installer` command-line tool. Also, we'll have to remove `osxfuse` installed via Homebrew Cask.
+    * Tap `homebrew/fuse`.
+    * Install `ntfs-3g` formula.
+    * Link NTFS-3G to the system location as shown in the steps.
 * Update Hosted Chef URL (http://api.opscode.com/) to the new one (presumably http://api.chef.io/) one when it changes (generate a new knife config and see what's in there). Also update `cookbooks/README.md` from [chef-repo](https://github.com/chef/chef-repo) when that gets updated.
 * Start using the [Chef Development Kit](https://docs.chef.io/install_dk.html), maybe. Things seem to be working OK now, but the Chef DK looks like "what everyone's using". Not sure, though.
 * Automatically install default Python packages (see dotfiles as well for how this is done currently).
