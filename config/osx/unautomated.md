@@ -27,6 +27,10 @@ This file lists parts of OS X setup that are not automated. Typically, this is d
 
   Installed from the Mac App Store.
 
+* Wunderlist
+
+  Installed from the Mac App Store.
+
 * Quicksilver hotkey
 
   Most of the other preferences are automated, but this one proved difficult. For now, it needs to be set manually. See the recipe for the gritty details and rationale for the decision not to automate.
