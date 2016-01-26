@@ -680,6 +680,12 @@ node.default['mac_os_x']['settings']['quicksilver'] = {
   'Setup Assistant Completed' => true
 }
 
+cookbook_file 'Quicksilver catalog preferences file' do
+  source 'Quicksilver-Catalog.plist'
+  path node['osx_setup']['home'] +
+    '/Library/Application Support/Quicksilver/Catalog.plist'
+end
+
 # TODO: Consider using JavaScript preferences (replacing .slate, or to
 # supplement it).
 cookbook_file 'Slate preferences file' do
