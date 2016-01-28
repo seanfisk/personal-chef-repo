@@ -184,6 +184,7 @@ node.default['homebrew']['formulas'] = [
   'p7zip',
   'parallel',
   'pdfgrep',
+  'pidof',
   'progress',
   'pstree',
   # pwgen and sf-pwgen are both password generators. pwgen is more generic,
