@@ -313,6 +313,7 @@ node.default['homebrew']['casks'] = [
   'jettison',
   'karabiner',
   'lastpass', # NOTE: Requires manual intervention
+  'libreoffice',
   # This is a maintained fork of the original Slate:
   # https://github.com/mattr-/slate
   'mattr-slate',
@@ -428,6 +429,30 @@ execute 'install Tasks Explorer' do
   # - https://github.com/mattdbridges/chef-osx_pkg/blob/master/providers/package.rb
   command ['sudo', 'installer', '-pkg', TE_PKG_CACHE_PATH, '-target', '/']
   not_if { TE_IS_INSTALLED }
+end
+
+# Ubuntu fonts
+#
+# The regular Ubuntu font can be installed with SkyFonts, but it doesn't
+# include Ubuntu Mono, which we want.
+UBUNTU_FONT_ARCHIVE_NAME = 'ubuntu-font-family-0.83.zip'
+UBUNTU_FONT_ARCHIVE_PATH =
+    "#{Chef::Config[:file_cache_path]}/#{UBUNTU_FONT_ARCHIVE_NAME}"
+UBUNTU_FONT_DIR = "#{node['osx_setup']['fonts_dir']}/Ubuntu"
+
+directory UBUNTU_FONT_DIR
+
+remote_file 'download Ubuntu fonts' do
+  source "http://font.ubuntu.com/download/#{UBUNTU_FONT_ARCHIVE_NAME}"
+  path UBUNTU_FONT_ARCHIVE_PATH
+  checksum '456d7d42797febd0d7d4cf1b782a2e03680bb4a5ee43cc9d06bda172bac05b42'
+  notifies :run, 'execute[install Ubuntu fonts]'
+end
+
+execute 'install Ubuntu fonts' do
+  command "unzip '#{UBUNTU_FONT_ARCHIVE_PATH}'"
+  cwd UBUNTU_FONT_DIR
+  action :nothing
 end
 
 # Inconsolata for Powerline (can't be installed via SkyFonts, for obvious
