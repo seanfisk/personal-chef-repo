@@ -1,6 +1,7 @@
 High Priority
 -------------
 
+* Use [tccutil](https://github.com/jacobsalmela/tccutil) to modify the accessibility database.
 * [bcat](http://rtomayko.github.io/bcat/) gem (in either system Ruby or local Ruby)
 * Local Python installation
 * `sudo` prompts in various resources are not showing, and script is hanging waiting for them.
