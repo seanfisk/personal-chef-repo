@@ -154,6 +154,7 @@ node.default['homebrew']['formulas'] = [
   'duti',
   'editorconfig',
   'fasd',
+  'ghostscript',
   'gibo',
   'gnu-tar',
   # Install both GraphicMagick and ImageMagick. In generally, I prefer
