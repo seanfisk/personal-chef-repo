@@ -3,7 +3,44 @@
 <plist version="1.0">
 <dict>
 	<key>customEntries</key>
-	<array/>
+	<array>
+		<!-- When Quicksilver finds symbolic links to apps, it won't let me quit the app through them. We need to locate the actual app bundle for this to work. Not sure if this is a bug or intentional, but I don't like it either way. This workaround finds the actual app bundle in the Caskroom. -->
+		<dict>
+			<key>ID</key>
+			<string>977554DC-991E-4210-AECE-61934D337811</string>
+			<key>children</key>
+			<array/>
+			<key>enabled</key>
+			<true/>
+			<key>name</key>
+			<string>Caskroom</string>
+			<key>requiresSettingsPath</key>
+			<true/>
+			<key>settings</key>
+			<dict>
+				<key>folderDepth</key>
+				<integer>3</integer>
+				<key>folderTypes</key>
+				<array>
+					<string>com.apple.application</string>
+				</array>
+				<key>kind</key>
+				<string>Folder</string>
+				<key>parser</key>
+				<string>QSDirectoryParser</string>
+				<key>path</key>
+				<string>/opt/homebrew-cask/Caskroom</string>
+				<key>scanContents</key>
+				<integer>1</integer>
+				<key>skipItem</key>
+				<true/>
+			</dict>
+			<key>source</key>
+			<string>QSFileSystemObjectSource</string>
+			<key>watchTarget</key>
+			<true/>
+		</dict>
+	</array>
 	<key>enabledPresets</key>
 	<dict>
 		<key>QSPresetAllApplications</key>
@@ -11,9 +48,9 @@
 		<key>QSPresetMainApplications</key>
 		<true/>
 		<key>QSPresetRunningProcesses</key>
-		<true/>
+		<false/>
 		<key>QSPresetUserApplications</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>omittedItems</key>
 	<array/>
