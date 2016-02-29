@@ -606,7 +606,7 @@ end
 # - It would be nice to call the CoreFoundation API from Ruby, but RubyCocoa,
 #   MacRuby, and HotCocoa are apparently defunct; they have been succeeded by
 #   RubyMotion which is a proprietary product. Frustrating.
-iterm2_script_name = 'iterm2-set-profile-prefs'
+iterm2_script_name = 'iterm2-set-profile-prefs.py'
 iterm2_script_path = "#{Chef::Config[:file_cache_path]}/#{iterm2_script_name}"
 cookbook_file 'Copy iTerm2 Profile Preferences Script' do
   source iterm2_script_name

@@ -1,0 +1,23 @@
+# -*- mode: conf-unix; -*-
+
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# defaults
+[*]
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# 4-space indentation, UTF-8
+[*.{md,py,rb,rb.sample,yml}]
+indent_style = space
+indent_size = 4
+charset = utf-8
+
+# Tabbed indentation, 4-space representation, UTF-8
+[*.{ps1,xml,plist}]
+indent_style = tab
+indent_size = 4
+charset = utf-8
