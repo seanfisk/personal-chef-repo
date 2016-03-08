@@ -330,7 +330,6 @@ node.default['homebrew']['casks'] = [
   'pandoc',
   'quicksilver',
   'remote-desktop-connection',
-  'silverlight', # Used for Anne's Netflix :)
   'skim',
   'skitch',
   'skype',
