@@ -268,6 +268,7 @@ node.default['homebrew']['casks'] = [
   'cathode',
   'chicken',
   'cord',
+  'crashplan',
   'dash',
   'deeper',
   'disk-inventory-x',
