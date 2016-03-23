@@ -95,6 +95,8 @@ end
 # HOMEBREW FORMULAS
 ###############################################################################
 
+homebrew_tap 'homebrew/command-not-found'
+
 # Install Emacs with options. Do this before installing the other formulas,
 # because the cask formula depends on emacs.
 package 'emacs' do
