@@ -46,6 +46,17 @@ Be careful, because after re-generating, all nodes must be updated to use the ne
 
 It is definitely possible to manage these recipes with Chef Solo. However, both Josh and Seth's tutorials are focused around Hosted Chef. In addition, Berkshelf works a bit better with Hosted Chef, as cookbooks only need to be uploaded initially and then for upgrades. It would be necessary to vendor the Berkshelf cookbooks each time for use with Chef Solo. This is all possible, and shouldn't be too difficult, but it's just not how I decided to do it.
 
+## Ruby version
+
+There are two Rubies that are used for this project: the embedded Ruby used by [Chef Client][] and the Ruby used for development. The development Ruby runs the tasks in the Thorfile, while the embedded Ruby executes the cookbooks. There's no requirement for these to be identical, but it's advantageous to keep them as close as possible because of [Rubocop][]. Rubocop parses the cookbooks as the Ruby under which it is currently running would. Since the cookbooks are ultimately run by Chef Client's embedded Ruby, the Ruby versions should be the same.
+
+You can find the version of the embedded Ruby that Chef Client uses on OS X with the following:
+
+    /opt/chef/embedded/bin/ruby --version
+
+[Chef Client]: https://docs.chef.io/chef_client.html
+[Rubocop]: https://github.com/bbatsov/rubocop
+
 ## References
 
 * Josh Timberman
