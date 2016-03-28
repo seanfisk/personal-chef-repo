@@ -145,6 +145,10 @@ node.default['homebrew']['formulas'] = [
   'aria2',
   'astyle',
   'cask',
+  # Although there is a formula for this, it's best to install in a Python
+  # environment, because cookiecutter uses the Python under which it runs to
+  # execute things. Using /usr/bin/python causes problems...
+  #'cookiecutter',
   'coreutils',
   # An improved version of df with colors.
   'dfc',
