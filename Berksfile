@@ -5,7 +5,7 @@ source 'https://supermarket.chef.io'
 group :osx do
   cookbook 'dmg', '~> 2.3.0'
   cookbook 'mac_os_x', '~> 1.4.6'
-  cookbook 'homebrew', '~> 2.0.0'
+  cookbook 'homebrew', '~> 2.1.0'
 end
 
 group :windows do
