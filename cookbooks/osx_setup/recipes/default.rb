@@ -148,7 +148,7 @@ node.default['homebrew']['formulas'] = [
   # Although there is a formula for this, it's best to install in a Python
   # environment, because cookiecutter uses the Python under which it runs to
   # execute things. Using /usr/bin/python causes problems...
-  #'cookiecutter',
+  # 'cookiecutter',
   'coreutils',
   # An improved version of df with colors.
   'dfc',
