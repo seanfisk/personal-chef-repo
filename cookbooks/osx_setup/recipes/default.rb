@@ -719,11 +719,9 @@ cookbook_file 'Quicksilver catalog preferences file' do
     '/Library/Application Support/Quicksilver/Catalog.plist'
 end
 
-# TODO: Consider using JavaScript preferences (replacing .slate, or to
-# supplement it).
 cookbook_file 'Slate preferences file' do
-  source 'slate'
-  path "#{node['osx_setup']['home']}/.slate"
+  source 'slate.js'
+  path "#{node['osx_setup']['home']}/.slate.js"
 end
 
 node.default['mac_os_x']['settings']['tasks_explorer'] = {
