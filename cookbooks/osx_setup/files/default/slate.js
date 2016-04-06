@@ -15,8 +15,8 @@ _.each({X: ["left", "right"], Y: ["up", "down"]}, function(dirs, dim) {
 });
 
 // Throw Bindings
-_.each(_.range(1, 4), function (i) {
-    slate.bind(i.toString() + mods, slate.operation("throw", {
+_.each(_.range(3), function(i) {
+    slate.bind((i + 1).toString() + mods, slate.operation("throw", {
         screen: i.toString(),
         width: "screenSizeX",
         height: "screenSizeY"
