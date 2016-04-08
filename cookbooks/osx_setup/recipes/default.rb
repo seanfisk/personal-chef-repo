@@ -22,6 +22,7 @@
 
 require 'etc'
 require 'uri'
+require 'json'
 
 # Including this causes Homebrew to install if not already installed (needed
 # for the next section) and to run `brew update' if already installed.
@@ -587,43 +588,24 @@ cookbook_file background_name do
   path background_path
 end
 
-# Install and run script which merges our specific customizations into the
-# fuller iTerm2 preferences. There is an array of profiles in the key 'New
-# Bookmarks' (no idea why they chose this name). By default there is only one
-# profile, the default profile. Our script sets only the keys within the
-# default profile we have specifically changed.
-#
-# This can't be done with mac_os_x_userdefaults because it only supports
-# setting top-level keys, not merging. The current approach is to use
-# CoreFoundation's Preferences API to retrieve the profile dictionary through
-# the top-level key, merge the values, then set the top-level key with the new
-# values. This is done through Python using PyObjC so that we don't have to
-# compile an Objective-C or Swift program.
-#
-# Other approaches that have been considered are:
-#
-# - Modifying the plist directly (templating values or merging or setting with
-#   PlistBuddy). This is not good because preference plists are synced with
-#   cached defaults, and the plists are not really meant to be modified
-#   directly. The correct way to interact with them is through the preferences
-#   APIs. PlistBuddy does support setting of keys within nested structures, but
-#   is cumbersome to use.
-# - NSUserDefaults only supports operations on preferences for the current
-#   application.
-# - It would be nice to call the CoreFoundation API from Ruby, but RubyCocoa,
-#   MacRuby, and HotCocoa are apparently defunct; they have been succeeded by
-#   RubyMotion which is a proprietary product. Frustrating.
-iterm2_script_name = 'iterm2-set-profile-prefs.py'
-iterm2_script_path = "#{Chef::Config[:file_cache_path]}/#{iterm2_script_name}"
-cookbook_file 'Copy iTerm2 Profile Preferences Script' do
-  source iterm2_script_name
-  path iterm2_script_path
-  mode '700'
-end
-
-execute 'Run iTerm2 Profile Preferences Script' do
-  command [iterm2_script_path, background_path]
-  only_if [iterm2_script_path, '--should-run', background_path]
+dynamic_profiles_dir = node['osx_setup']['home'] +
+                       '/Library/Application Support/iTerm2/DynamicProfiles'
+font_name = 'InconsolataForPowerline 20'
+directory dynamic_profiles_dir
+file "#{dynamic_profiles_dir}/InstalledByChef.json" do
+  content JSON.pretty_generate(
+    Profiles: [
+      { :Name => 'Personal',
+        :Guid => '411F060B-E097-4E29-9986-275D5A47F609',
+        'Background Image Location' => background_path,
+        :Blend => 0.4,
+        'Option Key Sends' => 2,
+        'Right Option Key Sends' => 2,
+        'Normal Font' => font_name,
+        'Non Ascii Font' => font_name
+      }
+    ]
+  )
 end
 
 node.default['mac_os_x']['settings']['jettison'] = {
