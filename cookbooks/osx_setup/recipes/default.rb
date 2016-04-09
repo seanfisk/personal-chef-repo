@@ -583,6 +583,7 @@ app_support_dir =
   "#{node['osx_setup']['home']}/Library/Application Support/iTerm2"
 bg_key = 'Background Image Location'
 font_name = 'InconsolataForPowerline 20'
+gv_dir = "#{node['osx_setup']['home']}/classes"
 profiles = [
   { :Name => 'Personal',
     :Guid => '411F060B-E097-4E29-9986-275D5A47F609',
@@ -609,6 +610,15 @@ profiles = [
     'Dynamic Profile Parent Name' => 'Personal',
     bg_key => 'volcano.jpg',
     'Bound Hosts' => ['root@']
+  },
+  { :Name => 'GVSU',
+    :Guid => '3129170E-EE36-4E29-9528-008A8BAB7FB7',
+    'Dynamic Profile Parent Name' => 'Personal',
+    bg_key => 'gvsu.jpg',
+    :Blend => 0.35,
+    'Working Directory' => gv_dir,
+    'Custom Directory' => 'Yes',
+    'Bound Hosts' => [gv_dir]
   }
 ]
 
