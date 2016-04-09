@@ -578,34 +578,65 @@ node.default['mac_os_x']['settings']['iterm2'] = {
   PasteFromClipboard: false
 }
 
-# Install background image.
-backgrounds_dir = "#{node['osx_setup']['home']}/Pictures/Backgrounds"
-background_name = 'holland-beach-sunset.jpg'
-background_path = "#{backgrounds_dir}/#{background_name}"
-
-directory backgrounds_dir
-cookbook_file background_name do
-  path background_path
-end
-
-dynamic_profiles_dir = node['osx_setup']['home'] +
-                       '/Library/Application Support/iTerm2/DynamicProfiles'
+# Declare profiles.
+app_support_dir =
+  "#{node['osx_setup']['home']}/Library/Application Support/iTerm2"
+bg_key = 'Background Image Location'
 font_name = 'InconsolataForPowerline 20'
-directory dynamic_profiles_dir
-file "#{dynamic_profiles_dir}/InstalledByChef.json" do
-  content JSON.pretty_generate(
-    Profiles: [
-      { :Name => 'Personal',
-        :Guid => '411F060B-E097-4E29-9986-275D5A47F609',
-        'Background Image Location' => background_path,
-        :Blend => 0.4,
-        'Option Key Sends' => 2,
-        'Right Option Key Sends' => 2,
-        'Normal Font' => font_name,
-        'Non Ascii Font' => font_name
+profiles = [
+  { :Name => 'Personal',
+    :Guid => '411F060B-E097-4E29-9986-275D5A47F609',
+    bg_key => 'holland-beach-sunset.jpg',
+    :Blend => 0.4,
+    'Option Key Sends' => 2,
+    'Right Option Key Sends' => 2,
+    'Normal Font' => font_name,
+    'Non Ascii Font' => font_name,
+    :Triggers => [
+      # Set the user name to 'root' when the root prompt appears. This is
+      # done in order not to have to install shell integration into the
+      # root login script.
+      {
+        partial: true, # Take effect before next newline
+        parameter: 'root@',
+        regex: '^\w+:.+ root# ',
+        action: 'SetHostnameTrigger'
       }
     ]
-  )
+  },
+  { :Name => 'Root',
+    :Guid => '80B90042-691C-42B6-9943-A1924E86A41F',
+    'Dynamic Profile Parent Name' => 'Personal',
+    bg_key => 'volcano.jpg',
+    'Bound Hosts' => ['root@']
+  }
+]
+
+# Install background images.
+bgs_dir = "#{app_support_dir}/Backgrounds"
+directory bgs_dir
+json_content = JSON.pretty_generate(
+  Profiles: profiles.map do |profile|
+    if profile.key?(bg_key)
+      base = profile[bg_key]
+      cookbook_path = "iterm2-bgs/#{base}"
+      install_path = "#{bgs_dir}/#{base}"
+      profile[bg_key] = install_path
+      cookbook_file "install iTerm2 background '#{base}'" do
+        source cookbook_path
+        path install_path
+      end
+    end
+    profile
+  end
+)
+
+# Install dynamic profiles.
+dynamic_profiles_dir = "#{app_support_dir}/DynamicProfiles"
+directory dynamic_profiles_dir
+file 'install iTerm2 dynamic profiles' do
+  path "#{dynamic_profiles_dir}/InstalledByChef.json"
+  content json_content
 end
 
 node.default['mac_os_x']['settings']['jettison'] = {
