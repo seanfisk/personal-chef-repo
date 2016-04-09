@@ -18,13 +18,5 @@
 #
 
 default['osx_setup']['home'] = ENV['HOME']
-default['osx_setup']['personal_dir'] =
-  "#{default['osx_setup']['home']}/src/personal"
-default['osx_setup']['dotfiles_dir'] =
-  "#{default['osx_setup']['personal_dir']}/dotfiles"
-default['osx_setup']['emacs_dir'] =
-  "#{default['osx_setup']['personal_dir']}/emacs"
-default['osx_setup']['scripts_dir'] =
-  "#{default['osx_setup']['home']}/bin"
 default['osx_setup']['fonts_dir'] =
   "#{default['osx_setup']['home']}/Library/Fonts"

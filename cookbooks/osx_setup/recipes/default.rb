@@ -998,28 +998,6 @@ execute 'set Skim as PDF viewer' do
   not_if { CURRENT_PDF_APP == 'Skim.app' }
 end
 
-###############################################################################
-# DOTFILES AND EMACS
-###############################################################################
-
-directory node['osx_setup']['personal_dir'] do
-  recursive true
-  action :create
-end
-
-git node['osx_setup']['emacs_dir'] do
-  repository 'git@github.com:seanfisk/emacs.git'
-  enable_submodules true
-  action :checkout
-  notifies :run, 'execute[install emacs configuration]'
-end
-
-execute 'install emacs configuration' do
-  command %w(make install)
-  cwd node['osx_setup']['emacs_dir']
-  action :nothing
-end
-
 execute 'invalidate sudo timestamp' do
   # 'sudo -K' will remove the timestamp entirely, which means that sudo will
   # print the initial 'Improper use of the sudo command' warning. Not what we
