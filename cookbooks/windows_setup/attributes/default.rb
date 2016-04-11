@@ -17,53 +17,69 @@
 # limitations under the License.
 #
 
-# Arguments used to run a batch PowerShell command
-default['windows_setup']['pscmd_args'] =
-  'powershell -NoLogo -NonInteractive -NoProfile -Command'
+default.windows_setup.tap do |w|
+  # Arguments used to run a batch PowerShell command
+  w.ps_args =
+    'powershell -NoLogo -NonInteractive -NoProfile -Command'
 
-default['windows_setup']['home'] = ENV['USERPROFILE']
-default['windows_setup']['scripts_dir'] =
-  "#{default['windows_setup']['home']}\\bin"
-default['windows_setup']['apps_dir'] =
-  "#{default['windows_setup']['home']}\\Applications"
+  w.home = ENV['USERPROFILE']
+  w.scripts_dir = "#{w.home}\\bin"
+  w.apps_dir = "#{w.home}\\Applications"
 
-# Inspired by:
-# - https://github.com/opscode-cookbooks/windows#examples-12
-# - https://msdn.microsoft.com/en-us/library/0ea7b5xe%28v=vs.84%29.aspx
-require 'win32ole'
-wshell = WIN32OLE.new('WScript.Shell')
+  # Inspired by:
+  # - https://github.com/opscode-cookbooks/windows#examples-12
+  # - https://msdn.microsoft.com/en-us/library/0ea7b5xe%28v=vs.84%29.aspx
+  require 'win32ole'
+  wshell = WIN32OLE.new('WScript.Shell')
 
-default['windows_setup']['startup_dir'] = wshell.SpecialFolders('Startup')
-default['windows_setup']['desktop_dir'] = wshell.SpecialFolders('Desktop')
+  w.startup_dir = wshell.SpecialFolders('Startup')
+  w.desktop_dir = wshell.SpecialFolders('Desktop')
 
-default['windows_setup']['packages'] = [
-  '7zip',
-  'ConEmu',
-  'Firefox',
-  'autohotkey',
-  'carbon',
-  # On OS X and GNU/Linux, we don't use the ChefDK. But it makes installation of
-  # a development environment very easy on Windows.
-  'chefdk',
-  'dependencywalker',
-  'flashplayerplugin',
-  'gimp',
-  'githubforwindows',
-  'nodejs',
-  'pscx',
-  'scite4autohotkey',
-  'sqlitebrowser',
-  'steam',
-  'switcheroo',
-  'sysinternals',
-  'wixtoolset'
-]
+  w.explorer_registry_key =
+    'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer'
+  w.time_zone = 'Eastern Standard Time'
 
-default['windows_setup']['psget_modules'] = %w(
-  PSReadLine
-)
+  w.packages = [
+    '7zip',
+    'ConEmu',
+    'Firefox',
+    'autohotkey',
+    'carbon',
+    # On OS X and GNU/Linux, we don't use the ChefDK. But it makes installation
+    # of a development environment very easy on Windows.
+    'chefdk',
+    'dependencywalker',
+    'flashplayerplugin',
+    'gimp',
+    'githubforwindows',
+    'nodejs',
+    'pscx',
+    'scite4autohotkey',
+    'sqlitebrowser',
+    'steam',
+    'switcheroo',
+    'sysinternals',
+    'wixtoolset'
+  ]
 
-default['windows_setup']['nodejs_tools'] = %w(
-  jsonlint
-  uglify-js
-)
+  w.chocolatey.features = %w(
+    checksumFiles
+    autoUninstaller
+    allowGlobalConfirmation
+    failOnAutoUninstaller
+  )
+
+  w.psget.modules = %w(
+    PSReadLine
+  )
+
+  w.nodejs.tools = %w(
+    jsonlint
+    uglify-js
+  )
+
+  w.diablo2 = {
+    registry_key: 'HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II',
+    server: 'play.slashdiablo.net'
+  }
+end
