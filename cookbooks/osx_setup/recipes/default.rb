@@ -23,6 +23,7 @@
 require 'etc'
 require 'uri'
 require 'json'
+require 'pathname'
 
 # Including this causes Homebrew to install if not already installed (needed
 # for the next section) and to run `brew update' if already installed.
@@ -280,7 +281,7 @@ json_content = JSON.pretty_generate(
   Profiles: node.osx_setup.iterm2.profiles.map do |profile|
     profile = profile.dup
     bg_key = node.osx_setup.iterm2.bg_key
-    if profile.key?(bg_key)
+    if profile.key?(bg_key) && Pathname.new(profile[bg_key]).relative?
       base = profile[bg_key]
       cookbook_path = "iterm2-bgs/#{base}"
       install_path =

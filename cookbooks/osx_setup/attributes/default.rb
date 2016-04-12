@@ -26,11 +26,14 @@ default.osx_setup.tap do |o|
     app_support = "#{o.home}/Library/Application Support/iTerm2"
     font = 'InconsolataForPowerline 20'
     gvsu_dir = "#{o.home}/classes"
+    system_profile_guid = '4381BB8C-7F7D-4CFD-A5F8-3F1A77185E37'
+    i.default_profile_guid = personal_profile_guid =
+      '411F060B-E097-4E29-9986-275D5A47F609'
     i.bg_key = 'Background Image Location'
     i.bgs_dir = "#{app_support}/Backgrounds"
     i.dynamic_profiles_dir = "#{app_support}/DynamicProfiles"
     i.profiles = [
-      { :Guid => '411F060B-E097-4E29-9986-275D5A47F609',
+      { :Guid => personal_profile_guid,
         # General
         :Name => 'Personal',
         # Text
@@ -100,6 +103,18 @@ default.osx_setup.tap do |o|
         :'Bound Hosts' => [gvsu_dir]
       }
     ]
+    # TODO: Only works for Yosemite
+    if node.platform_version.start_with?('10.10')
+      i.profiles << {
+        :Guid => system_profile_guid,
+        :'Dynamic Profile Parent Name' => 'Personal',
+        # General
+        :Name => 'System',
+        # Window
+        i.bg_key => '/Library/Desktop Pictures/Yosemite 4.jpg'
+      }
+      i.default_profile_guid = system_profile_guid
+    end
   end
 end
 
@@ -412,36 +427,37 @@ default.mac_os_x.settings = {
     # login items like most other applications. So don't bother setting it.
   },
   iterm2: {
-    domain: 'com.googlecode.iterm2',
+    :domain => 'com.googlecode.iterm2',
+    :'Default Bookmark Guid' => node.osx_setup.iterm2.default_profile_guid,
     # General
     ## Closing
-    QuitWhenAllWindowsClosed: false,
-    PromptOnQuit: true,
+    :QuitWhenAllWindowsClosed => false,
+    :PromptOnQuit => true,
     ## Services
-    SUEnableAutomaticChecks: true,
-    CheckTestRelease: true,
+    :SUEnableAutomaticChecks => true,
+    :CheckTestRelease => true,
     ## Window
-    AdjustWindowForFontSizeChange: true,
-    UseLionStyleFullscreen: true,
+    :AdjustWindowForFontSizeChange => true,
+    :UseLionStyleFullscreen => true,
     # Appearance
     ## Tabs
-    TabViewType: 0, # Tab bar on top
-    TabStyle: 0, # Light tab theme
-    HideTabNumber: false,
-    HideTabCloseButton: true,
-    HideActivityIndicator: false,
+    :TabViewType => 0, # Tab bar on top
+    :TabStyle => 0, # Light tab theme
+    :HideTabNumber => false,
+    :HideTabCloseButton => true,
+    :HideActivityIndicator => false,
     ## Window & Tab Titles
-    WindowNumber: true,
-    JobName: true,
-    ShowBookmarkName: true,
+    :WindowNumber => true,
+    :JobName => true,
+    :ShowBookmarkName => true,
     ## Window
-    UseBorder: false,
-    HideScrollbar: true,
+    :UseBorder => false,
+    :HideScrollbar => true,
     # Keys
-    Hotkey: true,
-    HotkeyChar: 59,
-    HotkeyCode: 41,
-    HotkeyModifiers: 1_048_840
+    :Hotkey => true,
+    :HotkeyChar => 59,
+    :HotkeyCode => 41,
+    :HotkeyModifiers => 1_048_840
   },
   jettison: {
     domain: 'com.stclairsoft.Jettison',
