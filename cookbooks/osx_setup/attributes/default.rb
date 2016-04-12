@@ -30,14 +30,42 @@ default.osx_setup.tap do |o|
     i.bgs_dir = "#{app_support}/Backgrounds"
     i.dynamic_profiles_dir = "#{app_support}/DynamicProfiles"
     i.profiles = [
-      { :Name => 'Personal',
-        :Guid => '411F060B-E097-4E29-9986-275D5A47F609',
-        i.bg_key => 'holland-beach-sunset.jpg',
-        :Blend => 0.4,
-        :'Option Key Sends' => 2,
-        :'Right Option Key Sends' => 2,
+      { :Guid => '411F060B-E097-4E29-9986-275D5A47F609',
+        # General
+        :Name => 'Personal',
+        # Text
+        'Cursor Type' => 2, # Box cursor
+        :'Blinking Cursor' => false,
         :'Normal Font' => font,
         :'Non Ascii Font' => font,
+        :'Ambiguous Double Width' => false,
+        :'ASCII Anti Aliased' => true,
+        :'Non-ASCII Anti Aliased' => true,
+        # Window
+        i.bg_key => 'holland-beach-sunset.jpg',
+        :Blend => 0.4,
+        :'Sync Title' => true,
+        # Terminal
+        :'Character Encoding' => 4, # UTF-8
+        :'Terminal Type' => 'xterm-256color',
+        :'Mouse Reporting' => true,
+        :'Allow Title Reporting' => true,
+        :'Allow Title Setting' => true,
+        :'Disable Window Resizing' => true,
+        :'Silence Bell' => false,
+        :'BM Growl' => true,
+        :'Visual Bell' => true,
+        :'Flashing Bell' => false,
+        :'Set Local Environment Vars' => true,
+        :'Place Prompt at First Column' => true,
+        :'Show Mark Indicators' => true,
+        # Session
+        :'Close Sessions On End' => true,
+        :'Prompt Before Closing 2' => 0, # Do not prompt before closing
+        # Keys
+        :'Option Key Sends' => 2,
+        :'Right Option Key Sends' => 2,
+        # Advanced
         :Triggers => [
           # Set the user name to 'root' when the root prompt appears. This is
           # done in order not to have to install shell integration into the
@@ -50,19 +78,25 @@ default.osx_setup.tap do |o|
           }
         ]
       },
-      { :Name => 'Root',
-        :Guid => '80B90042-691C-42B6-9943-A1924E86A41F',
+      { :Guid => '80B90042-691C-42B6-9943-A1924E86A41F',
         :'Dynamic Profile Parent Name' => 'Personal',
+        # General
+        :Name => 'Root',
+        # Window
         i.bg_key => 'volcano.jpg',
+        # Advanced
         :'Bound Hosts' => ['root@']
       },
-      { :Name => 'GVSU',
-        :Guid => '3129170E-EE36-4E29-9528-008A8BAB7FB7',
+      { :Guid => '3129170E-EE36-4E29-9528-008A8BAB7FB7',
         :'Dynamic Profile Parent Name' => 'Personal',
+        # General
+        :Name => 'GVSU',
+        :'Custom Directory' => 'Yes',
+        :'Working Directory' => gvsu_dir,
+        # Window
         i.bg_key => 'gvsu.jpg',
         :Blend => 0.35,
-        :'Working Directory' => gvsu_dir,
-        :'Custom Directory' => 'Yes',
+        # Advanced
         :'Bound Hosts' => [gvsu_dir]
       }
     ]
@@ -379,11 +413,35 @@ default.mac_os_x.settings = {
   },
   iterm2: {
     domain: 'com.googlecode.iterm2',
+    # General
+    ## Closing
+    QuitWhenAllWindowsClosed: false,
+    PromptOnQuit: true,
+    ## Services
+    SUEnableAutomaticChecks: true,
+    CheckTestRelease: true,
+    ## Window
+    AdjustWindowForFontSizeChange: true,
+    UseLionStyleFullscreen: true,
+    # Appearance
+    ## Tabs
+    TabViewType: 0, # Tab bar on top
+    TabStyle: 0, # Light tab theme
+    HideTabNumber: false,
+    HideTabCloseButton: true,
+    HideActivityIndicator: false,
+    ## Window & Tab Titles
+    WindowNumber: true,
+    JobName: true,
+    ShowBookmarkName: true,
+    ## Window
+    UseBorder: false,
+    HideScrollbar: true,
+    # Keys
     Hotkey: true,
     HotkeyChar: 59,
     HotkeyCode: 41,
-    HotkeyModifiers: 1_048_840,
-    PasteFromClipboard: false
+    HotkeyModifiers: 1_048_840
   },
   jettison: {
     domain: 'com.stclairsoft.Jettison',
