@@ -285,7 +285,10 @@ mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 # raises an annoying error because it looks for the plist in its own cookbook.
 #
 # Install background images.
-directory node.osx_setup.iterm2.bgs_dir
+directory 'create iTerm2 background images directory' do
+  path node.osx_setup.iterm2.bgs_dir
+  recursive true
+end
 json_content = JSON.pretty_generate(
   Profiles: node.osx_setup.iterm2.profiles.map do |profile|
     profile = profile.dup
