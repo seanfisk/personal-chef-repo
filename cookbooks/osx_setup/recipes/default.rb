@@ -128,9 +128,10 @@ end
 #
 # There is a cask for this as well, but it is out-of-date. We also want to make
 # sure the extras are included.
-package 'mitmproxy' do
-  options '--with-cssutils --with-protobuf --with-pyamf'
-end
+# XXX: This is broken as of 2016-04-14
+# package 'mitmproxy' do
+#   options '--with-cssutils --with-protobuf --with-pyamf'
+# end
 
 # Ettercap with IPv6 support, GTK+ GUI, and Ghostscript (for PDF docs)
 #
