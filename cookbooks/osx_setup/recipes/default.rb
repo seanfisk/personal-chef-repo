@@ -315,17 +315,23 @@ file 'install iTerm2 dynamic profiles' do
   content json_content
 end
 
-cookbook_file 'Karabiner XML settings file' do
-  source 'Karabiner_private.xml'
-  path "#{node.osx_setup.home}/Library/Application Support/" \
-       'Karabiner/private.xml'
-end
+lambda do
+  install_dir = "#{node.osx_setup.home}/Library/Application Support/Karabiner"
+  directory install_dir
+  cookbook_file 'Karabiner XML settings file' do
+    source 'Karabiner_private.xml'
+    path "#{install_dir}/private.xml"
+  end
+end.call
 
-cookbook_file 'Quicksilver catalog preferences file' do
-  source 'Quicksilver-Catalog.plist'
-  path node.osx_setup.home +
-    '/Library/Application Support/Quicksilver/Catalog.plist'
-end
+lambda do
+  install_dir =
+    "#{node.osx_setup.home}/Library/Application Support/Quicksilver"
+  cookbook_file 'Quicksilver catalog preferences file' do
+    source 'Quicksilver-Catalog.plist'
+    path "#{install_dir}/Catalog.plist"
+  end
+end.call
 
 cookbook_file 'Slate preferences file' do
   source 'slate.js'
