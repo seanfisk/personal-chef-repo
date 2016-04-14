@@ -149,6 +149,14 @@ end
 include_recipe 'homebrew::install_formulas'
 include_recipe 'homebrew::install_casks'
 
+# Install X11 software
+# Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
+homebrew_cask 'xquartz'
+# These formulae require XQuartz to be installed first
+homebrew_tap 'homebrew/x11'
+package 'xclip'
+homebrew_cask 'inkscape'
+
 ###############################################################################
 # CUSTOM INSTALLS
 ###############################################################################

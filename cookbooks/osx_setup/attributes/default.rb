@@ -217,7 +217,6 @@ default.homebrew.formulas = [
   'valgrind',
   'watch',
   'wget',
-  'xclip',
   'xz',
   # For downloading videos/audio. ffmpeg is for post-processing; we chose it
   # over libav based on http://blog.pkh.me/p/13-the-ffmpeg-libav-situation.html
@@ -273,7 +272,6 @@ default.homebrew.casks = [
   'google-chrome',
   # This is 'GoogleVoiceAndVideoSetup', which installs the browser plugins.
   'google-hangouts',
-  'inkscape',
   'iterm2',
   # Java
   #
@@ -350,9 +348,7 @@ default.homebrew.casks = [
   'sshfs',
   'vagrant',
   'virtualbox',
-  'wireshark',
-  # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
-  'xquartz'
+  'wireshark'
 ]
 
 ###############################################################################
