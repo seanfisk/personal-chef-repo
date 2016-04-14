@@ -189,7 +189,7 @@ end.call
 #
 # We only check for the first one, though.
 lambda do
-  is_installed = shell_out!(
+  is_installed = shell_out(
     'pkgutil', '--pkg-info', 'com.macosinternals.tasksexplorer.Contents.pkg'
   ).exitstatus == 0
   pkg_path = "#{Chef::Config[:file_cache_path]}/Tasks Explorer.pkg"
