@@ -308,7 +308,6 @@ default.homebrew.casks = [
   # This cask already applies the fix as shown here:
   # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
   'macfusion',
-  'monotype-skyfonts',
   'openemu',
   'osxfuse',
   # Pandoc also has Homebrew formula. There isn't a particular reason to pick
@@ -318,6 +317,7 @@ default.homebrew.casks = [
   'remote-desktop-connection',
   'skim',
   'skitch',
+  'skyfonts',
   'skype',
   # Recommended by Lifehacker
   # http://lifehacker.com/the-best-antivirus-app-for-mac-488021445
