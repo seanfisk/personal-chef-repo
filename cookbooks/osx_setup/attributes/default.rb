@@ -103,8 +103,9 @@ default.osx_setup.tap do |o|
         :'Bound Hosts' => [gvsu_dir]
       }
     ]
-    system_bg_names = { :'10.10' => 'Yosemite 4', :'10.11' => 'El Capitan 2' }
-    if system_bg_names.key?(node.platform_version)
+    system_bg_names = { [10, 10] => 'Yosemite 4', [10, 11] => 'El Capitan 2' }
+    major_minor = node.platform_version.split('.')[0..1].map(&:to_i)
+    if system_bg_names.key?(major_minor)
       i.profiles << {
         :Guid => system_profile_guid,
         :'Dynamic Profile Parent Name' => 'Personal',
@@ -112,7 +113,7 @@ default.osx_setup.tap do |o|
         :Name => 'System',
         # Window
         i.bg_key => '/Library/Desktop Pictures/' \
-          "#{system_bg_names[node.platform_version]}.jpg"
+          "#{system_bg_names[major_minor]}.jpg"
       }
       i.default_profile_guid = system_profile_guid
     end
