@@ -314,14 +314,12 @@ default.homebrew.casks = [
   # one over the other.
   'pandoc',
   'quicksilver',
-  'remote-desktop-connection',
   'skim',
   'skitch',
   'skyfonts',
   'skype',
   # Recommended by Lifehacker
   # http://lifehacker.com/the-best-antivirus-app-for-mac-488021445
-  'sophos-anti-virus-home-edition',
   'speedcrunch',
   'spotify',
   # SQLite browser options:
