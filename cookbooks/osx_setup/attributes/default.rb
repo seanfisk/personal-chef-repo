@@ -274,7 +274,7 @@ default.homebrew.casks = [
   'google-chrome',
   # This is 'GoogleVoiceAndVideoSetup', which installs the browser plugins.
   'google-hangouts',
-  'iterm2',
+  'iterm2-beta',
   # Java
   #
   # I wish we could avoid installing Java, but I need it for at least these
