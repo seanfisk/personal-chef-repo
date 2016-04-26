@@ -3,6 +3,10 @@ Unautomated Setup
 
 This file lists parts of OS X setup that are not automated. Typically, this is due to technical or practical reasons.
 
+* SSH key generation
+
+  Run `ssh-keygen`, upload to GitHub, and copy the public key to necessary servers.
+
 * Dotfiles installation
 
   This used to be automated, but since moving to Waf, it is probably a good idea to set up pyenv with a virtualenv to do it correctly. While this could be automated, there isn't a large benefit in doing it right now since I only have one machine.

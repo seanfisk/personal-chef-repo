@@ -100,8 +100,6 @@ end
 # HOMEBREW FORMULAS AND CASKS
 ###############################################################################
 
-homebrew_tap 'homebrew/command-not-found'
-
 # Install Emacs with options. Do this before installing the other formulas,
 # because the cask formula depends on emacs.
 package 'emacs' do
@@ -146,6 +144,7 @@ end
 #   options '--with-ghostscript --with-gtk+ --with-ipv6'
 # end
 
+include_recipe 'homebrew::install_taps'
 include_recipe 'homebrew::install_formulas'
 include_recipe 'homebrew::install_casks'
 
@@ -153,7 +152,6 @@ include_recipe 'homebrew::install_casks'
 # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
 homebrew_cask 'xquartz'
 # These formulae require XQuartz to be installed first
-homebrew_tap 'homebrew/x11'
 package 'xclip'
 homebrew_cask 'inkscape'
 

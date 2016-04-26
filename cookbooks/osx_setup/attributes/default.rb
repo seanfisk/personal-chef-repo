@@ -124,6 +124,11 @@ end
 # HOMEBREW FORMULAS
 ###############################################################################
 
+default.homebrew.taps = %w(
+  homebrew/command-not-found
+  homebrew/x11
+)
+
 default.homebrew.formulas = [
   'ack',
   'aria2',
