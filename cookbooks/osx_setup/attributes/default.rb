@@ -159,6 +159,7 @@ default.homebrew.formulas = [
   'graphviz',
   'grc',
   'htop-osx',
+  'httpie',
   'hub',
   # ImageMagick might already be present on the system (but just 'convert').
   # I'm not sure if it's just an artifact of an earlier build, but it was on my
