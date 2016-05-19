@@ -17,6 +17,15 @@
 
     <!-- Our key remappings -->
     <list>
+		<item>
+			<name>Ergonomics</name>
+			<item>
+				<name>Space to Control_L</name>
+				<appendix>(+ When you type Space only, send Space) + [KeyRepeat]</appendix>
+				<identifier>private.ergo.space2control</identifier>
+				<autogen>__KeyOverlaidModifier__ KeyCode::SPACE, KeyCode::CONTROL_L, KeyCode::SPACE</autogen>
+			</item>
+		</item>
         <item>
             <name>Targus Wireless Presenter</name>
             <item>
