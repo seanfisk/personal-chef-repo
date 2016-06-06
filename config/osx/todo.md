@@ -1,6 +1,7 @@
 High Priority
 -------------
 
+* `chsh` prompts for the user's password. We should switch to Directory Services (`dscl`). Although this needs root to run, this is easier because we can just use `sudo` in the recipe. See [here](http://superuser.com/questions/379725/how-do-i-change-a-users-default-shell-in-osx/379726).
 * Use [tccutil](https://github.com/jacobsalmela/tccutil) to modify the accessibility database.
 * [bcat](http://rtomayko.github.io/bcat/) gem (in either system Ruby or local Ruby)
 * Local Python installation
