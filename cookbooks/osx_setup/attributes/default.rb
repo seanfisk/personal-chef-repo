@@ -312,11 +312,7 @@ default.homebrew.casks = [
   # This is a maintained fork of the original Slate:
   # https://github.com/mattr-/slate
   'mattr-slate',
-  # This cask already applies the fix as shown here:
-  # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
-  'macfusion',
   'openemu',
-  'osxfuse',
   # Pandoc also has Homebrew formula. There isn't a particular reason to pick
   # one over the other.
   'pandoc',
@@ -351,10 +347,17 @@ default.homebrew.casks = [
   # a cask are available. We've decided to go for the cask to avoid having to
   # build (although it's bottled anyway).
   'sqlitebrowser',
-  'sshfs',
   'vagrant',
   'virtualbox',
-  'wireshark'
+  'wireshark',
+  # Homebrew formulas are also available for these two formulas. However, since
+  # osxfuse requires commands to be run by root, and official binaries are
+  # probably better, we've decided to go for the casks.
+  'osxfuse',
+  'sshfs',
+  # This cask already applies the fix as shown here:
+  # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
+  'macfusion'
 ]
 
 ###############################################################################
