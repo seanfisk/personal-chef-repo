@@ -170,7 +170,6 @@ default.homebrew.formulas = [
   # For rotating the Powerline log (see dotfiles).
   'logrotate',
   'mercurial',
-  'mobile-shell',
   'mplayer', # For https://github.com/TeMPOraL/nyan-mode#features :)
   'mr', # myrepos, for managing multiple repos
   'nmap',
@@ -312,6 +311,7 @@ default.homebrew.casks = [
   # This is a maintained fork of the original Slate:
   # https://github.com/mattr-/slate
   'mattr-slate',
+  'mosh', # Also available as a formula
   'openemu',
   # Pandoc also has Homebrew formula. There isn't a particular reason to pick
   # one over the other.
