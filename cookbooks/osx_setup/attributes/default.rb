@@ -220,6 +220,7 @@ default.homebrew.formulas = [
   'thefuck',
   'the_silver_searcher',
   'tmux',
+  'trash',
   'tree',
   'valgrind',
   'watch',
