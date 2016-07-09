@@ -254,14 +254,17 @@ default.homebrew.formulas = [
 # HOMEBREW CASKS (see http://caskroom.io/)
 ###############################################################################
 
+# Casks that are commented out are ones that I'm not using right now, but have
+# used in the past and may use in the future.
+
 default.homebrew.casks = [
-  'adium',
+  # 'adium',
   'adobe-reader',
   'atext',
   'caffeine',
   'cathode',
-  'chicken',
-  'cord',
+  # 'chicken',
+  # 'cord',
   'crashplan',
   'dash',
   'deeper',
@@ -270,7 +273,7 @@ default.homebrew.casks = [
   # described as 'Eclipse IDE for Eclipse Committers', is actually just the
   # standard package without any extras. This is nice, because extras can
   # always be installed using the Eclipse Marketplace.
-  'eclipse-ide',
+  # 'eclipse-ide',
   'firefox',
   'flash',
   'flash-player',
@@ -320,7 +323,7 @@ default.homebrew.casks = [
   'skim',
   'skitch',
   'skyfonts',
-  'skype',
+  # 'skype',
   # Recommended by Lifehacker
   # http://lifehacker.com/the-best-antivirus-app-for-mac-488021445
   'speedcrunch',
