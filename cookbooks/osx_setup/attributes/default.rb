@@ -305,7 +305,6 @@ default.homebrew.casks = [
   # JDK: http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html#uninstall
   # JRE: https://www.java.com/en/download/help/mac_uninstall_java.xml
   'java',
-  'jettison',
   'karabiner',
   'lastpass', # NOTE: Requires manual intervention
   'libreoffice',
