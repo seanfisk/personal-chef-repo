@@ -72,7 +72,8 @@ class Test < Thor
         # XXX This is disabled due to binary data (\x00) in our windows_setup
         # cookbook incorrectly being flagged as an unnecessary use of double
         # quotes. We should fix this upstream.
-        '~CINK002']
+        '~CINK002'
+      ]
     )
 
     if review.warnings.any?

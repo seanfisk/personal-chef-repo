@@ -27,13 +27,14 @@ default.osx_setup.tap do |o|
     font = 'InconsolataForPowerline 20'
     gvsu_dir = "#{o.home}/classes"
     system_profile_guid = '4381BB8C-7F7D-4CFD-A5F8-3F1A77185E37'
-    i.default_profile_guid = personal_profile_guid =
-      '411F060B-E097-4E29-9986-275D5A47F609'
+    i.default_profile_guid =
+      personal_profile_guid = '411F060B-E097-4E29-9986-275D5A47F609'
     i.bg_key = 'Background Image Location'
     i.bgs_dir = "#{app_support}/Backgrounds"
     i.dynamic_profiles_dir = "#{app_support}/DynamicProfiles"
     i.profiles = [
-      { :Guid => personal_profile_guid,
+      {
+        :Guid => personal_profile_guid,
         # General
         :Name => 'Personal',
         # Text
@@ -81,7 +82,8 @@ default.osx_setup.tap do |o|
           }
         ]
       },
-      { :Guid => '80B90042-691C-42B6-9943-A1924E86A41F',
+      {
+        :Guid => '80B90042-691C-42B6-9943-A1924E86A41F',
         :'Dynamic Profile Parent Name' => 'Personal',
         # General
         :Name => 'Root',
@@ -90,7 +92,8 @@ default.osx_setup.tap do |o|
         # Advanced
         :'Bound Hosts' => ['root@']
       },
-      { :Guid => '3129170E-EE36-4E29-9528-008A8BAB7FB7',
+      {
+        :Guid => '3129170E-EE36-4E29-9528-008A8BAB7FB7',
         :'Dynamic Profile Parent Name' => 'Personal',
         # General
         :Name => 'GVSU',

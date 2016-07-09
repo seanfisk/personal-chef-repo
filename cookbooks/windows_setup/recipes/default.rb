@@ -36,8 +36,8 @@ def add_to_user_path(path)
   # therefore resort to this PowerShell hack, which is ugly but works.
   var = 'Path'
   scope = 'User'
-  get_var_command = (
-    "[Environment]::GetEnvironmentVariable('#{var}', '#{scope}')")
+  get_var_command =
+    "[Environment]::GetEnvironmentVariable('#{var}', '#{scope}')"
   powershell_script "add #{path} to the #{scope} #{var}" do
     code "[Environment]::SetEnvironmentVariable('#{var}', "\
          "#{get_var_command} + ';' + '#{path}', '#{scope}')"
@@ -91,7 +91,8 @@ lambda do
   powershell_out!(feature_cmd).stdout.lines do |line|
     match = /(\w+) - \[(En|Dis)abled\]/.match(line)
     Chef::Application.fatal!(
-      "Unexpected output format for '#{feature_cmd}'") unless match
+      "Unexpected output format for '#{feature_cmd}'"
+    ) unless match
     features[match[1]] = match[2] == 'En'
   end
   node.windows_setup.chocolatey.features.each do |feature|
@@ -109,7 +110,10 @@ add_to_system_path(
       'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths' \
       '\Ahk2Exe.exe',
       # This gets the default key.
-      '')))
+      ''
+    )
+  )
+)
 
 # Swap Caps Lock and Control using a registry hack. We previously used
 # AutoHotkey to do this, but since it used hotstrings, it installed a keyboard
@@ -142,7 +146,7 @@ remote_file 'download and install Gibo' do
   script_name = 'gibo.bat'
   # This file will likely change, so don't provide a checksum.
   source 'https://raw.githubusercontent.com/simonwhitaker/gibo/master/' +
-    script_name
+         script_name
   path "#{node.windows_setup.scripts_dir}\\#{script_name}"
 end
 
@@ -211,8 +215,7 @@ lambda do
     key 'HKEY_CURRENT_USER\Software\Apple Inc.\Apple Keyboard Support'
     values [{ name: 'OSXFnBehavior',
               type: :dword,
-              data: 0
-            }]
+              data: 0 }]
     only_if { boot_camp_is_installed }
   end
 end.call
@@ -223,8 +226,7 @@ registry_key 'configure the taskbar' do
     # "Always show all icons and notifications on the taskbar"
     { name: 'EnableAutoTray',
       type: :dword,
-      data: 0
-    }
+      data: 0 }
   ]
   notifies :run, 'powershell_script[restart Windows Explorer]'
 end
@@ -236,18 +238,15 @@ registry_key 'configure Windows Explorer' do
     # Show hidden files
     { name: 'Hidden',
       type: :dword,
-      data: 1
-    },
+      data: 1 },
     # Don't hide file extensions for known file types
     { name: 'HideFileExt',
       type: :dword,
-      data: 0
-    },
+      data: 0 },
     # But don't show OS files
     { name: 'ShowSuperHidden',
       type: :dword,
-      data: 0
-    }
+      data: 0 }
   ]
   notifies :run, 'powershell_script[restart Windows Explorer]'
 end
@@ -462,8 +461,8 @@ lambda do
     # Make sure to run D2VidTst.exe after installing to choose GLIDE as the
     # renderer. D2VidTst.exe usually needs to run in compatibility mode for
     # older Windows, so just be ready for that.
-    install_path = registry_get_value(
-      node.windows_setup.diablo2.registry_key, 'InstallPath')
+    install_path = registry_get_value(node.windows_setup.diablo2.registry_key,
+                                      'InstallPath')
     ['glide-init.exe', 'glide-readme.txt', 'glide3x.dll'].each do |file|
       cookbook_file "install GLIDE file #{file} to Diablo II directory" do
         source file

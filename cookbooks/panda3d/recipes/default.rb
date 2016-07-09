@@ -20,7 +20,8 @@
 
 include_recipe 'dmg'
 
-PANDA3D_VERSION = '1.8.1'
+PANDA3D_VERSION = '1.8.1'.freeze
+
 dmg_package 'Panda3D' do
   source "http://www.panda3d.org/download/panda3d-#{PANDA3D_VERSION}" \
     "/Panda3D-#{PANDA3D_VERSION}.dmg"

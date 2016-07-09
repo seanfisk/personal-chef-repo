@@ -176,7 +176,7 @@ lambda do
   # archive file doesn't exist.
   remote_file 'download Deep Sleep dashboard widget' do
     source 'https://github.com/downloads/code2k/Deep-Sleep.wdgt/' +
-      archive_name
+           archive_name
     checksum 'fa41a926d7c1b6566b074579bdd4c9bc969d348292597ac3064731326efc4207'
     path archive_path
     notifies :run, 'execute[install Deep Sleep dashboard widget]'
@@ -253,7 +253,7 @@ end.call
 remote_file 'download Inconsolata for Powerline font' do
   filename = 'Inconsolata for Powerline.otf'
   source 'https://github.com/powerline/fonts/raw/master/Inconsolata/' +
-    URI.escape(filename)
+         URI.escape(filename)
   path "#{node.osx_setup.fonts_dir}/#{filename}"
 end
 
@@ -311,8 +311,7 @@ json_content = JSON.pretty_generate(
 # Install dynamic profiles.
 directory node.osx_setup.iterm2.dynamic_profiles_dir
 file 'install iTerm2 dynamic profiles' do
-  path node.osx_setup.iterm2.dynamic_profiles_dir +
-    '/InstalledByChef.json'
+  path node.osx_setup.iterm2.dynamic_profiles_dir + '/InstalledByChef.json'
   content json_content
 end
 
