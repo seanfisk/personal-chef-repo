@@ -46,7 +46,7 @@ BREW_PREFIX = shell_out!('brew', '--prefix').stdout.rstrip
 # don't want to wait for all the other packages to be installed to see the
 # prompt, but we need the shell to be available before setting it as the
 # default.
-node.osx_setup.shells.each do |shell|
+node['osx_setup']['shells'].each do |shell|
   # Install the shell using Homebrew.
   package shell do
     action :install
@@ -55,16 +55,16 @@ node.osx_setup.shells.each do |shell|
   shell_path = File.join(BREW_PREFIX, 'bin', shell)
   # First, add shell to shells config file so it is recognized as a valid user
   # shell.
-  execute "add #{shell_path} to #{node.osx_setup.etc_shells}" do
+  execute "add #{shell_path} to #{node['osx_setup']['etc_shells']}" do
     # Unfortunately, using a ruby_block does not work because there's no way
     # that I know to execute it using sudo.
     command ['sudo', 'bash', '-c',
-             "echo '#{shell_path}' >> '#{node.osx_setup.etc_shells}'"]
+             "echo '#{shell_path}' >> '#{node['osx_setup']['etc_shells']}'"]
     not_if do
       # Don't execute if this shell is already in the shells config file. Open
       # a new file each time to reset the enumerator, and just in case these
       # are executed in parallel.
-      File.open(node.osx_setup.etc_shells).each_line.any? do |line|
+      File.open(node['osx_setup']['etc_shells']).each_line.any? do |line|
         line.include?(shell_path)
       end
     end
@@ -116,7 +116,10 @@ end
 
 # git-grep PCRE. Do this before installing other formulas in
 # case there is a dependency on git.
-package 'git' do
+package 'install custom Git' do
+  # Prevent resource cloning from the Homebrew formula
+  # Ref: http://tickets.chef.io/browse/CHEF-3694
+  package_name 'git'
   options '--with-pcre'
 end
 
@@ -184,7 +187,7 @@ lambda do
 
   execute 'install Deep Sleep dashboard widget' do
     command ['unzip', '-o', archive_path]
-    cwd "#{node.osx_setup.home}/Library/Widgets"
+    cwd "#{node['osx_setup']['home']}/Library/Widgets"
     action :nothing
   end
 end.call
@@ -230,7 +233,7 @@ lambda do
   archive_name = 'ubuntu-font-family-0.83.zip'
   archive_path =
     "#{Chef::Config[:file_cache_path]}/#{archive_name}"
-  install_dir = "#{node.osx_setup.fonts_dir}/Ubuntu"
+  install_dir = "#{node['osx_setup']['fonts_dir']}/Ubuntu"
 
   directory install_dir
 
@@ -254,7 +257,7 @@ remote_file 'download Inconsolata for Powerline font' do
   filename = 'Inconsolata for Powerline.otf'
   source 'https://github.com/powerline/fonts/raw/master/Inconsolata/' +
          URI.escape(filename)
-  path "#{node.osx_setup.fonts_dir}/#{filename}"
+  path "#{node['osx_setup']['fonts_dir']}/#{filename}"
 end
 
 ###############################################################################
@@ -287,18 +290,18 @@ mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 #
 # Install background images.
 directory 'create iTerm2 background images directory' do
-  path node.osx_setup.iterm2.bgs_dir
+  path node['osx_setup']['iterm2']['bgs_dir']
   recursive true
 end
 json_content = JSON.pretty_generate(
-  Profiles: node.osx_setup.iterm2.profiles.map do |profile|
+  Profiles: node['osx_setup']['iterm2']['profiles'].map do |profile|
     profile = profile.dup
-    bg_key = node.osx_setup.iterm2.bg_key
+    bg_key = node['osx_setup']['iterm2']['bg_key']
     if profile.key?(bg_key) && Pathname.new(profile[bg_key]).relative?
       base = profile[bg_key]
       cookbook_path = "iterm2-bgs/#{base}"
       install_path =
-        "#{node.osx_setup.iterm2.bgs_dir}/#{base}"
+        "#{node['osx_setup']['iterm2']['bgs_dir']}/#{base}"
       profile[bg_key] = install_path
       cookbook_file "install iTerm2 background '#{base}'" do
         source cookbook_path
@@ -309,14 +312,16 @@ json_content = JSON.pretty_generate(
   end
 )
 # Install dynamic profiles.
-directory node.osx_setup.iterm2.dynamic_profiles_dir
+directory node['osx_setup']['iterm2']['dynamic_profiles_dir']
 file 'install iTerm2 dynamic profiles' do
-  path node.osx_setup.iterm2.dynamic_profiles_dir + '/InstalledByChef.json'
+  path node['osx_setup']['iterm2']['dynamic_profiles_dir'] +
+       '/InstalledByChef.json'
   content json_content
 end
 
 lambda do
-  install_dir = "#{node.osx_setup.home}/Library/Application Support/Karabiner"
+  install_dir = node['osx_setup']['home'] +
+                '/Library/Application Support/Karabiner'
   directory install_dir
   cookbook_file 'Karabiner XML settings file' do
     source 'Karabiner_private.xml'
@@ -326,7 +331,7 @@ end.call
 
 lambda do
   install_dir =
-    "#{node.osx_setup.home}/Library/Application Support/Quicksilver"
+    "#{node['osx_setup']['home']}/Library/Application Support/Quicksilver"
   cookbook_file 'Quicksilver catalog preferences file' do
     source 'Quicksilver-Catalog.plist'
     path "#{install_dir}/Catalog.plist"
@@ -335,7 +340,7 @@ end.call
 
 cookbook_file 'Slate preferences file' do
   source 'slate.js'
-  path "#{node.osx_setup.home}/.slate.js"
+  path "#{node['osx_setup']['home']}/.slate.js"
 end
 
 # Set Skim as default PDF reader using duti.

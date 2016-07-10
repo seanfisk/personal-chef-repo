@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default.osx_setup.tap do |o|
+default['osx_setup'].tap do |o|
   o.home = ENV['HOME']
   o.fonts_dir = "#{o.home}/Library/Fonts"
   o.etc_shells = '/etc/shells'
@@ -107,7 +107,7 @@ default.osx_setup.tap do |o|
       }
     ]
     system_bg_names = { [10, 10] => 'Yosemite 4', [10, 11] => 'El Capitan 2' }
-    major_minor = node.platform_version.split('.')[0..1].map(&:to_i)
+    major_minor = node['platform_version'].split('.')[0..1].map(&:to_i)
     if system_bg_names.key?(major_minor)
       i.profiles << {
         :Guid => system_profile_guid,
@@ -127,12 +127,12 @@ end
 # HOMEBREW FORMULAS
 ###############################################################################
 
-default.homebrew.taps = %w(
+default['homebrew'].taps = %w(
   homebrew/command-not-found
   homebrew/x11
 )
 
-default.homebrew.formulas = [
+default['homebrew'].formulas = [
   'ack',
   'aria2',
   'astyle',
@@ -260,7 +260,7 @@ default.homebrew.formulas = [
 # Casks that are commented out are ones that I'm not using right now, but have
 # used in the past and may use in the future.
 
-default.homebrew.casks = [
+default['homebrew'].casks = [
   # 'adium',
   'adobe-reader',
   'atext',
@@ -371,7 +371,7 @@ default.homebrew.casks = [
 ###############################################################################
 
 lastpass_cmd_shift_key = '1179914'
-default.mac_os_x.settings = {
+default['mac_os_x']['settings'] = {
   # Apple Apps
   # Set up clock with day of week, date, and 24-hour clock.
   clock: {
@@ -439,7 +439,8 @@ default.mac_os_x.settings = {
   },
   iterm2: {
     :domain => 'com.googlecode.iterm2',
-    :'Default Bookmark Guid' => node.osx_setup.iterm2.default_profile_guid,
+    :'Default Bookmark Guid' =>
+      node['osx_setup']['iterm2']['default_profile_guid'],
     # General
     ## Closing
     :QuitWhenAllWindowsClosed => false,
