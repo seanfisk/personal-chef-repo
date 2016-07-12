@@ -350,6 +350,8 @@ default.homebrew.casks = [
   'sqlitebrowser',
   'vagrant',
   'virtualbox',
+  # This also has a formula, but we install via cask because the formula
+  # requires extra work (things need to be accessed as root).
   'wireshark',
   # Homebrew formulas are also available for these two formulas. However, since
   # osxfuse requires commands to be run by root, and official binaries are
