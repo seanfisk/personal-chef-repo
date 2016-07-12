@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default.windows_setup.tap do |w|
+default['windows_setup'].tap do |w|
   # Arguments used to run a batch PowerShell command
   w.ps_args =
     'powershell -NoLogo -NonInteractive -NoProfile -Command'

@@ -36,8 +36,8 @@ def add_to_user_path(path)
   # therefore resort to this PowerShell hack, which is ugly but works.
   var = 'Path'
   scope = 'User'
-  get_var_command = (
-    "[Environment]::GetEnvironmentVariable('#{var}', '#{scope}')")
+  get_var_command =
+    "[Environment]::GetEnvironmentVariable('#{var}', '#{scope}')"
   powershell_script "add #{path} to the #{scope} #{var}" do
     code "[Environment]::SetEnvironmentVariable('#{var}', "\
          "#{get_var_command} + ';' + '#{path}', '#{scope}')"
@@ -59,28 +59,28 @@ def registry_get_value(key, value_name)
   end[0][:data]
 end
 
-directory node.windows_setup.scripts_dir do
+directory node['windows_setup']['scripts_dir'] do
   recursive true
 end
-file "#{node.windows_setup.scripts_dir}\\README.txt" do
+file "#{node['windows_setup']['scripts_dir']}\\README.txt" do
   content <<EOF
 This directory is for command-line applications or scripts that will be added \
 to the executable Path. These programs do not install through a Windows \
 installer and do not have an entry in the Control Panel.
 EOF
 end
-add_to_user_path node.windows_setup.scripts_dir
+add_to_user_path node['windows_setup']['scripts_dir']
 
 # Fails out with insufficient permissions. I guess we'll just assume it exists
 # for now.
 #
-# directory node.windows_setup.startup_dir do
+# directory node['windows_setup']['startup_dir'] do
 #   recursive true
 # end
 
 include_recipe 'chocolatey'
 
-node.windows_setup.packages.each do |pkg_name|
+node['windows_setup']['packages'].each do |pkg_name|
   chocolatey pkg_name
 end
 
@@ -91,10 +91,11 @@ lambda do
   powershell_out!(feature_cmd).stdout.lines do |line|
     match = /(\w+) - \[(En|Dis)abled\]/.match(line)
     Chef::Application.fatal!(
-      "Unexpected output format for '#{feature_cmd}'") unless match
+      "Unexpected output format for '#{feature_cmd}'"
+    ) unless match
     features[match[1]] = match[2] == 'En'
   end
-  node.windows_setup.chocolatey.features.each do |feature|
+  node['windows_setup']['chocolatey']['features'].each do |feature|
     powershell_script "enable Chocolatey feature '#{feature}'" do
       code "choco feature enable --name='#{feature}'"
       not_if { features[feature] }
@@ -109,7 +110,10 @@ add_to_system_path(
       'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths' \
       '\Ahk2Exe.exe',
       # This gets the default key.
-      '')))
+      ''
+    )
+  )
+)
 
 # Swap Caps Lock and Control using a registry hack. We previously used
 # AutoHotkey to do this, but since it used hotstrings, it installed a keyboard
@@ -142,8 +146,8 @@ remote_file 'download and install Gibo' do
   script_name = 'gibo.bat'
   # This file will likely change, so don't provide a checksum.
   source 'https://raw.githubusercontent.com/simonwhitaker/gibo/master/' +
-    script_name
-  path "#{node.windows_setup.scripts_dir}\\#{script_name}"
+         script_name
+  path "#{node['windows_setup']['scripts_dir']}\\#{script_name}"
 end
 
 # Gitignore from dotfiles
@@ -152,7 +156,7 @@ end
 remote_file 'download my .gitconfig' do
   source 'https://raw.githubusercontent.com/'\
          'seanfisk/dotfiles/master/dotfiles/gitconfig'
-  path "#{node.windows_setup.home}\\.gitconfig"
+  path "#{node['windows_setup']['home']}\\.gitconfig"
 end
 
 # Install PsGet. There is a Chocolatey package for this, but as of 2015-03-06
@@ -163,7 +167,7 @@ powershell_script 'install PsGet' do
   only_if '(Get-Module -ListAvailable -Name PsGet) -eq $null'
 end
 
-node.windows_setup.psget.modules.each do |mod_name|
+node['windows_setup']['psget']['modules'].each do |mod_name|
   # Use string interpolation in the name instead of concatenation, else
   # Foodcritic will complain about the guard not acting as expected.
   powershell_script "install PsGet module '#{mod_name}'" do
@@ -174,13 +178,13 @@ end
 
 # Install paste program
 windows_zipfile 'download and install paste program' do
-  path node.windows_setup.scripts_dir
+  path node['windows_setup']['scripts_dir']
   # TODO: This comes from a somewhat questionable source...
   source 'http://www.c3scripts.com/tutorials/msdos/paste.zip'
   # We've provided a checksum as this file is unlikely to change.
   checksum 'fd8034ed96d1e18be508b61c5732e91c24c6876229bc78ef9cd617682e37c493'
   action :unzip
-  not_if { File.exist?("#{node.windows_setup.scripts_dir}/paste.exe") }
+  not_if { File.exist?("#{node['windows_setup']['scripts_dir']}/paste.exe") }
 end
 # paste program depends on .NET 3.5
 # Also possible to install with Chocolatey, but Chef-native seems better.
@@ -192,7 +196,7 @@ end
 lambda do
   # Mixlib::ShellOut doesn't support arrays on Windows... Ugh.
   profile_path = shell_out!(
-    "#{node.windows_setup.ps_args} $profile"
+    "#{node['windows_setup']['ps_args']} $profile"
   ).stdout.rstrip
 
   cookbook_file 'Writing PowerShell profile ' + profile_path do
@@ -211,43 +215,38 @@ lambda do
     key 'HKEY_CURRENT_USER\Software\Apple Inc.\Apple Keyboard Support'
     values [{ name: 'OSXFnBehavior',
               type: :dword,
-              data: 0
-            }]
+              data: 0 }]
     only_if { boot_camp_is_installed }
   end
 end.call
 
 registry_key 'configure the taskbar' do
-  key node.windows_setup.explorer_registry_key
+  key node['windows_setup']['explorer_registry_key']
   values [
     # "Always show all icons and notifications on the taskbar"
     { name: 'EnableAutoTray',
       type: :dword,
-      data: 0
-    }
+      data: 0 }
   ]
   notifies :run, 'powershell_script[restart Windows Explorer]'
 end
 
 # http://stackoverflow.com/a/8110982/879885
 registry_key 'configure Windows Explorer' do
-  key "#{node.windows_setup.explorer_registry_key}\\Advanced"
+  key "#{node['windows_setup']['explorer_registry_key']}\\Advanced"
   values [
     # Show hidden files
     { name: 'Hidden',
       type: :dword,
-      data: 1
-    },
+      data: 1 },
     # Don't hide file extensions for known file types
     { name: 'HideFileExt',
       type: :dword,
-      data: 0
-    },
+      data: 0 },
     # But don't show OS files
     { name: 'ShowSuperHidden',
       type: :dword,
-      data: 0
-    }
+      data: 0 }
   ]
   notifies :run, 'powershell_script[restart Windows Explorer]'
 end
@@ -277,8 +276,8 @@ end
 # Explorer. tzutil does both.
 # Note: We've tried an array argument with execute's command... doesn't work :(
 powershell_script 'set time zone' do
-  code "tzutil /s '#{node.windows_setup.time_zone}'"
-  not_if "(tzutil /g) -eq '#{node.windows_setup.time_zone}'"
+  code "tzutil /s '#{node['windows_setup']['time_zone']}'"
+  not_if "(tzutil /g) -eq '#{node['windows_setup']['time_zone']}'"
 end
 
 powershell_script 'restart Windows Explorer' do
@@ -296,10 +295,10 @@ powershell_script 'update Powershell help' do
 end
 
 # Custom applications
-directory node.windows_setup.apps_dir do
+directory node['windows_setup']['apps_dir'] do
   recursive true
 end
-file "#{node.windows_setup.apps_dir}\\README.txt" do
+file "#{node['windows_setup']['apps_dir']}\\README.txt" do
   content <<EOF
 This directory is for portable applications that do not install through a \
 Windows installer and do not have an entry in the Control Panel.
@@ -308,14 +307,15 @@ end
 
 lambda do
   version = '18'
-  install_path = "#{node.windows_setup.apps_dir}\\flashplayer_sa.exe"
+  install_path = "#{node['windows_setup']['apps_dir']}\\flashplayer_sa.exe"
   remote_file 'download and install Flash Player projector' do
     source 'https://fpdownload.macromedia.com/pub/flashplayer/updaters/' \
            "#{version}/flashplayer_#{version}_sa.exe"
     path install_path
     checksum 'f93ceb1c4dfff8934429c72c284058bc85061be77a6fd993372a89e00a07c525'
   end
-  windows_shortcut "#{node.windows_setup.desktop_dir}\\Flash Player.lnk" do
+  windows_shortcut node['windows_setup']['desktop_dir'] +
+                   '\\Flash Player.lnk' do
     target install_path
     description 'Launch the Flash Player projector'
   end
@@ -385,7 +385,7 @@ end
 # https://www.gnu.org/software/emacs/manual/html_node/efaq-w32/Location-of-init-file.html
 registry_key 'set Emacs HOME' do
   key 'HKEY_CURRENT_USER\SOFTWARE\GNU\Emacs'
-  values [{ name: 'HOME', type: :string, data: node.windows_setup.home }]
+  values [{ name: 'HOME', type: :string, data: node['windows_setup']['home'] }]
   recursive true
 end
 
@@ -395,7 +395,7 @@ end
 # PowerShell. In this way, Emacs is run with all of our profile variables
 # defined.
 windows_shortcut 'create Emacs desktop shortcut' do
-  name "#{node.windows_setup.desktop_dir}\\Emacs.lnk"
+  name "#{node['windows_setup']['desktop_dir']}\\Emacs.lnk"
   target 'powershell'
   # Even with -WindowStyle Hidden, the command window shows up for a split
   # second. The other options are to wrap it in a C# or VbScript application,
@@ -408,7 +408,7 @@ end
 
 # Emacs Cask
 lambda do
-  install_path = "#{node.windows_setup.home}\\.cask"
+  install_path = "#{node['windows_setup']['home']}\\.cask"
   git install_path do
     repository 'https://github.com/cask/cask.git'
     action :checkout
@@ -441,7 +441,7 @@ lambda do
                   '01',
                   # The order is IP, Zone, Name. The Zone is some type of
                   # priority, I guess.
-                  node.windows_setup.diablo2.server,
+                  node['windows_setup']['diablo2']['server'],
                   '0',
                   'Slash Diablo',
                   'evnt.slashdiablo.net',
@@ -450,9 +450,9 @@ lambda do
                 ] }]
     end
     registry_key 'choose Diablo II Battle.Net gateway' do
-      key node.windows_setup.diablo2.registry_key
+      key node['windows_setup']['diablo2']['registry_key']
       values [{ name: 'BNETIP', type: :string,
-                data: node.windows_setup.diablo2.server }]
+                data: node['windows_setup']['diablo2']['server'] }]
     end
 
     # Install the GLIDE wrapper; this allows the Steam overlay to work. The
@@ -463,7 +463,8 @@ lambda do
     # renderer. D2VidTst.exe usually needs to run in compatibility mode for
     # older Windows, so just be ready for that.
     install_path = registry_get_value(
-      node.windows_setup.diablo2.registry_key, 'InstallPath')
+      node['windows_setup']['diablo2']['registry_key'], 'InstallPath'
+    )
     ['glide-init.exe', 'glide-readme.txt', 'glide3x.dll'].each do |file|
       cookbook_file "install GLIDE file #{file} to Diablo II directory" do
         source file
@@ -474,7 +475,7 @@ lambda do
 end.call
 
 # Install NodeJS and tools
-node.windows_setup.nodejs.tools.each do |tool|
+node['windows_setup']['nodejs'].tools.each do |tool|
   powershell_script "install Node.js tool #{tool}" do
     code "npm install --global '#{tool}'"
     not_if do
