@@ -510,6 +510,17 @@ default['mac_os_x']['settings'] = {
     show_kernel_cpu_time: true,
     update_frequency: 2 # seconds
   },
+  skitch: {
+    domain: 'com.skitch.skitch',
+    # Save New Skitch Notes to Evernote:
+    #
+    # 1: Always
+    # 2: Ask
+    # 3: Manual
+    #
+    # The default is Always, which quickly burns up the Evernote upload quota.
+    auto_save_selector: 3
+  },
   xquartz: {
     domain: 'org.macosforge.xquartz.X11',
     # Input
