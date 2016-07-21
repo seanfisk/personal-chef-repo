@@ -314,8 +314,11 @@ json_content = JSON.pretty_generate(
 # Install dynamic profiles.
 directory node['osx_setup']['iterm2']['dynamic_profiles_dir']
 file 'install iTerm2 dynamic profiles' do
-  path node['osx_setup']['iterm2']['dynamic_profiles_dir'] +
-       '/InstalledByChef.json'
+  # This file contains profiles used as parents by the iTerm2/fasd integration.
+  # Since iTerm2 loads the list of dynamic profiles alphabetically, we prefix
+  # it with a hyphen to ensure it is loaded first.
+  # https://iterm2.com/documentation-dynamic-profiles.html
+  path node['osx_setup']['iterm2']['dynamic_profiles_dir'] + '/-Personal.json'
   content json_content
 end
 
