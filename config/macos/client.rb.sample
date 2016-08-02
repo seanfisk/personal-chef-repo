@@ -18,9 +18,9 @@
 # means that it is not necessary to set checksum_path, file_cache_path,
 # file_backup_path, and lockfile, as these will all use cache_path.
 cache_path "#{ENV['HOME']}/.chef"
-chef_server_url 'https://api.opscode.com/organizations/sean_fisk'
+chef_server_url 'https://api.opscode.com/organizations/ibrahim_ahmed'
 # The default level is :auto, which sets the log_level to :warn when
 # log_location (default: STDOUT) is a tty. We want more information.
 log_level :info
-node_name 'osx-node'
-validation_client_name 'sean_fisk-validator'
+node_name 'macos-node'
+validation_client_name 'ibrahim_ahmed-validator'

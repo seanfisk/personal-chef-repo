@@ -10,4 +10,4 @@
 
 # Author
 
-Author:: Sean Fisk (sean@seanfisk.com)
+Author:: Ibrahim Ahmed

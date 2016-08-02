@@ -3,8 +3,8 @@
 # Cookbook Name:: macos_setup
 # Recipe:: default
 #
-# Author:: Sean Fisk <sean@seanfisk.com>
-# Copyright:: Copyright (c) 2013, Sean Fisk
+# Author:: Ibrahim Ahmed <ahmedibr@msu.edu>
+# Copyright:: Copyright (c) 2016, Ibrahim Ahmed
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License")
