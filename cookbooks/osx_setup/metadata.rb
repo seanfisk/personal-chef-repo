@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-name 'osx_setup'
+name 'macos_setup'
 maintainer 'Sean Fisk'
 maintainer_email 'sean@seanfisk.com'
 source_url 'https://github.com/seanfisk/personal-chef-repo'

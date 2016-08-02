@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default['osx_setup'].tap do |o|
+default['macos_setup'].tap do |o|
   o.home = ENV['HOME']
   o.fonts_dir = "#{o.home}/Library/Fonts"
   o.etc_shells = '/etc/shells'
@@ -442,7 +442,7 @@ default['mac_os_x']['settings'] = {
   iterm2: {
     :domain => 'com.googlecode.iterm2',
     :'Default Bookmark Guid' =>
-      node['osx_setup']['iterm2']['default_profile_guid'],
+      node['macos_setup']['iterm2']['default_profile_guid'],
     # General
     ## Closing
     :QuitWhenAllWindowsClosed => false,
