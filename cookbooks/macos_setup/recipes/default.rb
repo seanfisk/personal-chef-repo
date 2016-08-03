@@ -20,6 +20,13 @@
 # limitations under the License.
 #
 
+###############################################################################
+# HOMEBREW FORMULAS AND CASKS
+###############################################################################
+%w(vim git tree tmux).each do |pkg|
+  package pkg
+end
+
 file "#{ENV['HOME']}/chef.txt" do
   content 'Created by Chef!'
 end

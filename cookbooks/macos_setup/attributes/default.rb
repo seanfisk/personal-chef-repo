@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Author:: Ibrahim Ahmed <ahmedibr@msu.edu>
-# Copyright:: Copyright (c) 2016, Ibrahim Ahmed 
+# Copyright:: Copyright (c) 2016, Ibrahim Ahmed
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License")
