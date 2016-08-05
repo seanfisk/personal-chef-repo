@@ -30,3 +30,10 @@ end
 file "#{ENV['HOME']}/chef.txt" do
   content 'Created by Chef!'
 end
+
+###############################################################################
+# PREFERENCES
+###############################################################################
+
+# Actually write all the settings using the 'defaults' command.
+include_recipe 'mac_os_x::settings'
