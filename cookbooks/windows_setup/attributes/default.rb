@@ -78,7 +78,8 @@ default['windows_setup'].tap do |w|
   )
 
   w['diablo2'] = {
-    registry_key: 'HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II',
-    server: 'play.slashdiablo.net'
+    'registry_key' =>
+    'HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II',
+    'server' => 'play.slashdiablo.net'
   }
 end
