@@ -18,21 +18,21 @@
 #
 
 default['osx_setup'].tap do |o|
-  o.home = ENV['HOME']
-  o.fonts_dir = "#{o.home}/Library/Fonts"
-  o.etc_shells = '/etc/shells'
-  o.shells = %w(bash zsh)
-  o.iterm2.tap do |i|
-    app_support = "#{o.home}/Library/Application Support/iTerm2"
+  o['home'] = ENV['HOME']
+  o['fonts_dir'] = "#{o['home']}/Library/Fonts"
+  o['etc_shells'] = '/etc/shells'
+  o['shells'] = %w(bash zsh)
+  o['iterm2'].tap do |i|
+    app_support = "#{o['home']}/Library/Application Support/iTerm2"
     font = 'InconsolataForPowerline 20'
-    gvsu_dir = "#{o.home}/classes"
+    gvsu_dir = "#{o['home']}/classes"
     system_profile_guid = '4381BB8C-7F7D-4CFD-A5F8-3F1A77185E37'
-    i.default_profile_guid =
+    i['default_profile_guid'] =
       personal_profile_guid = '411F060B-E097-4E29-9986-275D5A47F609'
-    i.bg_key = 'Background Image Location'
-    i.bgs_dir = "#{app_support}/Backgrounds"
-    i.dynamic_profiles_dir = "#{app_support}/DynamicProfiles"
-    i.profiles = [
+    i['bg_key'] = 'Background Image Location'
+    i['bgs_dir'] = "#{app_support}/Backgrounds"
+    i['dynamic_profiles_dir'] = "#{app_support}/DynamicProfiles"
+    i['profiles'] = [
       {
         :Guid => personal_profile_guid,
         # General
@@ -46,7 +46,7 @@ default['osx_setup'].tap do |o|
         :'ASCII Anti Aliased' => true,
         :'Non-ASCII Anti Aliased' => true,
         # Window
-        i.bg_key => 'holland-beach-sunset.jpg',
+        i['bg_key'] => 'holland-beach-sunset.jpg',
         :Blend => 0.4,
         :'Sync Title' => true,
         # Terminal
@@ -88,7 +88,7 @@ default['osx_setup'].tap do |o|
         # General
         :Name => 'Root',
         # Window
-        i.bg_key => 'volcano.jpg',
+        i['bg_key'] => 'volcano.jpg',
         # Advanced
         :'Bound Hosts' => ['root@']
       },
@@ -100,7 +100,7 @@ default['osx_setup'].tap do |o|
         :'Custom Directory' => 'Yes',
         :'Working Directory' => gvsu_dir,
         # Window
-        i.bg_key => 'gvsu.jpg',
+        i['bg_key'] => 'gvsu.jpg',
         :Blend => 0.35,
         # Advanced
         :'Bound Hosts' => [gvsu_dir]
@@ -109,16 +109,16 @@ default['osx_setup'].tap do |o|
     system_bg_names = { [10, 10] => 'Yosemite 4', [10, 11] => 'El Capitan 2' }
     major_minor = node['platform_version'].split('.')[0..1].map(&:to_i)
     if system_bg_names.key?(major_minor)
-      i.profiles << {
+      i['profiles'] << {
         :Guid => system_profile_guid,
         :'Dynamic Profile Parent Name' => 'Personal',
         # General
         :Name => 'System',
         # Window
-        i.bg_key => '/Library/Desktop Pictures/' \
+        i['bg_key'] => '/Library/Desktop Pictures/' \
           "#{system_bg_names[major_minor]}.jpg"
       }
-      i.default_profile_guid = system_profile_guid
+      i['default_profile_guid'] = system_profile_guid
     end
   end
 end

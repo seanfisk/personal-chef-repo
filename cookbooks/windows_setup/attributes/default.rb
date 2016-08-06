@@ -19,12 +19,11 @@
 
 default['windows_setup'].tap do |w|
   # Arguments used to run a batch PowerShell command
-  w.ps_args =
-    'powershell -NoLogo -NonInteractive -NoProfile -Command'
+  w['ps_args'] = 'powershell -NoLogo -NonInteractive -NoProfile -Command'
 
-  w.home = ENV['USERPROFILE']
-  w.scripts_dir = "#{w.home}\\bin"
-  w.apps_dir = "#{w.home}\\Applications"
+  w['home'] = ENV['USERPROFILE']
+  w['scripts_dir'] = "#{w['home']}\\bin"
+  w['apps_dir'] = "#{w['home']}\\Applications"
 
   # Inspired by:
   # - https://github.com/opscode-cookbooks/windows#examples-12
@@ -32,14 +31,14 @@ default['windows_setup'].tap do |w|
   require 'win32ole'
   wshell = WIN32OLE.new('WScript.Shell')
 
-  w.startup_dir = wshell.SpecialFolders('Startup')
-  w.desktop_dir = wshell.SpecialFolders('Desktop')
+  w['startup_dir'] = wshell.SpecialFolders('Startup')
+  w['desktop_dir'] = wshell.SpecialFolders('Desktop')
 
-  w.explorer_registry_key =
+  w['explorer_registry_key'] =
     'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer'
-  w.time_zone = 'Eastern Standard Time'
+  w['time_zone'] = 'Eastern Standard Time'
 
-  w.packages = [
+  w['packages'] = [
     '7zip',
     'ConEmu',
     'Firefox',
@@ -62,23 +61,23 @@ default['windows_setup'].tap do |w|
     'wixtoolset'
   ]
 
-  w.chocolatey.features = %w(
+  w['chocolatey']['features'] = %w(
     checksumFiles
     autoUninstaller
     allowGlobalConfirmation
     failOnAutoUninstaller
   )
 
-  w.psget.modules = %w(
+  w['psget']['modules'] = %w(
     PSReadLine
   )
 
-  w.nodejs.tools = %w(
+  w['nodejs']['tools'] = %w(
     jsonlint
     uglify-js
   )
 
-  w.diablo2 = {
+  w['diablo2'] = {
     registry_key: 'HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II',
     server: 'play.slashdiablo.net'
   }
