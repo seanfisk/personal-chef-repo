@@ -195,6 +195,7 @@ default['homebrew'].formulas = [
   'pyenv',
   'pyenv-virtualenv',
   'pyenv-which-ext',
+  'q', # text as data: https://github.com/harelba/q
   'qpdf',
   # Even though the rbenv cookbooks looks nice, they don't work as I'd like.
   # fnichol's supports local install, but insists on templating
