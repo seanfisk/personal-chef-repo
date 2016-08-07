@@ -181,6 +181,7 @@ default['homebrew'].formulas = [
   'ohcount',
   'osquery',
   'p7zip',
+  'pandoc',
   'parallel',
   'pdfgrep',
   'pidof',
@@ -319,9 +320,6 @@ default['homebrew'].casks = [
   'mattr-slate',
   'mosh', # Also available as a formula
   'openemu',
-  # Pandoc also has Homebrew formula. There isn't a particular reason to pick
-  # one over the other.
-  'pandoc',
   'quicksilver',
   'skim',
   'skitch',
