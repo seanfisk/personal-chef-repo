@@ -75,7 +75,7 @@ end
 lambda do
   path = File.join(BREW_PREFIX, 'bin', 'zsh')
   execute "set #{path} as default shell" do
-    command ['chsh', '-s', path]
+    command %W(chsh -s #{path})
     # getpwuid defaults to the current user, which is what we want.
     not_if { Etc.getpwuid.shell == path }
   end
@@ -92,7 +92,7 @@ execute 'fix the zsh startup file that path_helper uses' do
   #
   # See this link for more information:
   # <https://github.com/sorin-ionescu/prezto/issues/381>
-  command ['sudo', 'mv', '/etc/zshenv', '/etc/zprofile']
+  command %w(sudo mv /etc/zshenv /etc/zprofile)
   only_if { File.exist?('/etc/zshenv') }
 end
 
@@ -186,7 +186,7 @@ lambda do
   end
 
   execute 'install Deep Sleep dashboard widget' do
-    command ['unzip', '-o', archive_path]
+    command %W(unzip -o #{archive_path})
     cwd "#{node['osx_setup']['home']}/Library/Widgets"
     action :nothing
   end
@@ -220,7 +220,7 @@ lambda do
     # With some help from:
     # - https://github.com/opscode-cookbooks/dmg/blob/master/providers/package.rb
     # - https://github.com/mattdbridges/chef-osx_pkg/blob/master/providers/package.rb
-    command ['sudo', 'installer', '-pkg', pkg_path, '-target', '/']
+    command %W(sudo installer -pkg #{pkg_path} -target /)
     not_if { is_installed }
   end
 end.call
@@ -361,12 +361,12 @@ execute 'invalidate sudo timestamp' do
   # 'sudo -K' will remove the timestamp entirely, which means that sudo will
   # print the initial 'Improper use of the sudo command' warning. Not what we
   # want. 'sudo -k' just invalidates the timestamp without removing it.
-  command ['sudo', '-k']
+  command %w(sudo -k)
   # Kill only if we have sudo privileges. 'sudo -k' is idempotent anyway, but
   # it's nice to see less resources updated when possible.
   #
   # 'sudo -n command' exits with 0 if a password is needed (what?), or the exit
   # code of 'command' if it is able to run it. Hence the unusual guard here: an
   # exit code of 1 indicates sudo privileges, while 0 indicates none.
-  not_if ['sudo', '-n', 'false']
+  not_if %w(sudo -n false)
 end
