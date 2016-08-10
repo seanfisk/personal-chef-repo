@@ -278,7 +278,9 @@ default['homebrew'].casks = [
   # described as 'Eclipse IDE for Eclipse Committers', is actually just the
   # standard package without any extras. This is nice, because extras can
   # always be installed using the Eclipse Marketplace.
-  # 'eclipse-ide',
+  #
+  # Using this for browsing DynamoDB using the AWS Toolkit for Eclipse.
+  'eclipse-ide',
   'firefox',
   'flash',
   'flash-player',
