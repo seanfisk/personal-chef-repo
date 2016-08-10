@@ -127,12 +127,12 @@ end
 # HOMEBREW FORMULAS
 ###############################################################################
 
-default['homebrew'].taps = %w(
+default['homebrew']['taps'] = %w(
   homebrew/command-not-found
   homebrew/x11
 )
 
-default['homebrew'].formulas = [
+default['homebrew']['formulas'] = [
   'ack',
   'aria2',
   'astyle',
@@ -262,7 +262,7 @@ default['homebrew'].formulas = [
 # Casks that are commented out are ones that I'm not using right now, but have
 # used in the past and may use in the future.
 
-default['homebrew'].casks = [
+default['homebrew']['casks'] = [
   # 'adium',
   'adobe-reader',
   'atext',
