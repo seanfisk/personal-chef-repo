@@ -150,9 +150,9 @@ end
 #   options '--with-ghostscript --with-gtk+ --with-ipv6'
 # end
 
-include_recipe 'homebrew::install_taps'
-include_recipe 'homebrew::install_formulas'
-include_recipe 'homebrew::install_casks'
+%w(taps formulas casks).each do |entity|
+  include_recipe "homebrew::install_#{entity}"
+end
 
 # Install X11 software
 # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app
