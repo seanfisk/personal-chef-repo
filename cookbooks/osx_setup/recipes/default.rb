@@ -152,7 +152,7 @@ end
 
 include_recipe 'homebrew::install_taps'
 include_recipe 'homebrew::install_formulas'
-# include_recipe 'homebrew::install_casks'
+include_recipe 'homebrew::install_casks'
 
 # Install X11 software
 # Note: XQuartz is installed to /Applications/Utilities/XQuartz.app

@@ -1,12 +1,15 @@
 DEPENDENCIES
   chocolatey (~> 1.0.0)
   dmg (~> 2.4.0)
-  homebrew (~> 2.1.0)
+  homebrew
+    git: https://github.com/chef-cookbooks/homebrew.git
+    revision: 87a4a2f2a012128e6ca95197744ee571a31a577e
+    branch: 87a4a2f2a012128e6ca95197744ee571a31a577e
   mac_os_x (~> 1.4.6)
   windows (~> 1.43.0)
 
 GRAPH
-  build-essential (6.0.1)
+  build-essential (6.0.3)
     compat_resource (>= 12.10)
     mingw (>= 1.1)
     seven_zip (>= 0.0.0)
@@ -18,7 +21,7 @@ GRAPH
   homebrew (2.1.0)
     build-essential (>= 2.1.2)
   mac_os_x (1.4.6)
-  mingw (1.2.2)
+  mingw (1.2.4)
     compat_resource (>= 0.0.0)
     seven_zip (>= 0.0.0)
   seven_zip (2.0.1)
