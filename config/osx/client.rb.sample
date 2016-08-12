@@ -23,4 +23,6 @@ chef_server_url 'https://api.opscode.com/organizations/sean_fisk'
 # log_location (default: STDOUT) is a tty. We want more information.
 log_level :info
 node_name 'osx-node'
+policy_group 'osx'
+policy_name 'osx'
 validation_client_name 'sean_fisk-validator'

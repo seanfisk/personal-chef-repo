@@ -1,0 +1,115 @@
+{
+  "revision_id": "d956212de65f1560ca2a1124924dbab92b21c834deb413d475a5d6596001e6d3",
+  "name": "windows",
+  "run_list": [
+    "recipe[windows_setup::default]"
+  ],
+  "cookbook_locks": {
+    "windows_setup": {
+      "version": "0.1.0",
+      "identifier": "fcc53d7ad32aaadfac06b1b9a5a884862d7356be",
+      "dotted_decimal_identifier": "71148561975421610.62958064557991336.145711823017662",
+      "source": "../cookbooks/windows_setup",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": null,
+        "revision": "804bf1f4a3b6e519f5bb93da281d564738319eb3",
+        "working_tree_clean": false,
+        "published": false,
+        "synchronized_remote_branches": [
+
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/windows_setup"
+      }
+    },
+    "chocolatey": {
+      "version": "1.0.1",
+      "identifier": "3e38cef192a1513d3ee842ecf0ed471d3f16be4b",
+      "dotted_decimal_identifier": "17513910023397713.17239140855509229.78190938078795",
+      "cache_key": "chocolatey-1.0.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chocolatey/versions/1.0.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chocolatey/versions/1.0.1/download",
+        "version": "1.0.1"
+      }
+    },
+    "windows": {
+      "version": "1.43.0",
+      "identifier": "e462959d40bb34df4a4da50b6d1bec33b2c7cb7e",
+      "dotted_decimal_identifier": "64284689417943860.62850617148402971.259706786925438",
+      "cache_key": "windows-1.43.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.43.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.43.0/download",
+        "version": "1.43.0"
+      }
+    },
+    "chef_handler": {
+      "version": "1.4.0",
+      "identifier": "aa794c0c3a03d09a5e22ca2ffb70115fda923471",
+      "dotted_decimal_identifier": "47984113570415568.43450649927482224.19103386580081",
+      "cache_key": "chef_handler-1.4.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/1.4.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/1.4.0/download",
+        "version": "1.4.0"
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "windows_setup",
+        ">= 0.0.0"
+      ],
+      [
+        "chocolatey",
+        "= 1.0.1"
+      ],
+      [
+        "windows",
+        "= 1.43.0"
+      ],
+      [
+        "chef_handler",
+        "= 1.4.0"
+      ]
+    ],
+    "dependencies": {
+      "windows_setup (0.1.0)": [
+        [
+          "chocolatey",
+          "~> 1.0.0"
+        ],
+        [
+          "windows",
+          "~> 1.43.0"
+        ]
+      ],
+      "chocolatey (1.0.1)": [
+        [
+          "windows",
+          "~> 1.38"
+        ]
+      ],
+      "windows (1.43.0)": [
+        [
+          "chef_handler",
+          ">= 0.0.0"
+        ]
+      ],
+      "chef_handler (1.4.0)": [
+
+      ]
+    }
+  }
+}

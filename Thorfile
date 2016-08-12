@@ -1,8 +1,8 @@
 # -*- mode: ruby; coding: utf-8; -*-
 
+require 'pathname'
 require 'foodcritic'
 require 'rubocop'
-require 'berkshelf/thor'
 # 'travis lint' can be called as a subprocess, but calling it from Ruby is
 # preferable because it is cleaner and avoids loading the entire travis gem.
 require 'travis/cli/lint'
@@ -23,23 +23,18 @@ module Subprocess
   end
 end
 
-# Chef Knife-related tasks.
-class Knife < Thor
+# Tasks for uploading cookbooks to the Chef server.
+class Push < Thor
   include Subprocess
 
-  desc 'upload', 'Upload all local cookbooks to the Chef server'
-  def upload
-    proc = run_subprocess 'knife cookbook upload --all'
-    proc.error!
-  end
-end
-
-# Tasks for uploading cookbooks to the Chef server.
-class Upload < Thor
-  desc 'all', 'Upload everything to the Chef server'
+  desc 'all', 'Push everything to the Chef server'
   def all
-    invoke 'berkshelf:upload'
-    invoke 'knife:upload'
+    Pathname.glob('policies/*.rb').each do |policyfile|
+      run_subprocess "chef update #{policyfile}"
+      run_subprocess(
+        "chef push #{policyfile.basename.sub_ext('')} #{policyfile}"
+      )
+    end
   end
 end
 
@@ -51,10 +46,10 @@ class Test < Thor
   def rubocop(exit = true)
     # Pass in a list of files/directories because we don't want the bin/
     # directory, other Foodcritic rules, etc., being checked.
-    result = RuboCop::CLI.new.run %W(Berksfile Gemfile #{__FILE__} cookbooks
-                                     config/osx/client.rb.sample
-                                     config/windows/client.rb.sample
-                                     .chef/knife.rb)
+    result = RuboCop::CLI.new.run %W(
+      Gemfile #{__FILE__} cookbooks policies config/osx/client.rb.sample
+      config/windows/client.rb.sample .chef/knife.rb
+    )
     puts 'No rubocop errors'.colorize(:green) if result == 0
     exit result if exit
     result

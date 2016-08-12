@@ -1,0 +1,280 @@
+{
+  "revision_id": "94a5f90f7ac2f9181a395721dd2b6f0a741fdcc7c656441221d7ee4d350be3f9",
+  "name": "osx",
+  "run_list": [
+    "recipe[fasd_iterm2::default]",
+    "recipe[osx_setup::default]"
+  ],
+  "cookbook_locks": {
+    "fasd_iterm2": {
+      "version": "0.1.0",
+      "identifier": "1044952b96655ea2e94212b7b620538e984028e7",
+      "dotted_decimal_identifier": "4579007099463006.45855416218269216.91871904803047",
+      "source": "../cookbooks/fasd_iterm2",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": null,
+        "revision": "804bf1f4a3b6e519f5bb93da281d564738319eb3",
+        "working_tree_clean": false,
+        "published": false,
+        "synchronized_remote_branches": [
+
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/fasd_iterm2"
+      }
+    },
+    "osx_setup": {
+      "version": "0.1.0",
+      "identifier": "43b15a43be54531f6072d3a6498f7c5a5309cd49",
+      "dotted_decimal_identifier": "19053824681333843.8831770571458959.136727382052169",
+      "source": "../cookbooks/osx_setup",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": null,
+        "revision": "804bf1f4a3b6e519f5bb93da281d564738319eb3",
+        "working_tree_clean": false,
+        "published": false,
+        "synchronized_remote_branches": [
+
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/osx_setup"
+      }
+    },
+    "homebrew": {
+      "version": "2.1.0",
+      "identifier": "6fd7eea4fb692fb454e4514630d170bfc56a599a",
+      "dotted_decimal_identifier": "31481142385010991.50758835400749265.123968953145754",
+      "cache_key": "homebrew-87a4a2f2a012128e6ca95197744ee571a31a577e",
+      "origin": "git://github.com/chef-cookbooks/homebrew.git",
+      "source_options": {
+        "git": "git://github.com/chef-cookbooks/homebrew.git",
+        "revision": "87a4a2f2a012128e6ca95197744ee571a31a577e",
+        "branch": "87a4a2f2a012128e6ca95197744ee571a31a577e"
+      }
+    },
+    "build-essential": {
+      "version": "6.0.3",
+      "identifier": "175a87af498fb4b5495534bdc61cd2ba76a753ab",
+      "dotted_decimal_identifier": "6573463272263604.51027601090528796.231698296427435",
+      "cache_key": "build-essential-6.0.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/6.0.3/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/6.0.3/download",
+        "version": "6.0.3"
+      }
+    },
+    "seven_zip": {
+      "version": "2.0.1",
+      "identifier": "1ef062de1bc4cb14e4a78fb739e104eb9508473e",
+      "dotted_decimal_identifier": "8708556725142731.5880907856034273.5409864173374",
+      "cache_key": "seven_zip-2.0.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.1/download",
+        "version": "2.0.1"
+      }
+    },
+    "windows": {
+      "version": "1.44.1",
+      "identifier": "1b58034b7876468ac5fccf872237c4f623916c84",
+      "dotted_decimal_identifier": "7696595545519686.39061236390240823.216561437731972",
+      "cache_key": "windows-1.44.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.44.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.44.1/download",
+        "version": "1.44.1"
+      }
+    },
+    "chef_handler": {
+      "version": "1.4.0",
+      "identifier": "aa794c0c3a03d09a5e22ca2ffb70115fda923471",
+      "dotted_decimal_identifier": "47984113570415568.43450649927482224.19103386580081",
+      "cache_key": "chef_handler-1.4.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/1.4.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/1.4.0/download",
+        "version": "1.4.0"
+      }
+    },
+    "mingw": {
+      "version": "1.2.4",
+      "identifier": "c4f0ae0ce0635c9ec82cdc01b570a7dcc1b19521",
+      "dotted_decimal_identifier": "55433725766296412.44693141315499376.184566584284449",
+      "cache_key": "mingw-1.2.4-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mingw/versions/1.2.4/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mingw/versions/1.2.4/download",
+        "version": "1.2.4"
+      }
+    },
+    "compat_resource": {
+      "version": "12.10.7",
+      "identifier": "0cf5d376444495035f02b8cb1acf2b3e5a0a51e5",
+      "dotted_decimal_identifier": "3647988291617941.948890225023695.47546798592485",
+      "cache_key": "compat_resource-12.10.7-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.10.7/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.10.7/download",
+        "version": "12.10.7"
+      }
+    },
+    "dmg": {
+      "version": "2.4.0",
+      "identifier": "18ecc45e6cfba70985620d8f2358d63c34845f01",
+      "dotted_decimal_identifier": "7015727583001511.2679930971169624.235554067472129",
+      "cache_key": "dmg-2.4.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/dmg/versions/2.4.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/dmg/versions/2.4.0/download",
+        "version": "2.4.0"
+      }
+    },
+    "mac_os_x": {
+      "version": "1.4.6",
+      "identifier": "b03f43d2291ec389a920bd1e6783738de9d11621",
+      "dotted_decimal_identifier": "49609156422344387.38748029886293891.127053350376993",
+      "cache_key": "mac_os_x-1.4.6-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mac_os_x/versions/1.4.6/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mac_os_x/versions/1.4.6/download",
+        "version": "1.4.6"
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "fasd_iterm2",
+        ">= 0.0.0"
+      ],
+      [
+        "osx_setup",
+        ">= 0.0.0"
+      ],
+      [
+        "homebrew",
+        ">= 0.0.0"
+      ],
+      [
+        "build-essential",
+        "= 6.0.3"
+      ],
+      [
+        "seven_zip",
+        "= 2.0.1"
+      ],
+      [
+        "windows",
+        "= 1.44.1"
+      ],
+      [
+        "chef_handler",
+        "= 1.4.0"
+      ],
+      [
+        "mingw",
+        "= 1.2.4"
+      ],
+      [
+        "compat_resource",
+        "= 12.10.7"
+      ],
+      [
+        "dmg",
+        "= 2.4.0"
+      ],
+      [
+        "mac_os_x",
+        "= 1.4.6"
+      ]
+    ],
+    "dependencies": {
+      "fasd_iterm2 (0.1.0)": [
+        [
+          "homebrew",
+          ">= 0.0.0"
+        ]
+      ],
+      "homebrew (2.1.0)": [
+        [
+          "build-essential",
+          ">= 2.1.2"
+        ]
+      ],
+      "build-essential (6.0.3)": [
+        [
+          "seven_zip",
+          ">= 0.0.0"
+        ],
+        [
+          "mingw",
+          ">= 1.1.0"
+        ],
+        [
+          "compat_resource",
+          ">= 12.10.0"
+        ]
+      ],
+      "seven_zip (2.0.1)": [
+        [
+          "windows",
+          ">= 1.2.2"
+        ]
+      ],
+      "windows (1.44.1)": [
+        [
+          "chef_handler",
+          ">= 0.0.0"
+        ]
+      ],
+      "chef_handler (1.4.0)": [
+
+      ],
+      "mingw (1.2.4)": [
+        [
+          "seven_zip",
+          ">= 0.0.0"
+        ],
+        [
+          "compat_resource",
+          ">= 0.0.0"
+        ]
+      ],
+      "compat_resource (12.10.7)": [
+
+      ],
+      "osx_setup (0.1.0)": [
+        [
+          "dmg",
+          "~> 2.4.0"
+        ],
+        [
+          "mac_os_x",
+          "~> 1.4.6"
+        ],
+        [
+          "homebrew",
+          "~> 2.1.0"
+        ]
+      ],
+      "dmg (2.4.0)": [
+
+      ],
+      "mac_os_x (1.4.6)": [
+
+      ]
+    }
+  }
+}
