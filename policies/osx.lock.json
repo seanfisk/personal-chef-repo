@@ -1,31 +1,11 @@
 {
-  "revision_id": "94a5f90f7ac2f9181a395721dd2b6f0a741fdcc7c656441221d7ee4d350be3f9",
+  "revision_id": "080b2d3203b3595aeccb087f770528ecc4edb7db8aee2fc754d69d199d3a1a50",
   "name": "osx",
   "run_list": [
-    "recipe[fasd_iterm2::default]",
-    "recipe[osx_setup::default]"
+    "recipe[osx_setup::default]",
+    "recipe[fasd_iterm2::default]"
   ],
   "cookbook_locks": {
-    "fasd_iterm2": {
-      "version": "0.1.0",
-      "identifier": "1044952b96655ea2e94212b7b620538e984028e7",
-      "dotted_decimal_identifier": "4579007099463006.45855416218269216.91871904803047",
-      "source": "../cookbooks/fasd_iterm2",
-      "cache_key": null,
-      "scm_info": {
-        "scm": "git",
-        "remote": null,
-        "revision": "804bf1f4a3b6e519f5bb93da281d564738319eb3",
-        "working_tree_clean": false,
-        "published": false,
-        "synchronized_remote_branches": [
-
-        ]
-      },
-      "source_options": {
-        "path": "../cookbooks/fasd_iterm2"
-      }
-    },
     "osx_setup": {
       "version": "0.1.0",
       "identifier": "43b15a43be54531f6072d3a6498f7c5a5309cd49",
@@ -35,8 +15,8 @@
       "scm_info": {
         "scm": "git",
         "remote": null,
-        "revision": "804bf1f4a3b6e519f5bb93da281d564738319eb3",
-        "working_tree_clean": false,
+        "revision": "f0a2f837a84d756fa81fb0113f885df24b393998",
+        "working_tree_clean": true,
         "published": false,
         "synchronized_remote_branches": [
 
@@ -44,6 +24,26 @@
       },
       "source_options": {
         "path": "../cookbooks/osx_setup"
+      }
+    },
+    "fasd_iterm2": {
+      "version": "0.1.0",
+      "identifier": "ebefbe0a6a84028111be73e7f2b50b4875c654cc",
+      "dotted_decimal_identifier": "66410219024581634.36329781681713845.12405841482956",
+      "source": "../cookbooks/fasd_iterm2",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": null,
+        "revision": "f0a2f837a84d756fa81fb0113f885df24b393998",
+        "working_tree_clean": true,
+        "published": false,
+        "synchronized_remote_branches": [
+
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/fasd_iterm2"
       }
     },
     "homebrew": {
@@ -56,6 +56,28 @@
         "git": "git://github.com/chef-cookbooks/homebrew.git",
         "revision": "87a4a2f2a012128e6ca95197744ee571a31a577e",
         "branch": "87a4a2f2a012128e6ca95197744ee571a31a577e"
+      }
+    },
+    "dmg": {
+      "version": "2.4.0",
+      "identifier": "18ecc45e6cfba70985620d8f2358d63c34845f01",
+      "dotted_decimal_identifier": "7015727583001511.2679930971169624.235554067472129",
+      "cache_key": "dmg-2.4.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/dmg/versions/2.4.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/dmg/versions/2.4.0/download",
+        "version": "2.4.0"
+      }
+    },
+    "mac_os_x": {
+      "version": "1.4.6",
+      "identifier": "b03f43d2291ec389a920bd1e6783738de9d11621",
+      "dotted_decimal_identifier": "49609156422344387.38748029886293891.127053350376993",
+      "cache_key": "mac_os_x-1.4.6-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mac_os_x/versions/1.4.6/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mac_os_x/versions/1.4.6/download",
+        "version": "1.4.6"
       }
     },
     "build-essential": {
@@ -123,28 +145,6 @@
         "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.10.7/download",
         "version": "12.10.7"
       }
-    },
-    "dmg": {
-      "version": "2.4.0",
-      "identifier": "18ecc45e6cfba70985620d8f2358d63c34845f01",
-      "dotted_decimal_identifier": "7015727583001511.2679930971169624.235554067472129",
-      "cache_key": "dmg-2.4.0-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/dmg/versions/2.4.0/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/dmg/versions/2.4.0/download",
-        "version": "2.4.0"
-      }
-    },
-    "mac_os_x": {
-      "version": "1.4.6",
-      "identifier": "b03f43d2291ec389a920bd1e6783738de9d11621",
-      "dotted_decimal_identifier": "49609156422344387.38748029886293891.127053350376993",
-      "cache_key": "mac_os_x-1.4.6-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mac_os_x/versions/1.4.6/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mac_os_x/versions/1.4.6/download",
-        "version": "1.4.6"
-      }
     }
   },
   "default_attributes": {
@@ -156,16 +156,24 @@
   "solution_dependencies": {
     "Policyfile": [
       [
-        "fasd_iterm2",
+        "osx_setup",
         ">= 0.0.0"
       ],
       [
-        "osx_setup",
+        "fasd_iterm2",
         ">= 0.0.0"
       ],
       [
         "homebrew",
         ">= 0.0.0"
+      ],
+      [
+        "dmg",
+        "= 2.4.0"
+      ],
+      [
+        "mac_os_x",
+        "= 1.4.6"
       ],
       [
         "build-essential",
@@ -190,22 +198,28 @@
       [
         "compat_resource",
         "= 12.10.7"
-      ],
-      [
-        "dmg",
-        "= 2.4.0"
-      ],
-      [
-        "mac_os_x",
-        "= 1.4.6"
       ]
     ],
     "dependencies": {
-      "fasd_iterm2 (0.1.0)": [
+      "osx_setup (0.1.0)": [
+        [
+          "dmg",
+          "~> 2.4.0"
+        ],
+        [
+          "mac_os_x",
+          "~> 1.4.6"
+        ],
         [
           "homebrew",
-          ">= 0.0.0"
+          "~> 2.1.0"
         ]
+      ],
+      "dmg (2.4.0)": [
+
+      ],
+      "mac_os_x (1.4.6)": [
+
       ],
       "homebrew (2.1.0)": [
         [
@@ -255,25 +269,11 @@
       "compat_resource (12.10.7)": [
 
       ],
-      "osx_setup (0.1.0)": [
-        [
-          "dmg",
-          "~> 2.4.0"
-        ],
-        [
-          "mac_os_x",
-          "~> 1.4.6"
-        ],
+      "fasd_iterm2 (0.1.0)": [
         [
           "homebrew",
-          "~> 2.1.0"
+          ">= 0.0.0"
         ]
-      ],
-      "dmg (2.4.0)": [
-
-      ],
-      "mac_os_x (1.4.6)": [
-
       ]
     }
   }

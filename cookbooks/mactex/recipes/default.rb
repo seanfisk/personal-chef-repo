@@ -22,8 +22,6 @@
 # recipe so that it can be selectively added to the run_list. It's a huge
 # download and install.
 
-include_recipe 'homebrew::cask'
-
 homebrew_cask 'mactex'
 
 # Blacklisting fonts as in MacTeX 2013 is no longer necessary with MacTeX 2014.

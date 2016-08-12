@@ -18,8 +18,7 @@
 # limitations under the License.
 
 package 'fasd'
-# Disabled until the cask provider is fixed
-# homebrew_cask 'iterm2'
+homebrew_cask 'iterm2'
 
 git 'clone repo' do
   repository node['fasd_iterm2']['repo_url']

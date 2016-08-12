@@ -18,8 +18,6 @@
 # limitations under the License.
 #
 
-include_recipe 'dmg'
-
 PANDA3D_VERSION = '1.8.1'.freeze
 
 dmg_package 'Panda3D' do
