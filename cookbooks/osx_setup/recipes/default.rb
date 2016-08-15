@@ -225,6 +225,8 @@ lambda do
   end
 end.call
 
+directory node['osx_setup']['fonts_dir']
+
 # Ubuntu fonts
 #
 # The regular Ubuntu font can be installed with SkyFonts, but it doesn't
@@ -235,8 +237,6 @@ lambda do
     "#{Chef::Config[:file_cache_path]}/#{archive_name}"
   install_dir = "#{node['osx_setup']['fonts_dir']}/Ubuntu"
 
-  directory install_dir
-
   remote_file 'download Ubuntu fonts' do
     source "http://font.ubuntu.com/download/#{archive_name}"
     path archive_path
@@ -244,8 +244,12 @@ lambda do
     notifies :run, 'execute[install Ubuntu fonts]'
   end
 
+  directory install_dir
+
   execute 'install Ubuntu fonts' do
-    command "unzip '#{archive_path}'"
+    # Enabled overwrite since this directory is being written to regardless of
+    # the version.
+    command %W(unzip -o #{archive_path})
     cwd install_dir
     action :nothing
   end
