@@ -9,31 +9,68 @@ require 'travis/cli/lint'
 require 'mixlib/shellout'
 require 'artii'
 require 'colorize'
+require 'ohai'
 
 # Helper module for safely executing subprocesses.
 module Subprocess
   # Mixlib::ShellOut doesn't support arrays on Windows... Ugh.
-  def run_subprocess(cmd)
+  def run_subprocess(cmd, **opts)
     # See `bundle help exec' for more info on using a 'clean' environment.
     Bundler.with_clean_env do
-      proc = Mixlib::ShellOut.new(cmd, live_stream: STDOUT)
+      proc = Mixlib::ShellOut.new(cmd, live_stream: STDOUT, **opts)
       proc.run_command
       proc
     end
   end
 end
 
-# Tasks for uploading cookbooks to the Chef server.
-class Push < Thor
-  include Subprocess
+# Helper module for determining the current operating system.
+module Platform
+  def current_platform
+    system = Ohai::System.new
+    system.all_plugins('platform')
+    system['platform']
+  end
+end
 
-  desc 'all', 'Push everything to the Chef server'
-  def all
+# Tasks for uploading cookbooks to the Chef server.
+class Chef < Thor
+  include Subprocess
+  include Platform
+
+  desc 'push', 'Push everything to the Chef server'
+  def push
     Pathname.glob('policies/*.rb').each do |policyfile|
       run_subprocess "chef update #{policyfile}"
       run_subprocess(
         "chef push #{policyfile.basename.sub_ext('')} #{policyfile}"
       )
+    end
+  end
+
+  desc 'try', 'Run the policy for the current OS locally'
+  def try
+    platform = current_platform
+    policy_platform = {
+      'mac_os_x' => 'osx',
+      'windows' => 'windows'
+    }[platform]
+    unless policy_platform
+      puts "Platform not supported: #{platform}"
+      exit 1
+    end
+    policyfile = "policies/#{policy_platform}.rb"
+    run_subprocess "chef update #{policyfile}"
+    Dir.mktmpdir do |export_dir|
+      run_subprocess "chef export #{policyfile} #{export_dir}"
+      # We need to run as a subprocess (not exec) in order to delete the temp
+      # directory afterwards.
+
+      # Obnoxiously chef-client *requires* PWD to be set to the correct value,
+      # otherwise the correct repo isn't found.
+      run_subprocess 'chef-client --local-mode',
+                     cwd: export_dir,
+                     env: { 'PWD' => export_dir }
     end
   end
 end

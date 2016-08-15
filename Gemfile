@@ -10,3 +10,4 @@ gem 'travis'
 # For printing fancy pass/fail message :)
 gem 'artii'
 gem 'colorize'
+gem 'ohai'
