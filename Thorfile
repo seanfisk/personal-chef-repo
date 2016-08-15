@@ -68,7 +68,10 @@ class Chef < Thor
 
       # Obnoxiously chef-client *requires* PWD to be set to the correct value,
       # otherwise the correct repo isn't found.
-      run_subprocess 'chef-client --local-mode',
+
+      # The last two options make the client behave as if it was outputting
+      # directory to a TTY.
+      run_subprocess 'chef-client --local-mode --format doc --log_level warn',
                      cwd: export_dir,
                      env: { 'PWD' => export_dir }
     end
