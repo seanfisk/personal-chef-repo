@@ -1,4 +1,4 @@
-// Configure Slate, a window manager for OS X.
+// Configure Slate, a window manager for macOS.
 
 slate.config("defaultToCurrentScreen", true);
 

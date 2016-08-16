@@ -44,7 +44,7 @@ default['windows_setup'].tap do |w|
     'Firefox',
     'autohotkey',
     'carbon',
-    # On OS X and GNU/Linux, we don't use the ChefDK. But it makes installation
+    # On macOS and GNU/Linux, we don't use the ChefDK. But it makes installation
     # of a development environment very easy on Windows.
     'chefdk',
     'dependencywalker',

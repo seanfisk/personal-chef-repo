@@ -8,7 +8,7 @@ This repository contains personal configurations for my machines, set up using t
 
 Please see the README for one of the configurations for more instructions on how to install:
 
-* [OS X](https://github.com/seanfisk/personal-chef-repo/tree/master/config/osx)
+* [macOS](https://github.com/seanfisk/personal-chef-repo/tree/master/config/macos)
 * [Windows](https://github.com/seanfisk/personal-chef-repo/tree/master/config/windows)
 
 ## Setting up an Administrator Workstation
@@ -50,7 +50,7 @@ It is definitely possible to manage these recipes with Chef Solo. However, both 
 
 There are two Rubies that are used for this project: the embedded Ruby used by [Chef Client][] and the Ruby used for development. The development Ruby runs the tasks in the Thorfile, while the embedded Ruby executes the cookbooks. There's no requirement for these to be identical, but it's advantageous to keep them as close as possible because of [Rubocop][]. Rubocop parses the cookbooks as the Ruby under which it is currently running would. Since the cookbooks are ultimately run by Chef Client's embedded Ruby, the Ruby versions should be the same.
 
-You can find the version of the embedded Ruby that Chef Client uses on OS X with the following:
+You can find the version of the embedded Ruby that Chef Client uses on macOS with the following:
 
     /opt/chef/embedded/bin/ruby --version
 

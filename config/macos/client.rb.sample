@@ -4,7 +4,7 @@
 #
 # Instructions:
 #
-# Replace the node_name's 'osx-node' with a name for your machine. If it is a
+# Replace the node_name's 'macos-node' with a name for your machine. If it is a
 # roaming machine, it is NOT a good idea to let chef give it a node name based
 # on its fully qualified domain name (FQDN).
 #
@@ -19,7 +19,7 @@
 # file_backup_path, and lockfile, as these will all use cache_path.
 cache_path "#{ENV['HOME']}/.chef"
 chef_server_url 'https://api.opscode.com/organizations/sean_fisk'
-node_name 'osx-node'
-policy_group 'osx'
-policy_name 'osx'
+node_name 'macos-node'
+policy_group 'macos'
+policy_name 'macos'
 validation_client_name 'sean_fisk-validator'

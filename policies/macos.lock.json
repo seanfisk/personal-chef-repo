@@ -1,29 +1,29 @@
 {
-  "revision_id": "0e6df18902361e6f832f9ad87d67b8795d8bccdac66aa16500c4dfc491c5c3c4",
-  "name": "osx",
+  "revision_id": "fb82df8ad16e1b617cc8bc2d58ad8fa37f5e61b5d78f055b7989d4fe7d00e424",
+  "name": "macos",
   "run_list": [
-    "recipe[osx_setup::default]",
+    "recipe[macos_setup::default]",
     "recipe[fasd_iterm2::default]"
   ],
   "cookbook_locks": {
-    "osx_setup": {
+    "macos_setup": {
       "version": "0.1.0",
-      "identifier": "cfa8ca16e1676867cbeb8c6c68577c05ebc95d65",
-      "dotted_decimal_identifier": "58450906099836776.29216135134865495.136364872523109",
-      "source": "../cookbooks/osx_setup",
+      "identifier": "bfe864e4e91f85a3123b6f4f137878bac468601c",
+      "dotted_decimal_identifier": "54017240586592133.45900467683660664.132743554424860",
+      "source": "../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "495716750ad910b1e642d3781ec6462df6dd57b9",
+        "revision": "8c814408975844330d36ae2e61d345fbdd3de136",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/policyfile"
+
         ]
       },
       "source_options": {
-        "path": "../cookbooks/osx_setup"
+        "path": "../cookbooks/macos_setup"
       }
     },
     "fasd_iterm2": {
@@ -35,11 +35,11 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "495716750ad910b1e642d3781ec6462df6dd57b9",
+        "revision": "8c814408975844330d36ae2e61d345fbdd3de136",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/policyfile"
+
         ]
       },
       "source_options": {
@@ -103,14 +103,14 @@
       }
     },
     "windows": {
-      "version": "1.44.1",
-      "identifier": "1b58034b7876468ac5fccf872237c4f623916c84",
-      "dotted_decimal_identifier": "7696595545519686.39061236390240823.216561437731972",
-      "cache_key": "windows-1.44.1-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.44.1/download",
+      "version": "1.44.3",
+      "identifier": "856961abed6d3eb7083b1dd1d71bdd130a809576",
+      "dotted_decimal_identifier": "37552040119725374.51518970734434075.243073850316150",
+      "cache_key": "windows-1.44.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.44.3/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.44.1/download",
-        "version": "1.44.1"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.44.3/download",
+        "version": "1.44.3"
       }
     },
     "chef_handler": {
@@ -156,7 +156,7 @@
   "solution_dependencies": {
     "Policyfile": [
       [
-        "osx_setup",
+        "macos_setup",
         ">= 0.0.0"
       ],
       [
@@ -185,7 +185,7 @@
       ],
       [
         "windows",
-        "= 1.44.1"
+        "= 1.44.3"
       ],
       [
         "chef_handler",
@@ -201,7 +201,7 @@
       ]
     ],
     "dependencies": {
-      "osx_setup (0.1.0)": [
+      "macos_setup (0.1.0)": [
         [
           "dmg",
           "~> 2.4.0"
@@ -247,7 +247,7 @@
           ">= 1.2.2"
         ]
       ],
-      "windows (1.44.1)": [
+      "windows (1.44.3)": [
         [
           "chef_handler",
           ">= 0.0.0"

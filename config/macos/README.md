@@ -1,4 +1,4 @@
-# OS X Chef Configuration
+# macOS Chef Configuration
 
 Throughout the instructions, `NODE_NAME` will be used as the machine's node name, and should be substituted appropriately.
 
@@ -6,14 +6,14 @@ Throughout the instructions, `NODE_NAME` will be used as the machine's node name
 
 1. Install the Chef client using the [full-stack installer](https://www.chef.io/download-chef-client/).
 
-1. Create the Chef configuration directory. We change the owner to our user so that we can provision mostly under our standard user. This works well with OS X because most operations don't require root, including installing to `/Applications` and installing [Homebrew](http://brew.sh/) packages.
+1. Create the Chef configuration directory. We change the owner to our user so that we can provision mostly under our standard user. This works well with macOS because most operations don't require root, including installing to `/Applications` and installing [Homebrew](http://brew.sh/) packages.
 
         sudo mkdir /etc/chef
         sudo chown "$(id -u):$(id -g)" /etc/chef
 
 1. Set up the Chef client configuration. This allows us to authenticate to the Chef server using our *machine* client:
 
-        curl https://raw.githubusercontent.com/seanfisk/personal-chef-repo/master/config/osx/client.rb.sample > /etc/chef/client.rb
+        curl https://raw.githubusercontent.com/seanfisk/personal-chef-repo/master/config/macos/client.rb.sample > /etc/chef/client.rb
 
 1. Now edit `client.rb` according to the instructions.
 
@@ -29,9 +29,9 @@ Throughout the instructions, `NODE_NAME` will be used as the machine's node name
 
 1. At this point, the node is registered and is ready to provision. However, we need to add cookbooks to this node's `run_list`. *From an administrator workstation*, run the following command. If you do not yet have an administrator workstation (i.e., this is the only workstation you have), read the section on setting up an administrator workstation in the main README and return here when finished.
 
-        knife node run_list add NODE_NAME osx_setup
+        knife node run_list add NODE_NAME macos_setup
 
-    This command registers the `osx_setup` cookbook to be run when provisioning takes place.
+    This command registers the `macos_setup` cookbook to be run when provisioning takes place.
 
 1. Now provision the node with the modified `run_list`:
 

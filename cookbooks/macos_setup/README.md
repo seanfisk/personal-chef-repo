@@ -1,4 +1,4 @@
-# osx_setup cookbook
+# macos_setup cookbook
 
 # Requirements
 

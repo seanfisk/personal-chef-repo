@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default['osx_setup'].tap do |o|
+default['macos_setup'].tap do |o|
   o['home'] = ENV['HOME']
   o['fonts_dir'] = "#{o['home']}/Library/Fonts"
   o['etc_shells'] = '/etc/shells'
@@ -336,8 +336,8 @@ default['homebrew']['casks'] = [
   #
   # - sqlitebrowser: open-source, cross-platform, well-maintained
   # - sqliteman: looks unmaintained, questionable OS support
-  # - mesasqlite: OS X-only, looks unmaintained
-  # - sqlprosqlite: OS X-only, proprietary
+  # - mesasqlite: macOS-only, looks unmaintained
+  # - sqlprosqlite: macOS-only, proprietary
   # - sqlitestudio: open-source, cross-platform, well-maintained
   # - navicat-for-sqlite: cross-platform, proprietary
   #
@@ -346,7 +346,7 @@ default['homebrew']['casks'] = [
   #
   # We've tried DB Browser for SQLite (sqlitebrowser), SQLite Studio
   # (sqlitestudio), and SQLite Manager for Firefox. All are excellent. The
-  # first two are written in Qt and look great on OS X. DB Browser and SQLite
+  # first two are written in Qt and look great on macOS. DB Browser and SQLite
   # manager both have options for CSV and SQL export, while SQLite Studio has
   # those in addition to HTML, JSON, PDF, and XML. However, we've decided to go
   # for DB Browser for SQLite because it has an intuitive interface and has
@@ -444,7 +444,7 @@ default['mac_os_x']['settings'] = {
   iterm2: {
     'domain' => 'com.googlecode.iterm2',
     'Default Bookmark Guid' =>
-      node['osx_setup']['iterm2']['default_profile_guid'],
+      node['macos_setup']['iterm2']['default_profile_guid'],
     # General
     ## Closing
     'QuitWhenAllWindowsClosed' => false,

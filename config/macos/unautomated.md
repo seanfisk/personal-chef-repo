@@ -1,7 +1,7 @@
 Unautomated Setup
 =================
 
-This file lists parts of OS X setup that are not automated. Typically, this is due to technical or practical reasons.
+This file lists parts of macOS setup that are not automated. Typically, this is due to technical or practical reasons.
 
 * SSH key generation
 
@@ -70,7 +70,7 @@ This file lists parts of OS X setup that are not automated. Typically, this is d
 * LastPass
 
   - The universal installer has installer and uninstaller app bundles which are downloaded by Homebrew Cask but need to be run manually. Using the universal installer is preferable to individual browser add-ons due to the inclusion of all browser add-ons and the binary component, which allows sharing state between browsers.
-  - [LastPass app for OS X](https://itunes.apple.com/us/app/lastpass/id926036361?ls=1&mt=12), which is installed using the Mac App Store.
+  - [LastPass app for macOS](https://itunes.apple.com/us/app/lastpass/id926036361?ls=1&mt=12), which is installed using the Mac App Store.
 
 * Firefox
 

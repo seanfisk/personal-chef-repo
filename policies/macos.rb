@@ -1,7 +1,7 @@
-# Run osx_setup first so that Homebrew is updated
-COOKBOOKS = %w(osx_setup fasd_iterm2).freeze
+# Run macos_setup first so that Homebrew is updated
+COOKBOOKS = %w(macos_setup fasd_iterm2).freeze
 
-name 'osx'
+name 'macos'
 run_list COOKBOOKS
 default_source :community
 COOKBOOKS.each do |cookbook|

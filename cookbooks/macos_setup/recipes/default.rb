@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Cookbook Name:: osx_setup
+# Cookbook Name:: macos_setup
 # Recipe:: default
 #
 # Author:: Sean Fisk <sean@seanfisk.com>
@@ -46,7 +46,7 @@ BREW_PREFIX = shell_out!('brew', '--prefix').stdout.rstrip
 # don't want to wait for all the other packages to be installed to see the
 # prompt, but we need the shell to be available before setting it as the
 # default.
-node['osx_setup']['shells'].each do |shell|
+node['macos_setup']['shells'].each do |shell|
   # Install the shell using Homebrew.
   package shell do
     action :install
@@ -55,16 +55,16 @@ node['osx_setup']['shells'].each do |shell|
   shell_path = File.join(BREW_PREFIX, 'bin', shell)
   # First, add shell to shells config file so it is recognized as a valid user
   # shell.
-  execute "add #{shell_path} to #{node['osx_setup']['etc_shells']}" do
+  execute "add #{shell_path} to #{node['macos_setup']['etc_shells']}" do
     # Unfortunately, using a ruby_block does not work because there's no way
     # that I know to execute it using sudo.
     command ['sudo', 'bash', '-c',
-             "echo '#{shell_path}' >> '#{node['osx_setup']['etc_shells']}'"]
+             "echo '#{shell_path}' >> '#{node['macos_setup']['etc_shells']}'"]
     not_if do
       # Don't execute if this shell is already in the shells config file. Open
       # a new file each time to reset the enumerator, and just in case these
       # are executed in parallel.
-      File.open(node['osx_setup']['etc_shells']).each_line.any? do |line|
+      File.open(node['macos_setup']['etc_shells']).each_line.any? do |line|
         line.include?(shell_path)
       end
     end
@@ -84,7 +84,7 @@ end.call
 # Make sure to use the `execute' resource than the `bash' resource, otherwise
 # sudo cannot prompt for a password.
 execute 'fix the zsh startup file that path_helper uses' do
-  # OS X has a program called path_helper that allows paths to be easily set
+  # macOS has a program called path_helper that allows paths to be easily set
   # for multiple shells. For bash (and other shells), it works great because it
   # is called /etc/profile which is executed only for login shells. However,
   # with zsh, path_helper is run from /etc/zshenv *instead of* /etc/zprofile
@@ -174,7 +174,7 @@ homebrew_cask 'inkscape'
 lambda do
   archive_name = 'deepsleep-1.3-beta1.zip'
   archive_path = "#{Chef::Config[:file_cache_path]}/#{archive_name}"
-  install_dir = "#{node['osx_setup']['home']}/Library/Widgets"
+  install_dir = "#{node['macos_setup']['home']}/Library/Widgets"
 
   # This isn't perfect -- the widget will only download and install when the
   # archive file doesn't exist.
@@ -228,7 +228,7 @@ lambda do
   end
 end.call
 
-directory node['osx_setup']['fonts_dir']
+directory node['macos_setup']['fonts_dir']
 
 # Ubuntu fonts
 #
@@ -238,7 +238,7 @@ lambda do
   archive_name = 'ubuntu-font-family-0.83.zip'
   archive_path =
     "#{Chef::Config[:file_cache_path]}/#{archive_name}"
-  install_dir = "#{node['osx_setup']['fonts_dir']}/Ubuntu"
+  install_dir = "#{node['macos_setup']['fonts_dir']}/Ubuntu"
 
   remote_file 'download Ubuntu fonts' do
     source "http://font.ubuntu.com/download/#{archive_name}"
@@ -264,7 +264,7 @@ remote_file 'download Inconsolata for Powerline font' do
   filename = 'Inconsolata for Powerline.otf'
   source 'https://github.com/powerline/fonts/raw/master/Inconsolata/' +
          URI.escape(filename)
-  path "#{node['osx_setup']['fonts_dir']}/#{filename}"
+  path "#{node['macos_setup']['fonts_dir']}/#{filename}"
 end
 
 ###############################################################################
@@ -274,7 +274,7 @@ end
 # Password-protected screensaver + delay
 include_recipe 'mac_os_x::screensaver'
 
-# Turn on the OS X firewall.
+# Turn on the macOS firewall.
 include_recipe 'mac_os_x::firewall'
 
 # Actually write all the settings using the 'defaults' command.
@@ -297,18 +297,18 @@ mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 #
 # Install background images.
 directory 'create iTerm2 background images directory' do
-  path node['osx_setup']['iterm2']['bgs_dir']
+  path node['macos_setup']['iterm2']['bgs_dir']
   recursive true
 end
 json_content = JSON.pretty_generate(
-  Profiles: node['osx_setup']['iterm2']['profiles'].map do |profile|
+  Profiles: node['macos_setup']['iterm2']['profiles'].map do |profile|
     profile = profile.dup
-    bg_key = node['osx_setup']['iterm2']['bg_key']
+    bg_key = node['macos_setup']['iterm2']['bg_key']
     if profile.key?(bg_key) && Pathname.new(profile[bg_key]).relative?
       base = profile[bg_key]
       cookbook_path = "iterm2-bgs/#{base}"
       install_path =
-        "#{node['osx_setup']['iterm2']['bgs_dir']}/#{base}"
+        "#{node['macos_setup']['iterm2']['bgs_dir']}/#{base}"
       profile[bg_key] = install_path
       cookbook_file "install iTerm2 background '#{base}'" do
         source cookbook_path
@@ -319,18 +319,18 @@ json_content = JSON.pretty_generate(
   end
 )
 # Install dynamic profiles.
-directory node['osx_setup']['iterm2']['dynamic_profiles_dir']
+directory node['macos_setup']['iterm2']['dynamic_profiles_dir']
 file 'install iTerm2 dynamic profiles' do
   # This file contains profiles used as parents by the iTerm2/fasd integration.
   # Since iTerm2 loads the list of dynamic profiles alphabetically, we prefix
   # it with a hyphen to ensure it is loaded first.
   # https://iterm2.com/documentation-dynamic-profiles.html
-  path node['osx_setup']['iterm2']['dynamic_profiles_dir'] + '/-Personal.json'
+  path node['macos_setup']['iterm2']['dynamic_profiles_dir'] + '/-Personal.json'
   content json_content
 end
 
 lambda do
-  install_dir = node['osx_setup']['home'] +
+  install_dir = node['macos_setup']['home'] +
                 '/Library/Application Support/Karabiner'
   directory install_dir
   cookbook_file 'Karabiner XML settings file' do
@@ -341,7 +341,7 @@ end.call
 
 lambda do
   install_dir =
-    "#{node['osx_setup']['home']}/Library/Application Support/Quicksilver"
+    "#{node['macos_setup']['home']}/Library/Application Support/Quicksilver"
   cookbook_file 'Quicksilver catalog preferences file' do
     source 'Quicksilver-Catalog.plist'
     path "#{install_dir}/Catalog.plist"
@@ -350,7 +350,7 @@ end.call
 
 cookbook_file 'Slate preferences file' do
   source 'slate.js'
-  path "#{node['osx_setup']['home']}/.slate.js"
+  path "#{node['macos_setup']['home']}/.slate.js"
 end
 
 # Set Skim as default PDF reader using duti.

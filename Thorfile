@@ -59,7 +59,7 @@ class Chef < Thor
   def try
     platform = current_platform
     policy_platform = {
-      'mac_os_x' => 'osx',
+      'mac_os_x' => 'macos',
       'windows' => 'windows'
     }[platform]
     unless policy_platform
@@ -92,7 +92,7 @@ class Test < Thor
     # Pass in a list of files/directories because we don't want the bin/
     # directory, other Foodcritic rules, etc., being checked.
     result = RuboCop::CLI.new.run %W(
-      Gemfile #{__FILE__} cookbooks policies config/osx/client.rb.sample
+      Gemfile #{__FILE__} cookbooks policies config/macos/client.rb.sample
       config/windows/client.rb.sample .chef/knife.rb
     )
     puts Rainbow('No rubocop errors').green if result == 0
