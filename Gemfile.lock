@@ -9,7 +9,6 @@ GEM
       fuzzyurl (~> 0.8.0)
       mixlib-config (~> 2.0)
       mixlib-shellout (~> 2.0)
-    colorize (0.8.1)
     cucumber-core (1.5.0)
       gherkin (~> 4.0)
     erubis (2.7.0)
@@ -123,7 +122,6 @@ PLATFORMS
 
 DEPENDENCIES
   artii
-  colorize
   foodcritic
   ohai
   rubocop

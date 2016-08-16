@@ -6,7 +6,6 @@ gem 'thor'
 gem 'foodcritic'
 gem 'rubocop'
 gem 'travis'
+gem 'ohai'
 # For printing fancy pass/fail message :)
 gem 'artii'
-gem 'colorize'
-gem 'ohai'

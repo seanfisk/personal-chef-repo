@@ -1,3 +1,6 @@
 Metrics/MethodLength:
   # This is pretty arbitrary, but the default of 10 seems short.
   Max: 30
+
+Metrics/AbcSize:
+  Max: 20

@@ -1,13 +1,14 @@
 # -*- mode: ruby; coding: utf-8; -*-
 
 require 'pathname'
+require 'English'
 require 'foodcritic'
 require 'rubocop'
 # 'travis lint' can be called as a subprocess, but calling it from Ruby is
 # preferable because it is cleaner and avoids loading the entire travis gem.
 require 'travis/cli/lint'
 require 'artii'
-require 'colorize'
+require 'rainbow'
 require 'ohai'
 
 # Helper module for safely executing subprocesses.
@@ -19,9 +20,12 @@ module Subprocess
       env = opts.fetch(:env, {})
       opts.delete(:env)
       # Force Ruby to not use a shell by using the argv[0]-setting syntax
+      puts Rainbow('==> ').bright.blue + Rainbow(cmd.inspect).bright
       unless system(env, [cmd[0], cmd[0]], *cmd[1..-1], **opts)
-        $stderr.puts "Command failed: #{cmd.inspect}"
-        exit 1
+        status = $CHILD_STATUS.exitstatus
+        $stderr.puts 'Command failed with non-zero '\
+                     "exit code #{status}: #{cmd.inspect}"
+        exit status
       end
     end
   end
@@ -91,7 +95,7 @@ class Test < Thor
       Gemfile #{__FILE__} cookbooks policies config/osx/client.rb.sample
       config/windows/client.rb.sample .chef/knife.rb
     )
-    puts 'No rubocop errors'.colorize(:green) if result == 0
+    puts Rainbow('No rubocop errors').green if result == 0
     exit result if exit
     result
   end
@@ -116,7 +120,7 @@ class Test < Thor
       puts review
       retval = 1
     else
-      puts 'No foodcritic errors'.colorize(:green)
+      puts Rainbow('No foodcritic errors').green
       retval = 0
     end
     exit retval if exit
@@ -146,20 +150,9 @@ class Test < Thor
     sum = %w(rubocop foodcritic travis)
           .collect { |task| invoke('test:' + task, [false]) }
           .reduce(:+)
-    if sum == 0
-      print_msg 'PASS', :green
-    else
-      print_msg 'FAIL', :red
-    end
-    # Exit with the sum of the error codes.
-    exit sum
-  end
-
-  private
-
-  def print_msg(msg, color)
+    message, color = sum == 0 ? ['PASS', :green] : ['FAIL', :red]
     artii = Artii::Base.new font: 'block'
     # artii adds two blank lines after the block text; we just want one.
-    print artii.asciify(msg).lines[0..-2].join.colorize(color)
+    print Rainbow(artii.asciify(message).lines[0..-2].join).color(color)
   end
 end
