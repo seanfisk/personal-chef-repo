@@ -174,6 +174,7 @@ homebrew_cask 'inkscape'
 lambda do
   archive_name = 'deepsleep-1.3-beta1.zip'
   archive_path = "#{Chef::Config[:file_cache_path]}/#{archive_name}"
+  install_dir = "#{node['osx_setup']['home']}/Library/Widgets"
 
   # This isn't perfect -- the widget will only download and install when the
   # archive file doesn't exist.
@@ -185,9 +186,11 @@ lambda do
     notifies :run, 'execute[install Deep Sleep dashboard widget]'
   end
 
+  directory install_dir
+
   execute 'install Deep Sleep dashboard widget' do
     command %W(unzip -o #{archive_path})
-    cwd "#{node['osx_setup']['home']}/Library/Widgets"
+    cwd install_dir
     action :nothing
   end
 end.call
