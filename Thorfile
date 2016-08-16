@@ -6,7 +6,6 @@ require 'rubocop'
 # 'travis lint' can be called as a subprocess, but calling it from Ruby is
 # preferable because it is cleaner and avoids loading the entire travis gem.
 require 'travis/cli/lint'
-require 'mixlib/shellout'
 require 'artii'
 require 'colorize'
 require 'ohai'
@@ -17,9 +16,13 @@ module Subprocess
   def run_subprocess(cmd, **opts)
     # See `bundle help exec' for more info on using a 'clean' environment.
     Bundler.with_clean_env do
-      proc = Mixlib::ShellOut.new(cmd, live_stream: STDOUT, **opts)
-      proc.run_command
-      proc
+      env = opts.fetch(:env, {})
+      opts.delete(:env)
+      # Force Ruby to not use a shell by using the argv[0]-setting syntax
+      unless system(env, [cmd[0], cmd[0]], *cmd[1..-1], **opts)
+        $stderr.puts "Command failed: #{cmd.inspect}"
+        exit 1
+      end
     end
   end
 end
@@ -41,9 +44,9 @@ class Chef < Thor
   desc 'push', 'Push everything to the Chef server'
   def push
     Pathname.glob('policies/*.rb').each do |policyfile|
-      run_subprocess "chef update #{policyfile}"
+      run_subprocess %W(chef update #{policyfile})
       run_subprocess(
-        "chef push #{policyfile.basename.sub_ext('')} #{policyfile}"
+        %W(chef push #{policyfile.basename.sub_ext('')} #{policyfile})
       )
     end
   end
@@ -60,9 +63,9 @@ class Chef < Thor
       exit 1
     end
     policyfile = "policies/#{policy_platform}.rb"
-    run_subprocess "chef update #{policyfile}"
+    run_subprocess %W(chef update #{policyfile})
     Dir.mktmpdir do |export_dir|
-      run_subprocess "chef export #{policyfile} #{export_dir}"
+      run_subprocess %W(chef export #{policyfile} #{export_dir})
       # We need to run as a subprocess (not exec) in order to delete the temp
       # directory afterwards.
 
@@ -71,8 +74,8 @@ class Chef < Thor
 
       # The last two options make the client behave as if it was outputting
       # directory to a TTY.
-      run_subprocess 'chef-client --local-mode --format doc --log_level warn',
-                     cwd: export_dir,
+      run_subprocess %w(chef-client --local-mode --format doc --log_level warn),
+                     chdir: export_dir,
                      env: { 'PWD' => export_dir }
     end
   end
@@ -80,8 +83,6 @@ end
 
 # Tasks for testing.
 class Test < Thor
-  include Subprocess
-
   desc 'rubocop', 'Run rubocop on all Ruby files'
   def rubocop(exit = true)
     # Pass in a list of files/directories because we don't want the bin/

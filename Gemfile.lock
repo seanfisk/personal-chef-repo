@@ -125,7 +125,6 @@ DEPENDENCIES
   artii
   colorize
   foodcritic
-  mixlib-shellout
   ohai
   rubocop
   thor

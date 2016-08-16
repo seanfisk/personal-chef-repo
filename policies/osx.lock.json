@@ -15,11 +15,11 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "83377249e994a4ca98f47bfc79f63552a17aba67",
+        "revision": "9ed5d4c071d49b44cf027fdb266d59e42312835e",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/policyfile"
         ]
       },
       "source_options": {
@@ -35,11 +35,11 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "83377249e994a4ca98f47bfc79f63552a17aba67",
+        "revision": "9ed5d4c071d49b44cf027fdb266d59e42312835e",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/policyfile"
         ]
       },
       "source_options": {
