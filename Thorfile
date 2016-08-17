@@ -31,42 +31,56 @@ module Subprocess
   end
 end
 
-# Helper module for determining the current operating system.
-module Platform
-  def current_platform
-    system = Ohai::System.new
-    system.all_plugins('platform')
-    system['platform']
+# Helper module for policyfiles.
+module Policy
+  def current_policyfile
+    ohai = Ohai::System.new
+    ohai.all_plugins('platform')
+    platform = CHEF_TO_PERSONAL[ohai['platform']]
+    unless platform
+      puts "Platform not supported: #{platform}"
+      exit 1
+    end
+    policyfile_path(platform)
   end
+
+  def all_policyfiles
+    CHEF_TO_PERSONAL.values.map { |platform| policyfile_path(platform) }
+  end
+
+  def supported_platforms
+    CHEF_TO_PERSONAL.values
+  end
+
+  def policyfile_path(platform)
+    "policies/#{platform}.rb"
+  end
+
+  CHEF_TO_PERSONAL = {
+    'mac_os_x' => 'macos',
+    'windows' => 'windows'
+  }.freeze
 end
 
 # Tasks for uploading cookbooks to the Chef server.
 class Chef < Thor
   include Subprocess
-  include Platform
+  include Policy
 
   desc 'push', 'Push everything to the Chef server'
   def push
-    Pathname.glob('policies/*.rb').each do |policyfile|
+    supported_platforms.each do |platform|
+      policyfile = policyfile_path(platform)
       run_subprocess %W(chef update #{policyfile})
       run_subprocess(
-        %W(chef push #{policyfile.basename.sub_ext('')} #{policyfile})
+        %W(chef push #{platform} #{policyfile})
       )
     end
   end
 
   desc 'try', 'Run the policy for the current OS locally'
   def try
-    platform = current_platform
-    policy_platform = {
-      'mac_os_x' => 'macos',
-      'windows' => 'windows'
-    }[platform]
-    unless policy_platform
-      puts "Platform not supported: #{platform}"
-      exit 1
-    end
-    policyfile = "policies/#{policy_platform}.rb"
+    policyfile = current_policyfile
     run_subprocess %W(chef update #{policyfile})
     Dir.mktmpdir do |export_dir|
       run_subprocess %W(chef export #{policyfile} #{export_dir})
@@ -87,14 +101,17 @@ end
 
 # Tasks for testing.
 class Test < Thor
+  include Policy
+
   desc 'rubocop', 'Run rubocop on all Ruby files'
   def rubocop(exit = true)
     # Pass in a list of files/directories because we don't want the bin/
     # directory, other Foodcritic rules, etc., being checked.
     result = RuboCop::CLI.new.run %W(
-      Gemfile #{__FILE__} cookbooks policies config/macos/client.rb.sample
-      config/windows/client.rb.sample .chef/knife.rb
-    )
+      Gemfile #{__FILE__} cookbooks policies .chef/knife.rb
+    ) + (supported_platforms.map do |platform|
+      "config/#{platform}/client.rb.sample"
+    end)
     puts Rainbow('No rubocop errors').green if result == 0
     exit result if exit
     result

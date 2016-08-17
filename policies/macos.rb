@@ -1,12 +1,10 @@
-# Run macos_setup first so that Homebrew is updated
-COOKBOOKS = %w(macos_setup fasd_iterm2).freeze
-
 name 'macos'
-run_list COOKBOOKS
-default_source :community
-COOKBOOKS.each do |cookbook|
-  cookbook cookbook, path: "../cookbooks/#{cookbook}"
-end
+
+instance_eval(IO.read("#{File.dirname(__FILE__)}/base.rb"))
+
+# Run macos_setup first so that Homebrew is updated
+local_cookbooks %w(macos_setup fasd_iterm2)
+
 # Until a new version is released, this fixes the management of the Cask
 # directories.
 cookbook 'homebrew',

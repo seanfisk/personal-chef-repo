@@ -14,7 +14,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "8c814408975844330d36ae2e61d345fbdd3de136",
+        "revision": "59627a9ed6faa65c47af6f8870f32bd78b99d5e8",
         "working_tree_clean": false,
         "published": false,
         "synchronized_remote_branches": [
@@ -69,7 +69,7 @@
     "Policyfile": [
       [
         "windows_setup",
-        ">= 0.0.0"
+        "= 0.1.0"
       ],
       [
         "chocolatey",

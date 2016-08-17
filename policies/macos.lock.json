@@ -15,11 +15,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "8c814408975844330d36ae2e61d345fbdd3de136",
+        "revision": "131a299fca81b781c65518d6cc3b4f7892d08de8",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -35,11 +36,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "8c814408975844330d36ae2e61d345fbdd3de136",
+        "revision": "131a299fca81b781c65518d6cc3b4f7892d08de8",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -157,11 +159,11 @@
     "Policyfile": [
       [
         "macos_setup",
-        ">= 0.0.0"
+        "= 0.1.0"
       ],
       [
         "fasd_iterm2",
-        ">= 0.0.0"
+        "= 0.1.0"
       ],
       [
         "homebrew",

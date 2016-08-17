@@ -1,8 +1,5 @@
-COOKBOOKS = %w(windows_setup).freeze
-
 name 'windows'
-run_list COOKBOOKS
-default_source :community
-COOKBOOKS.each do |cookbook|
-  cookbook cookbook, path: "../cookbooks/#{cookbook}"
-end
+
+instance_eval(IO.read("#{File.dirname(__FILE__)}/base.rb"))
+
+local_cookbooks %w(windows_setup)
