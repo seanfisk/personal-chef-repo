@@ -133,8 +133,8 @@ class Test < Thor
   def foodcritic(exit = true)
     review = FoodCritic::Linter.new.check(
       cookbook_paths: 'cookbooks',
-      fail_tags: ['any'],
-      include_rules: ['foodcritic/etsy', 'foodcritic/customink'],
+      fail_tags: %(any),
+      include_rules: Pathname.new('foodcritic').children.map(&:to_s),
       tags: [
         # Don't worry about having a CHANGELOG.md file for each cookbook.
         '~CINK001',
@@ -177,11 +177,11 @@ class Test < Thor
   def all
     # Pass false as an argument to prevent the task from exiting.
     sum = %w(rubocop foodcritic travis)
-          .collect { |task| invoke('test:' + task, [false]) }
+          .map { |task| invoke("test:#{task}", [false]) }
           .reduce(:+)
     message, color = sum == 0 ? ['PASS', :green] : ['FAIL', :red]
     artii = Artii::Base.new font: 'block'
     # artii adds two blank lines after the block text; we just want one.
-    print Rainbow(artii.asciify(message).lines[0..-2].join).color(color)
+    puts Rainbow(artii.asciify(message).rstrip + "\n").color(color)
   end
 end
