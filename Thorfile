@@ -85,7 +85,7 @@ class Repo < Thor
   desc 'push', 'Push everything to the Chef server'
   def push
     all_policies.each do |policy|
-      run_subprocess %W(chef install #{policy[:path]})
+      run_subprocess %W(chef update #{policy[:path]})
       run_subprocess %W(chef push #{policy[:group]} #{policy[:path]})
     end
   end
@@ -93,7 +93,7 @@ class Repo < Thor
   desc 'try', 'Run the policy for the current OS locally'
   def try
     policy = current_policy
-    run_subprocess %W(chef install #{policy[:path]})
+    run_subprocess %W(chef update #{policy[:path]})
     Dir.mktmpdir do |export_dir|
       run_subprocess %W(chef export #{policy[:path]} #{export_dir})
       # We need to run as a subprocess (not exec) in order to delete the temp
