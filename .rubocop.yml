@@ -4,3 +4,6 @@ Metrics/MethodLength:
 
 Metrics/AbcSize:
   Max: 20
+
+Style/MultilineBlockChain:
+  Enabled: false

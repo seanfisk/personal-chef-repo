@@ -9,7 +9,6 @@ require 'rubocop'
 require 'travis/cli/lint'
 require 'artii'
 require 'rainbow'
-require 'ohai'
 
 # Helper module for safely executing subprocesses.
 module Subprocess
@@ -33,57 +32,70 @@ end
 
 # Helper module for policyfiles.
 module Policy
-  def current_policyfile
-    ohai = Ohai::System.new
-    ohai.all_plugins('platform')
-    platform = CHEF_TO_PERSONAL[ohai['platform']]
-    unless platform
-      puts "Platform not supported: #{platform}"
-      exit 1
-    end
-    policyfile_path(platform)
+  def current_policy
+    @current ||=
+      begin
+        # Load the current node's config. Stolen directly from the Chef source
+        # code.
+        require 'chef/application/client'
+        # Load configuration from client.rb
+        Chef::Application::Client.new.load_config_file
+        policy = %i(group name).map do |key|
+          [key, Chef::Config[:"policy_#{key}"]]
+        end.to_h
+      rescue KeyError
+        $stderr.puts 'Unable to load config for current node'
+        exit 1
+      else
+        policy_path =
+          Pathname.new "policies/#{policy[:group]}/#{policy[:name]}.rb"
+        unless policy_path.file?
+          $stderr.puts "No policy found at '#{policy_path}'!"
+          exit 1
+        end
+        policy[:path] = policy_path
+        policy
+      end
   end
 
-  def all_policyfiles
-    CHEF_TO_PERSONAL.values.map { |platform| policyfile_path(platform) }
+  def all_policies
+    Pathname
+      .new('policies').children.select(&:directory?)
+      .flat_map do |group_path|
+        group_path
+          .children
+          .select do |name_path|
+            name_path.extname == '.rb' && name_path.basename.to_s != 'base.rb'
+          end
+          .map do |name_path|
+            { group: group_path.basename.to_s,
+              name: name_path.basename.sub_ext('').to_s,
+              path: name_path }
+          end
+      end
   end
-
-  def supported_platforms
-    CHEF_TO_PERSONAL.values
-  end
-
-  def policyfile_path(platform)
-    "policies/#{platform}.rb"
-  end
-
-  CHEF_TO_PERSONAL = {
-    'mac_os_x' => 'macos',
-    'windows' => 'windows'
-  }.freeze
 end
 
-# Tasks for uploading cookbooks to the Chef server.
-class Chef < Thor
+# Tasks for interacting with the current Chef repository.
+# NOTE: Naming this 'Chef' will cause conflicts!
+class Repo < Thor
   include Subprocess
   include Policy
 
   desc 'push', 'Push everything to the Chef server'
   def push
-    supported_platforms.each do |platform|
-      policyfile = policyfile_path(platform)
-      run_subprocess %W(chef update #{policyfile})
-      run_subprocess(
-        %W(chef push #{platform} #{policyfile})
-      )
+    all_policies.each do |policy|
+      run_subprocess %W(chef update #{policy[:path]})
+      run_subprocess %W(chef push #{policy[:group]} #{policy[:path]})
     end
   end
 
   desc 'try', 'Run the policy for the current OS locally'
   def try
-    policyfile = current_policyfile
-    run_subprocess %W(chef update #{policyfile})
+    policy = current_policy
+    run_subprocess %W(chef update #{policy[:path]})
     Dir.mktmpdir do |export_dir|
-      run_subprocess %W(chef export #{policyfile} #{export_dir})
+      run_subprocess %W(chef export #{policy[:path]} #{export_dir})
       # We need to run as a subprocess (not exec) in order to delete the temp
       # directory afterwards.
 
@@ -109,9 +121,9 @@ class Test < Thor
     # directory, other Foodcritic rules, etc., being checked.
     result = RuboCop::CLI.new.run %W(
       Gemfile #{__FILE__} cookbooks policies .chef/knife.rb
-    ) + (supported_platforms.map do |platform|
-      "config/#{platform}/client.rb.sample"
-    end)
+    ) + (Pathname.new('config').children.map do |platform_dir|
+      (platform_dir + 'client.rb.sample').to_s
+    end).to_a
     puts Rainbow('No rubocop errors').green if result == 0
     exit result if exit
     result

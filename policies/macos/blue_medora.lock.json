@@ -1,6 +1,6 @@
 {
-  "revision_id": "fb82df8ad16e1b617cc8bc2d58ad8fa37f5e61b5d78f055b7989d4fe7d00e424",
-  "name": "macos",
+  "revision_id": "5f344685e13c1c9c525c45aefd61d8aa9b48125c408541d729d7623fed16f403",
+  "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
     "recipe[fasd_iterm2::default]"
@@ -10,42 +10,40 @@
       "version": "0.1.0",
       "identifier": "bfe864e4e91f85a3123b6f4f137878bac468601c",
       "dotted_decimal_identifier": "54017240586592133.45900467683660664.132743554424860",
-      "source": "../cookbooks/macos_setup",
+      "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "131a299fca81b781c65518d6cc3b4f7892d08de8",
+        "remote": null,
+        "revision": "1b1d023cac91d386cf27e6a49dcaa99a1af0abb4",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/master"
+
         ]
       },
       "source_options": {
-        "path": "../cookbooks/macos_setup"
+        "path": "../../cookbooks/macos_setup"
       }
     },
     "fasd_iterm2": {
       "version": "0.1.0",
       "identifier": "ebefbe0a6a84028111be73e7f2b50b4875c654cc",
       "dotted_decimal_identifier": "66410219024581634.36329781681713845.12405841482956",
-      "source": "../cookbooks/fasd_iterm2",
+      "source": "../../cookbooks/fasd_iterm2",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "131a299fca81b781c65518d6cc3b4f7892d08de8",
+        "remote": null,
+        "revision": "1b1d023cac91d386cf27e6a49dcaa99a1af0abb4",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/master"
+
         ]
       },
       "source_options": {
-        "path": "../cookbooks/fasd_iterm2"
+        "path": "../../cookbooks/fasd_iterm2"
       }
     },
     "homebrew": {
@@ -83,14 +81,14 @@
       }
     },
     "build-essential": {
-      "version": "6.0.3",
-      "identifier": "175a87af498fb4b5495534bdc61cd2ba76a753ab",
-      "dotted_decimal_identifier": "6573463272263604.51027601090528796.231698296427435",
-      "cache_key": "build-essential-6.0.3-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/6.0.3/download",
+      "version": "6.0.4",
+      "identifier": "6ca850c821bde0e559359e33926756a6da7b8596",
+      "dotted_decimal_identifier": "30584362393255392.64555856489058919.95274630088086",
+      "cache_key": "build-essential-6.0.4-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/6.0.4/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/6.0.3/download",
-        "version": "6.0.3"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/6.0.4/download",
+        "version": "6.0.4"
       }
     },
     "seven_zip": {
@@ -179,7 +177,7 @@
       ],
       [
         "build-essential",
-        "= 6.0.3"
+        "= 6.0.4"
       ],
       [
         "seven_zip",
@@ -229,7 +227,7 @@
           ">= 2.1.2"
         ]
       ],
-      "build-essential (6.0.3)": [
+      "build-essential (6.0.4)": [
         [
           "seven_zip",
           ">= 0.0.0"

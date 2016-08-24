@@ -1,6 +1,6 @@
 {
-  "revision_id": "308d5cbea0ee5e7e8645067a0354645268d8c3fdaf7a06cc6bedd98604115034",
-  "name": "windows",
+  "revision_id": "c31ec4bf21eea1502f346ef69b9aa78ab8f2f1f64ed4a0454f7a31e34dd14323",
+  "name": "personal",
   "run_list": [
     "recipe[windows_setup::default]"
   ],
@@ -9,12 +9,12 @@
       "version": "0.1.0",
       "identifier": "fafcd9d98e0daef48331921c1fc6891fea595d61",
       "dotted_decimal_identifier": "70646756765732270.68824143245352902.150770168716641",
-      "source": "../cookbooks/windows_setup",
+      "source": "../../cookbooks/windows_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "59627a9ed6faa65c47af6f8870f32bd78b99d5e8",
+        "remote": null,
+        "revision": "1b1d023cac91d386cf27e6a49dcaa99a1af0abb4",
         "working_tree_clean": false,
         "published": false,
         "synchronized_remote_branches": [
@@ -22,7 +22,7 @@
         ]
       },
       "source_options": {
-        "path": "../cookbooks/windows_setup"
+        "path": "../../cookbooks/windows_setup"
       }
     },
     "chocolatey": {

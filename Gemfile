@@ -6,6 +6,6 @@ gem 'thor'
 gem 'foodcritic'
 gem 'rubocop'
 gem 'travis'
-gem 'ohai'
+gem 'chef'
 # For printing fancy pass/fail message :)
 gem 'artii'
