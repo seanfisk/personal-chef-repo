@@ -1,5 +1,5 @@
 {
-  "revision_id": "5f344685e13c1c9c525c45aefd61d8aa9b48125c408541d729d7623fed16f403",
+  "revision_id": "ffc1f6adebab6e5852d8fb93ed6f761f0f1b398290a692f08c864d8bc6cedadf",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -8,14 +8,14 @@
   "cookbook_locks": {
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "bfe864e4e91f85a3123b6f4f137878bac468601c",
-      "dotted_decimal_identifier": "54017240586592133.45900467683660664.132743554424860",
+      "identifier": "2b7ea3abf39c06c89d971aebcf88a22963cc29fe",
+      "dotted_decimal_identifier": "12242665428196358.56468267659415432.178298651683326",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "5726b34642cd30506ea8e9ad8c531f4ff9511834",
+        "revision": "3f9802b0806740a5eca629acd5c57b4394f6e311",
         "working_tree_clean": false,
         "published": false,
         "synchronized_remote_branches": [
@@ -35,7 +35,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "5726b34642cd30506ea8e9ad8c531f4ff9511834",
+        "revision": "3f9802b0806740a5eca629acd5c57b4394f6e311",
         "working_tree_clean": false,
         "published": false,
         "synchronized_remote_branches": [
@@ -201,20 +201,6 @@
       ]
     ],
     "dependencies": {
-      "macos_setup (0.1.0)": [
-        [
-          "dmg",
-          "~> 2.4.0"
-        ],
-        [
-          "mac_os_x",
-          "~> 1.4.6"
-        ],
-        [
-          "homebrew",
-          "~> 2.1.0"
-        ]
-      ],
       "dmg (2.4.0)": [
 
       ],
@@ -273,6 +259,20 @@
         [
           "homebrew",
           ">= 0.0.0"
+        ]
+      ],
+      "macos_setup (0.1.0)": [
+        [
+          "dmg",
+          "~> 2.4.0"
+        ],
+        [
+          "mac_os_x",
+          "~> 1.4.6"
+        ],
+        [
+          "homebrew",
+          "~> 2.1.0"
         ]
       ]
     }

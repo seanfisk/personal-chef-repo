@@ -282,6 +282,7 @@ default['homebrew']['casks'] = [
   # Using this for browsing DynamoDB using the AWS Toolkit for Eclipse.
   'eclipse-ide',
   'firefox',
+  'firefoxdeveloperedition',
   'flash',
   'flash-player',
   'flux',
