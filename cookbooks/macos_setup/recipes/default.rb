@@ -118,7 +118,7 @@ if node['macos_setup']['ruby_manager'] == 'rvm'
   include_recipe 'rvm::user'
 else
   # Use rbenv by default
-  node['homebrew']['formulas'] += [
+  node.default['homebrew']['formulas'] += [
     # Even though the rbenv cookbooks looks nice, they don't work as I'd
     # like. fnichol's supports local install, but insists on templating
     # /etc/profile.d/rbenv.sh *even when doing a local install*. That makes

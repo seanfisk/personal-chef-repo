@@ -254,19 +254,10 @@ default['homebrew']['casks'] = [
   'cathode',
   # 'chicken',
   # 'cord',
-  'crashplan',
   'dash',
   'deeper',
   'disk-inventory-x',
-  # There are a number of different versions of Eclipse. The eclipse-ide cask,
-  # described as 'Eclipse IDE for Eclipse Committers', is actually just the
-  # standard package without any extras. This is nice, because extras can
-  # always be installed using the Eclipse Marketplace.
-  #
-  # Using this for browsing DynamoDB using the AWS Toolkit for Eclipse.
-  'eclipse-ide',
   'firefox',
-  'firefoxdeveloperedition',
   'flash',
   'flash-player',
   'flux',
@@ -307,7 +298,6 @@ default['homebrew']['casks'] = [
   # https://github.com/mattr-/slate
   'mattr-slate',
   'mosh', # Also available as a formula
-  'openemu',
   'quicksilver',
   'skim',
   'skitch',
@@ -352,11 +342,7 @@ default['homebrew']['casks'] = [
   # This cask already applies the fix as shown here:
   # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
   'macfusion'
-]
-
-###############################################################################
-# PREFERENCES
-###############################################################################
+] + node['macos_setup'].fetch('extra_casks', [])
 
 lastpass_cmd_shift_key = '1179914'
 default['mac_os_x']['settings'] = {
