@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+require 'etc'
+
 default['macos_setup'].tap do |o|
   o['home'] = ENV['HOME']
   o['fonts_dir'] = "#{o['home']}/Library/Fonts"
@@ -197,28 +199,10 @@ default['homebrew']['formulas'] = [
   'pyenv-which-ext',
   'q', # text as data: https://github.com/harelba/q
   'qpdf',
-  # Even though the rbenv cookbooks looks nice, they don't work as I'd like.
-  # fnichol's supports local install, but insists on templating
-  # /etc/profile.d/rbenv.sh *even when doing a local install*. That makes no
-  # sense. I don't want that.
-  #
-  # The RiotGames rbenv cookbook only supports global install.
-  #
-  # So let's just install through trusty Homebrew.
-  #
-  # We now also install pyenv through Homebrew, so it's nice to be consistent.
-  'rbenv',
-  # rbenv plugins
-  # For the reason this was chosen over alternatives, see
-  # https://github.com/maljub01/rbenv-bundle-exec#similar-plugins
-  'rbenv-bundle-exec',
-  'rbenv-communal-gems',
-  'rbenv-default-gems',
   # reattach-to-user-namespace has options to fix launchctl and shim
   # pbcopy/pbaste. We haven't needed them yet, though.
   'reattach-to-user-namespace',
   'renameutils',
-  'ruby-build',
   'ssh-copy-id',
   # Primarily for Sphinx
   'texinfo',

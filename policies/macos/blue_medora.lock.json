@@ -1,5 +1,5 @@
 {
-  "revision_id": "ffc1f6adebab6e5852d8fb93ed6f761f0f1b398290a692f08c864d8bc6cedadf",
+  "revision_id": "8277e7a35cf69b74d97415dc2371490975b3df719441b52e18f26309140a2e1c",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -8,14 +8,14 @@
   "cookbook_locks": {
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "2b7ea3abf39c06c89d971aebcf88a22963cc29fe",
-      "dotted_decimal_identifier": "12242665428196358.56468267659415432.178298651683326",
+      "identifier": "67662599cb9d0985a8cc168e8e0064cf07428b75",
+      "dotted_decimal_identifier": "29104234281278729.37621766407753216.110840342809461",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "3f9802b0806740a5eca629acd5c57b4394f6e311",
+        "revision": "52c6d9353836045062f890281d0d2efda9f42f35",
         "working_tree_clean": false,
         "published": false,
         "synchronized_remote_branches": [
@@ -35,7 +35,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "3f9802b0806740a5eca629acd5c57b4394f6e311",
+        "revision": "52c6d9353836045062f890281d0d2efda9f42f35",
         "working_tree_clean": false,
         "published": false,
         "synchronized_remote_branches": [
@@ -145,10 +145,34 @@
         "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.10.7/download",
         "version": "12.10.7"
       }
+    },
+    "rvm": {
+      "version": "0.9.4",
+      "identifier": "df8fd3aacb7d9c52ddbc3f6ee6f24afac9f7dbaf",
+      "dotted_decimal_identifier": "62927059072810396.23324748678096626.82440990743471",
+      "cache_key": "rvm-0.9.4-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/rvm/versions/0.9.4/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/rvm/versions/0.9.4/download",
+        "version": "0.9.4"
+      }
+    },
+    "chef_gem": {
+      "version": "0.1.0",
+      "identifier": "17d9d6fdd67839066cf7ebed0c7c23134b7783b0",
+      "dotted_decimal_identifier": "6713441869264953.1808661931166844.38565777474480",
+      "cache_key": "chef_gem-0.1.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_gem/versions/0.1.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_gem/versions/0.1.0/download",
+        "version": "0.1.0"
+      }
     }
   },
   "default_attributes": {
-
+    "macos_setup": {
+      "ruby_manager": "rvm"
+    }
   },
   "override_attributes": {
 
@@ -198,9 +222,35 @@
       [
         "compat_resource",
         "= 12.10.7"
+      ],
+      [
+        "rvm",
+        "= 0.9.4"
+      ],
+      [
+        "chef_gem",
+        "= 0.1.0"
       ]
     ],
     "dependencies": {
+      "macos_setup (0.1.0)": [
+        [
+          "dmg",
+          "~> 2.4.0"
+        ],
+        [
+          "mac_os_x",
+          "~> 1.4.6"
+        ],
+        [
+          "homebrew",
+          "~> 2.1.0"
+        ],
+        [
+          "rvm",
+          "~> 0.9.4"
+        ]
+      ],
       "dmg (2.4.0)": [
 
       ],
@@ -255,24 +305,19 @@
       "compat_resource (12.10.7)": [
 
       ],
+      "rvm (0.9.4)": [
+        [
+          "chef_gem",
+          ">= 0.0.0"
+        ]
+      ],
+      "chef_gem (0.1.0)": [
+
+      ],
       "fasd_iterm2 (0.1.0)": [
         [
           "homebrew",
           ">= 0.0.0"
-        ]
-      ],
-      "macos_setup (0.1.0)": [
-        [
-          "dmg",
-          "~> 2.4.0"
-        ],
-        [
-          "mac_os_x",
-          "~> 1.4.6"
-        ],
-        [
-          "homebrew",
-          "~> 2.1.0"
         ]
       ]
     }

@@ -25,6 +25,8 @@ require 'uri'
 require 'json'
 require 'pathname'
 
+CURRENT_USER = Etc.getpwuid
+
 # Including this causes Homebrew to install if not already installed (needed
 # for the next section) and to run `brew update' if already installed.
 include_recipe 'homebrew'
@@ -77,7 +79,7 @@ lambda do
   execute "set #{path} as default shell" do
     command %W(chsh -s #{path})
     # getpwuid defaults to the current user, which is what we want.
-    not_if { Etc.getpwuid.shell == path }
+    not_if { CURRENT_USER.shell == path }
   end
 end.call
 
@@ -94,6 +96,49 @@ execute 'fix the zsh startup file that path_helper uses' do
   # <https://github.com/sorin-ionescu/prezto/issues/381>
   command %w(sudo mv /etc/zshenv /etc/zprofile)
   only_if { File.exist?('/etc/zshenv') }
+end
+
+###############################################################################
+# RUBY MANAGEMENT
+###############################################################################
+
+if node['macos_setup']['ruby_manager'] == 'rvm'
+  # Use RVM if requested
+  default_ruby = 'ruby-2.3.1'
+  node.default['rvm']['user_installs'] = [
+    { 'user' => CURRENT_USER.name,
+      'default_ruby' => default_ruby,
+      'rubies' => [
+        default_ruby, # Regular development
+        'ruby-2.2.1', # Current front-end
+        'ruby-2.2.5', # Current collector (and hopefully future front-end)
+        'jruby'       # Data providers
+      ] }
+  ]
+  include_recipe 'rvm::user'
+else
+  # Use rbenv by default
+  node['homebrew']['formulas'] += [
+    # Even though the rbenv cookbooks looks nice, they don't work as I'd
+    # like. fnichol's supports local install, but insists on templating
+    # /etc/profile.d/rbenv.sh *even when doing a local install*. That makes
+    # no sense. I don't want that.
+    #
+    # The RiotGames rbenv cookbook only supports global install.
+    #
+    # So let's just install through trusty Homebrew.
+    #
+    # We now also install pyenv through Homebrew, so it's nice to be
+    # consistent.
+    'ruby-build',
+    'rbenv',
+    # rbenv plugins
+    # For the reason this was chosen over alternatives, see
+    # https://github.com/maljub01/rbenv-bundle-exec#similar-plugins
+    'rbenv-bundle-exec',
+    'rbenv-communal-gems',
+    'rbenv-default-gems'
+  ]
 end
 
 ###############################################################################
