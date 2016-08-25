@@ -11,7 +11,7 @@
 # For a full list of options, see
 # <https://docs.chef.io/config_rb_client.html>.
 
-chef_server_url 'https://api.opscode.com/organizations/sean_fisk'
+chef_server_url 'https://api.chef.io/organizations/sean_fisk'
 node_name 'windows-node'
 policy_group 'windows'
 policy_name 'windows'

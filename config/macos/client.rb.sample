@@ -18,7 +18,7 @@
 # means that it is not necessary to set checksum_path, file_cache_path,
 # file_backup_path, and lockfile, as these will all use cache_path.
 cache_path "#{ENV['HOME']}/.chef"
-chef_server_url 'https://api.opscode.com/organizations/sean_fisk'
+chef_server_url 'https://api.chef.io/organizations/sean_fisk'
 node_name 'macos-node'
 policy_group 'macos'
 policy_name 'macos'
