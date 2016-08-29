@@ -1,5 +1,5 @@
 {
-  "revision_id": "799ad3816ac357526bd5b45852369a6bea4eae3909e017217d6b2b2075beb500",
+  "revision_id": "545fe7cd22b92e5cb6e423a463a708a672770ef2f6f876ce2d40d5decf674fc2",
   "name": "personal",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -8,18 +8,19 @@
   "cookbook_locks": {
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "f324459ff9d4e0688f3d02f1706eff8368123d6b",
-      "dotted_decimal_identifier": "68438300795983072.29430889783062638.280939851824491",
+      "identifier": "c83956546e1c7f7411712648e19adc13e97994c8",
+      "dotted_decimal_identifier": "56358038288604287.32670274969723290.241978079548616",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "009fbdfe9464dc81b8ac349b94d69efd14d0c066",
+        "revision": "93d78d11dd3055256f738d1736b92b41f9f96b1e",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -35,11 +36,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "009fbdfe9464dc81b8ac349b94d69efd14d0c066",
+        "revision": "93d78d11dd3055256f738d1736b92b41f9f96b1e",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -92,14 +94,14 @@
       }
     },
     "seven_zip": {
-      "version": "2.0.1",
-      "identifier": "1ef062de1bc4cb14e4a78fb739e104eb9508473e",
-      "dotted_decimal_identifier": "8708556725142731.5880907856034273.5409864173374",
-      "cache_key": "seven_zip-2.0.1-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.1/download",
+      "version": "2.0.2",
+      "identifier": "8e6795446cfa8e0a4a09cef4d5d35eb2d522a24d",
+      "dotted_decimal_identifier": "40083337488693902.2896155754419667.104122173006413",
+      "cache_key": "seven_zip-2.0.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.2/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.1/download",
-        "version": "2.0.1"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.2/download",
+        "version": "2.0.2"
       }
     },
     "windows": {
@@ -136,14 +138,14 @@
       }
     },
     "compat_resource": {
-      "version": "12.10.7",
-      "identifier": "0cf5d376444495035f02b8cb1acf2b3e5a0a51e5",
-      "dotted_decimal_identifier": "3647988291617941.948890225023695.47546798592485",
-      "cache_key": "compat_resource-12.10.7-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.10.7/download",
+      "version": "12.13.38",
+      "identifier": "0462c1636600433b289b657f22bc03b6b53f7b39",
+      "dotted_decimal_identifier": "1234482642681923.16651671513801404.4083259767609",
+      "cache_key": "compat_resource-12.13.38-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.13.38/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.10.7/download",
-        "version": "12.10.7"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.13.38/download",
+        "version": "12.13.38"
       }
     },
     "rvm": {
@@ -208,7 +210,7 @@
       ],
       [
         "seven_zip",
-        "= 2.0.1"
+        "= 2.0.2"
       ],
       [
         "windows",
@@ -224,7 +226,7 @@
       ],
       [
         "compat_resource",
-        "= 12.10.7"
+        "= 12.13.38"
       ],
       [
         "rvm",
@@ -280,7 +282,7 @@
           ">= 12.10.0"
         ]
       ],
-      "seven_zip (2.0.1)": [
+      "seven_zip (2.0.2)": [
         [
           "windows",
           ">= 1.2.2"
@@ -305,7 +307,7 @@
           ">= 0.0.0"
         ]
       ],
-      "compat_resource (12.10.7)": [
+      "compat_resource (12.13.38)": [
 
       ],
       "rvm (0.9.4)": [

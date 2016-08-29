@@ -273,6 +273,14 @@ lambda do
   end
 end.call
 
+dmg_package 'Jettison' do
+  version = '1.5'
+  source "http://www.stclairsoft.com/download/Jettison-#{version}.dmg"
+  checksum 'b502b1b0cd7730eea576fe7f524bd9914c0652dbbb631362300194cbc7f610ce'
+  volumes_dir "Jettison #{version}"
+  action :install
+end
+
 directory node['macos_setup']['fonts_dir']
 
 # Ubuntu fonts
