@@ -237,7 +237,7 @@ default['homebrew']['formulas'] = [
   'ponysay',
   'sl',
   'toilet'
-]
+].sort
 
 ###############################################################################
 # HOMEBREW CASKS (see http://caskroom.io/)
@@ -246,103 +246,104 @@ default['homebrew']['formulas'] = [
 # Casks that are commented out are ones that I'm not using right now, but have
 # used in the past and may use in the future.
 
-default['homebrew']['casks'] = [
-  # 'adium',
-  'adobe-reader',
-  'atext',
-  'caffeine',
-  'cathode',
-  # 'chicken',
-  # 'cord',
-  'dash',
-  'deeper',
-  'disk-inventory-x',
-  'firefox',
-  'flash',
-  'flash-player',
-  'flux',
-  'gfxcardstatus',
-  'gimp',
-  'google-chrome',
-  # This is 'GoogleVoiceAndVideoSetup', which installs the browser plugins.
-  'google-hangouts',
-  'iterm2',
-  # Java
-  #
-  # I wish we could avoid installing Java, but I need it for at least these
-  # reasons:
-  #
-  # - Network Connect, GVSU's SSL VPN
-  # - Playing TankPit, a Java applet-based game
-  # - Eclipse
-  #
-  # Apple Java 6 was installed, then uninstalled like so:
-  #
-  #     sudo rm -r /System/Library/Java/JavaVirtualMachines/1.6.0.jdk
-  #     sudo pkgutil --forget com.apple.pkg.JavaForMacOSX107
-  #
-  # See here for the procedure followed: http://superuser.com/a/712783
-  #
-  # Oracle Java 7 JDK was installed, then uninstalled with:
-  #
-  #     sudo rm -r /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk
-  #
-  # See here:
-  # JDK: http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html#uninstall
-  # JRE: https://www.java.com/en/download/help/mac_uninstall_java.xml
-  'java',
-  'karabiner',
-  'lastpass', # NOTE: Requires manual intervention
-  'libreoffice',
-  # This is a maintained fork of the original Slate:
-  # https://github.com/mattr-/slate
-  'mattr-slate',
-  'mosh', # Also available as a formula
-  'quicksilver',
-  'skim',
-  'skitch',
-  'skyfonts',
-  # 'skype',
-  # Recommended by Lifehacker
-  # http://lifehacker.com/the-best-antivirus-app-for-mac-488021445
-  'speedcrunch',
-  'spotify',
-  # SQLite browser options:
-  #
-  # - sqlitebrowser: open-source, cross-platform, well-maintained
-  # - sqliteman: looks unmaintained, questionable OS support
-  # - mesasqlite: macOS-only, looks unmaintained
-  # - sqlprosqlite: macOS-only, proprietary
-  # - sqlitestudio: open-source, cross-platform, well-maintained
-  # - navicat-for-sqlite: cross-platform, proprietary
-  #
-  # Also available is SQLite Manager, which is a high-quality Firefox add-on.
-  # <https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/>
-  #
-  # We've tried DB Browser for SQLite (sqlitebrowser), SQLite Studio
-  # (sqlitestudio), and SQLite Manager for Firefox. All are excellent. The
-  # first two are written in Qt and look great on macOS. DB Browser and SQLite
-  # manager both have options for CSV and SQL export, while SQLite Studio has
-  # those in addition to HTML, JSON, PDF, and XML. However, we've decided to go
-  # for DB Browser for SQLite because it has an intuitive interface and has
-  # packages for both Homebrew and Chocolatey. For Homebrew, both a formula and
-  # a cask are available. We've decided to go for the cask to avoid having to
-  # build (although it's bottled anyway).
-  'sqlitebrowser',
-  'vagrant',
-  'virtualbox',
-  # This also has a formula, but we install via cask because the formula
-  # requires extra work (things need to be accessed as root).
-  'wireshark',
-  # Homebrew formulas are also available for these two formulas. However, since
-  # osxfuse requires commands to be run by root, and official binaries are
-  # probably better, we've decided to go for the casks.
-  'osxfuse',
-  'sshfs',
-  # This cask already applies the fix as shown here:
-  # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
-  'macfusion'
-] + node['macos_setup'].fetch('extra_casks', [])
+default['homebrew']['casks'] = (
+  [
+    # 'adium',
+    'adobe-reader',
+    'atext',
+    'caffeine',
+    'cathode',
+    # 'chicken',
+    # 'cord',
+    'dash',
+    'deeper',
+    'disk-inventory-x',
+    'firefox',
+    'flash',
+    'flash-player',
+    'flux',
+    'gfxcardstatus',
+    'gimp',
+    'google-chrome',
+    # This is 'GoogleVoiceAndVideoSetup', which installs the browser plugins.
+    'google-hangouts',
+    'iterm2',
+    # Java
+    #
+    # I wish we could avoid installing Java, but I need it for at least these
+    # reasons:
+    #
+    # - Network Connect, GVSU's SSL VPN
+    # - Playing TankPit, a Java applet-based game
+    # - Eclipse
+    #
+    # Apple Java 6 was installed, then uninstalled like so:
+    #
+    #     sudo rm -r /System/Library/Java/JavaVirtualMachines/1.6.0.jdk
+    #     sudo pkgutil --forget com.apple.pkg.JavaForMacOSX107
+    #
+    # See here for the procedure followed: http://superuser.com/a/712783
+    #
+    # Oracle Java 7 JDK was installed, then uninstalled with:
+    #
+    #     sudo rm -r /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk
+    #
+    # See here:
+    # JDK: http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html#uninstall
+    # JRE: https://www.java.com/en/download/help/mac_uninstall_java.xml
+    'java',
+    'karabiner',
+    'lastpass', # NOTE: Requires manual intervention
+    'libreoffice',
+    # This is a maintained fork of the original Slate:
+    # https://github.com/mattr-/slate
+    'mattr-slate',
+    'mosh', # Also available as a formula
+    'quicksilver',
+    'skim',
+    'skitch',
+    'skyfonts',
+    # 'skype',
+    # Recommended by Lifehacker
+    # http://lifehacker.com/the-best-antivirus-app-for-mac-488021445
+    'speedcrunch',
+    'spotify',
+    # SQLite browser options:
+    #
+    # - sqlitebrowser: open-source, cross-platform, well-maintained
+    # - sqliteman: looks unmaintained, questionable OS support
+    # - mesasqlite: macOS-only, looks unmaintained
+    # - sqlprosqlite: macOS-only, proprietary
+    # - sqlitestudio: open-source, cross-platform, well-maintained
+    # - navicat-for-sqlite: cross-platform, proprietary
+    #
+    # Also available is SQLite Manager, which is a high-quality Firefox add-on.
+    # <https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/>
+    #
+    # We've tried DB Browser for SQLite (sqlitebrowser), SQLite Studio
+    # (sqlitestudio), and SQLite Manager for Firefox. All are excellent. The
+    # first two are written in Qt and look great on macOS. DB Browser and
+    # SQLite manager both have options for CSV and SQL export, while SQLite
+    # Studio has those in addition to HTML, JSON, PDF, and XML. However, we've
+    # decided to go for DB Browser for SQLite because it has an intuitive
+    # interface and has packages for both Homebrew and Chocolatey. For
+    # Homebrew, both a formula and a cask are available. We've decided to go
+    # for the cask to avoid having to build (although it's bottled anyway).
+    'sqlitebrowser',
+    'vagrant',
+    'virtualbox',
+    # This also has a formula, but we install via cask because the formula
+    # requires extra work (things need to be accessed as root).
+    'wireshark',
+    # Homebrew formulas are also available for these two formulas. However,
+    # since osxfuse requires commands to be run by root, and official binaries
+    # are probably better, we've decided to go for the casks.
+    'osxfuse',
+    'sshfs',
+    # This cask already applies the fix as shown here:
+    # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
+    'macfusion'
+  ] + node['macos_setup'].fetch('extra_casks', [])).sort
 
 lastpass_cmd_shift_key = '1179914'
 default['mac_os_x']['settings'] = {
@@ -412,7 +413,7 @@ default['mac_os_x']['settings'] = {
     # Note: shouldStartAtLogin doesn't actually work, because gfxCardStatus uses
     # login items like most other applications. So don't bother setting it.
   },
-  iterm2: {
+  'iterm2' => {
     'domain' => 'com.googlecode.iterm2',
     'Default Bookmark Guid' =>
       node['macos_setup']['iterm2']['default_profile_guid'],
@@ -709,4 +710,4 @@ default['mac_os_x']['settings'] = {
     ###     3. Tiled along edge
     'closeViewWindowMode' => 1
   }
-}
+}.sort.to_h
