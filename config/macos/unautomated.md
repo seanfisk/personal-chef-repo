@@ -15,6 +15,8 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 
   This is licensed software that is installed using Homebrew Cask. I purchased it from the Mac App Store (MAS). However, as stated in [aText Support](http://www.trankynam.com/atext/support.html), the non-MAS version generally works better. You'll have to follow the process to migrate your MAS license to get the non-MAS version working.
 
+  When using the launch agent approach to start up aText, it does not validate the license. So we're just going for the regular startup process.
+
 * Jettison
 
   This is licensed software that is installed using the dmg cookbook. I purchased a license that has to be manually entered/activated. Don't get confused: I initially purchased Jettison from the Mac App Store, but bought a separate license when I found that the Mac App Store version isn't up-to-date.
@@ -27,13 +29,15 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 
   Preferences are scattered over a couple places. Some are in user defaults, and some are in `~/Library/Application Support/Sophos Anti-Virus`, and some are elsewhere. Most of them I didn't find, but I honestly didn't look really hard. We've just left the preferences unautomated for now.
 
+  Start at login uses custom workflow and is therefore not automated.
+
 * Memory Clean
 
-  Installed from the Mac App Store.
+  Installed from the Mac App Store; start at login uses custom workflow and is therefore not automated.
 
 * Wunderlist
 
-  Installed from the Mac App Store.
+  Installed from the Mac App Store; helper start at login uses custom workflow and is therefore not automated.
 
 * Quicksilver hotkey
 
@@ -77,19 +81,9 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
   - Disable the auto-redirection of domains. Specifically this is annoying for `localhost`. Hopefully this will be synced. See http://cdivilly.wordpress.com/2013/08/15/disable-firefox-redirecting-to-localhost-com/.
   - Google Talk plugin needs to be blocked, as it forces a transition to the discrete GPU even when the plugin really isn't being used [i.e., not in hangouts]).
 
-* Login items
+* Karabiner
 
-  The list of applications which should run at startup are currently not automated. They are:
-
-  * gfxCardStatus
-  * Quicksilver
-  * Flux
-  * Jettison
-  * Slate
-  * Monotype SkyFonts
-  * aText
-  * Karabiner
-  * iTerm (optional, this is just for convenience)
+  This does not start up properly when using the launch agent approach, so we just use native startup support through the app itself.
 
 * Xerox WorkCenter 5755 Printer Drivers
 

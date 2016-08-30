@@ -417,6 +417,39 @@ execute 'set Skim as PDF viewer' do
   not_if { current_pdf_app == 'Skim.app' }
 end
 
+# Login items
+#
+# These are controlled by ~/Library/Preferences/com.apple.loginitems.plist,
+# which is can be viewed in System Preferences > Users & Group > Current User >
+# Login Items. However, this plist is difficult to edit manually because each
+# item has an opaque key associated with it. Omitting the opaque key has
+# yielded unpredicatable results, and the plist gets rewritten every time it is
+# modified through the UI.
+#
+# Another solution is to create launch agents for each program. This is not as
+# well-integrated with the macOS desktop experience, but seems to be the
+# cleaner solution in the long run.
+#
+# See this StackOverflow question for more information:
+# http://stackoverflow.com/q/12086638
+
+lambda do
+  agents_dir = Pathname.new(node['macos_setup']['home']) +
+               'Library/LaunchAgents'
+  node['macos_setup']['login_items'].each do |app|
+    label = "com.seanfisk.login.#{app.downcase}"
+    plist_file "create launch agent to start #{app} at login" do
+      # This takes a Pathname for some reason. I'm not complaining, because I
+      # love Pathname, but it's just weird.
+      file agents_dir + "#{label}.plist"
+      content 'Label' => label,
+              'ProgramArguments' => %W(/usr/bin/open -a #{app}),
+              'RunAtLoad' => true
+      action :create
+    end
+  end
+end.call
+
 execute 'invalidate sudo timestamp' do
   # 'sudo -K' will remove the timestamp entirely, which means that sudo will
   # print the initial 'Improper use of the sudo command' warning. Not what we

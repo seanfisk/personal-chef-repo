@@ -17,3 +17,4 @@ default['macos_setup']['extra_casks'] = [
   'firefoxdeveloperedition',
   'slack'
 ]
+default['macos_setup']['extra_login_items'] = %w(Slack)

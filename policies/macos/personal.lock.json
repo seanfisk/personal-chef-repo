@@ -1,5 +1,5 @@
 {
-  "revision_id": "1e9bb317e16ed26820c50ebd02eed0b5cc0a216ba12555d462b7cd21e8a5b97d",
+  "revision_id": "ceea9523ce3f2b54f8d7354d6c6cccbc2f3a829842739b0c5e490b20f7d411ca",
   "name": "personal",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -8,14 +8,14 @@
   "cookbook_locks": {
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "3f4fdba6339daf39efd704ee327518e6c860fa8c",
-      "dotted_decimal_identifier": "17820728337604015.16307780452233845.27379483343500",
+      "identifier": "e7202ee411316f71be75a8b3be14ac863e432197",
+      "dotted_decimal_identifier": "65056105387077999.32016084919107092.189692570182039",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "62eeda103e2ee2db3c8d4613189e55672fc2772f",
+        "revision": "92564d2227a29691011d1932545232a7c4a435d3",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -36,7 +36,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "62eeda103e2ee2db3c8d4613189e55672fc2772f",
+        "revision": "92564d2227a29691011d1932545232a7c4a435d3",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -138,14 +138,14 @@
       }
     },
     "compat_resource": {
-      "version": "12.13.38",
-      "identifier": "0462c1636600433b289b657f22bc03b6b53f7b39",
-      "dotted_decimal_identifier": "1234482642681923.16651671513801404.4083259767609",
-      "cache_key": "compat_resource-12.13.38-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.13.38/download",
+      "version": "12.14.0",
+      "identifier": "0e312445de07c01dbf8a7ee3f34d1327ce285503",
+      "dotted_decimal_identifier": "3994681534711744.8373375879869261.21061683401987",
+      "cache_key": "compat_resource-12.14.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.14.0/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.13.38/download",
-        "version": "12.13.38"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.14.0/download",
+        "version": "12.14.0"
       }
     },
     "rvm": {
@@ -168,6 +168,17 @@
       "source_options": {
         "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_gem/versions/0.1.0/download",
         "version": "0.1.0"
+      }
+    },
+    "plist": {
+      "version": "0.9.3",
+      "identifier": "02fdfdf2a72bbc0f67bb397a31ea63d4d7ab9198",
+      "dotted_decimal_identifier": "842217093016508.4336178471514602.109765802561944",
+      "cache_key": "plist-0.9.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/plist/versions/0.9.3/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/plist/versions/0.9.3/download",
+        "version": "0.9.3"
       }
     }
   },
@@ -226,7 +237,7 @@
       ],
       [
         "compat_resource",
-        "= 12.13.38"
+        "= 12.14.0"
       ],
       [
         "rvm",
@@ -235,6 +246,10 @@
       [
         "chef_gem",
         "= 0.1.0"
+      ],
+      [
+        "plist",
+        "= 0.9.3"
       ]
     ],
     "dependencies": {
@@ -254,6 +269,10 @@
         [
           "rvm",
           "~> 0.9.4"
+        ],
+        [
+          "plist",
+          "~> 0.9.3"
         ]
       ],
       "dmg (2.4.0)": [
@@ -307,7 +326,7 @@
           ">= 0.0.0"
         ]
       ],
-      "compat_resource (12.13.38)": [
+      "compat_resource (12.14.0)": [
 
       ],
       "rvm (0.9.4)": [
@@ -317,6 +336,9 @@
         ]
       ],
       "chef_gem (0.1.0)": [
+
+      ],
+      "plist (0.9.3)": [
 
       ],
       "fasd_iterm2 (0.1.0)": [

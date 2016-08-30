@@ -1,5 +1,5 @@
 {
-  "revision_id": "c31ec4bf21eea1502f346ef69b9aa78ab8f2f1f64ed4a0454f7a31e34dd14323",
+  "revision_id": "9c50f0aefeb7f6b6869ffea17795c4e15ef69c166d811e435d5cfc2112b32228",
   "name": "personal",
   "run_list": [
     "recipe[windows_setup::default]"
@@ -14,11 +14,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "009fbdfe9464dc81b8ac349b94d69efd14d0c066",
+        "revision": "92564d2227a29691011d1932545232a7c4a435d3",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -26,14 +27,14 @@
       }
     },
     "chocolatey": {
-      "version": "1.0.1",
-      "identifier": "3e38cef192a1513d3ee842ecf0ed471d3f16be4b",
-      "dotted_decimal_identifier": "17513910023397713.17239140855509229.78190938078795",
-      "cache_key": "chocolatey-1.0.1-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chocolatey/versions/1.0.1/download",
+      "version": "1.0.2",
+      "identifier": "c93f2c48473674b4f3f2b969a41820eb343fed93",
+      "dotted_decimal_identifier": "56645929742579316.50933719626261528.36194566008211",
+      "cache_key": "chocolatey-1.0.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chocolatey/versions/1.0.2/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chocolatey/versions/1.0.1/download",
-        "version": "1.0.1"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chocolatey/versions/1.0.2/download",
+        "version": "1.0.2"
       }
     },
     "windows": {
@@ -73,7 +74,7 @@
       ],
       [
         "chocolatey",
-        "= 1.0.1"
+        "= 1.0.2"
       ],
       [
         "windows",
@@ -95,7 +96,7 @@
           "~> 1.43.0"
         ]
       ],
-      "chocolatey (1.0.1)": [
+      "chocolatey (1.0.2)": [
         [
           "windows",
           "~> 1.38"

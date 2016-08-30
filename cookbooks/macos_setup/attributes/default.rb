@@ -24,6 +24,10 @@ default['macos_setup'].tap do |o|
   o['fonts_dir'] = "#{o['home']}/Library/Fonts"
   o['etc_shells'] = '/etc/shells'
   o['shells'] = %w(bash zsh)
+  o['login_items'] = (
+    %w(Flux Jettison Quicksilver SkyFonts Slate gfxCardStatus iTerm) +
+    node['macos_setup'].fetch('extra_login_items', [])
+  ).sort
   o['iterm2'].tap do |i|
     app_support = "#{o['home']}/Library/Application Support/iTerm2"
     font = 'InconsolataForPowerline 20'

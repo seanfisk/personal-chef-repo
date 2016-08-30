@@ -1,5 +1,5 @@
 {
-  "revision_id": "c215c8780e6423f0d0e4be5c9177c202f334ed7f2d7b50c63eb5cb4503643268",
+  "revision_id": "83cdfd34144432631fb17a9155c1d15ff098b44609e02ffe18116b393d22acf7",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -8,18 +8,19 @@
   "cookbook_locks": {
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "f324459ff9d4e0688f3d02f1706eff8368123d6b",
-      "dotted_decimal_identifier": "68438300795983072.29430889783062638.280939851824491",
+      "identifier": "e7202ee411316f71be75a8b3be14ac863e432197",
+      "dotted_decimal_identifier": "65056105387077999.32016084919107092.189692570182039",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "009fbdfe9464dc81b8ac349b94d69efd14d0c066",
+        "revision": "92564d2227a29691011d1932545232a7c4a435d3",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -35,11 +36,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "009fbdfe9464dc81b8ac349b94d69efd14d0c066",
+        "revision": "92564d2227a29691011d1932545232a7c4a435d3",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -92,14 +94,14 @@
       }
     },
     "seven_zip": {
-      "version": "2.0.1",
-      "identifier": "1ef062de1bc4cb14e4a78fb739e104eb9508473e",
-      "dotted_decimal_identifier": "8708556725142731.5880907856034273.5409864173374",
-      "cache_key": "seven_zip-2.0.1-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.1/download",
+      "version": "2.0.2",
+      "identifier": "8e6795446cfa8e0a4a09cef4d5d35eb2d522a24d",
+      "dotted_decimal_identifier": "40083337488693902.2896155754419667.104122173006413",
+      "cache_key": "seven_zip-2.0.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.2/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.1/download",
-        "version": "2.0.1"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.2/download",
+        "version": "2.0.2"
       }
     },
     "windows": {
@@ -136,14 +138,14 @@
       }
     },
     "compat_resource": {
-      "version": "12.10.7",
-      "identifier": "0cf5d376444495035f02b8cb1acf2b3e5a0a51e5",
-      "dotted_decimal_identifier": "3647988291617941.948890225023695.47546798592485",
-      "cache_key": "compat_resource-12.10.7-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.10.7/download",
+      "version": "12.14.0",
+      "identifier": "0e312445de07c01dbf8a7ee3f34d1327ce285503",
+      "dotted_decimal_identifier": "3994681534711744.8373375879869261.21061683401987",
+      "cache_key": "compat_resource-12.14.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.14.0/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.10.7/download",
-        "version": "12.10.7"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.14.0/download",
+        "version": "12.14.0"
       }
     },
     "rvm": {
@@ -166,6 +168,17 @@
       "source_options": {
         "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_gem/versions/0.1.0/download",
         "version": "0.1.0"
+      }
+    },
+    "plist": {
+      "version": "0.9.3",
+      "identifier": "02fdfdf2a72bbc0f67bb397a31ea63d4d7ab9198",
+      "dotted_decimal_identifier": "842217093016508.4336178471514602.109765802561944",
+      "cache_key": "plist-0.9.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/plist/versions/0.9.3/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/plist/versions/0.9.3/download",
+        "version": "0.9.3"
       }
     }
   },
@@ -211,7 +224,7 @@
       ],
       [
         "seven_zip",
-        "= 2.0.1"
+        "= 2.0.2"
       ],
       [
         "windows",
@@ -227,7 +240,7 @@
       ],
       [
         "compat_resource",
-        "= 12.10.7"
+        "= 12.14.0"
       ],
       [
         "rvm",
@@ -236,6 +249,10 @@
       [
         "chef_gem",
         "= 0.1.0"
+      ],
+      [
+        "plist",
+        "= 0.9.3"
       ]
     ],
     "dependencies": {
@@ -255,6 +272,10 @@
         [
           "rvm",
           "~> 0.9.4"
+        ],
+        [
+          "plist",
+          "~> 0.9.3"
         ]
       ],
       "dmg (2.4.0)": [
@@ -283,7 +304,7 @@
           ">= 12.10.0"
         ]
       ],
-      "seven_zip (2.0.1)": [
+      "seven_zip (2.0.2)": [
         [
           "windows",
           ">= 1.2.2"
@@ -308,7 +329,7 @@
           ">= 0.0.0"
         ]
       ],
-      "compat_resource (12.10.7)": [
+      "compat_resource (12.14.0)": [
 
       ],
       "rvm (0.9.4)": [
@@ -318,6 +339,9 @@
         ]
       ],
       "chef_gem (0.1.0)": [
+
+      ],
+      "plist (0.9.3)": [
 
       ],
       "fasd_iterm2 (0.1.0)": [
