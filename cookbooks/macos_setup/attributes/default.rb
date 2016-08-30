@@ -138,110 +138,112 @@ default['homebrew']['taps'] = %w(
   homebrew/x11
 )
 
-default['homebrew']['formulas'] = [
-  'ack',
-  'aria2',
-  'astyle',
-  'cask',
-  # Although there is a formula for this, it's best to install in a Python
-  # environment, because cookiecutter uses the Python under which it runs to
-  # execute things. Using /usr/bin/python causes problems...
-  # 'cookiecutter',
-  'coreutils',
-  # An improved version of df with colors.
-  'dfc',
-  # Dos2Unix / Unix2Dos <http://waterlan.home.xs4all.nl/dos2unix.html> looks
-  # superior to Tofrodos <http://www.thefreecountry.com/tofrodos/>. But that
-  # was just from a quick look.
-  'dos2unix',
-  'doxygen',
-  'duti',
-  'editorconfig',
-  'fasd',
-  'ghostscript',
-  'gibo',
-  'gnu-tar',
-  # Install both GraphicMagick and ImageMagick. In generally, I prefer
-  # GraphicsMagick, but ImageMagick has ICO support so we use it for
-  # BetterPlanner.
-  'graphicsmagick',
-  'graphviz',
-  'grc',
-  'htop-osx',
-  'httpie',
-  'hub',
-  # ImageMagick might already be present on the system (but just 'convert').
-  # I'm not sure if it's just an artifact of an earlier build, but it was on my
-  # Mavericks system before I installed it (again?).
-  'imagemagick',
-  # For pygit2 (which is for Powerline).
-  'libgit2',
-  # For rotating the Powerline log (see dotfiles).
-  'logrotate',
-  'mercurial',
-  'mplayer', # For https://github.com/TeMPOraL/nyan-mode#features :)
-  'mr', # myrepos, for managing multiple repos
-  'nmap',
-  'node',
-  # I prefer ohcount to cloc and sloccount.
-  'ohcount',
-  'osquery',
-  'p7zip',
-  'pandoc',
-  'parallel',
-  'pdfgrep',
-  'pidof',
-  'progress',
-  'pstree',
-  # pwgen and sf-pwgen are both password generators. pwgen is more generic,
-  # whereas sf-pwgen uses Apple's security framework. We also looked at APG,
-  # but it seems unmaintained.
-  'pwgen',
-  'sf-pwgen',
-  'pyenv',
-  'pyenv-virtualenv',
-  'pyenv-which-ext',
-  'q', # text as data: https://github.com/harelba/q
-  'qpdf',
-  # reattach-to-user-namespace has options to fix launchctl and shim
-  # pbcopy/pbaste. We haven't needed them yet, though.
-  'reattach-to-user-namespace',
-  'renameutils',
-  'ssh-copy-id',
-  # Primarily for Sphinx
-  'texinfo',
-  'thefuck',
-  'the_silver_searcher',
-  'tmux',
-  'trash',
-  'tree',
-  'valgrind',
-  'watch',
-  'wget',
-  'xz',
-  # For downloading videos/audio. ffmpeg is for post-processing; we chose it
-  # over libav based on http://blog.pkh.me/p/13-the-ffmpeg-libav-situation.html
-  # However, youtube-dl seems to prefer avconv (libav) over ffmpeg, so we may
-  # change this at a later time.
-  'youtube-dl',
-  'ffmpeg',
-  # ZeroMQ (zmq) is included to speed up IPython installs. It can install a
-  # bundled version to a virtualenv, but it's faster to have a globally built
-  # version.
-  'zmq',
-  'zsh-syntax-highlighting',
-  # XML utilities
-  'html-xml-utils',
-  'xml-coreutils',
-  # Fun commands!
-  'cmatrix',
-  'cowsay',
-  'figlet',
-  'fortune',
-  'ponysay',
-  'sl',
-  'toilet'
-].sort
+default['homebrew']['formulas'] = (
+  [
+    'ack',
+    'aria2',
+    'astyle',
+    'cask',
+    # Although there is a formula for this, it's best to install in a Python
+    # environment, because cookiecutter uses the Python under which it runs to
+    # execute things. Using /usr/bin/python causes problems...
+    # 'cookiecutter',
+    'coreutils',
+    # An improved version of df with colors.
+    'dfc',
+    # Dos2Unix / Unix2Dos <http://waterlan.home.xs4all.nl/dos2unix.html> looks
+    # superior to Tofrodos <http://www.thefreecountry.com/tofrodos/>. But that
+    # was just from a quick look.
+    'dos2unix',
+    'doxygen',
+    'duti',
+    'editorconfig',
+    'fasd',
+    'ghostscript',
+    'gibo',
+    'gnu-tar',
+    # Install both GraphicMagick and ImageMagick. In generally, I prefer
+    # GraphicsMagick, but ImageMagick has ICO support so we use it for
+    # BetterPlanner.
+    'graphicsmagick',
+    'graphviz',
+    'grc',
+    'htop-osx',
+    'httpie',
+    'hub',
+    # ImageMagick might already be present on the system (but just 'convert').
+    # I'm not sure if it's just an artifact of an earlier build, but it was on
+    # my Mavericks system before I installed it (again?).
+    'imagemagick',
+    # For pygit2 (which is for Powerline).
+    'libgit2',
+    # For rotating the Powerline log (see dotfiles).
+    'logrotate',
+    'mercurial',
+    'mplayer', # For https://github.com/TeMPOraL/nyan-mode#features :)
+    'mr', # myrepos, for managing multiple repos
+    'nmap',
+    'node',
+    # I prefer ohcount to cloc and sloccount.
+    'ohcount',
+    'osquery',
+    'p7zip',
+    'pandoc',
+    'parallel',
+    'pdfgrep',
+    'pidof',
+    'progress',
+    'pstree',
+    # pwgen and sf-pwgen are both password generators. pwgen is more generic,
+    # whereas sf-pwgen uses Apple's security framework. We also looked at APG,
+    # but it seems unmaintained.
+    'pwgen',
+    'sf-pwgen',
+    'pyenv',
+    'pyenv-virtualenv',
+    'pyenv-which-ext',
+    'q', # text as data: https://github.com/harelba/q
+    'qpdf',
+    # reattach-to-user-namespace has options to fix launchctl and shim
+    # pbcopy/pbaste. We haven't needed them yet, though.
+    'reattach-to-user-namespace',
+    'renameutils',
+    'ssh-copy-id',
+    # Primarily for Sphinx
+    'texinfo',
+    'thefuck',
+    'the_silver_searcher',
+    'tmux',
+    'trash',
+    'tree',
+    'valgrind',
+    'watch',
+    'wget',
+    'xz',
+    # For downloading videos/audio. ffmpeg is for post-processing; we chose it
+    # over libav based on
+    # http://blog.pkh.me/p/13-the-ffmpeg-libav-situation.html However,
+    # youtube-dl seems to prefer avconv (libav) over ffmpeg, so we may change
+    # this at a later time.
+    'youtube-dl',
+    'ffmpeg',
+    # ZeroMQ (zmq) is included to speed up IPython installs. It can install a
+    # bundled version to a virtualenv, but it's faster to have a globally built
+    # version.
+    'zmq',
+    'zsh-syntax-highlighting',
+    # XML utilities
+    'html-xml-utils',
+    'xml-coreutils',
+    # Fun commands!
+    'cmatrix',
+    'cowsay',
+    'figlet',
+    'fortune',
+    'ponysay',
+    'sl',
+    'toilet'
+  ] + node['macos_setup'].fetch('extra_formulas', [])).sort
 
 ###############################################################################
 # HOMEBREW CASKS (see http://caskroom.io/)

@@ -5,8 +5,13 @@ name 'blue_medora'
 load
 
 default['macos_setup']['ruby_manager'] = 'rvm'
+default['macos_setup']['extra_formulas'] = [
+  'aws-shell',
+  'pgcli'
+]
 default['macos_setup']['extra_casks'] = [
   'dbeaver-enterprise',
+  'docker', # This is Docker for Mac, which we use for Code Climate CLI
   # There are a number of different versions of Eclipse. The eclipse-ide cask,
   # described as 'Eclipse IDE for Eclipse Committers', is actually just the
   # standard package without any extras. This is nice, because extras can
@@ -17,4 +22,5 @@ default['macos_setup']['extra_casks'] = [
   'firefoxdeveloperedition',
   'slack'
 ]
-default['macos_setup']['extra_login_items'] = %w(Slack)
+default['macos_setup']['extra_login_items'] =
+  %w(Emacs FirefoxDeveloperEdition Slack)
