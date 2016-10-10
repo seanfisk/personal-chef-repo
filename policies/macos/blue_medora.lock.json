@@ -1,5 +1,5 @@
 {
-  "revision_id": "92eb10bec58014e1ecbe9efdea79c222e506c1ffe3ee5f0dd30b2e7e1471df50",
+  "revision_id": "ef4ec32176b009284b39eadc8c10bf6049815ec8584df559b4c0b810788b7283",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -15,11 +15,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "00d2b279db2a9b03475c10d47f0e8731597f1a4b",
+        "revision": "43b996c2d44ce9f1c9b4050f04edf9c7a0c2a3a4",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -35,11 +36,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "00d2b279db2a9b03475c10d47f0e8731597f1a4b",
+        "revision": "43b996c2d44ce9f1c9b4050f04edf9c7a0c2a3a4",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -81,14 +83,14 @@
       }
     },
     "build-essential": {
-      "version": "6.0.4",
-      "identifier": "6ca850c821bde0e559359e33926756a6da7b8596",
-      "dotted_decimal_identifier": "30584362393255392.64555856489058919.95274630088086",
-      "cache_key": "build-essential-6.0.4-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/6.0.4/download",
+      "version": "7.0.1",
+      "identifier": "92221b303e3b0e21e5f9d49316ec7532ce893c0a",
+      "dotted_decimal_identifier": "41132846768601870.9541535407478508.128861073914890",
+      "cache_key": "build-essential-7.0.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/7.0.1/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/6.0.4/download",
-        "version": "6.0.4"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/7.0.1/download",
+        "version": "7.0.1"
       }
     },
     "seven_zip": {
@@ -103,25 +105,14 @@
       }
     },
     "windows": {
-      "version": "1.44.3",
-      "identifier": "856961abed6d3eb7083b1dd1d71bdd130a809576",
-      "dotted_decimal_identifier": "37552040119725374.51518970734434075.243073850316150",
-      "cache_key": "windows-1.44.3-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.44.3/download",
+      "version": "2.0.2",
+      "identifier": "59e724b02f856cdd8a72cb82922eb820557ab3c7",
+      "dotted_decimal_identifier": "25305417687991660.62358195498291758.202449012569031",
+      "cache_key": "windows-2.0.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/2.0.2/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/1.44.3/download",
-        "version": "1.44.3"
-      }
-    },
-    "chef_handler": {
-      "version": "1.4.0",
-      "identifier": "aa794c0c3a03d09a5e22ca2ffb70115fda923471",
-      "dotted_decimal_identifier": "47984113570415568.43450649927482224.19103386580081",
-      "cache_key": "chef_handler-1.4.0-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/1.4.0/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/1.4.0/download",
-        "version": "1.4.0"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/2.0.2/download",
+        "version": "2.0.2"
       }
     },
     "mingw": {
@@ -136,14 +127,14 @@
       }
     },
     "compat_resource": {
-      "version": "12.14.0",
-      "identifier": "0e312445de07c01dbf8a7ee3f34d1327ce285503",
-      "dotted_decimal_identifier": "3994681534711744.8373375879869261.21061683401987",
-      "cache_key": "compat_resource-12.14.0-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.14.0/download",
+      "version": "12.14.7",
+      "identifier": "8d958f9606f7e6c7469bebb54cb7bd2141dc8745",
+      "dotted_decimal_identifier": "39852415646103526.56091155853823159.207950536542021",
+      "cache_key": "compat_resource-12.14.7-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.14.7/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.14.0/download",
-        "version": "12.14.0"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.14.7/download",
+        "version": "12.14.7"
       }
     },
     "rvm": {
@@ -195,6 +186,7 @@
         "slack"
       ],
       "extra_login_items": [
+        "Dash",
         "Emacs",
         "FirefoxDeveloperEdition",
         "Slack"
@@ -228,7 +220,7 @@
       ],
       [
         "build-essential",
-        "= 6.0.4"
+        "= 7.0.1"
       ],
       [
         "seven_zip",
@@ -236,11 +228,7 @@
       ],
       [
         "windows",
-        "= 1.44.3"
-      ],
-      [
-        "chef_handler",
-        "= 1.4.0"
+        "= 2.0.2"
       ],
       [
         "mingw",
@@ -248,7 +236,7 @@
       ],
       [
         "compat_resource",
-        "= 12.14.0"
+        "= 12.14.7"
       ],
       [
         "rvm",
@@ -298,7 +286,7 @@
           ">= 2.1.2"
         ]
       ],
-      "build-essential (6.0.4)": [
+      "build-essential (7.0.1)": [
         [
           "seven_zip",
           ">= 0.0.0"
@@ -309,7 +297,7 @@
         ],
         [
           "compat_resource",
-          ">= 12.10.0"
+          ">= 12.14.0"
         ]
       ],
       "seven_zip (2.0.2)": [
@@ -318,13 +306,7 @@
           ">= 1.2.2"
         ]
       ],
-      "windows (1.44.3)": [
-        [
-          "chef_handler",
-          ">= 0.0.0"
-        ]
-      ],
-      "chef_handler (1.4.0)": [
+      "windows (2.0.2)": [
 
       ],
       "mingw (1.2.4)": [
@@ -337,7 +319,7 @@
           ">= 0.0.0"
         ]
       ],
-      "compat_resource (12.14.0)": [
+      "compat_resource (12.14.7)": [
 
       ],
       "rvm (0.9.4)": [

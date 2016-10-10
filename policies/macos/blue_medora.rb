@@ -23,4 +23,4 @@ default['macos_setup']['extra_casks'] = [
   'slack'
 ]
 default['macos_setup']['extra_login_items'] =
-  %w(Emacs FirefoxDeveloperEdition Slack)
+  %w(Dash Emacs FirefoxDeveloperEdition Slack)
