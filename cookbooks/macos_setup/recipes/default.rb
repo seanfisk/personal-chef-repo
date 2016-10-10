@@ -274,9 +274,9 @@ lambda do
 end.call
 
 dmg_package 'Jettison' do
-  version = '1.5.1'
+  version = '1.5.2'
   source "http://www.stclairsoft.com/download/Jettison-#{version}.dmg"
-  checksum 'a06530be09090220a52efcd0db5f3e3b9756780e59d5eaac483646eec394673d'
+  checksum 'c19cc4cc5a58f8694bcc0449e011aaeda5c383f07f32deb0fa4ba86684e337b3'
   volumes_dir "Jettison #{version}"
   action :install
 end
