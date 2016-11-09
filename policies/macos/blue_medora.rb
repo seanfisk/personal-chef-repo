@@ -20,6 +20,8 @@ default['macos_setup']['extra_casks'] = [
   # Using this for browsing DynamoDB using the AWS Toolkit for Eclipse.
   'eclipse-ide',
   'firefoxdeveloperedition',
+  'intellij-idea-ce',
+  'java7', # Used for compiling data providers per Ex Uno tenets
   'slack'
 ]
 default['macos_setup']['extra_login_items'] =
