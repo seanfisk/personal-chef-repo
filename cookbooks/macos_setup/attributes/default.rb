@@ -179,6 +179,7 @@ default['homebrew']['formulas'] = (
     'libgit2',
     # For rotating the Powerline log (see dotfiles).
     'logrotate',
+    'm-cli',
     'mercurial',
     'mplayer', # For https://github.com/TeMPOraL/nyan-mode#features :)
     'mr', # myrepos, for managing multiple repos
