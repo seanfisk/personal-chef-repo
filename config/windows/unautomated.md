@@ -17,4 +17,3 @@ This file lists parts of Windows setup that are not automated. Typically, this i
 * RCT2 GoG; UCES
 * Powertab installation and config (see todos)
 * LastPass (Chocolatey package seems not to work)
-* SkyFonts (Chocolatey package is out-of-date, working on it)

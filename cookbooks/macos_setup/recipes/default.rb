@@ -284,9 +284,6 @@ end
 directory node['macos_setup']['fonts_dir']
 
 # Ubuntu fonts
-#
-# The regular Ubuntu font can be installed with SkyFonts, but it doesn't
-# include Ubuntu Mono, which we want.
 lambda do
   archive_name = 'ubuntu-font-family-0.83.zip'
   archive_path =
@@ -311,8 +308,14 @@ lambda do
   end
 end.call
 
-# Inconsolata for Powerline (can't be installed via SkyFonts, for obvious
-# reasons).
+remote_file 'download Inconsolata font' do
+  # This URL seems like one that may be updated with newer versions, so we'll
+  # just install the current version if it's not already installed.
+  filename = 'Inconsolata.otf'
+  source "http://levien.com/type/myfonts/#{URI.escape(filename)}"
+  path "#{node['macos_setup']['fonts_dir']}/#{filename}"
+end
+
 remote_file 'download Inconsolata for Powerline font' do
   filename = 'Inconsolata for Powerline.otf'
   source 'https://github.com/powerline/fonts/raw/master/Inconsolata/' +
