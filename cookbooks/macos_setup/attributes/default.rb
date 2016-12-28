@@ -30,7 +30,9 @@ default['macos_setup'].tap do |o|
   ).sort
   o['iterm2'].tap do |i|
     app_support = "#{o['home']}/Library/Application Support/iTerm2"
-    font = 'InconsolataForPowerline 20'
+    font_name = 'InconsolataForPowerline'
+    font = "#{font_name} 20"
+    presenter_font = "#{font_name} 36"
     gvsu_dir = "#{o['home']}/classes"
     system_profile_guid = '4381BB8C-7F7D-4CFD-A5F8-3F1A77185E37'
     i['default_profile_guid'] =
@@ -110,6 +112,15 @@ default['macos_setup'].tap do |o|
         'Blend' => 0.35,
         # Advanced
         'Bound Hosts' => [gvsu_dir]
+      },
+      {
+        'Guid' => '4A0A1F6D-753F-4D35-B019-F63C3144CC99',
+        'Dynamic Profile Parent Name' => 'Personal',
+        # General
+        'Name' => 'Presenter Mode',
+        # Text
+        'Normal Font' => presenter_font,
+        'Non Ascii Font' => presenter_font
       }
     ]
     system_bg_names = { [10, 10] => 'Yosemite 4', [10, 11] => 'El Capitan 2' }

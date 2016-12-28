@@ -1,5 +1,5 @@
 {
-  "revision_id": "d54e92ef2365071f3976bec757256f992592143b57d95f8bd50b5f110fd5e9c1",
+  "revision_id": "22e804d89b98885eeff573fe1ce95c4111550d23a73b6f46a2a9b767712b8517",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -8,14 +8,14 @@
   "cookbook_locks": {
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "c3550d775c87f248a72a95d6403b562291816a29",
-      "dotted_decimal_identifier": "54981136784066546.20449999667478587.94706470054441",
+      "identifier": "52ff60c96386cabcc7b56cf5569b62e7be68fe84",
+      "dotted_decimal_identifier": "23361739250960074.53136877652629147.108747471519364",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "1cfd23a4b49947c31e907987af22b4980286d973",
+        "revision": "fa132fce5b9a11dbc63f348276e949d6c783a6cc",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -36,7 +36,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "1cfd23a4b49947c31e907987af22b4980286d973",
+        "revision": "fa132fce5b9a11dbc63f348276e949d6c783a6cc",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -83,14 +83,14 @@
       }
     },
     "build-essential": {
-      "version": "7.0.2",
-      "identifier": "534f5c76385b652e8138b49b1700bb6f1e98ae76",
-      "dotted_decimal_identifier": "23449681605974885.13089929476904704.206085929086582",
-      "cache_key": "build-essential-7.0.2-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/7.0.2/download",
+      "version": "7.0.3",
+      "identifier": "5ede87d4b2f79a8c3b48104c5f06a88cb86560ce",
+      "dotted_decimal_identifier": "26703322781251482.39471677436616454.185322342539470",
+      "cache_key": "build-essential-7.0.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/7.0.3/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/7.0.2/download",
-        "version": "7.0.2"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/7.0.3/download",
+        "version": "7.0.3"
       }
     },
     "seven_zip": {
@@ -127,14 +127,14 @@
       }
     },
     "compat_resource": {
-      "version": "12.16.2",
-      "identifier": "ae22c628790a712a227e1045a1cfde6a45af12e3",
-      "dotted_decimal_identifier": "49014880425544305.11859873856070095.244548017001187",
-      "cache_key": "compat_resource-12.16.2-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.16.2/download",
+      "version": "12.16.3",
+      "identifier": "ee0005d802b7faad3584425961e9937962c8d65e",
+      "dotted_decimal_identifier": "66991069556029434.48754013136052713.162149557655134",
+      "cache_key": "compat_resource-12.16.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.16.3/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.16.2/download",
-        "version": "12.16.2"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/compat_resource/versions/12.16.3/download",
+        "version": "12.16.3"
       }
     },
     "mingw": {
@@ -233,7 +233,7 @@
       ],
       [
         "build-essential",
-        "= 7.0.2"
+        "= 7.0.3"
       ],
       [
         "seven_zip",
@@ -249,7 +249,7 @@
       ],
       [
         "compat_resource",
-        "= 12.16.2"
+        "= 12.16.3"
       ],
       [
         "mingw",
@@ -303,7 +303,7 @@
           ">= 2.1.2"
         ]
       ],
-      "build-essential (7.0.2)": [
+      "build-essential (7.0.3)": [
         [
           "seven_zip",
           ">= 0.0.0"
@@ -314,7 +314,7 @@
         ],
         [
           "compat_resource",
-          ">= 12.14.0"
+          ">= 12.16.3"
         ]
       ],
       "seven_zip (2.0.2)": [
@@ -335,7 +335,7 @@
           ">= 12.14.7"
         ]
       ],
-      "compat_resource (12.16.2)": [
+      "compat_resource (12.16.3)": [
 
       ],
       "mingw (1.2.4)": [
