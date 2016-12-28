@@ -360,14 +360,12 @@ json_content = JSON.pretty_generate(
   Profiles: node['macos_setup']['iterm2']['profiles'].map do |profile|
     profile = profile.dup
     bg_key = node['macos_setup']['iterm2']['bg_key']
-    if profile.key?(bg_key) && Pathname.new(profile[bg_key]).relative?
-      base = profile[bg_key]
-      cookbook_path = "iterm2-bgs/#{base}"
-      install_path =
-        "#{node['macos_setup']['iterm2']['bgs_dir']}/#{base}"
+    base = profile[bg_key]
+    if base && Pathname.new(base).relative?
+      install_path = "#{node['macos_setup']['iterm2']['bgs_dir']}/#{base}"
       profile[bg_key] = install_path
       cookbook_file "install iTerm2 background '#{base}'" do
-        source cookbook_path
+        source "iterm2-bgs/#{base}"
         path install_path
       end
     end
