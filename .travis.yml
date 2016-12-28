@@ -1,5 +1,4 @@
 language: ruby
 rvm: 2.1.6
-before_script: bundle exec berks install
 script: bundle exec thor test:all
 sudo: false
