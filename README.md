@@ -44,7 +44,7 @@ Be careful, because after re-generating, all nodes must be updated to use the ne
 
 ## Why not Chef Solo?
 
-It is definitely possible to manage these recipes with Chef Solo. However, both Josh and Seth's tutorials are focused around Hosted Chef. In addition, Berkshelf works a bit better with Hosted Chef, as cookbooks only need to be uploaded initially and then for upgrades. It would be necessary to vendor the Berkshelf cookbooks each time for use with Chef Solo. This is all possible, and shouldn't be too difficult, but it's just not how I decided to do it.
+Using Chef Solo essentially requires having a development environment present on the node that needs to be provisioned. While this is something that I typically do eventually, it's nice to be able to provision immediately (like starting a new job) or provision without setting up an environment on a one-off node.
 
 ## Ruby version
 
@@ -67,5 +67,4 @@ You can find the version of the embedded Ruby that Chef Client uses on macOS wit
     * [Provision Your Laptop With Chef: Part 1](http://technology.customink.com/blog/2012/05/28/provision-your-laptop-with-chef-part-1/)
     * [Provision Your Laptop With Chef: Part 2](http://technology.customink.com/blog/2012/07/30/provision-your-laptop-with-chef-part-2/)
 * Mike English
-    * [Simplifying Chef Solo Cookbook Management with Berkshelf](http://spin.atomicobject.com/2013/01/03/berks-simplifying-chef-solo-cookbook-management-with-berkshelf/)
-* [Berkshelf](http://berkshelf.com/)
+    * [Simplifying Chef Solo Cookbook Management with Berkshelf](http://spin.atomicobject.com/2013/01/03/berks-simplifying-chef-solo-cookbook-management-with-berkshelf/) [historical, since I don't use Berkshelf anymore]
