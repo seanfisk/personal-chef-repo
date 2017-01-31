@@ -124,7 +124,7 @@ class Test < Thor
     ) + (Pathname.new('config').children.map do |platform_dir|
       (platform_dir + 'client.rb.sample').to_s
     end).to_a
-    puts Rainbow('No rubocop errors').green if result == 0
+    puts Rainbow('No rubocop errors').green if result.zero?
     exit result if exit
     result
   end
@@ -133,7 +133,7 @@ class Test < Thor
   def foodcritic(exit = true)
     review = FoodCritic::Linter.new.check(
       cookbook_paths: 'cookbooks',
-      fail_tags: %(any),
+      fail_tags: %w(any),
       include_rules: Pathname.new('foodcritic').children.map(&:to_s),
       tags: [
         # Don't worry about having a CHANGELOG.md file for each cookbook.
@@ -179,7 +179,7 @@ class Test < Thor
     sum = %w(rubocop foodcritic travis)
           .map { |task| invoke("test:#{task}", [false]) }
           .reduce(:+)
-    message, color = sum == 0 ? ['PASS', :green] : ['FAIL', :red]
+    message, color = sum.zero? ? ['PASS', :green] : ['FAIL', :red]
     artii = Artii::Base.new font: 'block'
     # artii adds two blank lines after the block text; we just want one.
     puts Rainbow(artii.asciify(message).rstrip + "\n").color(color)
