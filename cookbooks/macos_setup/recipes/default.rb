@@ -339,8 +339,8 @@ include_recipe 'mac_os_x::settings'
 # Show percentage on battery indicator.
 #
 # Note: For some reason, Apple chose the value of ShowPercent to be 'YES' or
-# 'NO' as a string instead of using a boolean. mac_os_x_userdefaults treats
-# 'YES' as a boolean when reading, making it overwrite every time. For this
+# 'NO' as a string instead of using a Boolean. mac_os_x_userdefaults treats
+# 'YES' as a Boolean when reading, making it overwrite every time. For this
 # reason, we just write the plist.
 mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 
