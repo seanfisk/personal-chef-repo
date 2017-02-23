@@ -170,7 +170,11 @@ end
 
 # LastPass command-line interface
 package 'lastpass-cli' do
-  options '--with-doc --with-pinentry'
+  # This option fails for now. I don't use it often enough to try to fix it.
+  # - https://github.com/Homebrew/homebrew-core/issues/4383
+  # - https://github.com/Homebrew/homebrew-core/issues/7888
+  #
+  # options '--with-pinentry'
 end
 
 # mitmproxy with options
