@@ -172,6 +172,7 @@ default['homebrew']['formulas'] = (
     'fasd',
     'ghostscript',
     'gibo',
+    'git-lfs',
     'gnu-tar',
     # Install both GraphicMagick and ImageMagick. In generally, I prefer
     # GraphicsMagick, but ImageMagick has ICO support so we use it for
