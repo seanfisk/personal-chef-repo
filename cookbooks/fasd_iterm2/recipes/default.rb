@@ -27,7 +27,7 @@ git 'clone repo' do
 end
 
 execute 'installer' do
-  command 'yes | ./install'
+  command 'yes | ./install --num-dirs 500'
   cwd node['fasd_iterm2']['repo_path']
   action :nothing
 end
