@@ -411,15 +411,18 @@ cookbook_file 'Slate preferences file' do
   path "#{node['macos_setup']['home']}/.slate.js"
 end
 
-# Set Skim as default PDF reader using duti.
-execute 'set Skim as PDF viewer' do
+execute 'set Preview as default PDF viewer' do
   current_pdf_app = shell_out!('duti', '-x', 'pdf').stdout.lines[0].rstrip
   # Note: Although setting the default app for 'viewer' instead of 'all' works
   # and makes more sense, there is apparently no way to query this information
   # using duti. Since we won't really be editing PDFs, we'll just set the role
-  # to 'all' for Skim.
-  command %w(duti -s net.sourceforge.skim-app.skim pdf all)
-  not_if { current_pdf_app == 'Skim.app' }
+  # to 'all'.
+  #
+  # Note: Preview is the default PDF reader on macOS, but we previously used
+  # Skim. We've kept this in here for clarity and to convert old environments
+  # that still might have Skim as the default.
+  command %w(duti -s com.apple.Preview pdf all)
+  not_if { current_pdf_app == 'Preview.app' }
 end
 
 # Login items

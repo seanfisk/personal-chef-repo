@@ -1,5 +1,5 @@
 {
-  "revision_id": "f8c29d226ab2aed8f1b7614bc49dc3d7e7ec983ef87e79772764a2f8ed7e5d8a",
+  "revision_id": "bac0afa8e4a11913cc7479c67842bbe5b43bd184053ac0fccebafea02f0a2c65",
   "name": "personal",
   "run_list": [
     "recipe[windows_setup::default]"
@@ -14,7 +14,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "1cfd23a4b49947c31e907987af22b4980286d973",
+        "revision": "308de4d79901c70cfa16a640cb916c1b636e7a39",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -49,14 +49,14 @@
       }
     },
     "chef_handler": {
-      "version": "2.0.0",
-      "identifier": "bfb2bf83db007c3cae3ba1756f9e3c91695d450e",
-      "dotted_decimal_identifier": "53958256172400764.17080069737770910.66595235644686",
-      "cache_key": "chef_handler-2.0.0-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/2.0.0/download",
+      "version": "2.1.1",
+      "identifier": "80291f922e6e2fe7513e98934178915f95c4e12f",
+      "dotted_decimal_identifier": "36074012592205359.65110048909771128.159839720628527",
+      "cache_key": "chef_handler-2.1.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/2.1.1/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/2.0.0/download",
-        "version": "2.0.0"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/2.1.1/download",
+        "version": "2.1.1"
       }
     }
   },
@@ -82,7 +82,7 @@
       ],
       [
         "chef_handler",
-        "= 2.0.0"
+        "= 2.1.1"
       ]
     ],
     "dependencies": {
@@ -108,7 +108,7 @@
           ">= 0.0.0"
         ]
       ],
-      "chef_handler (2.0.0)": [
+      "chef_handler (2.1.1)": [
 
       ]
     }
