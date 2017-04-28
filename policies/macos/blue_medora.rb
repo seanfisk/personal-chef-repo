@@ -2,7 +2,7 @@ require_relative 'base'
 
 name 'blue_medora'
 
-load
+load extra: %w(selectstar_postgresql)
 
 default['macos_setup']['ruby_manager'] = 'rvm'
 default['macos_setup']['extra_formulas'] = [

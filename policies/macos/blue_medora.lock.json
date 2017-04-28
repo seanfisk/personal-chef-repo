@@ -1,9 +1,10 @@
 {
-  "revision_id": "0d7fab48b87fc18032ee13342322fa483f623d6b28201735ea579dd96ae6288a",
+  "revision_id": "179df048386e0d36b2e3654c219e58a4c22c535af67c5962770636a8300a4dc0",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
-    "recipe[fasd_iterm2::default]"
+    "recipe[fasd_iterm2::default]",
+    "recipe[selectstar_postgresql::default]"
   ],
   "cookbook_locks": {
     "macos_setup": {
@@ -15,7 +16,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "308de4d79901c70cfa16a640cb916c1b636e7a39",
+        "revision": "bd57abecbe92035c01ce49cd3f5f190060bd394a",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -36,7 +37,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "308de4d79901c70cfa16a640cb916c1b636e7a39",
+        "revision": "bd57abecbe92035c01ce49cd3f5f190060bd394a",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -46,6 +47,27 @@
       },
       "source_options": {
         "path": "../../cookbooks/fasd_iterm2"
+      }
+    },
+    "selectstar_postgresql": {
+      "version": "0.1.0",
+      "identifier": "0a2bcd78e58c1983bb78b6b58f52d0f0287cf8da",
+      "dotted_decimal_identifier": "2862911263706137.37079349084917586.229729890007258",
+      "source": "../../cookbooks/selectstar_postgresql",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
+        "revision": "bd57abecbe92035c01ce49cd3f5f190060bd394a",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/HEAD -> origin/master",
+          "origin/master"
+        ]
+      },
+      "source_options": {
+        "path": "../../cookbooks/selectstar_postgresql"
       }
     },
     "homebrew": {
@@ -209,6 +231,10 @@
         "= 0.1.0"
       ],
       [
+        "selectstar_postgresql",
+        "= 0.1.0"
+      ],
+      [
         "homebrew",
         ">= 0.0.0"
       ],
@@ -281,6 +307,9 @@
           "homebrew",
           ">= 0.0.0"
         ]
+      ],
+      "selectstar_postgresql (0.1.0)": [
+
       ],
       "homebrew (2.1.0)": [
         [

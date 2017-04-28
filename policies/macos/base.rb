@@ -1,8 +1,8 @@
 require_relative '../base'
 
-def load
+def load(extra: [])
   # Run macos_setup first so that Homebrew is updated
-  local_cookbooks %w(macos_setup fasd_iterm2)
+  local_cookbooks(%w(macos_setup fasd_iterm2) + extra)
 
   # Until a new version is released, this fixes the management of the Cask
   # directories.
