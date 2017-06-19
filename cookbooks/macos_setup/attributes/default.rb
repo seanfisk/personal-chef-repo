@@ -199,7 +199,7 @@ default['homebrew']['formulas'] = (
     'node',
     # I prefer ohcount to cloc and sloccount.
     'ohcount',
-    'osquery',
+    # 'osquery', # Newest version requires macOS Sierra
     'p7zip',
     'pandoc',
     'parallel',
