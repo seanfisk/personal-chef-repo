@@ -1,5 +1,5 @@
 {
-  "revision_id": "c555620e7cb94bea56736ab9d081bb397d96de3049be1ab1ea72e8e037e72c04",
+  "revision_id": "cd2561ad33697ba0ebcb9e154f5bdb215cff4cd12f4826649cb88679d5325c36",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -16,11 +16,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "1d6349709b8e64ab14bde66e3a911f2fff7bc028",
+        "revision": "03412836dc132ff0b3af8a599d28d2217bae7805",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -36,11 +37,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "1d6349709b8e64ab14bde66e3a911f2fff7bc028",
+        "revision": "03412836dc132ff0b3af8a599d28d2217bae7805",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -56,11 +58,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "1d6349709b8e64ab14bde66e3a911f2fff7bc028",
+        "revision": "03412836dc132ff0b3af8a599d28d2217bae7805",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -204,6 +207,7 @@
         "firefoxdeveloperedition",
         "intellij-idea-ce",
         "java7",
+        "jd-gui",
         "slack"
       ],
       "extra_login_items": [

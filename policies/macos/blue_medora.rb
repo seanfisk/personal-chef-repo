@@ -22,6 +22,7 @@ default['macos_setup']['extra_casks'] = [
   'firefoxdeveloperedition',
   'intellij-idea-ce',
   'java7', # Used for compiling data providers per Ex Uno tenets
+  'jd-gui', # Java decompiler
   'slack'
 ]
 default['macos_setup']['extra_login_items'] =
