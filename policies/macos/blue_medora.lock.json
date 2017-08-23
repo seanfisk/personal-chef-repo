@@ -1,5 +1,5 @@
 {
-  "revision_id": "cd2561ad33697ba0ebcb9e154f5bdb215cff4cd12f4826649cb88679d5325c36",
+  "revision_id": "001ce88796f86a05a79e548a5ebb744bab976b3af90efdd1b884daa7c2a40110",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -9,14 +9,14 @@
   "cookbook_locks": {
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "9372273e9bd5f46b5c2a3edc841928b3b487d924",
-      "dotted_decimal_identifier": "41502334456157684.30219159021061145.44752293058852",
+      "identifier": "9d59ad20982ee3fe2fec4d6c29e29e615a1cb452",
+      "dotted_decimal_identifier": "44290171454631651.71547336042228194.174140960846930",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "03412836dc132ff0b3af8a599d28d2217bae7805",
+        "revision": "b11b6cf1e4528260a5e26ba94833780d15efebd9",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -37,7 +37,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "03412836dc132ff0b3af8a599d28d2217bae7805",
+        "revision": "b11b6cf1e4528260a5e26ba94833780d15efebd9",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -58,7 +58,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "03412836dc132ff0b3af8a599d28d2217bae7805",
+        "revision": "b11b6cf1e4528260a5e26ba94833780d15efebd9",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -171,25 +171,25 @@
       }
     },
     "windows": {
-      "version": "3.1.1",
-      "identifier": "b73725749cc74ff2005c00f6c692a91e3c6b772f",
-      "dotted_decimal_identifier": "51570554747799375.68117339517142674.185947327788847",
-      "cache_key": "windows-3.1.1-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.1.1/download",
+      "version": "3.1.2",
+      "identifier": "1c8c2df7aa03da3dee366639782d81652d8c820c",
+      "dotted_decimal_identifier": "8035428404429786.17431890990037037.142271555863052",
+      "cache_key": "windows-3.1.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.1.2/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.1.1/download",
-        "version": "3.1.1"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.1.2/download",
+        "version": "3.1.2"
       }
     },
     "ohai": {
-      "version": "5.1.0",
-      "identifier": "0c8f2906d48ae976d03d6eb6c3f39534ea62d795",
-      "dotted_decimal_identifier": "3535106091551465.33443009520911347.164054503184277",
-      "cache_key": "ohai-5.1.0-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.1.0/download",
+      "version": "5.2.0",
+      "identifier": "31667e457ea2295ec2c43d24708b5b3edaea387e",
+      "dotted_decimal_identifier": "13904966376661545.26672795905978507.100325518882942",
+      "cache_key": "ohai-5.2.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.2.0/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.1.0/download",
-        "version": "5.1.0"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.2.0/download",
+        "version": "5.2.0"
       }
     }
   },
@@ -208,7 +208,8 @@
         "intellij-idea-ce",
         "java7",
         "jd-gui",
-        "slack"
+        "slack",
+        "vmware-remote-console"
       ],
       "extra_login_items": [
         "Dash",
@@ -273,11 +274,11 @@
       ],
       [
         "windows",
-        "= 3.1.1"
+        "= 3.1.2"
       ],
       [
         "ohai",
-        "= 5.1.0"
+        "= 5.2.0"
       ]
     ],
     "dependencies": {
@@ -358,13 +359,13 @@
           ">= 0.0.0"
         ]
       ],
-      "windows (3.1.1)": [
+      "windows (3.1.2)": [
         [
           "ohai",
           ">= 4.0.0"
         ]
       ],
-      "ohai (5.1.0)": [
+      "ohai (5.2.0)": [
 
       ]
     }

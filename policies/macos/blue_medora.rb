@@ -23,7 +23,8 @@ default['macos_setup']['extra_casks'] = [
   'intellij-idea-ce',
   'java7', # Used for compiling data providers per Ex Uno tenets
   'jd-gui', # Java decompiler
-  'slack'
+  'slack',
+  'vmware-remote-console'
 ]
 default['macos_setup']['extra_login_items'] =
   %w(Dash Emacs FirefoxDeveloperEdition Slack)

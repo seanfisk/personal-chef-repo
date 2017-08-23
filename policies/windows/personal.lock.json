@@ -1,5 +1,5 @@
 {
-  "revision_id": "bac0afa8e4a11913cc7479c67842bbe5b43bd184053ac0fccebafea02f0a2c65",
+  "revision_id": "8a7bc9db070fe5a2bdc1db6668b1ccad4ee7b57d1e051b0e455f58a774528792",
   "name": "personal",
   "run_list": [
     "recipe[windows_setup::default]"
@@ -14,11 +14,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "1d6349709b8e64ab14bde66e3a911f2fff7bc028",
+        "revision": "b11b6cf1e4528260a5e26ba94833780d15efebd9",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -48,14 +49,14 @@
       }
     },
     "chef_handler": {
-      "version": "2.1.1",
-      "identifier": "80291f922e6e2fe7513e98934178915f95c4e12f",
-      "dotted_decimal_identifier": "36074012592205359.65110048909771128.159839720628527",
-      "cache_key": "chef_handler-2.1.1-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/2.1.1/download",
+      "version": "3.0.2",
+      "identifier": "60cbc4e26770cf157c9f5ec71c0abfdeb79784e5",
+      "dotted_decimal_identifier": "27245644236681423.6047998442675210.210963283805413",
+      "cache_key": "chef_handler-3.0.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/3.0.2/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/2.1.1/download",
-        "version": "2.1.1"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/3.0.2/download",
+        "version": "3.0.2"
       }
     }
   },
@@ -81,7 +82,7 @@
       ],
       [
         "chef_handler",
-        "= 2.1.1"
+        "= 3.0.2"
       ]
     ],
     "dependencies": {
@@ -107,7 +108,7 @@
           ">= 0.0.0"
         ]
       ],
-      "chef_handler (2.1.1)": [
+      "chef_handler (3.0.2)": [
 
       ]
     }

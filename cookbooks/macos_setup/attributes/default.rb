@@ -353,16 +353,16 @@ default['homebrew']['casks'] = (
     'virtualbox',
     # This also has a formula, but we install via cask because the formula
     # requires extra work (things need to be accessed as root).
-    'wireshark',
-    # Homebrew formulas are also available for these two formulas. However,
-    # since osxfuse requires commands to be run by root, and official binaries
-    # are probably better, we've decided to go for the casks.
-    'osxfuse',
-    'sshfs',
-    # This cask already applies the fix as shown here:
-    # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
-    'macfusion'
-  ] + node['macos_setup'].fetch('extra_casks', [])).sort
+    'wireshark'
+  ] + node['macos_setup'].fetch('extra_casks', [])
+).sort + [
+  # Do not sort these because they must be installed in order :|
+  # We must install osxfuse before Macfusion.
+  'osxfuse',
+  # This cask already applies the fix as shown here:
+  # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
+  'macfusion'
+]
 
 lastpass_cmd_shift_key = '1179914'
 default['mac_os_x']['settings'] = {
