@@ -145,20 +145,6 @@ end
 # HOMEBREW FORMULAS AND CASKS
 ###############################################################################
 
-# Install Emacs with options. Do this before installing the other formulas,
-# because the cask formula depends on emacs.
-package 'emacs' do
-  # The flag --with-glib never actually worked to enable file notifications.
-  # However, Emacs 25 (currently in development, hence --devel) supports using
-  # kqueue for file notifications. This is detected automatically and it is not
-  # necessary to pass any flags.
-  options '--devel --with-cocoa --with-gnutls'
-end
-execute "Link 'Emacs.app' to '/Applications'" do
-  command %w(brew linkapps emacs)
-  creates '/Applications/Emacs.app'
-end
-
 # git-grep PCRE. Do this before installing other formulas in
 # case there is a dependency on git.
 package 'install custom Git' do

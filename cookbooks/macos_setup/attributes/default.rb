@@ -277,6 +277,7 @@ default['homebrew']['casks'] = (
     'dash',
     'deeper',
     'disk-inventory-x',
+    'emacs',
     'firefox',
     'flash',
     'flash-player',
