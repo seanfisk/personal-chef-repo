@@ -275,13 +275,13 @@ directory node['macos_setup']['fonts_dir']
 
 # Ubuntu fonts
 lambda do
-  archive_name = 'ubuntu-font-family-0.83.zip'
+  archive_name = 'fad7939b-ubuntu-font-family-0.83.zip'
   archive_path =
     "#{Chef::Config[:file_cache_path]}/#{archive_name}"
   install_dir = "#{node['macos_setup']['fonts_dir']}/Ubuntu"
 
   remote_file 'download Ubuntu fonts' do
-    source "http://font.ubuntu.com/download/#{archive_name}"
+    source "https://assets.ubuntu.com/v1/#{archive_name}"
     path archive_path
     checksum '456d7d42797febd0d7d4cf1b782a2e03680bb4a5ee43cc9d06bda172bac05b42'
     notifies :run, 'execute[install Ubuntu fonts]'

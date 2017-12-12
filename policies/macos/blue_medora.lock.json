@@ -1,5 +1,5 @@
 {
-  "revision_id": "001ce88796f86a05a79e548a5ebb744bab976b3af90efdd1b884daa7c2a40110",
+  "revision_id": "0f4ecef40187426b3fc3c3ead1dceb2351d1a9df2a18e435c25a3c8f64adcc24",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -9,14 +9,14 @@
   "cookbook_locks": {
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "9d59ad20982ee3fe2fec4d6c29e29e615a1cb452",
-      "dotted_decimal_identifier": "44290171454631651.71547336042228194.174140960846930",
+      "identifier": "7fca0f0ac7ceb5cdd23bfeb585988ed80f0b86c8",
+      "dotted_decimal_identifier": "35969487996440245.57933525343896984.157058616493768",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "b11b6cf1e4528260a5e26ba94833780d15efebd9",
+        "revision": "56474d0a349486851333fb2cd3522c7d0094932c",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -37,7 +37,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "b11b6cf1e4528260a5e26ba94833780d15efebd9",
+        "revision": "56474d0a349486851333fb2cd3522c7d0094932c",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -58,7 +58,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "b11b6cf1e4528260a5e26ba94833780d15efebd9",
+        "revision": "56474d0a349486851333fb2cd3522c7d0094932c",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -127,14 +127,14 @@
       }
     },
     "build-essential": {
-      "version": "8.0.3",
-      "identifier": "dfc29e7a0586933293e233bc74048fadae0e3ca1",
-      "dotted_decimal_identifier": "62982905714280083.14236348575413252.157976112282785",
-      "cache_key": "build-essential-8.0.3-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.0.3/download",
+      "version": "8.0.4",
+      "identifier": "ff5d8e233f21749e21fca7d25443e2ede19fd3bf",
+      "dotted_decimal_identifier": "71878984119296372.44510415351338051.249511320474559",
+      "cache_key": "build-essential-8.0.4-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.0.4/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.0.3/download",
-        "version": "8.0.3"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.0.4/download",
+        "version": "8.0.4"
       }
     },
     "chef_gem": {
@@ -171,14 +171,14 @@
       }
     },
     "windows": {
-      "version": "3.1.2",
-      "identifier": "1c8c2df7aa03da3dee366639782d81652d8c820c",
-      "dotted_decimal_identifier": "8035428404429786.17431890990037037.142271555863052",
-      "cache_key": "windows-3.1.2-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.1.2/download",
+      "version": "3.4.1",
+      "identifier": "bde47124340faa8028ec0288909c33166ca58939",
+      "dotted_decimal_identifier": "53449945188143018.36073791138861212.56171405084985",
+      "cache_key": "windows-3.4.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.4.1/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.1.2/download",
-        "version": "3.1.2"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.4.1/download",
+        "version": "3.4.1"
       }
     },
     "ohai": {
@@ -258,7 +258,7 @@
       ],
       [
         "build-essential",
-        "= 8.0.3"
+        "= 8.0.4"
       ],
       [
         "chef_gem",
@@ -274,7 +274,7 @@
       ],
       [
         "windows",
-        "= 3.1.2"
+        "= 3.4.1"
       ],
       [
         "ohai",
@@ -334,7 +334,7 @@
       "plist (0.9.3)": [
 
       ],
-      "build-essential (8.0.3)": [
+      "build-essential (8.0.4)": [
         [
           "seven_zip",
           ">= 0.0.0"
@@ -359,7 +359,7 @@
           ">= 0.0.0"
         ]
       ],
-      "windows (3.1.2)": [
+      "windows (3.4.1)": [
         [
           "ohai",
           ">= 4.0.0"
