@@ -31,10 +31,6 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 
   Start at login uses custom workflow and is therefore not automated.
 
-* Memory Clean
-
-  Installed from the Mac App Store; start at login uses custom workflow and is therefore not automated.
-
 * Wunderlist
 
   Installed from the Mac App Store; helper start at login uses custom workflow and is therefore not automated.
