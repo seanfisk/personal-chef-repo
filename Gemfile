@@ -2,10 +2,9 @@
 
 source 'https://rubygems.org'
 
-gem 'thor'
-gem 'foodcritic'
-gem 'rubocop'
-gem 'travis'
-gem 'chef'
+gem 'thor', '~> 0.20.0'
+gem 'rubocop', '~> 0.55.0'
+gem 'travis', '~> 1.8', '>= 1.8.8'
+gem 'foodcritic', '~> 13.1', '>= 13.1.1'
 # For printing fancy pass/fail message :)
-gem 'artii'
+gem 'artii', '~> 2.1', '>= 2.1.2'
