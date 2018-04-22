@@ -226,7 +226,7 @@ registry_key 'configure the taskbar' do
     # "Always show all icons and notifications on the taskbar"
     { name: 'EnableAutoTray',
       type: :dword,
-      data: 0 }
+      data: 0 },
   ]
   notifies :run, 'powershell_script[restart Windows Explorer]'
 end
@@ -246,7 +246,7 @@ registry_key 'configure Windows Explorer' do
     # But don't show OS files
     { name: 'ShowSuperHidden',
       type: :dword,
-      data: 0 }
+      data: 0 },
   ]
   notifies :run, 'powershell_script[restart Windows Explorer]'
 end
@@ -446,7 +446,7 @@ lambda do
                   'Slash Diablo',
                   'evnt.slashdiablo.net',
                   '1',
-                  'Slash Diablo Event'
+                  'Slash Diablo Event',
                 ] }]
     end
     registry_key 'choose Diablo II Battle.Net gateway' do

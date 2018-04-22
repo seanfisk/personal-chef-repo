@@ -86,9 +86,9 @@ default['macos_setup'].tap do |o|
             'partial' => true, # Take effect before next newline
             'parameter' => 'root@',
             'regex' => '^\w+:.+ root# ',
-            'action' => 'SetHostnameTrigger'
-          }
-        ]
+            'action' => 'SetHostnameTrigger',
+          },
+        ],
       },
       {
         'Guid' => '80B90042-691C-42B6-9943-A1924E86A41F',
@@ -98,7 +98,7 @@ default['macos_setup'].tap do |o|
         # Window
         i['bg_key'] => 'volcano.jpg',
         # Advanced
-        'Bound Hosts' => ['root@']
+        'Bound Hosts' => ['root@'],
       },
       {
         'Guid' => '3129170E-EE36-4E29-9528-008A8BAB7FB7',
@@ -111,7 +111,7 @@ default['macos_setup'].tap do |o|
         i['bg_key'] => 'gvsu.jpg',
         'Blend' => 0.35,
         # Advanced
-        'Bound Hosts' => [gvsu_dir]
+        'Bound Hosts' => [gvsu_dir],
       },
       {
         'Guid' => '4A0A1F6D-753F-4D35-B019-F63C3144CC99',
@@ -120,8 +120,8 @@ default['macos_setup'].tap do |o|
         'Name' => 'Presenter Mode',
         # Text
         'Normal Font' => presenter_font,
-        'Non Ascii Font' => presenter_font
-      }
+        'Non Ascii Font' => presenter_font,
+      },
     ]
     system_bg_names = { [10, 10] => 'Yosemite 4', [10, 11] => 'El Capitan 2' }
     major_minor = node['platform_version'].split('.')[0..1].map(&:to_i)
@@ -133,7 +133,7 @@ default['macos_setup'].tap do |o|
         'Name' => 'System',
         # Window
         i['bg_key'] => '/Library/Desktop Pictures/' \
-          "#{system_bg_names[major_minor]}.jpg"
+          "#{system_bg_names[major_minor]}.jpg",
       }
       i['default_profile_guid'] = system_profile_guid
     end
@@ -255,7 +255,7 @@ default['homebrew']['formulas'] = (
     'fortune',
     'ponysay',
     'sl',
-    'toilet'
+    'toilet',
   ] + node['macos_setup'].fetch('extra_formulas', [])).sort
 
 ###############################################################################
@@ -353,7 +353,7 @@ default['homebrew']['casks'] = (
     'virtualbox',
     # This also has a formula, but we install via cask because the formula
     # requires extra work (things need to be accessed as root).
-    'wireshark'
+    'wireshark',
   ] + node['macos_setup'].fetch('extra_casks', [])
 ).sort + [
   # Do not sort these because they must be installed in order :|
@@ -361,7 +361,7 @@ default['homebrew']['casks'] = (
   'osxfuse',
   # This cask already applies the fix as shown here:
   # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
-  'macfusion'
+  'macfusion',
 ]
 
 lastpass_cmd_shift_key = '1179914'
@@ -372,7 +372,7 @@ default['mac_os_x']['settings'] = {
     'domain' => 'com.apple.menuextra.clock',
     'DateFormat' => 'EEE MMM d  H:mm',
     'FlashDateSeparators' => false,
-    'IsAnalog' => false
+    'IsAnalog' => false,
   },
   # Start the character viewer in docked mode. The large window mode doesn't
   # take focus automatically, and can't AFAIK be focused with any keyboard
@@ -381,13 +381,13 @@ default['mac_os_x']['settings'] = {
   # is perfect for keyboard users like myself.
   'character_viewer' => {
     'domain' => 'com.apple.CharacterPaletteIM',
-    'CVStartAsLargeWindow' => false
+    'CVStartAsLargeWindow' => false,
   },
   'messages' => {
     'domain' => 'com.apple.iChat',
     'AddressMeInGroupchat' => true, # Notify me when my name is mentioned
     # Save history when conversations are closed
-    'SaveConversationsOnClose' => true
+    'SaveConversationsOnClose' => true,
   },
   # Third-party apps
   'atext' => {
@@ -395,13 +395,13 @@ default['mac_os_x']['settings'] = {
     # Most of aText's settings are [presumably] stored in a giant data blob.
     # XXX These settings are dubiously applied.
     'PlayFeedbackSound' => false,
-    'ShowDockIcon' => false
+    'ShowDockIcon' => false,
   },
   'caffeine' => {
     'domain' => 'com.lightheadsw.caffeine',
     'ActivateOnLaunch' => true, # Turn on Caffeine when the app is started.
     'DefaultDuration' => 0, # Activate indefinitely
-    'SuppressLaunchMessage' => true
+    'SuppressLaunchMessage' => true,
   },
   'cathode' => {
     'domain' => 'com.secretgeometry.Cathode',
@@ -413,7 +413,7 @@ default['mac_os_x']['settings'] = {
     'RenderingQuality' => 3, # High
     'UseColorPalette' => true,
     'UseOptionAsMeta' => true,
-    'UseSounds' => false
+    'UseSounds' => false,
   },
   'deeper' => {
     'domain' => 'com.titanium.Deeper',
@@ -423,7 +423,7 @@ default['mac_os_x']['settings'] = {
     'DrawerEffect' => true,
     'Licence' => false, # Don't show the license at startup
     'OpenLog' => false,
-    'ShowHelp' => false
+    'ShowHelp' => false,
   },
   'gfxcardstatus' => {
     'domain' => 'com.codykrieger.gfxCardStatus-Preferences',
@@ -464,7 +464,7 @@ default['mac_os_x']['settings'] = {
     'Hotkey' => true,
     'HotkeyChar' => 59,
     'HotkeyCode' => 41,
-    'HotkeyModifiers' => 1_048_840
+    'HotkeyModifiers' => 1_048_840,
   },
   'jettison' => {
     'domain' => 'com.stclairsoft.Jettison',
@@ -482,7 +482,7 @@ default['mac_os_x']['settings'] = {
     'playSoundOnSuccess' => false,
     'showRemountProgress' => false,
     'statusItemEnabled' => true,
-    'toggleMassStorageDriver' => false
+    'toggleMassStorageDriver' => false,
   },
   'lastpass' => {
     'domain' => 'com.lastpass.LastPass',
@@ -495,7 +495,7 @@ default['mac_os_x']['settings'] = {
     'global_SearchHotKeyVK' => '37',
     # Cmd-Shift-V
     'global_VaultHotKeyMod' => lastpass_cmd_shift_key,
-    'global_VaultHotKeyVK' => '9'
+    'global_VaultHotKeyVK' => '9',
   },
   'tasks_explorer' => {
     'domain' => 'com.macosinternals.Tasks-Explorer',
@@ -512,7 +512,7 @@ default['mac_os_x']['settings'] = {
     # 3: Manual
     #
     # The default is Always, which quickly burns up the Evernote upload quota.
-    'auto_save_selector' => 3
+    'auto_save_selector' => 3,
   },
   'xquartz' => {
     'domain' => 'org.macosforge.xquartz.X11',
@@ -601,23 +601,23 @@ default['mac_os_x']['settings'] = {
     ## Enable spring loading for directories
     'com.apple.springing.enabled' => true,
     # Remove the spring loading delay for directories
-    'com.apple.springing.delay' => 0
+    'com.apple.springing.delay' => 0,
   },
   # Automatically quit printer app once the print jobs complete
   'print' => {
     'domain' => 'com.apple.print.PrintingPrefs',
-    'Quit When Finished' => true
+    'Quit When Finished' => true,
   },
   # Set Help Viewer windows to non-floating mode
   'helpviewer' => {
     'domain' => 'com.apple.helpviewer',
-    'DevMode' => true
+    'DevMode' => true,
   },
   # Reveal IP address, hostname, OS version, etc. when clicking the clock in the
   # login window
   'loginwindow' => {
     'domain' => '/Library/Preferences/com.apple.loginwindow',
-    'AdminHostInfo' => 'HostName'
+    'AdminHostInfo' => 'HostName',
   },
   # More Finder tweaks
   # Note: Quitting Finder will also hide desktop icons.
@@ -645,17 +645,17 @@ default['mac_os_x']['settings'] = {
     'FXEnableExtensionChangeWarning' => false,
     # Use list view in all Finder windows by default
     # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-    'FXPreferredViewStyle' => 'Nlsv'
+    'FXPreferredViewStyle' => 'Nlsv',
   },
   # Avoid creating .DS_Store files on network
   'desktopservices' => {
     'domain' => 'com.apple.desktopservices',
-    'DSDontWriteNetworkStores' => true
+    'DSDontWriteNetworkStores' => true,
   },
   'networkbrowser' => {
     'domain' => 'com.apple.NetworkBrowser',
     # Enable AirDrop over Ethernet and on unsupported Macs running Lion
-    'BrowseAllInterfaces' => true
+    'BrowseAllInterfaces' => true,
   },
   'dock' => {
     'domain' => 'com.apple.dock',
@@ -666,13 +666,13 @@ default['mac_os_x']['settings'] = {
     # Automatically hide and show the Dock
     'autohide' => true,
     # Make Dock icons of hidden applications translucent
-    'showhidden' => true
+    'showhidden' => true,
   },
   'timemachine' => {
     'domain' => 'com.apple.TimeMachine',
     # Prevent Time Machine from prompting to use new hard drives as backup
     # volume
-    'DoNotOfferNewDisksForBackup' => true
+    'DoNotOfferNewDisksForBackup' => true,
   },
   'textedit' => {
     # Use plain text mode for new TextEdit documents
@@ -680,14 +680,14 @@ default['mac_os_x']['settings'] = {
     'RichText' => 0,
     # Open and save files as UTF-8 in TextEdit
     'PlainTextEncoding' => 4,
-    'PlainTextEncodingForWrite' => 4
+    'PlainTextEncodingForWrite' => 4,
   },
   'diskutil' => {
     'domain' => 'com.apple.DiskUtility',
     # Enable the debug menu in Disk Utility
     'DUDebugMenuEnabled' => true,
     # enable the advanced image menu in Disk Utility
-    'advanced-image-options' => true
+    'advanced-image-options' => true,
   },
   'universalaccess' => {
     'domain' => 'com.apple.universalaccess',
@@ -727,6 +727,6 @@ default['mac_os_x']['settings'] = {
     ###     1. Stationary
     ###     2. Follow mouse cursor
     ###     3. Tiled along edge
-    'closeViewWindowMode' => 1
-  }
+    'closeViewWindowMode' => 1,
+  },
 }.sort.to_h

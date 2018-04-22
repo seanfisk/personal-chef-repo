@@ -7,7 +7,7 @@ load extra: %w(selectstar_postgresql)
 default['macos_setup']['ruby_manager'] = 'rvm'
 default['macos_setup']['extra_formulas'] = [
   'aws-shell',
-  'pgcli'
+  'pgcli',
 ]
 default['macos_setup']['extra_casks'] = [
   'dbeaver-enterprise',
@@ -24,7 +24,7 @@ default['macos_setup']['extra_casks'] = [
   'java7', # Used for compiling data providers per Ex Uno tenets
   'jd-gui', # Java decompiler
   'slack',
-  'vmware-remote-console'
+  'vmware-remote-console',
 ]
 default['macos_setup']['extra_login_items'] =
   %w(Dash Emacs FirefoxDeveloperEdition Slack)

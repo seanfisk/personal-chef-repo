@@ -113,7 +113,7 @@ if node['macos_setup']['ruby_manager'] == 'rvm'
         'ruby-2.2.1', # Current front-end
         'ruby-2.2.5', # Current collector (and hopefully future front-end)
         'jruby'       # Data providers
-      ] }
+      ] },
   ]
   include_recipe 'rvm::user'
 else
@@ -137,7 +137,7 @@ else
     # https://github.com/maljub01/rbenv-bundle-exec#similar-plugins
     'rbenv-bundle-exec',
     'rbenv-communal-gems',
-    'rbenv-default-gems'
+    'rbenv-default-gems',
   ]
 end
 

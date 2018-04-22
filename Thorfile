@@ -3,7 +3,7 @@
 require 'pathname'
 require 'English'
 require 'foodcritic'
-require 'rubocop'
+require 'cookstyle'
 # 'travis lint' can be called as a subprocess, but calling it from Ruby is
 # preferable because it is cleaner and avoids loading the entire travis gem.
 require 'travis/cli/lint'
@@ -115,8 +115,8 @@ end
 class Test < Thor
   include Policy
 
-  desc 'rubocop', 'Run rubocop on all Ruby files'
-  def rubocop(exit = true)
+  desc 'style', 'Run Cookstyle on all Ruby files'
+  def style(exit = true)
     # Pass in a list of files/directories because we don't want the bin/
     # directory, other Foodcritic rules, etc., being checked.
     result = RuboCop::CLI.new.run %W(
@@ -124,7 +124,7 @@ class Test < Thor
     ) + (Pathname.new('config').children.map do |platform_dir|
       (platform_dir + 'client.rb.sample').to_s
     end).to_a
-    puts Rainbow('No rubocop errors').green if result.zero?
+    puts Rainbow('No Cookstyle errors').green if result == 0
     exit result if exit
     result
   end
@@ -141,7 +141,7 @@ class Test < Thor
         # XXX This is disabled due to binary data (\x00) in our windows_setup
         # cookbook incorrectly being flagged as an unnecessary use of double
         # quotes. We should fix this upstream.
-        '~CINK002'
+        '~CINK002',
       ]
     )
 
@@ -176,10 +176,10 @@ class Test < Thor
   desc 'all', 'Run all tests on the repository'
   def all
     # Pass false as an argument to prevent the task from exiting.
-    sum = %w(rubocop foodcritic travis)
+    sum = %w(style foodcritic travis)
           .map { |task| invoke("test:#{task}", [false]) }
           .reduce(:+)
-    message, color = sum.zero? ? ['PASS', :green] : ['FAIL', :red]
+    message, color = sum == 0 ? ['PASS', :green] : ['FAIL', :red]
     artii = Artii::Base.new font: 'block'
     # artii adds two blank lines after the block text; we just want one.
     puts Rainbow(artii.asciify(message).rstrip + "\n").color(color)
