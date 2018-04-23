@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
 #
-# Cookbook Name:: macos_setup
+# Cookbook:: macos_setup
 # Recipe:: default
 #
-# Author:: Sean Fisk <sean@seanfisk.com>
-# Copyright:: Copyright (c) 2013, Sean Fisk
-# License:: Apache License, Version 2.0
+# Copyright:: 2018, Sean Fisk
 #
 # Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
@@ -18,7 +15,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 require 'etc'
 require 'uri'

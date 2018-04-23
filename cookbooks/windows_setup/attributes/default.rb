@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 #
-# Author:: Sean Fisk <sean@seanfisk.com>
-# Copyright:: Copyright (c) 2014, Sean Fisk
-# License:: Apache License, Version 2.0
+# Cookbook:: windows_setup
+# Attributes:: default
+#
+# Copyright:: 2018, Sean Fisk
 #
 # Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 default['windows_setup'].tap do |w|
   # Arguments used to run a batch PowerShell command

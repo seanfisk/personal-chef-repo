@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
 #
-# Cookbook Name:: windows_setup
+# Cookbook:: windows_setup
 # Recipe:: default
 #
-# Author:: Sean Fisk <sean@seanfisk.com>
-# Copyright:: Copyright (c) 2014, Sean Fisk
-# License:: Apache License, Version 2.0
+# Copyright:: 2018, Sean Fisk
 #
 # Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
@@ -18,7 +15,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 # NOTE: powershell_script doesn't support the 'command' attribute. Argh...!
 
@@ -395,7 +391,7 @@ end
 # PowerShell. In this way, Emacs is run with all of our profile variables
 # defined.
 windows_shortcut 'create Emacs desktop shortcut' do
-  name "#{node['windows_setup']['desktop_dir']}\\Emacs.lnk"
+  shortcut_name "#{node['windows_setup']['desktop_dir']}\\Emacs.lnk"
   target 'powershell'
   # Even with -WindowStyle Hidden, the command window shows up for a split
   # second. The other options are to wrap it in a C# or VbScript application,

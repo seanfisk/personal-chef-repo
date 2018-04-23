@@ -10,12 +10,12 @@ This was made into a cookbook separate from `macos_setup` because MacTeX is a la
 For example, you could use `aria2` to download MacTeX through the torrent network:
 ```bash
 cd ~/Downloads
-aria2c http://www.tug.org/mactex/mactex2013.pkg.torrent
+aria2c http://www.tug.org/mactex/mactex-20170524.pkg.torrent
 ```
 
 Then move it into Chef's cache:
 ```bash
-mv ~/Downloads/mactex20130618.pkg ~/.chef/cache/MacTeX.pkg
+mv ~/Downloads/mactex-20170524.pkg ~/.chef/cache/MacTeX.pkg
 ```
 
 [mactex]: http://tug.org/mactex/downloading.html
@@ -23,19 +23,9 @@ mv ~/Downloads/mactex20130618.pkg ~/.chef/cache/MacTeX.pkg
 Requirements
 ------------
 
-Only works on macOS. Tested on OS 10.9 Mavericks.
+Only works on macOS. Tested on OS X 10.11 El Capitan.
 
 Usage
 -----
-#### mactex::default
 
-Just include `mactex` in your node's `run_list` to install:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[mactex]"
-  ]
-}
-```
+Just include `mactex` in your node's `run_list` to install.

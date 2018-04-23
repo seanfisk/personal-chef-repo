@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 #
-# Cookbook Name:: fasd_iterm2
+# Cookbook:: fasd_iterm2
 # Recipe:: default
 #
-# Copyright 2016 Sean Fisk
+# Copyright:: 2018, Sean Fisk
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
