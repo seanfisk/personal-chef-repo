@@ -1,29 +1,22 @@
 {
-  "revision_id": "8a7bc9db070fe5a2bdc1db6668b1ccad4ee7b57d1e051b0e455f58a774528792",
+  "revision_id": "1235802b000eda25fceb3d92d756f6b8c97c9bde08a1a4176c87ba59a169835e",
   "name": "personal",
   "run_list": [
     "recipe[windows_setup::default]"
   ],
+  "included_policy_locks": [
+
+  ],
   "cookbook_locks": {
-    "windows_setup": {
-      "version": "0.1.0",
-      "identifier": "fafcd9d98e0daef48331921c1fc6891fea595d61",
-      "dotted_decimal_identifier": "70646756765732270.68824143245352902.150770168716641",
-      "source": "../../cookbooks/windows_setup",
-      "cache_key": null,
-      "scm_info": {
-        "scm": "git",
-        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "b11b6cf1e4528260a5e26ba94833780d15efebd9",
-        "working_tree_clean": false,
-        "published": true,
-        "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/master"
-        ]
-      },
+    "chef_handler": {
+      "version": "3.0.3",
+      "identifier": "4d1b0688e8699097d2e921a3271b2667dc8ffcde",
+      "dotted_decimal_identifier": "21703288087406992.42734620216862491.42227523910878",
+      "cache_key": "chef_handler-3.0.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/3.0.3/download",
       "source_options": {
-        "path": "../../cookbooks/windows_setup"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/3.0.3/download",
+        "version": "3.0.3"
       }
     },
     "chocolatey": {
@@ -48,15 +41,24 @@
         "version": "1.43.0"
       }
     },
-    "chef_handler": {
-      "version": "3.0.2",
-      "identifier": "60cbc4e26770cf157c9f5ec71c0abfdeb79784e5",
-      "dotted_decimal_identifier": "27245644236681423.6047998442675210.210963283805413",
-      "cache_key": "chef_handler-3.0.2-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/3.0.2/download",
+    "windows_setup": {
+      "version": "0.1.0",
+      "identifier": "6fd56511932352e08773a5b207a2898231a9954e",
+      "dotted_decimal_identifier": "31478352478151506.63199325554083746.151192271951182",
+      "source": "../../cookbooks/windows_setup",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": null,
+        "revision": "75c124b5f6da2f0bedb5627d73d32fc53ac631c2",
+        "working_tree_clean": false,
+        "published": false,
+        "synchronized_remote_branches": [
+
+        ]
+      },
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_handler/versions/3.0.2/download",
-        "version": "3.0.2"
+        "path": "../../cookbooks/windows_setup"
       }
     }
   },
@@ -69,8 +71,8 @@
   "solution_dependencies": {
     "Policyfile": [
       [
-        "windows_setup",
-        "= 0.1.0"
+        "chef_handler",
+        "= 3.0.3"
       ],
       [
         "chocolatey",
@@ -81,20 +83,13 @@
         "= 1.43.0"
       ],
       [
-        "chef_handler",
-        "= 3.0.2"
+        "windows_setup",
+        "= 0.1.0"
       ]
     ],
     "dependencies": {
-      "windows_setup (0.1.0)": [
-        [
-          "chocolatey",
-          "~> 1.0.0"
-        ],
-        [
-          "windows",
-          "~> 1.43.0"
-        ]
+      "chef_handler (3.0.3)": [
+
       ],
       "chocolatey (1.0.3)": [
         [
@@ -108,8 +103,15 @@
           ">= 0.0.0"
         ]
       ],
-      "chef_handler (3.0.2)": [
-
+      "windows_setup (0.1.0)": [
+        [
+          "chocolatey",
+          "~> 1.0.0"
+        ],
+        [
+          "windows",
+          "~> 1.43.0"
+        ]
       ]
     }
   }

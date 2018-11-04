@@ -18,8 +18,11 @@ module Subprocess
     Bundler.with_clean_env do
       env = opts.fetch(:env, {})
       opts.delete(:env)
+      chdir = opts[:chdir]
       # Force Ruby to not use a shell by using the argv[0]-setting syntax
-      puts Rainbow('==> ').bright.blue + Rainbow(cmd.inspect).bright
+      puts Rainbow('==> ').bright.blue + Rainbow(cmd.inspect).bright + (
+             chdir ? Rainbow(" (cwd: #{chdir.inspect})").bright.green : ''
+      )
       unless system(env, [cmd[0], cmd[0]], *cmd[1..-1], **opts)
         status = $CHILD_STATUS.exitstatus
         $stderr.puts 'Command failed with non-zero '\
@@ -104,9 +107,17 @@ class Repo < Thor
 
       # The last two options make the client behave as if it was sending output
       # to a TTY.
-      run_subprocess %w(chef-client --local-mode --format doc --log_level warn),
-                     chdir: export_dir,
-                     env: { 'PWD' => export_dir }
+      run_subprocess(
+        %w(sudo chef-client --local-mode --format doc --log_level warn),
+        chdir: export_dir,
+        env: { 'PWD' => export_dir }
+      )
+
+      # chef-client, when run as root, writes a couple directories which are
+      # then owned by root. When the Ruby process tries to delete it,
+      # permission is deined. Delete those directories via sudo here.
+      run_subprocess(%w(sudo rm -r .chef/local-mode-cache nodes),
+                     chdir: export_dir)
     end
   end
 end

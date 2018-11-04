@@ -8,10 +8,6 @@ description 'Setup my personal macOS operating system'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '0.1.0'
 supports 'mac_os_x'
-chef_version '>= 14.0'
+chef_version '~> 14'
 
-depends 'dmg', '~> 2.4.0'
-depends 'mac_os_x', '~> 1.4.6'
-depends 'homebrew', '~> 2.1.0'
-depends 'rvm', '~> 0.9.4'
-depends 'plist', '~> 0.9.3'
+depends 'homebrew', '~> 5.0.7'

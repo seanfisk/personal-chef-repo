@@ -23,10 +23,12 @@ git 'clone repo' do
   repository node['fasd_iterm2']['repo_url']
   destination node['fasd_iterm2']['repo_path']
   notifies :run, 'execute[installer]'
+  # Note: Must clone this as root as the temp directory is owned by root
 end
 
 execute 'installer' do
   command 'yes | ./install --num-dirs 500'
   cwd node['fasd_iterm2']['repo_path']
+  user node['fasd_iterm2']['user']
   action :nothing
 end

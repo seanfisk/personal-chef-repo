@@ -1,213 +1,74 @@
 {
-  "revision_id": "0f4ecef40187426b3fc3c3ead1dceb2351d1a9df2a18e435c25a3c8f64adcc24",
+  "revision_id": "e25bdf27488144a731c1525e4ffccb6f64d2df1f016edce9f84b3b78d0806262",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
-    "recipe[fasd_iterm2::default]",
-    "recipe[selectstar_postgresql::default]"
+    "recipe[fasd_iterm2::default]"
+  ],
+  "included_policy_locks": [
+
   ],
   "cookbook_locks": {
-    "macos_setup": {
-      "version": "0.1.0",
-      "identifier": "7fca0f0ac7ceb5cdd23bfeb585988ed80f0b86c8",
-      "dotted_decimal_identifier": "35969487996440245.57933525343896984.157058616493768",
-      "source": "../../cookbooks/macos_setup",
-      "cache_key": null,
-      "scm_info": {
-        "scm": "git",
-        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "56474d0a349486851333fb2cd3522c7d0094932c",
-        "working_tree_clean": false,
-        "published": true,
-        "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/master"
-        ]
-      },
-      "source_options": {
-        "path": "../../cookbooks/macos_setup"
-      }
-    },
     "fasd_iterm2": {
       "version": "0.1.0",
-      "identifier": "60d7de413de9bacb6ad99158674f40677182bded",
-      "dotted_decimal_identifier": "27258947341511098.57256902951200591.70813030202861",
+      "identifier": "01ff99be0f7e9202b108722fdc3ba98348037e31",
+      "dotted_decimal_identifier": "562510760476306.757599787015227.186381313998385",
       "source": "../../cookbooks/fasd_iterm2",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "56474d0a349486851333fb2cd3522c7d0094932c",
+        "remote": null,
+        "revision": "f4ef45908fbcb9f58e513cd59355fbc72f19aeca",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/master"
+
         ]
       },
       "source_options": {
         "path": "../../cookbooks/fasd_iterm2"
       }
     },
-    "selectstar_postgresql": {
+    "homebrew": {
+      "version": "5.0.8",
+      "identifier": "072611ae06a863c842644c85bf776ffe18f59b0a",
+      "dotted_decimal_identifier": "2012182212946019.56367993890127735.123137131125514",
+      "cache_key": "homebrew-5.0.8-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/homebrew/versions/5.0.8/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/homebrew/versions/5.0.8/download",
+        "version": "5.0.8"
+      }
+    },
+    "macos_setup": {
       "version": "0.1.0",
-      "identifier": "d942e7598c432e255db54763c168c2e7f2f73a48",
-      "dotted_decimal_identifier": "61153631353455406.10517607306477928.214301469522504",
-      "source": "../../cookbooks/selectstar_postgresql",
+      "identifier": "d62a746099f0f996a7d216ae15787ed3cc7296f4",
+      "dotted_decimal_identifier": "60282324341354745.42405767272076664.139448133261044",
+      "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "56474d0a349486851333fb2cd3522c7d0094932c",
+        "remote": null,
+        "revision": "f4ef45908fbcb9f58e513cd59355fbc72f19aeca",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/master"
+
         ]
       },
       "source_options": {
-        "path": "../../cookbooks/selectstar_postgresql"
-      }
-    },
-    "homebrew": {
-      "version": "2.1.0",
-      "identifier": "6fd7eea4fb692fb454e4514630d170bfc56a599a",
-      "dotted_decimal_identifier": "31481142385010991.50758835400749265.123968953145754",
-      "cache_key": "homebrew-87a4a2f2a012128e6ca95197744ee571a31a577e",
-      "origin": "git://github.com/chef-cookbooks/homebrew.git",
-      "source_options": {
-        "git": "git://github.com/chef-cookbooks/homebrew.git",
-        "revision": "87a4a2f2a012128e6ca95197744ee571a31a577e",
-        "branch": "87a4a2f2a012128e6ca95197744ee571a31a577e"
-      }
-    },
-    "dmg": {
-      "version": "2.4.0",
-      "identifier": "18ecc45e6cfba70985620d8f2358d63c34845f01",
-      "dotted_decimal_identifier": "7015727583001511.2679930971169624.235554067472129",
-      "cache_key": "dmg-2.4.0-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/dmg/versions/2.4.0/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/dmg/versions/2.4.0/download",
-        "version": "2.4.0"
-      }
-    },
-    "mac_os_x": {
-      "version": "1.4.6",
-      "identifier": "b03f43d2291ec389a920bd1e6783738de9d11621",
-      "dotted_decimal_identifier": "49609156422344387.38748029886293891.127053350376993",
-      "cache_key": "mac_os_x-1.4.6-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mac_os_x/versions/1.4.6/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mac_os_x/versions/1.4.6/download",
-        "version": "1.4.6"
-      }
-    },
-    "rvm": {
-      "version": "0.9.4",
-      "identifier": "df8fd3aacb7d9c52ddbc3f6ee6f24afac9f7dbaf",
-      "dotted_decimal_identifier": "62927059072810396.23324748678096626.82440990743471",
-      "cache_key": "rvm-0.9.4-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/rvm/versions/0.9.4/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/rvm/versions/0.9.4/download",
-        "version": "0.9.4"
-      }
-    },
-    "plist": {
-      "version": "0.9.3",
-      "identifier": "02fdfdf2a72bbc0f67bb397a31ea63d4d7ab9198",
-      "dotted_decimal_identifier": "842217093016508.4336178471514602.109765802561944",
-      "cache_key": "plist-0.9.3-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/plist/versions/0.9.3/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/plist/versions/0.9.3/download",
-        "version": "0.9.3"
-      }
-    },
-    "build-essential": {
-      "version": "8.0.4",
-      "identifier": "ff5d8e233f21749e21fca7d25443e2ede19fd3bf",
-      "dotted_decimal_identifier": "71878984119296372.44510415351338051.249511320474559",
-      "cache_key": "build-essential-8.0.4-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.0.4/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.0.4/download",
-        "version": "8.0.4"
-      }
-    },
-    "chef_gem": {
-      "version": "0.1.0",
-      "identifier": "17d9d6fdd67839066cf7ebed0c7c23134b7783b0",
-      "dotted_decimal_identifier": "6713441869264953.1808661931166844.38565777474480",
-      "cache_key": "chef_gem-0.1.0-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_gem/versions/0.1.0/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef_gem/versions/0.1.0/download",
-        "version": "0.1.0"
-      }
-    },
-    "seven_zip": {
-      "version": "2.0.2",
-      "identifier": "8e6795446cfa8e0a4a09cef4d5d35eb2d522a24d",
-      "dotted_decimal_identifier": "40083337488693902.2896155754419667.104122173006413",
-      "cache_key": "seven_zip-2.0.2-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.2/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/2.0.2/download",
-        "version": "2.0.2"
-      }
-    },
-    "mingw": {
-      "version": "2.0.1",
-      "identifier": "9d203e2036b6d20a161e9649f1bc1e3fb2a4ff85",
-      "dotted_decimal_identifier": "44227022544090834.2839070393364924.33258928930693",
-      "cache_key": "mingw-2.0.1-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mingw/versions/2.0.1/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mingw/versions/2.0.1/download",
-        "version": "2.0.1"
-      }
-    },
-    "windows": {
-      "version": "3.4.1",
-      "identifier": "bde47124340faa8028ec0288909c33166ca58939",
-      "dotted_decimal_identifier": "53449945188143018.36073791138861212.56171405084985",
-      "cache_key": "windows-3.4.1-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.4.1/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/3.4.1/download",
-        "version": "3.4.1"
-      }
-    },
-    "ohai": {
-      "version": "5.2.0",
-      "identifier": "31667e457ea2295ec2c43d24708b5b3edaea387e",
-      "dotted_decimal_identifier": "13904966376661545.26672795905978507.100325518882942",
-      "cache_key": "ohai-5.2.0-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.2.0/download",
-      "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.2.0/download",
-        "version": "5.2.0"
+        "path": "../../cookbooks/macos_setup"
       }
     }
   },
   "default_attributes": {
     "macos_setup": {
       "ruby_manager": "rvm",
-      "extra_formulas": [
-        "aws-shell",
-        "pgcli"
-      ],
       "extra_casks": [
-        "dbeaver-enterprise",
-        "docker",
-        "eclipse-ide",
         "firefoxdeveloperedition",
-        "intellij-idea-ce",
-        "java7",
+        "intellij-idea",
         "jd-gui",
+        "jetbrains-toolbox",
         "slack",
         "vmware-remote-console"
       ],
@@ -225,148 +86,33 @@
   "solution_dependencies": {
     "Policyfile": [
       [
-        "macos_setup",
-        "= 0.1.0"
-      ],
-      [
         "fasd_iterm2",
         "= 0.1.0"
       ],
       [
-        "selectstar_postgresql",
-        "= 0.1.0"
-      ],
-      [
         "homebrew",
-        ">= 0.0.0"
+        "= 5.0.8"
       ],
       [
-        "dmg",
-        "= 2.4.0"
-      ],
-      [
-        "mac_os_x",
-        "= 1.4.6"
-      ],
-      [
-        "rvm",
-        "= 0.9.4"
-      ],
-      [
-        "plist",
-        "= 0.9.3"
-      ],
-      [
-        "build-essential",
-        "= 8.0.4"
-      ],
-      [
-        "chef_gem",
+        "macos_setup",
         "= 0.1.0"
-      ],
-      [
-        "seven_zip",
-        "= 2.0.2"
-      ],
-      [
-        "mingw",
-        "= 2.0.1"
-      ],
-      [
-        "windows",
-        "= 3.4.1"
-      ],
-      [
-        "ohai",
-        "= 5.2.0"
       ]
     ],
     "dependencies": {
-      "macos_setup (0.1.0)": [
-        [
-          "dmg",
-          "~> 2.4.0"
-        ],
-        [
-          "mac_os_x",
-          "~> 1.4.6"
-        ],
-        [
-          "homebrew",
-          "~> 2.1.0"
-        ],
-        [
-          "rvm",
-          "~> 0.9.4"
-        ],
-        [
-          "plist",
-          "~> 0.9.3"
-        ]
-      ],
       "fasd_iterm2 (0.1.0)": [
         [
           "homebrew",
           ">= 0.0.0"
         ]
       ],
-      "selectstar_postgresql (0.1.0)": [
+      "homebrew (5.0.8)": [
 
       ],
-      "homebrew (2.1.0)": [
+      "macos_setup (0.1.0)": [
         [
-          "build-essential",
-          ">= 2.1.2"
+          "homebrew",
+          "~> 5.0.7"
         ]
-      ],
-      "dmg (2.4.0)": [
-
-      ],
-      "mac_os_x (1.4.6)": [
-
-      ],
-      "rvm (0.9.4)": [
-        [
-          "chef_gem",
-          ">= 0.0.0"
-        ]
-      ],
-      "plist (0.9.3)": [
-
-      ],
-      "build-essential (8.0.4)": [
-        [
-          "seven_zip",
-          ">= 0.0.0"
-        ],
-        [
-          "mingw",
-          ">= 1.1.0"
-        ]
-      ],
-      "chef_gem (0.1.0)": [
-
-      ],
-      "seven_zip (2.0.2)": [
-        [
-          "windows",
-          ">= 1.2.2"
-        ]
-      ],
-      "mingw (2.0.1)": [
-        [
-          "seven_zip",
-          ">= 0.0.0"
-        ]
-      ],
-      "windows (3.4.1)": [
-        [
-          "ohai",
-          ">= 4.0.0"
-        ]
-      ],
-      "ohai (5.2.0)": [
-
       ]
     }
   }

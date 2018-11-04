@@ -37,28 +37,26 @@ default['windows_setup'].tap do |w|
     'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer'
   w['time_zone'] = 'Eastern Standard Time'
 
-  w['packages'] = [
-    '7zip',
-    'ConEmu',
-    'Firefox',
-    'autohotkey',
-    'carbon',
-    # On macOS and GNU/Linux, we don't use the ChefDK. But it makes installation
-    # of a development environment very easy on Windows.
-    'chefdk',
-    'dependencywalker',
-    'flashplayerplugin',
-    'gimp',
-    'githubforwindows',
-    'nodejs',
-    'pscx',
-    'scite4autohotkey',
-    'sqlitebrowser',
-    'steam',
-    'switcheroo',
-    'sysinternals',
-    'wixtoolset',
-  ]
+  w['packages'] = %w(
+    7zip
+    ConEmu
+    Firefox
+    autohotkey
+    carbon
+    chefdk
+    dependencywalker
+    flashplayerplugin
+    gimp
+    githubforwindows
+    nodejs
+    pscx
+    scite4autohotkey
+    sqlitebrowser
+    steam
+    switcheroo
+    sysinternals
+    wixtoolset
+  )
 
   w['chocolatey']['features'] = %w(
     checksumFiles

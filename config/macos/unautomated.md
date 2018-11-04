@@ -25,12 +25,6 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 
   This is licensed software that is installed using Homebrew Cask. I purchased a license that has to be manually activated.
 
-* Sophos Anti-Virus
-
-  Preferences are scattered over a couple places. Some are in user defaults, and some are in `~/Library/Application Support/Sophos Anti-Virus`, and some are elsewhere. Most of them I didn't find, but I honestly didn't look really hard. We've just left the preferences unautomated for now.
-
-  Start at login uses custom workflow and is therefore not automated.
-
 * Wunderlist
 
   Installed from the Mac App Store; helper start at login uses custom workflow and is therefore not automated.
@@ -51,21 +45,9 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 
   This is a little overkill. It's nice to automate, but I change these from time to time manually, and that would be just one more thing to change every time.
 
-* GVSU's VPN (Network Connect)
-
-  This comes from GVSU, and the versions need to remain consistent.
-
 * Xcode
 
   Installs using the Mac App Store. With Homebrew and normal C++ compiles, we can get along with just the Command-Line Tools. However, to compile Mac applications using Qt, we need the full Xcode installation.
-
-* Qt 5
-
-  This is installed using an application installer (an app bundle in the DMG which installs Qt), and is therefore hard to automate.
-
-* Microsoft DreamSpark's Secure Download Manager
-
-  This is just installed because it was needed. Should probably uninstall when not needed anymore.
 
 * LastPass
 
@@ -80,7 +62,3 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 * Karabiner
 
   This does not start up properly when using the launch agent approach, so we just use native startup support through the app itself.
-
-* Xerox WorkCenter 5755 Printer Drivers
-
-  For advanced use of GVSU's printers.

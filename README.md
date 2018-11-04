@@ -62,15 +62,11 @@ Be careful, because after re-generating, all nodes must be updated to use the ne
     brew update
     brew doctor
 
-Next, use [Homebrew Bundle][] to install a few development dependencies:
-
-    brew bundle --verbose
-
 ### Chef Development Kit
 
-The previous command installs the [Chef Development Kit][] (Chef DK), which includes many things we need in order to develop Chef cookbooks.
+Next, install the [Chef Development Kit][] (ChefDK) after downloading the correct version from [here](https://downloads.chef.io/chefdk#mac_os_x).
 
-Load the Chef DK environment by running the following command:
+Load the ChefDK environment by running the following command:
 
     source env.sh
 

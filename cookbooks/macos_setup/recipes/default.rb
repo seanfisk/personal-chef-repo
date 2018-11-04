@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Cookbook:: macos_setup
 # Recipe:: default
@@ -16,102 +17,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+Chef::Application.fatal!(
+  'This cookbook must be run as root!'
+) unless Process.uid == 0
+
 require 'etc'
-require 'uri'
 require 'json'
 require 'pathname'
 
-CURRENT_USER = Etc.getpwuid
-
-# Including this causes Homebrew to install if not already installed (needed
-# for the next section) and to run `brew update' if already installed.
+# Including this causes Homebrew to install if not already installed and to run
+# `brew update' if already installed.
 include_recipe 'homebrew'
-
-###############################################################################
-# SHELLS
-###############################################################################
-
-BREW_PREFIX = shell_out!('brew', '--prefix').stdout.rstrip
-
-# Add the latest bash and zsh as possible login shells.
-#
-# Unfortunately, these commands will cause password prompts, meaning
-# chef has to be watched. The "workaround" is to put them at the
-# beginning of the run.
-#
-# We also need to install the shells separately from the other Homebrew
-# packages because it needs to be available for changing the default shell. We
-# don't want to wait for all the other packages to be installed to see the
-# prompt, but we need the shell to be available before setting it as the
-# default.
-node['macos_setup']['shells'].each do |shell|
-  # Install the shell using Homebrew.
-  package shell do
-    action :install
-  end
-
-  shell_path = File.join(BREW_PREFIX, 'bin', shell)
-  # First, add shell to shells config file so it is recognized as a valid user
-  # shell.
-  execute "add #{shell_path} to #{node['macos_setup']['etc_shells']}" do
-    # Unfortunately, using a ruby_block does not work because there's no way
-    # that I know to execute it using sudo.
-    command ['sudo', 'bash', '-c',
-             "echo '#{shell_path}' >> '#{node['macos_setup']['etc_shells']}'"]
-    not_if do
-      # Don't execute if this shell is already in the shells config file. Open
-      # a new file each time to reset the enumerator, and just in case these
-      # are executed in parallel.
-      File.open(node['macos_setup']['etc_shells']).each_line.any? do |line|
-        line.include?(shell_path)
-      end
-    end
-  end
-end
-
-# Then, set zsh as the current user's shell.
-lambda do
-  path = File.join(BREW_PREFIX, 'bin', 'zsh')
-  execute "set #{path} as default shell" do
-    command %W(chsh -s #{path})
-    # getpwuid defaults to the current user, which is what we want.
-    not_if { CURRENT_USER.shell == path }
-  end
-end.call
-
-# Make sure to use the `execute' resource than the `bash' resource, otherwise
-# sudo cannot prompt for a password.
-execute 'fix the zsh startup file that path_helper uses' do
-  # macOS has a program called path_helper that allows paths to be easily set
-  # for multiple shells. For bash (and other shells), it works great because it
-  # is called /etc/profile which is executed only for login shells. However,
-  # with zsh, path_helper is run from /etc/zshenv *instead of* /etc/zprofile
-  # like it should be. This fixes Apple's mistake.
-  #
-  # See this link for more information:
-  # <https://github.com/sorin-ionescu/prezto/issues/381>
-  command %w(sudo mv /etc/zshenv /etc/zprofile)
-  only_if { File.exist?('/etc/zshenv') }
-end
 
 ###############################################################################
 # RUBY MANAGEMENT
 ###############################################################################
 
 if node['macos_setup']['ruby_manager'] == 'rvm'
-  # Use RVM if requested
-  default_ruby = 'ruby-2.3.1'
-  node.default['rvm']['user_installs'] = [
-    { 'user' => CURRENT_USER.name,
-      'default_ruby' => default_ruby,
-      'rubies' => [
-        default_ruby, # Regular development
-        'ruby-2.2.1', # Current front-end
-        'ruby-2.2.5', # Current collector (and hopefully future front-end)
-        'jruby'       # Data providers
-      ] },
-  ]
-  include_recipe 'rvm::user'
+  Chef::Log.warn('Automated RVM installation is no longer supported due to ' \
+                 "the RVM cookbook's lack of maintenance")
 else
   # Use rbenv by default
   node.default['homebrew']['formulas'] += [
@@ -152,34 +76,8 @@ end
 
 # LastPass command-line interface
 package 'lastpass-cli' do
-  # This option fails for now. I don't use it often enough to try to fix it.
-  # - https://github.com/Homebrew/homebrew-core/issues/4383
-  # - https://github.com/Homebrew/homebrew-core/issues/7888
-  #
-  # options '--with-pinentry'
+  options '--with-pinentry'
 end
-
-# mitmproxy with options
-#
-# There is a cask for this as well, but it is out-of-date. We also want to make
-# sure the extras are included.
-# XXX: This is broken as of 2016-04-14
-# package 'mitmproxy' do
-#   options '--with-cssutils --with-protobuf --with-pyamf'
-# end
-
-# Ettercap with IPv6 support, GTK+ GUI, and Ghostscript (for PDF docs)
-#
-# Note: Ettercap is crashing at this time on my Mac, so I've disabled it for
-# now. Hopefully there is a solution in the future.
-#
-# Note: When initially installing, I had a problem with this Ghostscript
-# conflicting with Ghostscript from MacTeX, I believe. I just overwrote it, but
-# this may be a problem again when installing fresh.
-#
-# package 'ettercap' do
-#   options '--with-ghostscript --with-gtk+ --with-ipv6'
-# end
 
 %w(taps formulas casks).each do |entity|
   include_recipe "homebrew::install_#{entity}"
@@ -191,6 +89,66 @@ homebrew_cask 'xquartz'
 # These formulae require XQuartz to be installed first
 package 'xclip'
 homebrew_cask 'inkscape'
+
+###############################################################################
+# SHELLS
+###############################################################################
+
+lambda do
+  brew_bin = Pathname.new(
+    shell_out!(
+      'brew', '--prefix', user: node['macos_setup']['user']
+    ).stdout.rstrip
+  ) + 'bin'
+  etc_shells_path = Pathname.new(node['macos_setup']['etc_shells'])
+
+  # Add the latest Bash and Zsh as possible login shells. Do this after
+  # Homebrew installation so that the shell executables are present.
+  node['macos_setup']['shells'].each do |shell|
+    shell_path = (brew_bin + shell).to_s
+    # First, add shell to shells config file so it is recognized as a valid
+    # user shell.
+    ruby_block "add #{shell_path} to #{node['macos_setup']['etc_shells']}" do
+      block do
+        etc_shells_path.open('a') do |f|
+          f << shell_path << "\n"
+        end
+      end
+      not_if do
+        # Don't execute if this shell is already in the shells config file.
+        # Open a new file each time to reset the enumerator, and just in case
+        # these are executed in parallel.
+        etc_shells_path.each_line.any? do |line|
+          line.include?(shell_path)
+        end
+      end
+    end
+  end
+
+  # Then, set Zsh as the standard user's shell.
+  lambda do
+    shell_path = brew_bin + 'zsh'
+    execute "set #{shell_path} as default shell" do
+      command %W(chsh -s #{shell_path} #{node['macos_setup']['user']})
+      not_if { Etc.getpwnam(node['macos_setup']['user']).shell == shell_path }
+    end
+  end.call
+end.call
+
+ruby_block 'fix the zsh startup file that path_helper uses' do
+  # macOS has a program called path_helper that allows paths to be easily set
+  # for multiple shells. For bash (and other shells), it works great because it
+  # is called /etc/profile which is executed only for login shells. However,
+  # with zsh, path_helper is run from /etc/zshenv *instead of* /etc/zprofile
+  # like it should be. This fixes Apple's mistake.
+  #
+  # See this link for more information:
+  # <https://github.com/sorin-ionescu/prezto/issues/381>
+  block do
+    File.rename('/etc/zshenv', '/etc/zprofile')
+  end
+  only_if { File.exist?('/etc/zshenv') }
+end
 
 ###############################################################################
 # CUSTOM INSTALLS
@@ -212,62 +170,27 @@ lambda do
   remote_file 'download Deep Sleep dashboard widget' do
     source 'https://github.com/downloads/code2k/Deep-Sleep.wdgt/' +
            archive_name
+    owner node['macos_setup']['user']
     checksum 'fa41a926d7c1b6566b074579bdd4c9bc969d348292597ac3064731326efc4207'
     path archive_path
     notifies :run, 'execute[install Deep Sleep dashboard widget]'
   end
 
-  directory install_dir
+  directory install_dir do
+    owner node['macos_setup']['user']
+  end
 
   execute 'install Deep Sleep dashboard widget' do
     command %W(unzip -o #{archive_path})
     cwd install_dir
+    user node['macos_setup']['user']
     action :nothing
   end
 end.call
 
-# Tasks Explorer, distributed as a pkg file not inside a DMG.
-#
-# All pkg ids installed:
-#
-#     com.macosinternals.tasksexplorer.Contents.pkg
-#     com.macosinternals.tasksexplorer.tasksexplorerd.pkg
-#     com.macosinternals.tasksexplorer.com.macosinternals.tasksexplorerd.pkg
-#
-# We only check for the first one, though.
-lambda do
-  is_installed = shell_out(
-    'pkgutil', '--pkg-info', 'com.macosinternals.tasksexplorer.Contents.pkg'
-  ).exitstatus == 0
-  pkg_path = "#{Chef::Config[:file_cache_path]}/Tasks Explorer.pkg"
-  # First, download the file.
-  remote_file 'download Tasks Explorer pkg' do
-    source 'https://github.com/astavonin/Tasks-Explorer/blob/master/release/' \
-           'Tasks%20Explorer.pkg?raw=true'
-    path pkg_path
-    checksum '8fa4fff39a6cdea368e0110905253d7fb9e26e36bbe053704330fe9f24f7db6a'
-    # Don't bother downloading the file if Tasks Explorer is already installed.
-    not_if { is_installed }
-  end
-  # Now install.
-  execute 'install Tasks Explorer' do
-    # With some help from:
-    # - https://github.com/opscode-cookbooks/dmg/blob/master/providers/package.rb
-    # - https://github.com/mattdbridges/chef-osx_pkg/blob/master/providers/package.rb
-    command %W(sudo installer -pkg #{pkg_path} -target /)
-    not_if { is_installed }
-  end
-end.call
-
-dmg_package 'Jettison' do
-  version = '1.5.2'
-  source "http://www.stclairsoft.com/download/Jettison-#{version}.dmg"
-  checksum 'c19cc4cc5a58f8694bcc0449e011aaeda5c383f07f32deb0fa4ba86684e337b3'
-  volumes_dir "Jettison #{version}"
-  action :install
+directory node['macos_setup']['fonts_dir'] do
+  owner node['macos_setup']['user']
 end
-
-directory node['macos_setup']['fonts_dir']
 
 # Ubuntu fonts
 lambda do
@@ -278,18 +201,22 @@ lambda do
 
   remote_file 'download Ubuntu fonts' do
     source "https://assets.ubuntu.com/v1/#{archive_name}"
+    owner node['macos_setup']['user']
     path archive_path
     checksum '456d7d42797febd0d7d4cf1b782a2e03680bb4a5ee43cc9d06bda172bac05b42'
     notifies :run, 'execute[install Ubuntu fonts]'
   end
 
-  directory install_dir
+  directory install_dir do
+    owner node['macos_setup']['user']
+  end
 
   execute 'install Ubuntu fonts' do
     # Enabled overwrite since this directory is being written to regardless of
     # the version.
     command %W(unzip -o #{archive_path})
     cwd install_dir
+    user node['macos_setup']['user']
     action :nothing
   end
 end.call
@@ -299,6 +226,7 @@ remote_file 'download Inconsolata font' do
   # just install the current version if it's not already installed.
   filename = 'Inconsolata.otf'
   source "http://levien.com/type/myfonts/#{URI.escape(filename)}"
+  owner node['macos_setup']['user']
   path "#{node['macos_setup']['fonts_dir']}/#{filename}"
 end
 
@@ -306,6 +234,7 @@ remote_file 'download Inconsolata for Powerline font' do
   filename = 'Inconsolata for Powerline.otf'
   source 'https://github.com/powerline/fonts/raw/master/Inconsolata/' +
          URI.escape(filename)
+  owner node['macos_setup']['user']
   path "#{node['macos_setup']['fonts_dir']}/#{filename}"
 end
 
@@ -313,22 +242,17 @@ end
 # PREFERENCES
 ###############################################################################
 
-# Password-protected screensaver + delay
-include_recipe 'mac_os_x::screensaver'
-
-# Turn on the macOS firewall.
-include_recipe 'mac_os_x::firewall'
-
-# Actually write all the settings using the 'defaults' command.
-include_recipe 'mac_os_x::settings'
-
-# Show percentage on battery indicator.
-#
-# Note: For some reason, Apple chose the value of ShowPercent to be 'YES' or
-# 'NO' as a string instead of using a Boolean. mac_os_x_userdefaults treats
-# 'YES' as a Boolean when reading, making it overwrite every time. For this
-# reason, we just write the plist.
-mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
+# Write preferences from attributes.
+node['macos_setup']['user_defaults'].each do |domain, defaults|
+  defaults.each do |key, value|
+    macos_userdefaults "#{domain}: set #{key} → #{value}" do
+      domain domain
+      key key
+      value value
+      user node['macos_setup']['user']
+    end
+  end
+end
 
 # iTerm2
 #
@@ -341,6 +265,7 @@ mac_os_x_plist_file 'com.apple.menuextra.battery.plist'
 directory 'create iTerm2 background images directory' do
   path node['macos_setup']['iterm2']['bgs_dir']
   recursive true
+  owner node['macos_setup']['user']
 end
 json_content = JSON.pretty_generate(
   Profiles: node['macos_setup']['iterm2']['profiles'].map do |profile|
@@ -359,7 +284,9 @@ json_content = JSON.pretty_generate(
   end
 )
 # Install dynamic profiles.
-directory node['macos_setup']['iterm2']['dynamic_profiles_dir']
+directory node['macos_setup']['iterm2']['dynamic_profiles_dir'] do
+  owner node['macos_setup']['user']
+end
 file 'install iTerm2 dynamic profiles' do
   # This file contains profiles used as parents by the iTerm2/fasd integration.
   # Since iTerm2 loads the list of dynamic profiles alphabetically, we prefix
@@ -367,15 +294,19 @@ file 'install iTerm2 dynamic profiles' do
   # https://iterm2.com/documentation-dynamic-profiles.html
   path node['macos_setup']['iterm2']['dynamic_profiles_dir'] + '/-Personal.json'
   content json_content
+  owner node['macos_setup']['user']
 end
 
 lambda do
   install_dir = node['macos_setup']['home'] +
                 '/Library/Application Support/Karabiner'
-  directory install_dir
+  directory install_dir do
+    owner node['macos_setup']['user']
+  end
   cookbook_file 'Karabiner XML settings file' do
     source 'Karabiner_private.xml'
     path "#{install_dir}/private.xml"
+    owner node['macos_setup']['user']
   end
 end.call
 
@@ -385,16 +316,17 @@ lambda do
   cookbook_file 'Quicksilver catalog preferences file' do
     source 'Quicksilver-Catalog.plist'
     path "#{install_dir}/Catalog.plist"
+    owner node['macos_setup']['user']
   end
 end.call
 
 cookbook_file 'Slate preferences file' do
   source 'slate.js'
   path "#{node['macos_setup']['home']}/.slate.js"
+  owner node['macos_setup']['user']
 end
 
 execute 'set Preview as default PDF viewer' do
-  current_pdf_app = shell_out!('duti', '-x', 'pdf').stdout.lines[0].rstrip
   # Note: Although setting the default app for 'viewer' instead of 'all' works
   # and makes more sense, there is apparently no way to query this information
   # using duti. Since we won't really be editing PDFs, we'll just set the role
@@ -404,7 +336,12 @@ execute 'set Preview as default PDF viewer' do
   # Skim. We've kept this in here for clarity and to convert old environments
   # that still might have Skim as the default.
   command %w(duti -s com.apple.Preview pdf all)
-  not_if { current_pdf_app == 'Preview.app' }
+  user node['macos_setup']['user']
+  not_if do
+    shell_out!(
+      'duti', '-x', 'pdf', user: node['macos_setup']['user']
+    ).stdout.lines[0].rstrip == 'Preview.app'
+  end
 end
 
 # Login items
@@ -424,32 +361,24 @@ end
 # http://stackoverflow.com/q/12086638
 
 lambda do
-  agents_dir = Pathname.new(node['macos_setup']['home']) +
-               'Library/LaunchAgents'
+  install_dir = "#{node['macos_setup']['home']}/Library/LaunchAgents"
+  directory install_dir do
+    owner node['macos_setup']['user']
+  end
+
   node['macos_setup']['login_items'].each do |app|
-    label = "com.seanfisk.login.#{app.downcase}"
-    plist_file "create launch agent to start #{app} at login" do
-      # This takes a Pathname for some reason. I'm not complaining, because I
-      # love Pathname, but it's just weird.
-      file agents_dir + "#{label}.plist"
-      content 'Label' => label,
-              'ProgramArguments' => %W(/usr/bin/open -a #{app}),
-              'RunAtLoad' => true
-      action :create
+    launchd "create launch agent to start #{app} at login" do
+      label = "com.seanfisk.login.#{app.downcase}"
+      label label
+      mode '600'
+      owner node['macos_setup']['user']
+      # This resource doesn't have explicit support for user launch agents, so
+      # we have to construct our own path.
+      path "#{install_dir}/#{label}.plist"
+      session_type 'user' # Not sure if this is necessary
+      type 'agent'
+      program_arguments ['/usr/bin/open', '-a', app]
+      run_at_load true
     end
   end
 end.call
-
-execute 'invalidate sudo timestamp' do
-  # 'sudo -K' will remove the timestamp entirely, which means that sudo will
-  # print the initial 'Improper use of the sudo command' warning. Not what we
-  # want. 'sudo -k' just invalidates the timestamp without removing it.
-  command %w(sudo -k)
-  # Kill only if we have sudo privileges. 'sudo -k' is idempotent anyway, but
-  # it's nice to see less resources updated when possible.
-  #
-  # 'sudo -n command' exits with 0 if a password is needed (what?), or the exit
-  # code of 'command' if it is able to run it. Hence the unusual guard here: an
-  # exit code of 1 indicates sudo privileges, while 0 indicates none.
-  not_if %w(sudo -n false)
-end

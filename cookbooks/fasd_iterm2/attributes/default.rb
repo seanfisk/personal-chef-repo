@@ -13,6 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-default['fasd_iterm2']['repo_url'] = 'https://github.com/seanfisk/fasd-iterm2-profiles.git'
-default['fasd_iterm2']['repo_path'] =
-  "#{Chef::Config[:file_cache_path]}/fasd-iterm2-profiles"
+default['fasd_iterm2'].tap do |o|
+  # See macos_setup for details
+  o['user'] = ENV['SUDO_USER']
+  o['repo_url'] = 'https://github.com/seanfisk/fasd-iterm2-profiles.git'
+  o['repo_path'] = "#{Chef::Config[:file_cache_path]}/fasd-iterm2-profiles"
+end
