@@ -704,6 +704,7 @@ default['homebrew'].tap do |o|
       # This is a maintained fork of the original Slate:
       # https://github.com/mattr-/slate
       'mattr-slate',
+      'microsoft-remote-desktop-beta',
       'mosh', # Also available as a formula
       'quicksilver',
       'skim',
