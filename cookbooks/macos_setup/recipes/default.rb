@@ -79,6 +79,14 @@ package 'lastpass-cli' do
   options '--with-pinentry'
 end
 
+# Install emacs-mac as my Emacs for use with Spacemacs
+#
+# Here are the differences from vanilla Emacs:
+# https://bitbucket.org/mituharu/emacs-mac/src/f3402395995bf70e50d6e65f841e44d5f9b4603c/README-mac?at=master&fileviewer=file-view-default#README-mac-148
+package 'emacs-mac' do
+  options '--with-spacemacs-icon'
+end
+
 %w(taps formulas casks).each do |entity|
   include_recipe "homebrew::install_#{entity}"
 end

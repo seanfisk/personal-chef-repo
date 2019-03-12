@@ -533,14 +533,16 @@ default['homebrew'].tap do |o|
 
   o['taps'] = %w(
     homebrew/command-not-found
-    homebrew/x11
   )
+
+  # Formulas or casks that are commented out are ones that I'm not using right now, but have
+  # used in the past and may use in the future.
 
   o['formulas'] = (
     [
       'ack',
       'aria2',
-      'astyle',
+      # 'astyle',
       'bash',
       'cask',
       # Although there is a formula for this, it's best to install in a Python
@@ -554,7 +556,7 @@ default['homebrew'].tap do |o|
       # superior to Tofrodos <http://www.thefreecountry.com/tofrodos/>. But that
       # was just from a quick look.
       'dos2unix',
-      'doxygen',
+      # 'doxygen',
       'duti',
       'editorconfig',
       'exa',
@@ -569,37 +571,37 @@ default['homebrew'].tap do |o|
       'graphviz',
       'grc',
       'htop-osx',
-      'httpie',
+      # 'httpie',
       'hub',
       # ImageMagick might already be present on the system (but just 'convert').
       # I'm not sure if it's just an artifact of an earlier build, but it was on
       # my Mavericks system before I installed it (again?).
-      'imagemagick',
+      # 'imagemagick',
       # For pygit2 (which is for Powerline).
       'libgit2',
       # For rotating the Powerline log (see dotfiles).
       'logrotate',
-      'm-cli',
+      # 'm-cli',
       'mercurial',
-      'mplayer', # For https://github.com/TeMPOraL/nyan-mode#features :)
-      'mr', # myrepos, for managing multiple repos
+      # 'mplayer', # For https://github.com/TeMPOraL/nyan-mode#features :)
+      # 'mr', # myrepos, for managing multiple repos
       'nmap',
       'node',
       # I prefer ohcount to cloc and sloccount.
       'ohcount',
       # 'osquery', # Newest version requires macOS Sierra
-      'p7zip',
+      # 'p7zip',
       'pandoc',
-      'parallel',
-      'pdfgrep',
-      'pidof',
-      'progress',
+      # 'parallel',
+      # 'pdfgrep',
+      # 'pidof',
+      # 'progress',
       'pstree',
       # pwgen and sf-pwgen are both password generators. pwgen is more generic,
       # whereas sf-pwgen uses Apple's security framework. We also looked at APG,
       # but it seems unmaintained.
-      'pwgen',
-      'sf-pwgen',
+      # 'pwgen',
+      # 'sf-pwgen',
       'pyenv',
       'pyenv-virtualenv',
       'pyenv-which-ext',
@@ -617,7 +619,7 @@ default['homebrew'].tap do |o|
       'tmux',
       'trash',
       'tree',
-      'valgrind',
+      # 'valgrind',
       'watch',
       'wget',
       'xz',
@@ -626,29 +628,26 @@ default['homebrew'].tap do |o|
       # http://blog.pkh.me/p/13-the-ffmpeg-libav-situation.html However,
       # youtube-dl seems to prefer avconv (libav) over ffmpeg, so we may change
       # this at a later time.
-      'youtube-dl',
-      'ffmpeg',
+      # 'youtube-dl',
+      # 'ffmpeg',
       # ZeroMQ (zmq) is included to speed up IPython installs. It can install a
       # bundled version to a virtualenv, but it's faster to have a globally built
       # version.
-      'zmq',
+      # 'zmq',
       'zsh',
       'zsh-syntax-highlighting',
       # XML utilities
-      'html-xml-utils',
-      'xml-coreutils',
+      # 'html-xml-utils',
+      # 'xml-coreutils',
       # Fun commands!
-      'cmatrix',
-      'cowsay',
+      # 'cmatrix',
+      # 'cowsay',
       'figlet',
-      'fortune',
-      'ponysay',
+      # 'fortune',
+      # 'ponysay',
       'sl',
       'toilet',
     ] + node['macos_setup'].fetch('extra_formulas', [])).sort
-
-  # Casks that are commented out are ones that I'm not using right now, but have
-  # used in the past and may use in the future.
 
   o['casks'] = (
     [
@@ -662,16 +661,16 @@ default['homebrew'].tap do |o|
       'dash',
       'deeper',
       'disk-inventory-x',
-      'emacs',
+      # 'emacs',
       'firefox',
-      'flash',
-      'flash-player',
+      # 'flash',
+      # 'flash-player',
       'flux',
       'gfxcardstatus',
       'gimp',
-      'google-chrome',
+      # 'google-chrome',
       # This is 'GoogleVoiceAndVideoSetup', which installs the browser plugins.
-      'google-hangouts',
+      # 'google-hangouts',
       'iterm2',
       # Java
       #
@@ -700,18 +699,16 @@ default['homebrew'].tap do |o|
       'jettison',
       'karabiner',
       'lastpass', # NOTE: Requires manual intervention
-      'libreoffice',
+      # 'libreoffice',
       # This is a maintained fork of the original Slate:
       # https://github.com/mattr-/slate
       'mattr-slate',
-      'microsoft-remote-desktop-beta',
-      'mosh', # Also available as a formula
+      # 'microsoft-remote-desktop-beta',
+      # 'mosh', # Also available as a formula
       'quicksilver',
-      'skim',
+      # 'skim',
       'skitch',
       # 'skype',
-      # Recommended by Lifehacker
-      # http://lifehacker.com/the-best-antivirus-app-for-mac-488021445
       'speedcrunch',
       'spotify',
       # SQLite browser options:
@@ -735,9 +732,9 @@ default['homebrew'].tap do |o|
       # interface and has packages for both Homebrew and Chocolatey. For
       # Homebrew, both a formula and a cask are available. We've decided to go
       # for the cask to avoid having to build (although it's bottled anyway).
-      'sqlitebrowser',
-      'vagrant',
-      'virtualbox',
+      # 'sqlitebrowser',
+      # 'vagrant',
+      # 'virtualbox',
       # This also has a formula, but we install via cask because the formula
       # requires extra work (things need to be accessed as root).
       'wireshark',
