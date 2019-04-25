@@ -6,8 +6,10 @@ load
 
 default['macos_setup']['extra_casks'] = [
   'firefoxdeveloperedition',
-  'intellij-idea',
   'jd-gui', # Java decompiler
+  # When using the JetBrains Toolbox, do not use the intellij-idea or
+  # intellij-idea-ce cask. JetBrains Toolbox installs its own versions of
+  # IntelliJ to its own location.
   'jetbrains-toolbox',
   'slack',
   'vmware-remote-console',
