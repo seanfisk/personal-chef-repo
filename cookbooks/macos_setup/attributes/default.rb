@@ -650,10 +650,9 @@ default['homebrew'].tap do |o|
       'ruby-build',
       'rbenv',
       # rbenv plugins
-      # For the reason this was chosen over alternatives, see
-      # https://github.com/maljub01/rbenv-bundle-exec#similar-plugins
-      'rbenv-communal-gems',
       'rbenv-default-gems',
+      # We previously used rbenv-communal-gems, but it causes issues with
+      # rbenv-chef-workstation. Not worth the headache.
       # XML utilities
       # 'html-xml-utils',
       # 'xml-coreutils',
