@@ -1,5 +1,5 @@
 {
-  "revision_id": "62bb08e670fb6a011ab52d43e7c46ca9e96d6cd3e2c2acda485ba4344233fb4a",
+  "revision_id": "c1e8d29d6bd1fec30bea1160a35c624108f48fe0bf6428ef62f86c09623194be",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -17,12 +17,13 @@
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": null,
-        "revision": "7c6297cf275ab12da250554e5386654d7b2739d6",
+        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
+        "revision": "ed554861c01103366fc4665fdd1f6c5571386b8f",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -42,18 +43,19 @@
     },
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "412f5582d3f161b7d74845aa8ab22f7a98c231b5",
-      "dotted_decimal_identifier": "18347917799846241.51746626144471730.52203595379125",
+      "identifier": "6cf2bc3b035d66755ecfd52c1c0e96ccba1aae06",
+      "dotted_decimal_identifier": "30666187742600550.33036819002825742.165806039805446",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": null,
-        "revision": "7c6297cf275ab12da250554e5386654d7b2739d6",
+        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
+        "revision": "ed554861c01103366fc4665fdd1f6c5571386b8f",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -65,7 +67,6 @@
     "macos_setup": {
       "extra_casks": [
         "firefoxdeveloperedition",
-        "intellij-idea",
         "jd-gui",
         "jetbrains-toolbox",
         "slack",
@@ -110,7 +111,7 @@
       "macos_setup (0.1.0)": [
         [
           "homebrew",
-          "~> 5.0.7"
+          "~> 5.0.8"
         ]
       ]
     }

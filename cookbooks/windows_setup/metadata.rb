@@ -10,5 +10,5 @@ version '0.1.0'
 supports 'windows'
 chef_version '~> 14'
 
-depends 'chocolatey', '~> 1.0.0'
-depends 'windows', '~> 1.43.0'
+depends 'chocolatey', '~> 2.0.1'
+depends 'windows', '~> 5.3.0'

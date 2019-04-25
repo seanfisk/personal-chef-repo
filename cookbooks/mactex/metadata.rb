@@ -10,4 +10,4 @@ version '0.1.0'
 supports 'mac_os_x'
 chef_version '~> 14'
 
-depends 'homebrew', '~> 5.0.7'
+depends 'homebrew', '~> 5.0.8'
