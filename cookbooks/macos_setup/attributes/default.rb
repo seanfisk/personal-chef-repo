@@ -636,6 +636,24 @@ default['homebrew'].tap do |o|
       # 'zmq',
       'zsh',
       'zsh-syntax-highlighting',
+      # Even though the rbenv cookbooks looks nice, they don't work as I'd like.
+      # fnichol's supports local install, but insists on templating
+      # /etc/profile.d/rbenv.sh *even when doing a local install*. That makes no
+      # sense. I don't want that.
+      #
+      # The RiotGames rbenv cookbook only supports global install.
+      #
+      # So let's just install through trusty Homebrew.
+      #
+      # We now also install pyenv through Homebrew, so it's nice to be
+      # consistent.
+      'ruby-build',
+      'rbenv',
+      # rbenv plugins
+      # For the reason this was chosen over alternatives, see
+      # https://github.com/maljub01/rbenv-bundle-exec#similar-plugins
+      'rbenv-communal-gems',
+      'rbenv-default-gems',
       # XML utilities
       # 'html-xml-utils',
       # 'xml-coreutils',

@@ -4,7 +4,6 @@ name 'blue_medora'
 
 load
 
-default['macos_setup']['ruby_manager'] = 'rvm'
 default['macos_setup']['extra_casks'] = [
   'firefoxdeveloperedition',
   'intellij-idea',
