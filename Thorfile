@@ -22,7 +22,7 @@ module Subprocess
       # Force Ruby to not use a shell by using the argv[0]-setting syntax
       puts Rainbow('==> ').bright.blue + Rainbow(cmd.inspect).bright + (
              chdir ? Rainbow(" (cwd: #{chdir.inspect})").bright.green : ''
-      )
+           )
       unless system(env, [cmd[0], cmd[0]], *cmd[1..-1], **opts)
         status = $CHILD_STATUS.exitstatus
         $stderr.puts 'Command failed with non-zero '\
