@@ -33,33 +33,8 @@ include_recipe 'homebrew'
 # RUBY MANAGEMENT
 ###############################################################################
 
-if node['macos_setup']['ruby_manager'] == 'rvm'
-  Chef::Log.warn('Automated RVM installation is no longer supported due to ' \
-                 "the RVM cookbook's lack of maintenance")
-else
-  # Use rbenv by default
   node.default['homebrew']['formulas'] += [
-    # Even though the rbenv cookbooks looks nice, they don't work as I'd
-    # like. fnichol's supports local install, but insists on templating
-    # /etc/profile.d/rbenv.sh *even when doing a local install*. That makes
-    # no sense. I don't want that.
-    #
-    # The RiotGames rbenv cookbook only supports global install.
-    #
-    # So let's just install through trusty Homebrew.
-    #
-    # We now also install pyenv through Homebrew, so it's nice to be
-    # consistent.
-    'ruby-build',
-    'rbenv',
-    # rbenv plugins
-    # For the reason this was chosen over alternatives, see
-    # https://github.com/maljub01/rbenv-bundle-exec#similar-plugins
-    'rbenv-bundle-exec',
-    'rbenv-communal-gems',
-    'rbenv-default-gems',
   ]
-end
 
 ###############################################################################
 # HOMEBREW FORMULAS AND CASKS
