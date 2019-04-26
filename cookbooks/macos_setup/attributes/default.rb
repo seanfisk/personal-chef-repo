@@ -650,6 +650,6 @@ default['homebrew'].tap do |o|
     'osxfuse',
     # This cask already applies the fix as shown here:
     # https://github.com/osxfuse/osxfuse/wiki/SSHFS#macfusion
-    'macfusion',
+    'macfusion-ng',
   ]
 end
