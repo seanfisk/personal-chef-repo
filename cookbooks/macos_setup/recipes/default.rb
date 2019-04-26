@@ -274,24 +274,6 @@ cookbook_file 'Slate preferences file' do
   owner node['macos_setup']['user']
 end
 
-execute 'set Preview as default PDF viewer' do
-  # Note: Although setting the default app for 'viewer' instead of 'all' works
-  # and makes more sense, there is apparently no way to query this information
-  # using duti. Since we won't really be editing PDFs, we'll just set the role
-  # to 'all'.
-  #
-  # Note: Preview is the default PDF reader on macOS, but we previously used
-  # Skim. We've kept this in here for clarity and to convert old environments
-  # that still might have Skim as the default.
-  command %w(duti -s com.apple.Preview pdf all)
-  user node['macos_setup']['user']
-  not_if do
-    shell_out!(
-      'duti', '-x', 'pdf', user: node['macos_setup']['user']
-    ).stdout.lines[0].rstrip == 'Preview.app'
-  end
-end
-
 # Login items
 #
 # These are controlled by ~/Library/Preferences/com.apple.loginitems.plist,
