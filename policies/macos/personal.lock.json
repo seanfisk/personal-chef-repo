@@ -1,5 +1,5 @@
 {
-  "revision_id": "208d6391865fbad3841527df6263fc32dfdf886b979bc1f98732a5e52a4c9307",
+  "revision_id": "4ca3dcd05669b4f3f177483a5b6868bb6192c2d8310b73abba6798ef780bcd47",
   "name": "personal",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -17,8 +17,8 @@
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": null,
-        "revision": "75c124b5f6da2f0bedb5627d73d32fc53ac631c2",
+        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
+        "revision": "0db3e24ca143a27f1afe299e6a7c45199e846688",
         "working_tree_clean": false,
         "published": false,
         "synchronized_remote_branches": [
@@ -30,26 +30,26 @@
       }
     },
     "homebrew": {
-      "version": "5.0.7",
-      "identifier": "6bc64047fce556e85aadb3771f5af148a36d07bf",
-      "dotted_decimal_identifier": "30335801896002902.65401896683642714.265294281770943",
-      "cache_key": "homebrew-5.0.7-supermarket.chef.io",
-      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/homebrew/versions/5.0.7/download",
+      "version": "5.0.8",
+      "identifier": "072611ae06a863c842644c85bf776ffe18f59b0a",
+      "dotted_decimal_identifier": "2012182212946019.56367993890127735.123137131125514",
+      "cache_key": "homebrew-5.0.8-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/homebrew/versions/5.0.8/download",
       "source_options": {
-        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/homebrew/versions/5.0.7/download",
-        "version": "5.0.7"
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/homebrew/versions/5.0.8/download",
+        "version": "5.0.8"
       }
     },
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "a3382e53eb81c2176732e32fe3829fad0540aea0",
-      "dotted_decimal_identifier": "45942192831431106.6587392721937282.175565466283680",
+      "identifier": "ac700eae1cba2ecf1405881c1ef8b8d0e9348c95",
+      "dotted_decimal_identifier": "48536904347204142.58287334170042104.203207405243541",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": null,
-        "revision": "75c124b5f6da2f0bedb5627d73d32fc53ac631c2",
+        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
+        "revision": "0db3e24ca143a27f1afe299e6a7c45199e846688",
         "working_tree_clean": false,
         "published": false,
         "synchronized_remote_branches": [
@@ -80,7 +80,7 @@
       ],
       [
         "homebrew",
-        "= 5.0.7"
+        "= 5.0.8"
       ],
       [
         "macos_setup",
@@ -94,13 +94,13 @@
           ">= 0.0.0"
         ]
       ],
-      "homebrew (5.0.7)": [
+      "homebrew (5.0.8)": [
 
       ],
       "macos_setup (0.1.0)": [
         [
           "homebrew",
-          "~> 5.0.7"
+          "~> 5.0.8"
         ]
       ]
     }

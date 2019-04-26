@@ -318,9 +318,22 @@ end.call
 
 %w(master nfs).each do |type|
   filename = "auto_#{type}"
-  cookbook_file "Install #{filename}" do
+  cookbook_file "install #{filename}" do
     mode '0644'
     path "/etc/#{filename}"
     source filename
   end
+end
+
+execute 'set default browser to FirefoxDeveloperEdition' do
+  desired_default_browser = 'firefoxdeveloperedition'
+  # Note: When this is run, it will prompt the user using macOS' GUI to confirm the change.
+  command %W(defaultbrowser #{desired_default_browser})
+  user node['macos_setup']['user']
+  not_if {
+    shell_out!(%w(defaultbrowser)).stdout.each_line.any? do |line|
+      # The current default browser will have an asterisk next to its name
+      line == "* #{desired_default_browser}\n"
+    end
+  }
 end

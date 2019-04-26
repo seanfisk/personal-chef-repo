@@ -549,6 +549,7 @@ default['homebrew'].tap do |o|
       # execute things. Using /usr/bin/python causes problems...
       # 'cookiecutter',
       'coreutils',
+      'defaultbrowser',
       # An improved version of df with colors.
       'dfc',
       # Dos2Unix / Unix2Dos <http://waterlan.home.xs4all.nl/dos2unix.html> looks
