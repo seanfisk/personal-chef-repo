@@ -1,0 +1,18 @@
+###############################################################################
+# macOS default content
+###############################################################################
+
+#
+# Automounter master map
+#
++auto_master		# Use directory service
+/net			-hosts		-nobrowse,hidefromfinder,nosuid
+/home			auto_home	-nobrowse,hidefromfinder
+/Network/Servers	-fstab
+/-			-static
+
+###############################################################################
+# Custom content
+###############################################################################
+
+/-			auto_nfs	-nobrowse,nosuid

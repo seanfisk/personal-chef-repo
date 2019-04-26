@@ -306,3 +306,21 @@ lambda do
     end
   end
 end.call
+
+###############################################################################
+# BLUE MEDORA
+###############################################################################
+
+# TODO: Don't execute this for the personal policy.
+
+# Auto-mount Atlas
+# See here for the technique: https://gist.github.com/L422Y/8697518
+
+%w(master nfs).each do |type|
+  filename = "auto_#{type}"
+  cookbook_file "Install #{filename}" do
+    mode '0644'
+    path "/etc/#{filename}"
+    source filename
+  end
+end
