@@ -136,40 +136,6 @@ end
 # CUSTOM INSTALLS
 ###############################################################################
 
-# Deep Sleep Dashboard widget
-
-# The original version (http://deepsleep.free.fr/) is unfortunately broken for
-# newer Macs as the hibernate modes have changed. However, CODE2K has updated
-# the widget for Mountain Lion (and Mavericks)
-# (http://code2k.net/blog/2012-11-06/).
-lambda do
-  archive_name = 'deepsleep-1.3-beta1.zip'
-  archive_path = "#{Chef::Config[:file_cache_path]}/#{archive_name}"
-  install_dir = "#{node['macos_setup']['home']}/Library/Widgets"
-
-  # This isn't perfect -- the widget will only download and install when the
-  # archive file doesn't exist.
-  remote_file 'download Deep Sleep dashboard widget' do
-    source 'https://github.com/downloads/code2k/Deep-Sleep.wdgt/' +
-           archive_name
-    owner node['macos_setup']['user']
-    checksum 'fa41a926d7c1b6566b074579bdd4c9bc969d348292597ac3064731326efc4207'
-    path archive_path
-    notifies :run, 'execute[install Deep Sleep dashboard widget]'
-  end
-
-  directory install_dir do
-    owner node['macos_setup']['user']
-  end
-
-  execute 'install Deep Sleep dashboard widget' do
-    command %W(unzip -o #{archive_path})
-    cwd install_dir
-    user node['macos_setup']['user']
-    action :nothing
-  end
-end.call
-
 directory node['macos_setup']['fonts_dir'] do
   owner node['macos_setup']['user']
 end
