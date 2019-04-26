@@ -33,6 +33,12 @@ include_recipe 'homebrew'
 # HOMEBREW FORMULAS AND CASKS
 ###############################################################################
 
+# TODO: Don't tap this in my personal policy
+homebrew_tap 'Install Blue Medora engineering tap' do
+  tap_name 'BlueMedora/engineering'
+  url 'git@github.com:BlueMedora/homebrew-engineering.git'
+end
+
 # git-grep PCRE. Do this before installing other formulas in
 # case there is a dependency on git.
 package 'install custom Git' do

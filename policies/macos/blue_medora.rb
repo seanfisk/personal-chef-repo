@@ -4,6 +4,10 @@ name 'blue_medora'
 
 load
 
+default['macos_setup']['extra_formulas'] = [
+  'exuno-architect',
+  'exuno-diff',
+]
 default['macos_setup']['extra_casks'] = [
   'firefoxdeveloperedition',
   'jd-gui', # Java decompiler
@@ -13,6 +17,9 @@ default['macos_setup']['extra_casks'] = [
   'jetbrains-toolbox',
   'slack',
   'vmware-remote-console',
+  'euchre',
+  'nsa',
+  'vrops-architect',
 ]
 default['macos_setup']['extra_login_items'] = %w(
   Dash
