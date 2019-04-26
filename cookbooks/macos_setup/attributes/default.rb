@@ -542,7 +542,6 @@ default['homebrew'].tap do |o|
     [
       'ack',
       'aria2',
-      # 'astyle',
       'bash',
       'cask',
       # Although there is a formula for this, it's best to install in a Python
@@ -556,7 +555,6 @@ default['homebrew'].tap do |o|
       # superior to Tofrodos <http://www.thefreecountry.com/tofrodos/>. But that
       # was just from a quick look.
       'dos2unix',
-      # 'doxygen',
       'duti',
       'editorconfig',
       'exa',
@@ -564,48 +562,24 @@ default['homebrew'].tap do |o|
       'gibo',
       'git-lfs',
       'gnu-tar',
-      # Install both GraphicMagick and ImageMagick. In generally, I prefer
-      # GraphicsMagick, but ImageMagick has ICO support so we use it for
-      # BetterPlanner.
       'graphicsmagick',
       'graphviz',
       'grc',
-      'htop-osx',
-      # 'httpie',
       'hub',
-      # ImageMagick might already be present on the system (but just 'convert').
-      # I'm not sure if it's just an artifact of an earlier build, but it was on
-      # my Mavericks system before I installed it (again?).
-      # 'imagemagick',
       # For pygit2 (which is for Powerline).
       'libgit2',
       # For rotating the Powerline log (see dotfiles).
       'logrotate',
-      # 'm-cli',
       'mercurial',
-      # 'mplayer', # For https://github.com/TeMPOraL/nyan-mode#features :)
-      # 'mr', # myrepos, for managing multiple repos
       'nmap',
       'node',
       # I prefer ohcount to cloc and sloccount.
       'ohcount',
-      # 'osquery', # Newest version requires macOS Sierra
-      # 'p7zip',
       'pandoc',
-      # 'parallel',
-      # 'pdfgrep',
-      # 'pidof',
-      # 'progress',
       'pstree',
-      # pwgen and sf-pwgen are both password generators. pwgen is more generic,
-      # whereas sf-pwgen uses Apple's security framework. We also looked at APG,
-      # but it seems unmaintained.
-      # 'pwgen',
-      # 'sf-pwgen',
       'pyenv',
       'pyenv-virtualenv',
       'pyenv-which-ext',
-      'q', # text as data: https://github.com/harelba/q
       'qpdf',
       # reattach-to-user-namespace has options to fix launchctl and shim
       # pbcopy/pbaste. We haven't needed them yet, though.
@@ -618,22 +592,9 @@ default['homebrew'].tap do |o|
       'the_silver_searcher',
       'tmux',
       'trash',
-      'tree',
-      # 'valgrind',
       'watch',
       'wget',
       'xz',
-      # For downloading videos/audio. ffmpeg is for post-processing; we chose it
-      # over libav based on
-      # http://blog.pkh.me/p/13-the-ffmpeg-libav-situation.html However,
-      # youtube-dl seems to prefer avconv (libav) over ffmpeg, so we may change
-      # this at a later time.
-      # 'youtube-dl',
-      # 'ffmpeg',
-      # ZeroMQ (zmq) is included to speed up IPython installs. It can install a
-      # bundled version to a virtualenv, but it's faster to have a globally built
-      # version.
-      # 'zmq',
       'zsh',
       'zsh-syntax-highlighting',
       # Even though the rbenv cookbooks looks nice, they don't work as I'd like.
@@ -649,109 +610,35 @@ default['homebrew'].tap do |o|
       # consistent.
       'ruby-build',
       'rbenv',
-      # rbenv plugins
       'rbenv-default-gems',
       # We previously used rbenv-communal-gems, but it causes issues with
       # rbenv-chef-workstation. Not worth the headache.
-      # XML utilities
-      # 'html-xml-utils',
-      # 'xml-coreutils',
-      # Fun commands!
-      # 'cmatrix',
-      # 'cowsay',
       'figlet',
-      # 'fortune',
-      # 'ponysay',
       'sl',
       'toilet',
     ] + node['macos_setup'].fetch('extra_formulas', [])).sort
 
   o['casks'] = (
     [
-      # 'adium',
       'adobe-reader',
       'atext',
       'caffeine',
       'cathode',
-      # 'chicken',
-      # 'cord',
       'dash',
       'deeper',
       'disk-inventory-x',
-      # 'emacs',
       'firefox',
-      # 'flash',
-      # 'flash-player',
       'flux',
       'gfxcardstatus',
       'gimp',
-      # 'google-chrome',
-      # This is 'GoogleVoiceAndVideoSetup', which installs the browser plugins.
-      # 'google-hangouts',
       'iterm2',
-      # Java
-      #
-      # I wish we could avoid installing Java, but I need it for at least these
-      # reasons:
-      #
-      # - Network Connect, GVSU's SSL VPN
-      # - Playing TankPit, a Java applet-based game
-      # - Eclipse
-      #
-      # Apple Java 6 was installed, then uninstalled like so:
-      #
-      #     sudo rm -r /System/Library/Java/JavaVirtualMachines/1.6.0.jdk
-      #     sudo pkgutil --forget com.apple.pkg.JavaForMacOSX107
-      #
-      # See here for the procedure followed: http://superuser.com/a/712783
-      #
-      # Oracle Java 7 JDK was installed, then uninstalled with:
-      #
-      #     sudo rm -r /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk
-      #
-      # See here:
-      # JDK: http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html#uninstall
-      # JRE: https://www.java.com/en/download/help/mac_uninstall_java.xml
       'java',
       'jettison',
       'karabiner',
       'lastpass', # NOTE: Requires manual intervention
-      # 'libreoffice',
-      # This is a maintained fork of the original Slate:
-      # https://github.com/mattr-/slate
-      'mattr-slate',
-      # 'microsoft-remote-desktop-beta',
-      # 'mosh', # Also available as a formula
       'quicksilver',
-      # 'skim',
-      'skitch',
-      # 'skype',
       'speedcrunch',
       'spotify',
-      # SQLite browser options:
-      #
-      # - sqlitebrowser: open-source, cross-platform, well-maintained
-      # - sqliteman: looks unmaintained, questionable OS support
-      # - mesasqlite: macOS-only, looks unmaintained
-      # - sqlprosqlite: macOS-only, proprietary
-      # - sqlitestudio: open-source, cross-platform, well-maintained
-      # - navicat-for-sqlite: cross-platform, proprietary
-      #
-      # Also available is SQLite Manager, which is a high-quality Firefox add-on.
-      # <https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/>
-      #
-      # We've tried DB Browser for SQLite (sqlitebrowser), SQLite Studio
-      # (sqlitestudio), and SQLite Manager for Firefox. All are excellent. The
-      # first two are written in Qt and look great on macOS. DB Browser and
-      # SQLite manager both have options for CSV and SQL export, while SQLite
-      # Studio has those in addition to HTML, JSON, PDF, and XML. However, we've
-      # decided to go for DB Browser for SQLite because it has an intuitive
-      # interface and has packages for both Homebrew and Chocolatey. For
-      # Homebrew, both a formula and a cask are available. We've decided to go
-      # for the cask to avoid having to build (although it's bottled anyway).
-      # 'sqlitebrowser',
-      # 'vagrant',
-      # 'virtualbox',
       # This also has a formula, but we install via cask because the formula
       # requires extra work (things need to be accessed as root).
       'wireshark',

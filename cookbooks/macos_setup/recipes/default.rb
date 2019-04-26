@@ -268,12 +268,6 @@ lambda do
   end
 end.call
 
-cookbook_file 'Slate preferences file' do
-  source 'slate.js'
-  path "#{node['macos_setup']['home']}/.slate.js"
-  owner node['macos_setup']['user']
-end
-
 # Login items
 #
 # These are controlled by ~/Library/Preferences/com.apple.loginitems.plist,
