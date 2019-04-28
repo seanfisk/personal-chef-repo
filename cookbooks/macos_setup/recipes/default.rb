@@ -357,7 +357,7 @@ execute 'set default browser to FirefoxDeveloperEdition' do
   command %W(defaultbrowser #{desired_default_browser})
   user node['macos_setup']['user']
   not_if {
-    shell_out!(%w(defaultbrowser)).stdout.each_line.any? do |line|
+    shell_out!(%w(defaultbrowser), user: node['macos_setup']['user']).stdout.each_line.any? do |line|
       # The current default browser will have an asterisk next to its name
       line == "* #{desired_default_browser}\n"
     end
