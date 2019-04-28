@@ -133,60 +133,6 @@ ruby_block 'fix the zsh startup file that path_helper uses' do
 end
 
 ###############################################################################
-# CUSTOM INSTALLS
-###############################################################################
-
-directory node['macos_setup']['fonts_dir'] do
-  owner node['macos_setup']['user']
-end
-
-# Ubuntu fonts
-lambda do
-  archive_name = 'fad7939b-ubuntu-font-family-0.83.zip'
-  archive_path =
-    "#{Chef::Config[:file_cache_path]}/#{archive_name}"
-  install_dir = "#{node['macos_setup']['fonts_dir']}/Ubuntu"
-
-  remote_file 'download Ubuntu fonts' do
-    source "https://assets.ubuntu.com/v1/#{archive_name}"
-    owner node['macos_setup']['user']
-    path archive_path
-    checksum '456d7d42797febd0d7d4cf1b782a2e03680bb4a5ee43cc9d06bda172bac05b42'
-    notifies :run, 'execute[install Ubuntu fonts]'
-  end
-
-  directory install_dir do
-    owner node['macos_setup']['user']
-  end
-
-  execute 'install Ubuntu fonts' do
-    # Enabled overwrite since this directory is being written to regardless of
-    # the version.
-    command %W(unzip -o #{archive_path})
-    cwd install_dir
-    user node['macos_setup']['user']
-    action :nothing
-  end
-end.call
-
-remote_file 'download Inconsolata font' do
-  # This URL seems like one that may be updated with newer versions, so we'll
-  # just install the current version if it's not already installed.
-  filename = 'Inconsolata.otf'
-  source "http://levien.com/type/myfonts/#{URI.escape(filename)}"
-  owner node['macos_setup']['user']
-  path "#{node['macos_setup']['fonts_dir']}/#{filename}"
-end
-
-remote_file 'download Inconsolata for Powerline font' do
-  filename = 'Inconsolata for Powerline.otf'
-  source 'https://github.com/powerline/fonts/raw/master/Inconsolata/' +
-         URI.escape(filename)
-  owner node['macos_setup']['user']
-  path "#{node['macos_setup']['fonts_dir']}/#{filename}"
-end
-
-###############################################################################
 # PREFERENCES
 ###############################################################################
 
