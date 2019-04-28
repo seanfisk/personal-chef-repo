@@ -25,10 +25,6 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 
   This is licensed software that is installed using Homebrew Cask. I purchased a license that has to be manually activated.
 
-* Wunderlist
-
-  Installed from the Mac App Store; helper start at login uses custom workflow and is therefore not automated.
-
 * Quicksilver hotkey
 
   Most of the other preferences are automated, but this one proved difficult. For now, it needs to be set manually. See the recipe for the gritty details and rationale for the decision not to automate.
@@ -47,8 +43,7 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 
 * LastPass
 
-  - The universal installer has installer and uninstaller app bundles which are downloaded by Homebrew Cask but need to be run manually. Using the universal installer is preferable to individual browser add-ons due to the inclusion of all browser add-ons and the binary component, which allows sharing state between browsers.
-  - [LastPass app for macOS](https://itunes.apple.com/us/app/lastpass/id926036361?ls=1&mt=12), which is installed using the Mac App Store.
+  - The universal installer has installer and uninstaller app bundles that need to be run manually. Using the universal installer is preferable to individual browser add-ons due to the inclusion of all browser add-ons and the binary component, which allows sharing state between browsers. The universal installer is not present in Homebrew, Homebrew Cask, or the Mac App Store and must be downloaded manually from here: https://lastpass.com/misc_download2.php
 
 * Firefox
 

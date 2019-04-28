@@ -73,6 +73,33 @@ package 'xclip'
 homebrew_cask 'inkscape'
 
 ###############################################################################
+# MAC APP STORE
+###############################################################################
+
+# I'd like to use https://github.com/RoboticCheese/mac-app-store-chef, but it doesn't appear to be maintained anymore. Some people are trying, though: https://github.com/RoboticCheese/mac-app-store-chef/pulls
+#
+# We could write a custom wrapper around mas-cli, but it's probably easier to just use Homebrew Bundle.
+#
+# TODO: Consider using Homebrew Bundle for everything?
+
+cookbook_file 'install global Brewfile' do
+  source 'Brewfile'
+  path "#{node['macos_setup']['home']}/.Brewfile"
+  owner node['macos_setup']['user']
+end
+
+execute 'install dependencies from global Brewfile' do
+  command %w(brew bundle install --global)
+  user node['macos_setup']['user']
+  not_if do
+    shell_out(
+      %w(brew bundle check --global),
+      user: node['macos_setup']['user']
+    ).exitstatus == 0
+  end
+end
+
+###############################################################################
 # SHELLS
 ###############################################################################
 
