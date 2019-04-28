@@ -1,5 +1,5 @@
 {
-  "revision_id": "44fc1c54bacdd8e4c066dc74346bb0026bff08b07cdccf8f111961088c3f513e",
+  "revision_id": "b1fbda6f6409f1798f86cf8ee2e9e0d9f97b5f44f7e646e5a5207749316da722",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -18,11 +18,12 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "18206795258b3f020cee3a45724890ea144701f9",
+        "revision": "d6bb05e410ea58282f559477dd0e887844186c30",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
@@ -42,18 +43,19 @@
     },
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "fa4264c6d47927143c23e00a3863ed573585c33c",
-      "dotted_decimal_identifier": "70441744777640231.5695624314501219.260958815896380",
+      "identifier": "da9183a64aaac303d886c44d7fe55b30cc538016",
+      "dotted_decimal_identifier": "61521539539577539.1082498260762597.100265144582166",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "18206795258b3f020cee3a45724890ea144701f9",
+        "revision": "d6bb05e410ea58282f559477dd0e887844186c30",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {

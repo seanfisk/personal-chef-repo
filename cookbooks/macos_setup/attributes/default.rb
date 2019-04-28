@@ -203,7 +203,7 @@ default['macos_setup'].tap do |o|
     'com.secretgeometry.Cathode' => {
       # Console and Monitor themes themselves seem not to be stored in
       # preferences.
-      'CloseOnExit' => false,
+      'CloseOnExit' => true,
       'JitterWhenWindowMoves' => true,
       'PositionalPerspective' => true,
       'RenderingQuality' => 3, # High
