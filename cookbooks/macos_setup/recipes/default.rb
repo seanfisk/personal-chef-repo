@@ -326,6 +326,25 @@ lambda do
 end.call
 
 ###############################################################################
+# CUSTOM INSTALLS
+###############################################################################
+
+# Network Link Conditioner; see https://stackoverflow.com/a/9659486 for the download link
+# Since this is an Apple Developer download, we've vendored it into our cookbook.
+
+# remote_directory can be used to copy a directory tree, but it can't preserve the original mode with an idempotency check.
+# We therefore have this really weird setup where we have files separated by their desired mode.
+
+%w(644 755).each do |mode|
+  remote_directory "install Network Link Conditioner files with mode #{mode}" do
+    source "Network Link Conditioner/#{mode}"
+    # Although it's possible to install to ~/Library/PreferencePanes and Network Link Conditioner *seems* to work if we do, it doesn't show up in System Preferences and must be launched via the "open" utility. So, install to the global location.
+    path '/Library/PreferencePanes/Network Link Conditioner.prefPane'
+    files_mode mode
+  end
+end
+
+###############################################################################
 # BLUE MEDORA
 ###############################################################################
 
