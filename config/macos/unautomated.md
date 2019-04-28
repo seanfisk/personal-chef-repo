@@ -33,10 +33,6 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 
   Most of the other preferences are automated, but this one proved difficult. For now, it needs to be set manually. See the recipe for the gritty details and rationale for the decision not to automate.
 
-* Seagate Dashboard
-
-  Installed with my Seagate external hard drive. Hard to automate, since the software is on the drive itself. May not want to automate, since this seems very specific to the device itself.
-
 * Swap Caps Lock and Control
 
   Apparently, not really too easy to automate. I haven't looked into it too much, since it's pretty easy to do manually.
