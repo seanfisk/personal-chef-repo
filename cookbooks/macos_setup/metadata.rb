@@ -1,4 +1,3 @@
-
 name 'macos_setup'
 maintainer 'Sean Fisk'
 maintainer_email 'sean@seanfisk.com'

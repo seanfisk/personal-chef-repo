@@ -9,6 +9,7 @@ require 'cookstyle'
 require 'travis/cli/lint'
 require 'artii'
 require 'rainbow'
+require 'find'
 
 # Helper module for safely executing subprocesses.
 module Subprocess
@@ -128,13 +129,10 @@ class Test < Thor
 
   desc 'style', 'Run Cookstyle on all Ruby files'
   def style(exit = true)
-    # Pass in a list of files/directories because we don't want the bin/
-    # directory, other Foodcritic rules, etc., being checked.
-    result = RuboCop::CLI.new.run %W(
-      Gemfile #{__FILE__} cookbooks policies .chef/knife.rb
-    ) + (Pathname.new('config').children.map do |platform_dir|
-      (platform_dir + 'client.rb.sample').to_s
-    end).to_a
+    paths = %w(Gemfile Thorfile) + %w(cookbooks policies .chef config).flat_map do |dir|
+      Find.find(dir).select { |path| path.end_with?('.rb', '.rb.sample') }
+    end
+    result = RuboCop::CLI.new.run(paths)
     puts Rainbow('No Cookstyle errors').green if result == 0
     exit result if exit
     result

@@ -310,21 +310,24 @@ lambda do
     owner node['macos_setup']['user']
   end
   json_content = JSON.pretty_generate(
-    { "profiles" =>
-      [
-        { "name" => "Default",
-          "complex_modifications" =>
-          { "rules" =>
-            [{ "description" => "Pressing spacebar inserts space. Holding spacebar holds control.",
-               "manipulators"=>
-               [{ "from" => {"key_code"=>"spacebar", "modifiers"=>{"optional"=>["any"]}},
-                  "to" => [{"key_code"=>"left_control"}],
-                  "to_if_alone" => [{ "key_code" => "spacebar" }],
-                  "type" => "basic" }]}]},
-          "selected" => true
-        }
-      ]
-    }
+    'profiles' => [
+      { 'name' => 'Default',
+        'selected' => true,
+        'complex_modifications' => {
+          'rules' => [
+            { 'description' => 'Pressing spacebar inserts space. Holding spacebar holds control.',
+              'manipulators' => [
+                { 'from' => { 'key_code' => 'spacebar', 'modifiers' => { 'optional' => ['any'] } },
+                  'to' => [{ 'key_code' => 'left_control' }],
+                  'to_if_alone' => [{ 'key_code' => 'spacebar' }],
+                  'type' => 'basic',
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ]
   )
   file 'install Karabiner Elements config file' do
     path "#{config_dir}/karabiner.json"
@@ -356,10 +359,10 @@ execute 'set default browser to FirefoxDeveloperEdition' do
   # Note: When this is run, it will prompt the user using macOS' GUI to confirm the change.
   command %W(defaultbrowser #{desired_default_browser})
   user node['macos_setup']['user']
-  not_if {
+  not_if do
     shell_out!(%w(defaultbrowser), user: node['macos_setup']['user']).stdout.each_line.any? do |line|
       # The current default browser will have an asterisk next to its name
       line == "* #{desired_default_browser}\n"
     end
-  }
+  end
 end
