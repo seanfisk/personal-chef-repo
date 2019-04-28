@@ -210,50 +210,39 @@ end
 # raises an annoying error because it looks for the plist in its own cookbook.
 #
 # Install background images.
-directory 'create iTerm2 background images directory' do
-  path node['macos_setup']['iterm2']['bgs_dir']
-  recursive true
-  owner node['macos_setup']['user']
-end
-json_content = JSON.pretty_generate(
-  Profiles: node['macos_setup']['iterm2']['profiles'].map do |profile|
-    profile = profile.dup
-    bg_key = node['macos_setup']['iterm2']['bg_key']
-    base = profile[bg_key]
-    if base && Pathname.new(base).relative?
-      install_path = "#{node['macos_setup']['iterm2']['bgs_dir']}/#{base}"
-      profile[bg_key] = install_path
-      cookbook_file "install iTerm2 background '#{base}'" do
-        source "iterm2-bgs/#{base}"
-        path install_path
-      end
-    end
-    profile
-  end
-)
-# Install dynamic profiles.
-directory node['macos_setup']['iterm2']['dynamic_profiles_dir'] do
-  owner node['macos_setup']['user']
-end
-file 'install iTerm2 dynamic profiles' do
-  # This file contains profiles used as parents by the iTerm2/fasd integration.
-  # Since iTerm2 loads the list of dynamic profiles alphabetically, we prefix
-  # it with a hyphen to ensure it is loaded first.
-  # https://iterm2.com/documentation-dynamic-profiles.html
-  path node['macos_setup']['iterm2']['dynamic_profiles_dir'] + '/-Personal.json'
-  content json_content
-  owner node['macos_setup']['user']
-end
-
 lambda do
-  install_dir = node['macos_setup']['home'] +
-                '/Library/Application Support/Karabiner'
-  directory install_dir do
+  directory 'create iTerm2 background images directory' do
+    path node['macos_setup']['iterm2']['bgs_dir']
+    recursive true
     owner node['macos_setup']['user']
   end
-  cookbook_file 'Karabiner XML settings file' do
-    source 'Karabiner_private.xml'
-    path "#{install_dir}/private.xml"
+  json_content = JSON.pretty_generate(
+    Profiles: node['macos_setup']['iterm2']['profiles'].map do |profile|
+      profile = profile.dup
+      bg_key = node['macos_setup']['iterm2']['bg_key']
+      base = profile[bg_key]
+      if base && Pathname.new(base).relative?
+        install_path = "#{node['macos_setup']['iterm2']['bgs_dir']}/#{base}"
+        profile[bg_key] = install_path
+        cookbook_file "install iTerm2 background '#{base}'" do
+          source "iterm2-bgs/#{base}"
+          path install_path
+        end
+      end
+      profile
+    end
+  )
+  # Install dynamic profiles.
+  directory node['macos_setup']['iterm2']['dynamic_profiles_dir'] do
+    owner node['macos_setup']['user']
+  end
+  file 'install iTerm2 dynamic profiles' do
+    # This file contains profiles used as parents by the iTerm2/fasd integration.
+    # Since iTerm2 loads the list of dynamic profiles alphabetically, we prefix
+    # it with a hyphen to ensure it is loaded first.
+    # https://iterm2.com/documentation-dynamic-profiles.html
+    path node['macos_setup']['iterm2']['dynamic_profiles_dir'] + '/-Personal.json'
+    content json_content
     owner node['macos_setup']['user']
   end
 end.call
@@ -304,6 +293,43 @@ lambda do
       program_arguments ['/usr/bin/open', '-a', app]
       run_at_load true
     end
+  end
+end.call
+
+# Karabiner Elements
+# See https://pqrs.org/osx/karabiner/json.html
+# We declare it in Ruby instead of having a separate JSON file so that we can use comments (yay, comments!)
+# Easily grab this from the current value with this little snippet:
+#
+#     ruby -e "require 'json'; pp JSON.load(File.open(File.expand_path('~/.config/karabiner/karabiner.json')))"
+#
+
+lambda do
+  config_dir = "#{node['macos_setup']['home']}/.config/karabiner"
+  directory config_dir do
+    owner node['macos_setup']['user']
+  end
+  json_content = JSON.pretty_generate(
+    { "profiles" =>
+      [
+        { "name" => "Default",
+          "complex_modifications" =>
+          { "rules" =>
+            [{ "description" => "Pressing spacebar inserts space. Holding spacebar holds control.",
+               "manipulators"=>
+               [{ "from" => {"key_code"=>"spacebar", "modifiers"=>{"optional"=>["any"]}},
+                  "to" => [{"key_code"=>"left_control"}],
+                  "to_if_alone" => [{ "key_code" => "spacebar" }],
+                  "type" => "basic" }]}]},
+          "selected" => true
+        }
+      ]
+    }
+  )
+  file 'install Karabiner Elements config file' do
+    path "#{config_dir}/karabiner.json"
+    content json_content
+    owner node['macos_setup']['user']
   end
 end.call
 

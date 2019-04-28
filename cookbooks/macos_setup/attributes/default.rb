@@ -635,7 +635,7 @@ default['homebrew'].tap do |o|
       'iterm2',
       'java',
       'jettison',
-      'karabiner',
+      'karabiner-elements',
       'lastpass', # NOTE: Requires manual intervention
       'quicksilver',
       'speedcrunch',
