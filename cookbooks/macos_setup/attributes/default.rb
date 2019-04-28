@@ -264,11 +264,12 @@ default['macos_setup'].tap do |o|
       'HotkeyModifiers' => 1_048_840,
     },
     'com.stclairsoft.Jettison' => {
-      'DisksNotToRemount' => [],
+      # These do not work correctly with the idempotence check. Disable for now.
+      # 'DisksNotToRemount' => [],
       # For Blue Medora's Atlas NFS server auto-mount, Jettison keeps telling
       # me that there are files open even though there are none. We don't need
       # to eject it anyway, so just exclude it from Jettison.
-      'ExternalDisksToKeepMounted' => %w(Atlas),
+      # 'ExternalDisksToKeepMounted' => %w(Atlas),
       'autoEjectAtLogout' => false,
       'autoEjectEnabled' => true, # This really means autoEjectAtSleep
       'ejectDiskImages' => true,
@@ -325,10 +326,6 @@ default['macos_setup'].tap do |o|
       'enable_key_equivalents' => true,
       'option_sends_alt' => true,
       # Output
-      # XXX The idempotency check for this is not working because grep is
-      # interpreting it as an option.
-      # See https://github.com/chef-osx/mac_os_x/blob/9a63d0a14a3574d32c4adb91377c719d7b533835/providers/userdefaults.rb#L35
-      'depth' => '-1', # use colors from display
       'rootless' => true,
       'fullscreen_menu' => true,
       # Pasteboard

@@ -148,6 +148,22 @@ node['macos_setup']['user_defaults'].each do |domain, defaults|
   end
 end
 
+# The idempotency check for this is not working in regular usage because grep is interpreting it as an option.
+# See https://github.com/chef/chef/blob/c7d9809deee1f5ebc5c7ba8ec5343f026d60698c/lib/chef/resource/macos_userdefaults.rb#L79
+# TODO Fix this upstream
+lambda do
+  domain = 'org.macosforge.xquartz.X11'
+  key = 'depth'
+  value = '-1' # This means "Use colors from display"
+  macos_userdefaults "#{domain}: set #{key} → #{value}" do
+    domain domain
+    key key
+    value value
+    user node['macos_setup']['user']
+    not_if { shell_out!(%W(defaults read #{domain} #{key}), user: node['macos_setup']['user']).stdout.rstrip == value }
+  end
+end.call
+
 # iTerm2
 #
 # There is a Chef cookbook for iterm2, but we've chosen to install using
