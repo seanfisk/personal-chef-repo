@@ -112,7 +112,7 @@ lambda do
     shell_path = brew_bin + 'zsh'
     execute "set #{shell_path} as default shell" do
       command %W(chsh -s #{shell_path} #{node['macos_setup']['user']})
-      not_if { Etc.getpwnam(node['macos_setup']['user']).shell == shell_path }
+      not_if { Etc.getpwnam(node['macos_setup']['user']).shell == shell_path.to_s }
     end
   end.call
 end.call
