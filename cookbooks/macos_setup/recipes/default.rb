@@ -325,6 +325,13 @@ lambda do
   end
 end.call
 
+# Wunderlist doesn't support custom backgrounds, but there is a way around this: https://www.quora.com/How-can-I-add-my-own-background-into-wunderlist
+# Replace Wunderlist's hideous orange gradient background with a cool picture of Bora Bora. Not bothering to replace the thumbnail since I know which one it is.
+cookbook_file 'install Wunderlist custom background' do
+  source 'wunderlist-background.jpg'
+  path '/Applications/Wunderlist.app/Contents/Resources/wlbackground16.jpg'
+end
+
 ###############################################################################
 # CUSTOM INSTALLS
 ###############################################################################

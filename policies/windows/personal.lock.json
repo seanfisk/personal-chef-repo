@@ -38,12 +38,13 @@
       "cache_key": null,
       "scm_info": {
         "scm": "git",
-        "remote": null,
-        "revision": "0fb0b48230745a37576445bba702177af60dc68c",
+        "remote": "git@github.com:seanfisk/personal-chef-repo.git",
+        "revision": "fc174332abab37ce9ee41aa8ed33ea6d7cbcf91a",
         "working_tree_clean": false,
-        "published": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/HEAD -> origin/master",
+          "origin/master"
         ]
       },
       "source_options": {
