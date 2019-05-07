@@ -315,6 +315,24 @@ lambda do
             },
           ],
         },
+        'devices' => [
+          {
+            'identifiers' => {
+              'is_keyboard' => true,
+              'is_pointing_device' => false,
+              # Das Keyboard
+              'product_id' => 320,
+              'vendor_id' => 9456,
+            },
+            # Swap Option and Command
+            'simple_modifications' => %w(left right).flat_map do |side|
+              %w(option command).permutation.map do |from, to|
+                { 'from' => { 'key_code' => "#{side}_#{from}" },
+                  'to' => { 'key_code' => "#{side}_#{to}" } }
+              end
+            end,
+          },
+        ],
       },
     ]
   )
