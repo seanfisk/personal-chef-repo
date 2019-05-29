@@ -42,6 +42,7 @@ default['macos_setup'].tap do |o|
   ) unless o['user']
   o['home'] = ENV['HOME']
   o['fonts_dir'] = "#{o['home']}/Library/Fonts"
+  o['bin_dir'] = "#{o['home']}/bin"
   o['etc_shells'] = '/etc/shells'
   o['shells'] = %w(bash zsh)
   o['login_items'] = (

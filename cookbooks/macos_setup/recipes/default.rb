@@ -369,6 +369,19 @@ end
   end
 end
 
+directory 'create personal bin/ directory' do
+  path node['macos_setup']['bin_dir']
+  owner node['macos_setup']['user']
+end
+
+remote_file "install iTerm2's imgcat script" do
+  # Do not include a checksum because we *want* the latest version. This means that Chef will use a conditional GET: https://docs.chef.io/resource_remote_file.html#prevent-re-downloads
+  source 'https://www.iterm2.com/utilities/imgcat'
+  path "#{node['macos_setup']['bin_dir']}/imgcat"
+  owner node['macos_setup']['user']
+  mode '0755'
+end
+
 ###############################################################################
 # BLUE MEDORA
 ###############################################################################
