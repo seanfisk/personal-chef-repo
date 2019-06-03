@@ -1,5 +1,5 @@
 {
-  "revision_id": "0b47686dd09d026714510b338c8811f5caf733bdf72ce93c5a51056cd21aeb03",
+  "revision_id": "74c72891785c545b430d5a4785b0caa8a1340a99a80e6521b7b18f5a2289634c",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -18,7 +18,7 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "13b2b9e9ddbaa7648ebb61ac2064d41b7f147e53",
+        "revision": "3fef5143ceb909ffa44393528b748b49217ee1e5",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -41,16 +41,27 @@
         "version": "5.0.8"
       }
     },
+    "libarchive": {
+      "version": "2.1.0",
+      "identifier": "e4d8478e7931544e77d53d5527bc336d82b8ed1f",
+      "dotted_decimal_identifier": "64414096534614356.22086805924161468.56545437609247",
+      "cache_key": "libarchive-2.1.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/libarchive/versions/2.1.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/libarchive/versions/2.1.0/download",
+        "version": "2.1.0"
+      }
+    },
     "macos_setup": {
       "version": "0.1.0",
-      "identifier": "6a826fed4e3b365f6012cca161fcecf9bc0a571f",
-      "dotted_decimal_identifier": "29979764765637430.26845756646318588.260557345806111",
+      "identifier": "941d93faa939a1b3a11b3fa4991e1da60ceaebf8",
+      "dotted_decimal_identifier": "41690817955969441.50561159235148062.32599018499064",
       "source": "../../cookbooks/macos_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "13b2b9e9ddbaa7648ebb61ac2064d41b7f147e53",
+        "revision": "3fef5143ceb909ffa44393528b748b49217ee1e5",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -101,6 +112,10 @@
         "= 5.0.8"
       ],
       [
+        "libarchive",
+        "= 2.1.0"
+      ],
+      [
         "macos_setup",
         "= 0.1.0"
       ]
@@ -115,10 +130,17 @@
       "homebrew (5.0.8)": [
 
       ],
+      "libarchive (2.1.0)": [
+
+      ],
       "macos_setup (0.1.0)": [
         [
           "homebrew",
           "~> 5.0.8"
+        ],
+        [
+          "libarchive",
+          "~> 2.1.0"
         ]
       ]
     }

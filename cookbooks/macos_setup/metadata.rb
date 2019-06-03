@@ -11,3 +11,4 @@ supports 'mac_os_x'
 chef_version '~> 14'
 
 depends 'homebrew', '~> 5.0.8'
+depends 'libarchive', '~> 2.1.0'

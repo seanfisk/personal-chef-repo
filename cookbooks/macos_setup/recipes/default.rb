@@ -382,6 +382,37 @@ remote_file "install iTerm2's imgcat script" do
   mode '0755'
 end
 
+lambda do
+  software_name = 'Java API Compliance Checker'
+  version = '2.4'
+  archive_path = "#{Chef::Config[:file_cache_path]}/japi-compliance-checker.tar.gz"
+  extract_name = "extract #{software_name} archive"
+  prefix = '/usr/local'
+  install_name = "install #{software_name} to #{prefix}"
+
+  remote_file "download #{software_name}" do
+    source "https://github.com/lvc/japi-compliance-checker/archive/#{version}.tar.gz"
+    checksum '0fd8ff8539a6f4a2c30379999befc1f9003fbb513f778b018a722360ab8c2229'
+    path archive_path
+    notifies :extract, "archive_file[#{extract_name}]"
+  end
+
+  archive_file extract_name do
+    path archive_path
+    extract_to Chef::Config[:file_cache_path]
+    notifies :run, "execute[#{install_name}]"
+    action :nothing
+  end
+
+  execute install_name do
+    # The Makefile is broken and should have the 'install' target marked as phony, but doesn't. This causes the target not to run. Just run what it would have executed anyway.
+    command %W(perl Makefile.pl -install -prefix #{prefix})
+    creates "#{prefix}/japi-compliance-checker"
+    cwd "#{Chef::Config[:file_cache_path]}/japi-compliance-checker-#{version}"
+    action :nothing
+  end
+end.call
+
 ###############################################################################
 # BLUE MEDORA
 ###############################################################################
