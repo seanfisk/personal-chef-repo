@@ -320,9 +320,9 @@ lambda do
             'identifiers' => {
               'is_keyboard' => true,
               'is_pointing_device' => false,
-              # Das Keyboard
-              'product_id' => 320,
-              'vendor_id' => 9456,
+              # Filco Majestouch 2
+              'product_id' => 17_733,
+              'vendor_id' => 1_241,
             },
             # Swap Option and Command
             'simple_modifications' => %w(left right).flat_map do |side|
