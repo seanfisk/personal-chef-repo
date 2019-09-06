@@ -91,12 +91,13 @@ lambda do
     ) unless match
     features[match[1]] = match[2] == 'En'
   end
-  node['windows_setup']['chocolatey']['features'].each do |feature|
-    powershell_script "enable Chocolatey feature '#{feature}'" do
-      code "choco feature enable --name='#{feature}'"
-      not_if { features[feature] }
-    end
-  end
+  # TODO: Re-enable when we use Windows again
+  # node['windows_setup']['chocolatey']['features'].each do |feature|
+  #   powershell_script "enable Chocolatey feature '#{feature}'" do
+  #     code "choco feature enable --name='#{feature}'"
+  #     not_if { features[feature] }
+  #   end
+  # end
 end.call
 
 # Add AutoHotkey compiler (Ahk2Exe) to System Path.
@@ -173,15 +174,16 @@ node['windows_setup']['psget']['modules'].each do |mod_name|
 end
 
 # Install paste program
-windows_zipfile 'download and install paste program' do
-  path node['windows_setup']['scripts_dir']
-  # TODO: This comes from a somewhat questionable source...
-  source 'http://www.c3scripts.com/tutorials/msdos/paste.zip'
-  # We've provided a checksum as this file is unlikely to change.
-  checksum 'fd8034ed96d1e18be508b61c5732e91c24c6876229bc78ef9cd617682e37c493'
-  action :unzip
-  not_if { File.exist?("#{node['windows_setup']['scripts_dir']}/paste.exe") }
-end
+# TODO: Re-enable when we use Windows again
+# windows_zipfile 'download and install paste program' do
+#   path node['windows_setup']['scripts_dir']
+#   # TODO: This comes from a somewhat questionable source...
+#   source 'http://www.c3scripts.com/tutorials/msdos/paste.zip'
+#   # We've provided a checksum as this file is unlikely to change.
+#   checksum 'fd8034ed96d1e18be508b61c5732e91c24c6876229bc78ef9cd617682e37c493'
+#   action :unzip
+#   not_if { File.exist?("#{node['windows_setup']['scripts_dir']}/paste.exe") }
+# end
 # paste program depends on .NET 3.5
 # Also possible to install with Chocolatey, but Chef-native seems better.
 windows_feature 'NetFx3' do

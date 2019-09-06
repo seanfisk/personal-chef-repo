@@ -4,10 +4,7 @@ name 'blue_medora'
 
 load
 
-default['macos_setup']['extra_formulas'] = [
-  'exuno-architect',
-  'exuno-diff',
-]
+default['macos_setup']['extra_formulas'] = %w(architect diff).map { |prog| "exuno-#{prog}" }
 default['macos_setup']['extra_casks'] = [
   'firefoxdeveloperedition',
   'jd-gui', # Java decompiler

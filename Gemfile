@@ -11,8 +11,8 @@ gem 'artii', '~> 2.1', '>= 2.1.2'
 # be loaded into our Bundler environment. They can be different versions than
 # those gems included with the Chef DK, in which case they'll be installed as
 # normal upon 'bundle install'.
-gem 'foodcritic', '~> 15.1'
-gem 'cookstyle', '~> 4.0'
+gem 'foodcritic', '~> 16.1', '>= 16.1.1'
+gem 'cookstyle', '~> 5.5', '>= 5.5.7'
 
 # This version must exactly match the version returned by this command:
 #
