@@ -7,7 +7,7 @@ license 'Apache-2.0'
 description 'Setup my personal Windows operating system'
 version '0.1.0'
 supports 'windows'
-chef_version '~> 14'
+chef_version '~> 15'
 
 depends 'chocolatey', '~> 2.0.1'
 depends 'windows', '~> 5.3.0'
