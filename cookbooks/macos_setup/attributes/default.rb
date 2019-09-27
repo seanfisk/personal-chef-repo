@@ -46,7 +46,7 @@ default['macos_setup'].tap do |o|
   o['etc_shells'] = '/etc/shells'
   o['shells'] = %w(bash zsh)
   o['login_items'] = (
-    %w(Flux Jettison Quicksilver Slate gfxCardStatus iTerm) +
+    %w(Flux Jettison Quicksilver gfxCardStatus iTerm Hammerspoon) +
     node['macos_setup'].fetch('extra_login_items', [])
   ).sort
   o['iterm2'].tap do |i|
@@ -633,6 +633,7 @@ default['homebrew'].tap do |o|
       'font-ubuntu',
       'gfxcardstatus',
       'gimp',
+      'hammerspoon',
       'iterm2',
       'java',
       'jettison',

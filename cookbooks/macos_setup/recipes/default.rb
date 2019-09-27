@@ -350,6 +350,18 @@ cookbook_file 'install Wunderlist custom background' do
   path '/Applications/Wunderlist.app/Contents/Resources/wlbackground16.jpg'
 end
 
+lambda do
+  hammerspoon_dir = "#{node['macos_setup']['home']}/.hammerspoon"
+  directory hammerspoon_dir do
+    owner node['macos_setup']['user']
+  end
+  cookbook_file 'install Hammerspoon config' do
+    source 'hammerspoon-init.lua'
+    path "#{hammerspoon_dir}/init.lua"
+    owner node['macos_setup']['user']
+  end
+end.call
+
 ###############################################################################
 # CUSTOM INSTALLS
 ###############################################################################
