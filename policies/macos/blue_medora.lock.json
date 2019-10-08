@@ -1,5 +1,5 @@
 {
-  "revision_id": "18138af0e5290b304ea1bc73bf4cf23976c83aa0a6d6361f7b77e80c0d93f90f",
+  "revision_id": "e2e2f5f1a4852419ec48aef44bc5fc6b5c3ff358f3064865f9c5fa9121ba58f4",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -18,12 +18,11 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "b91fbb38aab313c2640ed3ddccf2773bc0e79ccd",
+        "revision": "edc4450459cfbfa74224962fdafd0989b0af6166",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/master"
+
         ]
       },
       "source_options": {
@@ -61,12 +60,11 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "b91fbb38aab313c2640ed3ddccf2773bc0e79ccd",
+        "revision": "edc4450459cfbfa74224962fdafd0989b0af6166",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/master"
+
         ]
       },
       "source_options": {
@@ -86,6 +84,7 @@
         "jetbrains-toolbox",
         "slack",
         "vmware-remote-console",
+        "turbovnc-viewer",
         "euchre",
         "nsa",
         "vrops-architect"

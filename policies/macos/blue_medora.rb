@@ -1,3 +1,4 @@
+# coding: utf-8
 require_relative 'base'
 
 name 'blue_medora'
@@ -14,6 +15,15 @@ default['macos_setup']['extra_casks'] = [
   'jetbrains-toolbox',
   'slack',
   'vmware-remote-console',
+  # There are *plenty* of choices for VNC viewers. They all pretty much work the same.
+  #
+  # • RealVNC is the original VNC server and viewer, but some versions are proprietary. They also have UI for signing up for a RealVNC account… no thanks.
+  # • Chicken hasn't been updated in a while.
+  # • I had a good experience with Remmina on GNU/Linux but it isn't easily available for macOS.
+  # • This page has convinced me (somewhat simply through its existence) that TurboVNC is better than TigerVNC: https://turbovnc.org/About/TigerVNC
+  #
+  # Went with TurboVNC for these reasons.
+  'turbovnc-viewer',
   'euchre',
   'nsa',
   'vrops-architect',
