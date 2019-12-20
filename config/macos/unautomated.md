@@ -29,10 +29,6 @@ This file lists parts of macOS setup that are not automated. Typically, this is 
 
   Most of the other preferences are automated, but this one proved difficult. For now, it needs to be set manually. See the recipe for the gritty details and rationale for the decision not to automate.
 
-* Swap Caps Lock and Control
-
-  Apparently, not really too easy to automate. I haven't looked into it too much, since it's pretty easy to do manually.
-
 * Desktop backgrounds
 
   This is a little overkill. It's nice to automate, but I change these from time to time manually, and that would be just one more thing to change every time.
