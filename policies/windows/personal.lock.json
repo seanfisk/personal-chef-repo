@@ -1,5 +1,5 @@
 {
-  "revision_id": "4c8696b81fef091a2c6bbf5fb0f625cf9c78ab068390fdcd1bcd01126fa5d61e",
+  "revision_id": "d78bd1d3fb55419c41c42d24ca37e9518e955a92fbb381781bfb5aa871bd395c",
   "name": "personal",
   "run_list": [
     "recipe[windows_setup::default]"
@@ -32,14 +32,14 @@
     },
     "windows_setup": {
       "version": "0.1.0",
-      "identifier": "f402e165663aaf9efd71beb9bf5c1d02efc7f0f0",
-      "dotted_decimal_identifier": "68683061409495727.44751711293259612.31898449998064",
+      "identifier": "a6e761ec86165afe71f25e7e8d9742fa021b4bd7",
+      "dotted_decimal_identifier": "46979253900023386.71619929865883031.73641544600535",
       "source": "../../cookbooks/windows_setup",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "a96aa547ee9a47ac3bd9416de495035fdc899cbe",
+        "revision": "33a1b02226cceae97c6bfe648835d868bd9ac290",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
