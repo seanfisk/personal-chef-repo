@@ -306,7 +306,7 @@ lambda do
         'simple_modifications' => %w(left_control caps_lock).permutation.map do |keys|
           { 'from' => { 'key_code' => keys.first },
             'to' => { 'key_code' => keys.last } }
-        end
+        end,
         'complex_modifications' => {
           'rules' => [
             { 'description' => 'Pressing spacebar inserts space. Holding spacebar holds control.',
