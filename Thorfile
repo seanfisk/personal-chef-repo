@@ -192,5 +192,6 @@ class Test < Thor
     artii = Artii::Base.new font: 'block'
     # artii adds two blank lines after the block text; we just want one.
     puts Rainbow(artii.asciify(message).rstrip + "\n").color(color)
+    exit sum
   end
 end
