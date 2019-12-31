@@ -267,16 +267,7 @@ end
 
 # Windows doesn't set the time zone automatically, so set it here. Change if I
 # move ;)
-#
-# See here http://www.windows-commandline.com/set-time-zone-from-command-line/
-# It's possible to manipulate the time zone registry values, but this misses
-# values that get changed by the GUI and doesn't automatically update Windows
-# Explorer. tzutil does both.
-# Note: We've tried an array argument with execute's command... doesn't work :(
-powershell_script 'set time zone' do
-  code "tzutil /s '#{node['windows_setup']['time_zone']}'"
-  not_if "(tzutil /g) -eq '#{node['windows_setup']['time_zone']}'"
-end
+timezone node['windows_setup']['time_zone']
 
 powershell_script 'restart Windows Explorer' do
   code 'Stop-Process -Name explorer'

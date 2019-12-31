@@ -156,7 +156,7 @@ ruby_block 'fix the zsh startup file that path_helper uses' do
   block do
     File.rename('/etc/zshenv', '/etc/zprofile')
   end
-  only_if { File.exist?('/etc/zshenv') }
+  only_if { ::File.exist?('/etc/zshenv') }
 end
 
 ###############################################################################
