@@ -1,5 +1,5 @@
 {
-  "revision_id": "36a24b399e9392770bc56facbaa49705a600af81f56bcaef4da104c2f8c858fc",
+  "revision_id": "624fa7d299b5345c6745f7536ed52efb511b038191878be9bcf8a09f4881a2fe",
   "name": "blue_medora",
   "run_list": [
     "recipe[macos_setup::default]",
@@ -18,13 +18,11 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "4f4de23002e5a9feaaaea286cf2638d1ef4bfbfa",
+        "revision": "13afd1fb2061840d878248f2f93663fa8e474a9e",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/dependabot/bundler/nokogiri-1.10.8",
-          "origin/master"
+
         ]
       },
       "source_options": {
@@ -62,13 +60,11 @@
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:seanfisk/personal-chef-repo.git",
-        "revision": "4f4de23002e5a9feaaaea286cf2638d1ef4bfbfa",
+        "revision": "13afd1fb2061840d878248f2f93663fa8e474a9e",
         "working_tree_clean": false,
-        "published": true,
+        "published": false,
         "synchronized_remote_branches": [
-          "origin/HEAD -> origin/master",
-          "origin/dependabot/bundler/nokogiri-1.10.8",
-          "origin/master"
+
         ]
       },
       "source_options": {
@@ -79,8 +75,9 @@
   "default_attributes": {
     "macos_setup": {
       "extra_formulas": [
-        "exuno-architect",
-        "exuno-diff"
+        "ex-uno-architect",
+        "ex-uno-diff",
+        "vrops-architect"
       ],
       "extra_casks": [
         "firefoxdeveloperedition",
@@ -90,8 +87,7 @@
         "vmware-remote-console",
         "turbovnc-viewer",
         "euchre",
-        "nsa",
-        "vrops-architect"
+        "nsa"
       ],
       "extra_login_items": [
         "Dash",

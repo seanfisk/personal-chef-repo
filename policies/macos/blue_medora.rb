@@ -5,7 +5,11 @@ name 'blue_medora'
 
 load
 
-default['macos_setup']['extra_formulas'] = %w(architect diff).map { |prog| "exuno-#{prog}" }
+default['macos_setup']['extra_formulas'] = %w(
+  ex-uno-architect
+  ex-uno-diff
+  vrops-architect
+)
 default['macos_setup']['extra_casks'] = [
   'firefoxdeveloperedition',
   'jd-gui', # Java decompiler
@@ -26,7 +30,6 @@ default['macos_setup']['extra_casks'] = [
   'turbovnc-viewer',
   'euchre',
   'nsa',
-  'vrops-architect',
 ]
 default['macos_setup']['extra_login_items'] = %w(
   Dash
