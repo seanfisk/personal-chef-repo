@@ -625,6 +625,7 @@ default['homebrew'].tap do |o|
       'cathode',
       'dash',
       'deeper',
+      'discord',
       'disk-inventory-x',
       'firefox',
       'flux',
