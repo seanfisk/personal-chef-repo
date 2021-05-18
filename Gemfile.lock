@@ -92,7 +92,7 @@ GEM
     launchy (2.4.3)
       addressable (~> 2.3)
     libyajl2 (1.2.0)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.5.1)
     mixlib-archive (1.0.5)
       mixlib-log
     mixlib-authentication (2.1.1)
@@ -116,8 +116,9 @@ GEM
       net-ssh (>= 2.6.5)
       net-ssh-gateway (>= 1.2.0)
     net-telnet (0.1.1)
-    nokogiri (1.10.8)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.11.4)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     ohai (14.14.0)
       chef-config (>= 12.8, < 15)
       ffi (~> 1.9)
@@ -139,6 +140,7 @@ GEM
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
+    racc (1.5.2)
     rack (2.0.8)
     rainbow (3.0.0)
     rake (13.0.1)
